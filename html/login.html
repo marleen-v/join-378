@@ -10,7 +10,7 @@
   <script src="https://kit.fontawesome.com/110b168a2c.js" crossorigin="anonymous" defer></script>
   <script src="../scripts/login.js" defer></script>
 </head>
-<body>
+<body onload="init()">
 
   <div class="content-ctn">
 
@@ -32,7 +32,7 @@
       
     <div class="login-ctn">
       <p class="login-text">Log in</p>
-      <form onsubmit="loginUser();return false;">
+      <form onsubmit="checkUserPassword();return false;">
         <div class="input-ctn">
           <input id="emailInput" class="email-input" type="email" placeholder="Email" required>
           <input id="passwordInput" class="password-input" type="password" placeholder="Password" required>
