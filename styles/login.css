@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -28,9 +35,32 @@ body {
 .signup-ctn {
   position: absolute;
   display: flex;
+  justify-content: center;
+  align-items: center;
   top: 67px;
   left: 1039px;
   gap: 35px;
+  width: 279px;
+  height: 49px;
+}
+
+.signup-ctn p {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.signup-ctn button {
+  background-color: #2A3647;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19.2px;
+  width: 91px;
+  height: 49px;
+  /* padding: 15px 20px; */
+  border-radius: 8px;
+  border: none;
 }
 
 .login-ctn {
@@ -38,4 +68,37 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 652px;
+  height: 493px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  padding: 48px 115px 48px 115px;
+}
+
+.login-text {
+  margin-bottom: 16px;
+  font-size: 61px;
+  color: #000000;
+  font-weight: 700;
+  text-align: center;
+}
+
+.blue-line {
+  height: 3px;
+  width: 150px;
+  background-color: #29ABE2;
+}
+
+.input-ctn {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-ctn input {
+  width: 422px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  padding: 12px 21px;
+  margin-bottom: 32px;
 }

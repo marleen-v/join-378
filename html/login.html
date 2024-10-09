@@ -31,19 +31,28 @@
     </div>
       
     <div class="login-ctn">
-      <p>Log in</p>
+      <p class="login-text">Log in</p>
+      <p class="blue-line"></p>
       <form onsubmit="loginUser();return false;">
-        <input type="email" id="emailInput" required>
-        <input type="password" id="passwordInput" required>
-        <input type="checkbox"><p>Remember me</p>
-        <button>Log in</button>
-        <button>Guest Log in</button>
+        <div class="input-ctn">
+          <input id="emailInput" type="email" placeholder="Email" required>
+          <input id="passwordInput" type="password" placeholder="Password" required>
+        </div>
+        <div class="checkbox-ctn">
+          <input type="checkbox"><p>Remember me</p>
+        </div>
+        <div class="login-guest-ctn">
+          <button>Log in</button>
+          <button>Guest Log in</button>
+        </div>
       </form>
 
     </div>
 
   </div>
 
+
+  
 
 </body>
 </html>
