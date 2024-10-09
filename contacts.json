@@ -1,0 +1,104 @@
+{
+  "contacts": [
+    {
+      "firstName": "Anna",
+      "lastName": "Müller",
+      "email": "anna.mueller@gmail.com"
+    },
+    {
+      "firstName": "Max",
+      "lastName": "Schneider",
+      "email": "max.schneider@gmx.de"
+    },
+    {
+      "firstName": "Julia",
+      "lastName": "Weber",
+      "email": "julia.weber@yahoo.de"
+    },
+    {
+      "firstName": "Lukas",
+      "lastName": "Fischer",
+      "email": "lukas.fischer@outlook.com"
+    },
+    {
+      "firstName": "Sophia",
+      "lastName": "Schmidt",
+      "email": "sophia.schmidt@hotmail.com"
+    },
+    {
+      "firstName": "Tim",
+      "lastName": "Bauer",
+      "email": "tim.bauer@gmail.com"
+    },
+    {
+      "firstName": "Mia",
+      "lastName": "Koch",
+      "email": "mia.koch@gmx.de"
+    },
+    {
+      "firstName": "Jonas",
+      "lastName": "Wolf",
+      "email": "jonas.wolf@yahoo.com"
+    },
+    {
+      "firstName": "Emma",
+      "lastName": "Hofmann",
+      "email": "emma.hofmann@outlook.de"
+    },
+    {
+      "firstName": "Paul",
+      "lastName": "Kaiser",
+      "email": "paul.kaiser@icloud.com"
+    },
+    {
+      "firstName": "Clara",
+      "lastName": "Peters",
+      "email": "clara.peters@web.de"
+    },
+    {
+      "firstName": "Felix",
+      "lastName": "Mayer",
+      "email": "felix.mayer@gmail.com"
+    },
+    {
+      "firstName": "Lea",
+      "lastName": "Becker",
+      "email": "lea.becker@gmx.de"
+    },
+    {
+      "firstName": "Nico",
+      "lastName": "Frank",
+      "email": "nico.frank@yahoo.com"
+    },
+    {
+      "firstName": "Laura",
+      "lastName": "Lange",
+      "email": "laura.lange@outlook.com"
+    },
+    {
+      "firstName": "David",
+      "lastName": "Krause",
+      "email": "david.krause@gmail.com"
+    },
+    {
+      "firstName": "Elena",
+      "lastName": "Schulz",
+      "email": "elena.schulz@gmx.de"
+    },
+    {
+      "firstName": "Simon",
+      "lastName": "Wagner",
+      "email": "simon.wagner@yahoo.de"
+    },
+    {
+      "firstName": "Hannah",
+      "lastName": "Zimmermann",
+      "email": "hannah.zimmermann@outlook.com"
+    },
+    {
+      "firstName": "Jan",
+      "lastName": "Neumann",
+      "email": "jan.neumann@gmail.com"
+    }
+  ]
+}
