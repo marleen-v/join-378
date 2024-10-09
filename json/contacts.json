@@ -1,5 +1,4 @@
-{
-  "contacts": [
+[
     {
       "firstName": "Anna",
       "lastName": "Müller",
@@ -100,5 +99,4 @@
       "lastName": "Neumann",
       "email": "jan.neumann@gmail.com"
     }
-  ]
-}
+]
