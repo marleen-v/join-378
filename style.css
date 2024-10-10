@@ -1,3 +1,4 @@
+@import url('./styles/board.css');
 
 @font-face {
   font-family: "Inter";
@@ -43,6 +44,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  display: grid;
+  grid-template:  "nav head"
+                  "nav main";
+
+    height: 100vh;
+    grid-template-columns: 232px 1fr;
+    /*padding: 0 256px 0 264px;*/
   position: relative;
   min-height: 100vh;
   font-size: 16px;
@@ -81,10 +89,11 @@ h1 {
 /* ------------------------------------Header-------------------------------------------- */
 
 header {
+  grid-area: head;
   background-color: #fff;
   width: 100%;
   display: flex;
-  padding: 20px 40px 20px 348px;
+  padding: 20px 40px 20px 128px;
   justify-content: center;
   box-shadow: 0px 4px 4px 0px rgb(0 0 0 / 0.1);
   position: sticky;
@@ -164,6 +173,7 @@ header {
 /* ------------------------------------nav-------------------------------------------- */
 
 nav {
+  grid-area: nav;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -179,6 +189,10 @@ nav {
   height: 100vh;
   z-index: 2000;
   color: #cdcdcd;
+}
+
+main {
+  grid-area: main;
 }
 
 .menu-bar {

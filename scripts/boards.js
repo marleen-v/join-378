@@ -24,7 +24,7 @@ function processHTML(htmlString) {
   
     // Zum Beispiel: Den HTML-Inhalt in das DOM einfügen
     //document.getElementById('content').innerHTML = htmlString;
-    document.querySelector('body').innerHTML = htmlString;
+    document.querySelector('main').innerHTML = htmlString;
 }
 
 
