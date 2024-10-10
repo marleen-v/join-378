@@ -30,13 +30,20 @@ function getBoardBar() {
   // Funktion, die den geladenen HTML-String weiterverarbeitet
 function processHTML(htmlString) {
     // Hier kannst du den String weiter verarbeiten
-    console.log('HTML-String:', htmlString);
+    //console.log('HTML-String:', htmlString);
   
     // Zum Beispiel: Den HTML-Inhalt in das DOM einfügen
     //document.getElementById('content').innerHTML = htmlString;
     document.querySelector('body').innerHTML = htmlString;
-    document.querySelector('.boards').innerHTML = boardHTML();
-    document.querySelector('.board-bar').innerHTML = getBoardBar();
+    //document.querySelector('.boards').innerHTML = boardHTML();
+    //document.querySelector('.board-bar').innerHTML = getBoardBar();
+}
+
+function getInputField() {
+    return /*html*/`
+        <input class="board-search-input" type="text">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    `;
 }
 
 
@@ -45,7 +52,7 @@ function boardHTML() {
         <div class="board-head"></div>
         <div class="board-search">
             <div class="board-headline"><h1>Board</h1></div>
-            <div class="search-task"><input class="board-search-input" type="text"></div>
+            <div class="search-task">${getInputField}</div>
             <div class="btn-task-container"><button class="btn-task">Add Task +</button></div>
         </div>
         <div class="board-bar"></div>
@@ -56,9 +63,12 @@ function boardHTML() {
 
 async function initBoard() {
     const htmlContent = await loadHTML('../html/board.html');
+    const htmlBoardHead = await loadHTML('../html/board-head.html');
 
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
+        document.querySelector('.boards').innerHTML = htmlBoardHead;
+        document.querySelector('.board-bar').innerHTML = getBoardBar();
     }    
 }
 
