@@ -35,8 +35,9 @@ function boardHTML() {
         <div class="board-search">
             <div class="board-headline"><h1>Board</h1></div>
             <div class="search-task"><input class="board-search-input" type="text"></div>
-            <div class="btn-task-container"><button class="btn-task">Add Task</button></div>
+            <div class="btn-task-container"><button class="btn-task">Add Task +</button></div>
         </div>
+        <div class="board-bar"></div>
         <div class="board-main"></div>
     `;
 }

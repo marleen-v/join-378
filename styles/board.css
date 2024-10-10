@@ -17,7 +17,7 @@ main {
     grid-template-rows: 128px 232px 24px 1fr;
     grid-template-columns: 1fr;
     height: 100vh;
-    padding-left: 64px;
+    padding: 0 64px 0 64px;
 }
 
 
@@ -28,7 +28,7 @@ main {
 
 .board-search {
     display: grid;
-    grid-template-columns: 800px 312px 222px;
+    grid-template-columns: auto 312px 222px;
     height: 232px;
     gap: 32px;
 }
@@ -46,6 +46,13 @@ main {
     justify-content: flex-start;
     font-size: 61px;
     font-weight: 700;
+}
+
+
+.board-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
 }
 
 
