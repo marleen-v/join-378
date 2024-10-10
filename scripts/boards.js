@@ -17,6 +17,16 @@ async function loadHTML(url) {
 }
 
 
+function getBoardBar() {
+    return /*html*/`
+        <div class="board-to-do">To Do</div>
+        <div class="board-In-progress">In Progress</div>
+        <div class="board-feedback">Await feedback</div>
+        <div class="board-done">Done</div>
+    `;
+}
+
+
   // Funktion, die den geladenen HTML-String weiterverarbeitet
 function processHTML(htmlString) {
     // Hier kannst du den String weiter verarbeiten
@@ -26,6 +36,7 @@ function processHTML(htmlString) {
     //document.getElementById('content').innerHTML = htmlString;
     document.querySelector('body').innerHTML = htmlString;
     document.querySelector('.boards').innerHTML = boardHTML();
+    document.querySelector('.board-bar').innerHTML = getBoardBar();
 }
 
 
