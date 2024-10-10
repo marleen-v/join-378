@@ -28,13 +28,15 @@
 
      
     <div class="login-ctn">
-      <p class="login-text">Log in</p>
+      <img src="../assets/img/bluearrowleft.png" alt="Arrow Left">
+      <p class="signup-ctn">Sign Up</p>
 
-      <form onsubmit=";return false;">
-        <div class="signup-ctn"></div>
+      <form onsubmit="signUpUser();return false;">
         <div class="input-ctn">
+          <input id="nameInput" class="name-input" type="text" placeholder="Name" required>
           <input id="emailInput" class="email-input" type="email" placeholder="Email" required>
-          <input id="passwordInput" class="password-input" type="password" placeholder="Password" required>
+          <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Password" required>
+          <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Password" required>
         </div>
         <div class="checkbox-ctn">
           <input type="checkbox">
