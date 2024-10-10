@@ -7,6 +7,11 @@ body {
     font-family: Inter, arial, sans-serif;
 }
 
+main {
+    display: grid;
+    grid-template-columns: 232px 1fr;
+}
+
 .boards {
     display: grid;
     grid-template-rows: 128px 256px 1fr;
