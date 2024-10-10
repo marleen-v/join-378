@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'); */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter_28pt-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
   /* box-sizing: border-box; */
@@ -12,6 +19,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #F6F7F8;
 }
 
 button {
@@ -23,7 +31,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F6F7F8;
   width: 100%;
   height: 100%;
   max-width: 1440px;
@@ -101,14 +108,14 @@ button {
   background-image: url(../assets/img/mail.png);
   background-repeat: no-repeat;
   background-position: right;
-  background-position-x: 380px;
+  background-position-x: 420px;
 }
 
 .password-input {
   background-image: url(../assets/img/lock.png);
   background-repeat: no-repeat;
   background-position: right;
-  background-position-x: 380px;
+  background-position-x: 420px;
 }
 
 input::placeholder {
