@@ -28,7 +28,7 @@ main {
 
 .board-search {
     display: grid;
-    grid-template-columns: 500px 312px 222px;
+    grid-template-columns: 800px 312px 222px;
     height: 232px;
     gap: 32px;
 }
