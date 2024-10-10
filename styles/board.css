@@ -14,7 +14,7 @@ main {
 
 .boards {
     display: grid;
-    grid-template-rows: 128px 232px 24px 1fr;
+    grid-template-rows: 64px 232px 24px 1fr;
     grid-template-columns: 1fr;
     height: 100vh;
     padding: 0 128px 0 128px;
