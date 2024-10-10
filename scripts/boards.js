@@ -30,11 +30,9 @@ function processHTML(htmlString) {
 
 async function initBoard() {
     const htmlContent = await loadHTML('../html/board.html');
-    const htmlBoardHead = await loadHTML('../html/board-head.html');
 
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
-        document.querySelector('.boards').innerHTML = htmlBoardHead;
     }    
 }
 
