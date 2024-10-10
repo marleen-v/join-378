@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: "Inter";
   src: url("./assets/fonts/Inter-Regular.woff2") format("woff2");
@@ -226,3 +227,6 @@ nav {
   color: #29abe2;
   font-weight: 700;
 }
+
+@import "./styles/board.css";
+

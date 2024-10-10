@@ -1,5 +1,4 @@
-{
-  "users": [
+[
     {
       "firstName": "Max",
       "lastName": "Mustermann",
@@ -60,5 +59,4 @@
       "email": "david.krueger@land.gov",
       "password": "davidk123"
     }
-  ]
-}
+]

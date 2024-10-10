@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="../assets/icons/favicon.png" type="image/x-icon">
+  
+  <title>Join-378 Signup Page</title>
 
-  <title>Join-378 Login Page</title>
+  <link rel="stylesheet" href="../styles/signup.css">
 
-  <link rel="stylesheet" href="../styles/login.css">
-
-  <script src="../scripts/login.js" defer></script>
+  <script src="" defer></script>
 </head>
-<body onload="init()">
+<body>
 
   <div class="content-ctn">
 
@@ -26,29 +26,29 @@
       </svg>
     </div>
 
-    <div class="signup-ctn">
-      <p>Not a Join user?</p>
-      <button>Sign up</button>
-    </div>
-      
+     
     <div class="login-ctn">
-      <p class="login-text">Log in</p>
-      <form onsubmit="checkUserPassword();return false;">
+      <img class="leftarrow" src="../assets/img/bluearrowleft.png" alt="Arrow Left">
+      <p class="signup-ctn">Sign Up</p>
+
+      <form onsubmit="signUpUser();return false;">
         <div class="input-ctn">
+          <input id="nameInput" class="name-input" type="text" placeholder="Name" required>
           <input id="emailInput" class="email-input" type="email" placeholder="Email" required>
-          <input id="passwordInput" class="password-input" type="password" placeholder="Password" required>
+          <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Password" required>
+          <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Confirm Password" required>
         </div>
         <div class="checkbox-ctn">
-          <input type="checkbox">
-          <p>Remember me</p>
+          <input type="checkbox" id="checkbox">
+          <label for="checkbox">I accept the <a href="#">Privacy policy</a></label>
         </div>
-        <div class="login-guest-ctn">
-          <button class="login-btn">Log in</button>
-          <button class="guest-btn">Guest Log in</button>
+        <div class="login-ctn-btn">
+          <button class="login-btn">Sign up</button>
         </div>
       </form>
 
     </div>
+
 
     <div class="legal-ctn">
       <img src="../assets/img/privacypolicylegalnotice.png" alt="Legal-Links">
