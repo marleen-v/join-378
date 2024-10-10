@@ -28,7 +28,7 @@
 
      
     <div class="login-ctn">
-      <img src="../assets/img/bluearrowleft.png" alt="Arrow Left">
+      <img class="leftarrow" src="../assets/img/bluearrowleft.png" alt="Arrow Left">
       <p class="signup-ctn">Sign Up</p>
 
       <form onsubmit="signUpUser();return false;">
@@ -36,15 +36,14 @@
           <input id="nameInput" class="name-input" type="text" placeholder="Name" required>
           <input id="emailInput" class="email-input" type="email" placeholder="Email" required>
           <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Password" required>
-          <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Password" required>
+          <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Confirm Password" required>
         </div>
         <div class="checkbox-ctn">
-          <input type="checkbox">
-          <p>Remember me</p>
+          <input type="checkbox" id="checkbox">
+          <label for="checkbox">I accept the <a href="#">Privacy policy</a></label>
         </div>
-        <div class="login-guest-ctn">
-          <button class="login-btn">Log in</button>
-          <button class="guest-btn">Guest Log in</button>
+        <div class="login-ctn-btn">
+          <button class="login-btn">Sign up</button>
         </div>
       </form>
 

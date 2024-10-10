@@ -41,14 +41,27 @@ button {
 }
 
 .login-ctn {
+  position: relative;
   width: 598px;
   height: 630px;
   background-color: #ffffff;
   border-radius: 30px;
 }
 
+.leftarrow {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  height: 20px;
+  width: 20px;
+}
+
+.leftarrow:hover {
+  cursor: pointer;
+}
+
 .signup-ctn {
-  margin-top: 0;
+  margin-top: 32px;
   margin-bottom: 16px;
   font-size: 61px;
   font-weight: 700;
@@ -68,6 +81,14 @@ button {
   left: 220px;
 }
 
+.input-ctn {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 input::placeholder {
   font-size: 20px;
   font-weight: 400;
@@ -79,6 +100,75 @@ input::placeholder {
   height: 48px;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
-  padding: 12px 21px;
-  margin-bottom: 32px;
+  padding-left: 21px;
+  padding-right: 21px;
+  /* padding: 12px 21px; */
+  margin-bottom: 16px;
+}
+
+.name-input {
+  background-image: url(../assets/img/person.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-position-x: 420px;
+}
+
+.email-input {
+  background-image: url(../assets/img/mail.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-position-x: 420px;
+}
+
+.password-input {
+  background-image: url(../assets/img/lock.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-position-x: 420px;
+}
+
+.checkbox-ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.checkbox-ctn input {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  vertical-align: middle;
+  border: 2px solid black;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  /* border-radius: 3px; */
+}
+
+.checkbox-ctn input:checked {
+  appearance: auto;
+  background-color: #29ABE2;
+}
+
+.login-ctn-btn {
+  text-align: center;
+}
+
+.login-btn {
+  background-color: #2A3647;
+  padding: 15px 24px;
+  color: #ffffff;
+  border: none;
+  font-size: 21px;
+  border-radius: 8px;
+}
+
+.legal-ctn {
+  position: absolute;
+  bottom: 60px;
 }
