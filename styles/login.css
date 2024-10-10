@@ -93,9 +93,18 @@ button {
   color: #000000;
   font-weight: 700;
   text-align: center;
-  border-bottom-width: 150px;
-  border-bottom: 3px solid #29ABE2;
   padding-bottom: 16px;
+  position: relative;
+}
+
+.login-text:after {
+  content: "";
+  width: 150px;
+  height: 3px;
+  background: #29ABE2;
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
 }
 
 .input-ctn {
@@ -188,4 +197,9 @@ input::placeholder {
   font-weight: 700;
   font-size: 21px;
   text-align: center;
+}
+
+.legal-ctn {
+  position: absolute;
+  bottom: 60px;
 }
