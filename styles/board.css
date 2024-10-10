@@ -186,9 +186,12 @@ main {
 .add-btn {
     display: flex;
     justify-content: center;
-    cursor: pointer;
     border-radius: 8px;
     border: 2px solid rgb(42,53,71);
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 @font-face {
