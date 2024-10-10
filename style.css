@@ -227,7 +227,7 @@ main {
   align-items: flex-start;
   gap: 8px;
   padding-left: 52px;
-  padding-top: 243px;
+  /*padding-top: 243px;*/
   width: 100%;
 }
 
