@@ -14,11 +14,73 @@ main {
 
 .boards {
     display: grid;
-    grid-template-rows: 128px 256px 1fr;
+    grid-template-rows: 128px 232px 24px 1fr;
     grid-template-columns: 1fr;
     height: 100vh;
+    
 }
 
+
+.board-head {
+    
+}
+
+
+.board-search {
+    display: grid;
+    grid-template-columns: 500px 312px 222px;
+    height: 232px;
+    gap: 32px;
+}
+
+.board-search-input {
+    width: 312px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+}
+
+.board-headline {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+
+.board-main {
+
+}
+
+
+.search-task {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 312px;
+    height: 100%;
+}
+
+.btn-task {
+    width: 160px;
+    height: 48px;
+    color: #ffffff;
+    background-color: #2A3647;
+    border-radius: 8px;
+    padding: 15px 24px;
+    font-weight: 700;
+    font-size: 21px;
+    border: none;
+}
+
+.btn-task-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 100%;
+}
 
 @font-face {
     font-family: Inter;

@@ -25,6 +25,20 @@ function processHTML(htmlString) {
     // Zum Beispiel: Den HTML-Inhalt in das DOM einfügen
     //document.getElementById('content').innerHTML = htmlString;
     document.querySelector('body').innerHTML = htmlString;
+    document.querySelector('.boards').innerHTML = boardHTML();
+}
+
+
+function boardHTML() {
+    return /*html*/`
+        <div class="board-head"></div>
+        <div class="board-search">
+            <div class="board-headline"><h1>Board</h1></div>
+            <div class="search-task"><input class="board-search-input" type="text"></div>
+            <div class="btn-task-container"><button class="btn-task">Add Task</button></div>
+        </div>
+        <div class="board-main"></div>
+    `;
 }
 
 
