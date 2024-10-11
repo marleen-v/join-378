@@ -209,6 +209,7 @@ main {
     src: url("../fonts/Roboto/Roboto-Regular.ttf");
 }
 
+/* add Task Styles */
 .add-task {
     display: grid;
     grid-row: 3;
@@ -224,4 +225,66 @@ main {
 
 .priority-buttons {
     display: flex;
+}
+
+.task-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.task-label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+.task-input,
+.task-textarea,
+.task-select,
+.task-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+}
+
+.task-button {
+    border: 1px solid #D1D1D1;
+    margin-right: 16px;
+    background-color: white;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.form-row>div {
+    flex: 1;
+}
+
+.left-side,
+.right-side {
+    display: grid;
+    grid-row: 4;
+    grid-column: 1;
+    gap: 10px;
+}
+
+.left-side>div,
+.right-side>div {
+    flex: 1;
+}
+
+.divider-vertical {
+    border-left: 2px solid #ddd;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.subtask-container {
+    margin-bottom: 10px;
 }
