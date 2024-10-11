@@ -35,8 +35,15 @@
       <p class="login-text">Log in</p>
       <form onsubmit="checkUserPassword();return false;">
         <div class="input-ctn">
-          <input id="emailInput" class="email-input" type="email" placeholder="Email" required>
-          <input id="passwordInput" class="password-input" type="password" placeholder="Password" required>
+          <div class="email-input-ctn">
+            <input id="emailInput" class="email-input" type="email" placeholder="Email" required>
+            <img src="../assets/img/mail.png" alt="Mail-Icon">
+          </div>
+          <div class="password-input-ctn">
+            <input id="passwordInput" class="password-input" type="password" placeholder="Password" required>
+            <img id="hidepwd" onclick="togglePasswordIcon()" src="../assets/img/lock.png" alt="Lock-Icon">
+            <img id="showpwd" onclick="togglePasswordIcon()" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
+          </div>
         </div>
         <div class="checkbox-ctn">
           <input type="checkbox" id="checkbox">

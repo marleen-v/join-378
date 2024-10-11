@@ -120,6 +120,23 @@ button {
   margin-top: 20px;
 }
 
+.email-input-ctn, .password-input-ctn {
+  position: relative;
+}
+
+.password-input-ctn img:hover {
+  cursor: pointer;
+}
+
+.input-ctn img {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 24px;
+  right: 20px;
+}
+
+/*
 .email-input {
   background-image: url(../assets/img/mail.png);
   background-repeat: no-repeat;
@@ -133,6 +150,7 @@ button {
   background-position: right;
   background-position-x: 420px;
 }
+*/
 
 input::placeholder {
   font-size: 20px;
@@ -147,6 +165,12 @@ input::placeholder {
   border: 1px solid #D1D1D1;
   padding: 12px 21px;
   margin-bottom: 32px;
+  font-size: 24px;
+}
+
+input:focus {
+  border: 2px solid #29ABE2;
+  outline: none;
 }
 
 .checkbox-ctn {
@@ -237,4 +261,12 @@ input::placeholder {
 
 .legal-ctn a:hover {
   color: #29ABE2;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.dnone {
+  display: none;
 }

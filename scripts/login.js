@@ -76,18 +76,18 @@ function checkUserPassword(){
 }
 
 
-
-
-/*
-function addUser(){
-  let email = document.getElementById('email');
-  let password = document.getElementById('password');
-  users.push(
-    { email: email.value, 
-      password: password.value
-    });
-
-  // Weiterleitung zur Login-Seite + Nachricht anzeigen: "Erfolgreiche Registrierung"
-  window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
+function guestLogin(){
+  window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
 }
-*/
+
+
+function togglePasswordIcon(){
+  document.getElementById("hidepwd").classList.toggle("dnone");
+  document.getElementById("showpwd").classList.toggle("dnone");
+  let pwdInputRef = document.getElementById("passwordInput");
+  if(document.getElementById("showpwd").classList.contains("dnone")){
+    pwdInputRef.type = "password";
+  } else {
+    pwdInputRef.type = "text";
+  }
+}
