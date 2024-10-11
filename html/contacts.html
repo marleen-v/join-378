@@ -29,49 +29,67 @@
 
   <body onload="renderContacts()">
     <main>
-    <div class="content flex">
-      <section class="contacts-container flex flex-column align-items-center" >
-        <div class="contacts flex flex-column align-items-center" id="contact-container">
-          <div class="letter">A</div>
-          <div class="single-contact-container flex align-items-center">
-            <div class="ellipse flex justify-content-center align-items-center"><span>AM</span></div>
-            <div class="name-email flex flex-column">
-              <span class="contact-name">Anton Mayer</span>
-              <span class="contact-email">antom@gmail.com</span>
+      <div class="content flex">
+        <section class="contacts-container flex flex-column align-items-center">
+          <div
+            class="contacts flex flex-column align-items-center"
+            id="contact-container"
+          >
+            <div class="letter">A</div>
+            <div class="single-contact-container flex align-items-center">
+              <div
+                class="ellipse flex justify-content-center align-items-center"
+              >
+                <span>AM</span>
+              </div>
+              <div class="name-email flex flex-column">
+                <span class="contact-name">Anton Mayer</span>
+                <span class="contact-email">antom@gmail.com</span>
+              </div>
             </div>
+            <div class="single-contact-container flex align-items-center">
+              <div
+                class="ellipse flex justify-content-center align-items-center"
+              >
+                <span>AS</span>
+              </div>
+              <div class="name-email flex flex-column">
+                <span class="contact-name">Anja Schulz</span>
+                <span class="contact-email">schulz@gmail.com</span>
+              </div>
+            </div>
+            <div class="letter">B</div>
+            <span class="single-contact-container flex align-items-center">
+              <div
+                class="ellipse flex justify-content-center align-items-center"
+              >
+                <span>BZ</span>
+              </div>
+              <div class="name-email flex flex-column">
+                <span class="contact-name">Ben Ziegler</span>
+                <span class="contact-email">Ziegler@gmail.com</span>
+              </div>
+            </span>
           </div>
-          <div class="single-contact-container flex align-items-center">
-            <div class="ellipse flex justify-content-center align-items-center"><span>AS</span></div>
-            <div class="name-email flex flex-column">
-              <span class="contact-name">Anja Schulz</span>
-              <span class="contact-email">schulz@gmail.com</span>
-            </div>
+          <div
+            class="add-contact-container flex justify-content-center align-items-center"
+          >
+            <button
+              class="add-contact-btn flex justify-content-center align-items-center"
+            >
+              <span>Add new contact</span
+              ><span><img src="../assets/img/person_add.png" alt="" /></span>
+            </button>
           </div>
-          <div class="letter">B</div>
-          <span class="single-contact-container flex align-items-center">
-            <div class="ellipse flex justify-content-center align-items-center"><span>BZ</span></div>
-            <div class="name-email flex flex-column">
-              <span class="contact-name">Ben Ziegler</span>
-              <span class="contact-email">Ziegler@gmail.com</span>
-            </div>
-          </span>
-        </div>
-        <div class="add-contact-container flex justify-content-center align-items-center">
-          <button class="add-contact-btn flex justify-content-center align-items-center">
-            <span>Add new contact</span
-            ><span><img src="../assets/img/person_add.png" alt="" /></span>
-          </button>
-        </div>
-      </section>
-      <section class="contact-info-container">
-        <div class="contact-title flex align-items-center">
-        <h1>Contacts</h1>
-        <div class="vertical-line"></div> 
-        <span>Better with a team</span>
-        </div>
-        
-      </section>
-    </div>
+        </section>
+        <section class="contact-info-container">
+          <div class="contact-title flex align-items-center">
+            <h1>Contacts</h1>
+            <div class="vertical-line"></div>
+            <span>Better with a team</span>
+          </div>
+        </section>
+      </div>
     </main>
   </body>
 </html>
