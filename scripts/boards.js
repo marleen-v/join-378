@@ -24,12 +24,12 @@ function processHTML(htmlString) {
   
     // Zum Beispiel: Den HTML-Inhalt in das DOM einfügen
     //document.getElementById('content').innerHTML = htmlString;
-    document.querySelector('body').innerHTML = htmlString;
+    document.querySelector('main').innerHTML = htmlString;
 }
 
 
 async function initBoard() {
-    const htmlContent = await loadHTML('../html/board.html');
+    const htmlContent = await loadHTML('../html/add-task.html');
 
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten

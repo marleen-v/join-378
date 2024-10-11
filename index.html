@@ -10,6 +10,7 @@
     <script src="./scripts/add-task.js"></script>
     <script src="./scripts/summary.js"></script>
     <script src="./scripts/boards.js"></script>
+    <script src="./scripts/contacts.js"></script>
     <script src="./scripts/login.js"></script>
     <script src="./script.js"></script>
     <link rel="stylesheet" href="./styles/standard.css" />
@@ -53,11 +54,11 @@
         </button>
         <button class="nav-btn">
           <span class="nav-icon"><img src="./assets/icons/add-task.png" alt=""></span>
-          <span class="nav-text">Add Task</span>
+          <span class="nav-text clickable" onclick="loadAddTask()">Add Task</span>
         </button>
         <button class="nav-btn">
           <span class="nav-icon"><img src="./assets/icons/board.png" alt=""></span>
-          <span class="nav-text">Board</span>
+          <span class="nav-text clickable" onclick="loadBoard()">Board</span>
         </button>
         <button class="nav-btn">
           <span class="nav-icon"><img src="./assets/icons/contact.png" alt=""></span>
