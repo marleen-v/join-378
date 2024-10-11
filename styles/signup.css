@@ -128,14 +128,19 @@ input::placeholder {
   background-position-x: 420px;
 }
 
+a {
+  text-decoration: none;
+  color: #29ABE2;
+}
+
 .checkbox-ctn {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 16px;
   gap: 8px;
-  margin-top: 16px;
-  margin-bottom: 24px;
+  margin-top: 24px;
+  margin-bottom: 36px;
 }
 
 .checkbox-ctn input {
@@ -178,3 +183,13 @@ input::placeholder {
   position: absolute;
   bottom: 60px;
 }
+
+.legal-ctn a {
+  color: rgb(155, 155, 155);
+  margin-right: 20px;
+}
+
+.legal-ctn a:hover {
+  color: #29ABE2;
+}
+

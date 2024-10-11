@@ -9,9 +9,9 @@
 
   <link rel="stylesheet" href="../styles/signup.css">
 
-  <script src="" defer></script>
+  <script src="../scripts/signup.js" defer></script>
 </head>
-<body>
+<body onload="init()">
 
   <div class="content-ctn">
 
@@ -34,16 +34,16 @@
       <form onsubmit="signUpUser();return false;">
         <div class="input-ctn">
           <input id="nameInput" class="name-input" type="text" placeholder="Name" required>
-          <input id="emailInput" class="email-input" type="email" placeholder="Email" required>
-          <input id="passwordInput" class="password-input" type="password" placeholder="Password" required>
-          <input id="passwordInputConfirm" class="password-input" type="password" placeholder="Confirm Password" required>
+          <input autocomplete="username" id="emailInput" class="email-input" type="email" placeholder="Email" required>
+          <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" placeholder="Password" required>
+          <input autocomplete="new-password" id="passwordInputConfirm" class="password-input" type="password" placeholder="Confirm Password" required>
         </div>
         <div class="checkbox-ctn">
-          <input type="checkbox" id="checkbox">
+          <input type="checkbox" id="checkbox" onclick="enableButtonAfterChecked()">
           <label for="checkbox">I accept the <a href="#">Privacy policy</a></label>
         </div>
         <div class="login-ctn-btn">
-          <button class="login-btn" disabled="true">Sign up</button>
+          <button id="btn" class="login-btn" disabled="true">Sign up</button>
         </div>
       </form>
 
@@ -51,7 +51,9 @@
 
 
     <div class="legal-ctn">
-      <img src="../assets/img/privacypolicylegalnotice.png" alt="Legal-Links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Legal Notice</a>
+      <!-- <img src="../assets/img/privacypolicylegalnotice.png" alt="Legal-Links"> -->
     </div>
     
 

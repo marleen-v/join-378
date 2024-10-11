@@ -17,8 +17,16 @@ async function loadData(path=""){
 }
 
 
-function signUpUser(){
+function init(){
   loadData(USERS_DIR);
+}
+
+
+function signUpUser(){
+  addUser();
+  resetValues();
+  putData(USERS_DIR, dataFromFirebase);
+  // window.location.href = '../index.html?msg=Du hast dich erfolgreich registriert!';
 }
 
 
@@ -35,13 +43,47 @@ async function putData(path="", data={}){
 }
 
 
+function checkCorrectPassword(){
+  if(passwordInputRef.value === passwordInputConfirmRef.value){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function resetValues(){
+  emailInputRef.value = '';
+  nameInputRef.value = '';
+  passwordInputRef.value = '';
+  passwordInputConfirmRef.value = '';
+  document.getElementById("btn").disabled = "true";
+  document.getElementById("checkbox").checked = false;
+}
+
+
 function addUser(){
-  dataFromFirebase.push({
-    "email": emailInputRef.value,
-    "firstName": "Michael",
-    "lastName": "Bulbasaur",
-    "password": passwordInputRef.value
-  });
-  console.log(dataFromFirebase);
-  putData(USERS_DIR, dataFromFirebase);
+  let firstName = nameInputRef.value.split(' ')[0];
+  let lastName = nameInputRef.value.split(' ')[1];
+  if(checkCorrectPassword()){
+    dataFromFirebase.push({
+      "email": emailInputRef.value,
+      "firstName": firstName,
+      "lastName": lastName,
+      "password": passwordInputRef.value
+    });
+  } else {
+    alert("Passwords do not match");
+  }
+  // console.log(dataFromFirebase);
+}
+
+
+function enableButtonAfterChecked(){
+  let checkRef = document.getElementById("checkbox");
+  let buttonRef = document.getElementById("btn");
+  if(checkRef.checked){
+    buttonRef.removeAttribute("disabled");
+  } else {
+    buttonRef.disabled = "true";
+  }
 }
