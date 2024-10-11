@@ -64,15 +64,19 @@ button {
 
 .signup-ctn button {
   background-color: #2A3647;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19.2px;
   width: 91px;
   height: 49px;
   /* padding: 15px 20px; */
   border-radius: 8px;
   border: none;
+}
+
+.signup-ctn button a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 19.2px;
 }
 
 .login-ctn {
@@ -216,4 +220,14 @@ input::placeholder {
 .legal-ctn {
   position: absolute;
   bottom: 60px;
+}
+
+.legal-ctn a {
+  color: rgb(155, 155, 155);
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.legal-ctn a:hover {
+  color: #29ABE2;
 }
