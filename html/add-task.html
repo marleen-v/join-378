@@ -1,0 +1,144 @@
+<section id="add-task" class="add-task">
+<div class="add-task-head"></div>
+<div class="add-task-top">
+    <div class="add-task-headline">
+        <h1>Add Task</h1>
+    </div>
+</div>
+<div class="add-task-main">
+<form id="task-form">
+    <!-- Linker und rechter Bereich mit senkrechter Linie -->
+    <div class="form-row">
+        <!-- Linke Seite (Titel und Zuweisen an) -->
+        <div class="left-side">
+            <div>
+                <!-- Titel -->
+                <label for="title">Titel</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <!-- Beschreibung -->
+            <label for="description">Beschreibung</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+            <div>
+                <!-- Zuweisen an -->
+                <label for="assigned-to">Zugewiesen an</label>
+                <select id="assigned-to" name="assigned_to" required>
+                    <option value="" disabled selected>Bitte auswählen</option>
+                    <option value="mitarbeiter1">Mitarbeiter 1</option>
+                    <option value="mitarbeiter2">Mitarbeiter 2</option>
+                    <option value="mitarbeiter3">Mitarbeiter 3</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Rechte Seite (Fälligkeitsdatum) mit vertikaler Trennung -->
+        <div class="right-side divider-vertical">
+            <div>
+                <!-- Fälligkeitsdatum -->
+                <label for="due-date">Fälligkeitsdatum</label>
+                <input type="date" id="due-date" name="due_date" required>
+            </div>
+
+            <!-- Priorität als Buttons -->
+            <label>Priorität</label>
+            <div class="priority-buttons">
+                <button type="button" class="priority-button" id="urgent" data-priority="hoch"
+                    onclick="selectPriority(this)">Urgent</button>
+                <button type="button" class="priority-button active" id="medium" data-priority="mittel"
+                    onclick="selectPriority(this)">Medium</button>
+                <button type="button" class="priority-button" id="low" data-priority="niedrig"
+                    onclick="selectPriority(this)">Low</button>
+            </div>
+
+            <!-- Kategorie -->
+            <label for="category">Kategorie</label>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Bitte auswählen</option>
+                <option value="entwicklung">Entwicklung</option>
+                <option value="marketing">Marketing</option>
+                <option value="design">Design</option>
+            </select>
+
+            <!-- Subtasks -->
+            <label>Unteraufgaben (Subtasks)</label>
+            <div id="subtasks-container">
+                <div class="subtask-container">
+                    <input type="text" name="subtasks[]" placeholder="Unteraufgabe 1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <button type="button" onclick="addSubtask()">Weitere Unteraufgabe hinzufügen</button>
+
+    <!-- Absenden -->
+    <button type="submit">Aufgabe erstellen</button>
+</form>
+
+
+
+
+</div>
+<style>
+    form {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .form-row>div {
+        flex: 1;
+    }
+
+    .left-side,
+    .right-side {
+        display: grid;
+        grid-row: 4;
+        grid-column: 1;
+        gap: 10px;
+    }
+
+    .left-side>div,
+    .right-side>div {
+        flex: 1;
+    }
+
+    .divider-vertical {
+        border-left: 2px solid #ddd;
+        margin-left: 10px;
+        padding-left: 10px;
+    }
+
+    .subtask-container {
+        margin-bottom: 10px;
+    }
+
+    button {
+        cursor: pointer;
+    }
+</style>
+</section>
