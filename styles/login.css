@@ -66,9 +66,10 @@ button {
   background-color: #2A3647;
   width: 91px;
   height: 49px;
-  /* padding: 15px 20px; */
+  /* padding: 15px 16px; */
   border-radius: 8px;
   border: none;
+  box-sizing: content-box;
 }
 
 .signup-ctn button a {
@@ -89,6 +90,7 @@ button {
   border-radius: 30px;
   background-color: #ffffff;
   padding: 48px 115px 48px 115px;
+  box-shadow: 0 0 14px 3px rgb(0 0 0 / 0.04);
 }
 
 .login-text {
@@ -153,6 +155,7 @@ input::placeholder {
 }
 
 .checkbox-ctn input {
+  position: relative;
   border-radius: 3px;
   margin-right: 8px;
   margin-left: 39px;
@@ -167,11 +170,15 @@ input::placeholder {
   cursor: pointer;
 }
 
-.checkbox-ctn input:checked {
+.checkbox-ctn input:checked:after {
+  position: absolute;
   appearance: auto;
-  background-color: #29ABE2;
+  /* background-color: #29ABE2; */
+  content: '✔';
+  font-size: 26px;
+  top: -17px;
+  left: -2px;
 }
-
 
 .checkbox-ctn label {
   font-size: 16px;

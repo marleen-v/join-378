@@ -144,6 +144,7 @@ a {
 }
 
 .checkbox-ctn input {
+  position: relative;
   width: 16px;
   height: 16px;
   border-radius: 3px;
@@ -156,9 +157,14 @@ a {
   /* border-radius: 3px; */
 }
 
-.checkbox-ctn input:checked {
+.checkbox-ctn input:checked:after {
+  position: absolute;
   appearance: auto;
-  background-color: #29ABE2;
+  /* background-color: #29ABE2; */
+  content: '✔';
+  font-size: 26px;
+  top: -17px;
+  left: -2px;
 }
 
 .login-ctn-btn {
