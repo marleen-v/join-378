@@ -49,7 +49,8 @@ button {
   justify-content: center;
   align-items: center;
   top: 67px;
-  left: 1039px;
+  /* left: 1039px; */
+  right: 122px;
   gap: 35px;
   width: 279px;
   height: 49px;
@@ -148,14 +149,27 @@ input::placeholder {
 }
 
 .checkbox-ctn input {
-  width: 24px;
-  height: 24px;
   border-radius: 3px;
   margin-right: 8px;
   margin-left: 39px;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  vertical-align: middle;
+  border: 2px solid black;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
 }
 
-.checkbox-ctn p {
+.checkbox-ctn input:checked {
+  appearance: auto;
+  background-color: #29ABE2;
+}
+
+
+.checkbox-ctn label {
   font-size: 16px;
   color: #000000;
 }

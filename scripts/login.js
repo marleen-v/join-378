@@ -59,20 +59,23 @@ function checkUserPassword(){
   let unknownUser = true;
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
-      console.log("Willkommen " + dataFromFirebase[i].firstName);
+      // console.log("Willkommen " + dataFromFirebase[i].firstName);
       unknownUser = false;
       alert("Hallo " + dataFromFirebase[i].firstName + " " + dataFromFirebase[i].lastName);
+      window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
     }
   }
 
   if(unknownUser){
-    console.log("Benutzer nicht bekannt.");
+    // console.log("Benutzer nicht bekannt.");
     alert("Benutzer nicht bekannt.")
   }
 
   emailInputRef.value = '';
   passwordInputRef.value = '';
 }
+
+
 
 
 /*

@@ -39,12 +39,12 @@
           <input id="passwordInput" class="password-input" type="password" placeholder="Password" required>
         </div>
         <div class="checkbox-ctn">
-          <input type="checkbox">
-          <p>Remember me</p>
+          <input type="checkbox" id="checkbox">
+          <label for="checkbox">Remember me</label>
         </div>
         <div class="login-guest-ctn">
           <button class="login-btn">Log in</button>
-          <button class="guest-btn">Guest Log in</button>
+          <button onclick="guestLogin()" class="guest-btn">Guest Log in</button>
         </div>
       </form>
 

@@ -169,6 +169,11 @@ input::placeholder {
   border-radius: 8px;
 }
 
+.login-btn:disabled {
+  color: grey;
+  cursor: auto;
+}
+
 .legal-ctn {
   position: absolute;
   bottom: 60px;
