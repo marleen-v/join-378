@@ -212,10 +212,13 @@ main {
 /* add Task Styles */
 .add-task {
     display: grid;
-    grid-row: 3;
+    grid-template-rows: 64px 100px 1fr ;
     grid-column: 1;
     padding: 64px;
+    height: 100vh;
 }
+
+
 
 .add-task-right {
     overflow: auto !important;
