@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../assets/icons/favicon.png" type="image/x-icon">
 
-    <script src="../scripts/assets.js" defer></script>
+    <!-- <script src="../scripts/assets.js" defer></script>
     <script src="../scripts/template.js" defer></script>
-    <script src="../scripts/add-task.js" defer></script>
+    <script src="../scripts/add-task.js" defer></script> -->
     <script src="../scripts/summary.js" defer></script>
-    <script src="../scripts/boards.js" defer></script>
-    <script src="../scripts/contacts.js" defer></script>
-    <script src="../scripts/login.js" defer></script>
-    <script src="../script.js" defer></script>
+    <!-- <script src="../scripts/boards.js" defer></script>
+    <script src="../scripts/contacts.js" defer></script> -->
+    <!-- <script src="../scripts/login.js" defer></script> -->
+    <!-- <script src="../script.js" defer></script> -->
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
     <link rel="stylesheet" href="../style.css" />
@@ -34,7 +34,7 @@
           </button>
           <div class="user-profil">
             <div class="dropdown-menu">
-              <button class="profil-img" onclick="openCloseDropdownMenu()">
+              <button class="profil-img" onclick="">
                 <img src="../assets/img/user-profil.png" alt="" />
               </button>
               <div class="dropdown d_none" id="dropdown-menu">
@@ -73,58 +73,7 @@
       </div>
     </nav>
 
-    <main>
-      <section class="summary-section">
-        <div class="header-main">
-          <h1>Join 360</h1>
-          <span>Key Metrics at a Glance</span>
-        </div>
-
-        <div class="data-ctn">
-          <div class="object-data">
-
-            <div class="todo-done-ctn">
-              <div class="todo bgwhite-colblack-br30 w264h168">
-                <div class="circle69"><img src="../assets/icons/edit.png" alt=""></div>
-                <div><p class="font64colblackw600">1</p><p class="color2A">To-Do</p></div>
-              </div>
-              <div class="done bgwhite-colblack-br30 w264h168">
-                <div class="circle69"><img src="../assets/icons/Vector@2x.png" alt=""></div>
-                <div><p class="font64colblackw600">1</p><p class="color2A">Done</p></div>
-              </div>
-            </div>
-
-            <div class="urgent-ctn bgwhite-colblack-br30 w560h168">
-              <div class="urgent-left-side">
-                <div class="circle-urgent"><img src="../assets/icons/Prio alta.png" alt=""></div>
-              
-                <div class="urgent-data">
-                  <p class="font64colblackw600">1</p>
-                  <p class="color2A">Urgent</p>
-                </div>
-              
-              </div>
-              <div class="date-ctn">
-                <p class="font21w700">October 16, 2022</p>
-                <p class="font16w400">Upcoming Deadline</p>
-              </div>
-            </div>
-
-            <div class="tasks-ctn">
-              <div class="board bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">5</p><p class="color2A">Tasks in Board</p></div>
-              <div class="progress bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">2</p><p class="color2A">Tasks in Progress</p></div>
-              <div class="feedback bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">2</p><p class="color2A">Awaiting Feedback</p></div>
-            </div>
-            
-          </div>
-
-          <div id="greeting_ctn" class="greeting-ctn"></div>
-
-        </div>
-
-
-      </section>
-
+    <main id="main_summary">
     </main>
 
   </body>
