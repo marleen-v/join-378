@@ -64,6 +64,7 @@ h1 {
 .todo-done-ctn {
   display: flex;
   margin-bottom: 28px;
+  gap: 36px;
 }
 
 .urgent-ctn {
@@ -72,7 +73,19 @@ h1 {
 
 .tasks-ctn {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 28px;
+  gap: 30px;
+}
+
+.board, .progress, .feedback {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 25px;
+  text-align: center;
 }
 
 .greeting-ctn {
@@ -102,6 +115,9 @@ h1 {
   height: 69px;
   background-color: #2A3647;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .circle-urgent {
@@ -109,6 +125,29 @@ h1 {
   height: 60px;
   background-color: #FF3D00;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo, .done {
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+}
+
+.font64colblackw600 {
+  font-size: 64px;
+  text-align: center;
+  font-weight: 600;
+  color: #000000;
+}
+
+.color2A {
+  font-size: 20px;
+  color: #2A3647;
 }
 
 
