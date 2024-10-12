@@ -7,9 +7,10 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
+  margin-left: 120px;
 }
 
 .header-main {
@@ -35,4 +36,57 @@ h1 {
   color: #2A3647;
 }
 
+.bgwhite-colblack-br30 {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 30px;
+}
 
+.w264h168 {
+  width: 264px;
+  height: 168px;
+}
+
+.w560h168 {
+  width: 560px;
+  height: 168px;
+}
+
+.w168h168 {
+  width: 168px;
+  height: 168px;
+}
+
+.data-ctn {
+  display: flex;
+}
+
+.todo-done-ctn {
+  display: flex;
+}
+
+.tasks-ctn {
+  display: flex;
+}
+
+.greeting-ctn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 60px;
+}
+
+.greeting-formula {
+  font-size: 47px;
+  font-weight: 500;
+  color: #2A3647;
+}
+
+.greeting-person {
+  font-size: 64px;
+  font-weight: 700;
+  color: #29ABE2;
+}

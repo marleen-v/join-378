@@ -24,7 +24,7 @@
     <title>Join</title>
 
   </head>
-  <body onload="">
+  <body onload="initSummary()">
     <header>
       <div class="header-wrapper">
         <div class="title">Kanban Project Management Tool</div>
@@ -84,26 +84,30 @@
           <div class="object-data">
 
             <div class="todo-done-ctn">
-              <div class="todo">
+              <div class="todo bgwhite-colblack-br30 w264h168">
                 <img src="../assets/icons/edit.png" alt="">
+                <div><p>1</p><p>To-do</p></div>
               </div>
-              <div class="done">
+              <div class="done bgwhite-colblack-br30 w264h168">
                 <img src="../assets/icons/Vector@2x.png" alt="">
+                <div><p>1</p><p>Done</p></div>
               </div>
             </div>
 
-            <div class="urgent-ctn">
+            <div class="urgent-ctn bgwhite-colblack-br30 w560h168">
               <img src="../assets/icons/Prio alta.png" alt="">
+
             </div>
 
-            <div class="tasks-ctn"></div>
+            <div class="tasks-ctn">
+              <div class="board bgwhite-colblack-br30 w168h168"><p>5</p><p>Tasks in Board</p></div>
+              <div class="progress bgwhite-colblack-br30 w168h168"><p>2</p><p>Tasks in Progress</p></div>
+              <div class="feedback bgwhite-colblack-br30 w168h168"><p>2</p><p>Awaiting Feedback</p></div>
+            </div>
             
           </div>
 
-          <div class="greeting-ctn">
-            <p>Good morning</p>
-            <p>Sofia Müller</p>
-          </div>
+          <div id="greeting_ctn" class="greeting-ctn"></div>
 
         </div>
 
@@ -111,5 +115,6 @@
       </section>
 
     </main>
+
   </body>
 </html>
