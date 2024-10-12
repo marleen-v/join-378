@@ -15,8 +15,7 @@ main {
 
 .header-main {
   display: flex;
-  margin-left: 30px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 30px;
 }
@@ -59,14 +58,21 @@ h1 {
 
 .data-ctn {
   display: flex;
+  
 }
 
 .todo-done-ctn {
   display: flex;
+  margin-bottom: 28px;
+}
+
+.urgent-ctn {
+  margin-bottom: 28px;
 }
 
 .tasks-ctn {
   display: flex;
+  margin-bottom: 28px;
 }
 
 .greeting-ctn {
@@ -90,3 +96,21 @@ h1 {
   font-weight: 700;
   color: #29ABE2;
 }
+
+.circle69 {
+  width: 69px;
+  height: 69px;
+  background-color: #2A3647;
+  border-radius: 50%;
+}
+
+.circle-urgent {
+  width: 60px;
+  height: 60px;
+  background-color: #FF3D00;
+  border-radius: 50%;
+}
+
+
+
+
