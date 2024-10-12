@@ -91,3 +91,32 @@ function togglePasswordIcon(){
     pwdInputRef.type = "text";
   }
 }
+
+
+/*
+function changePwdMaskChar(){
+  const passwordFieldRef = document.getElementById('passwordInput');
+  const hiddenPassword = document.getElementById('hiddenPassword');
+
+  passwordFieldRef.addEventListener('input', (e) => {
+  const currentValue = passwordFieldRef.value;
+            
+  // Holen wir uns den vorherigen Wert (da der Wert hier maskiert ist)
+  let storedPassword = hiddenPassword.value;
+
+  // Wenn der Benutzer ein Zeichen löscht
+  if (currentValue.length < storedPassword.length) {
+    storedPassword = storedPassword.slice(0, currentValue.length);
+  } else {
+  
+  // Füge das neue Zeichen dem gespeicherten Passwort hinzu
+  storedPassword += currentValue[currentValue.length - 1];
+            }
+  // Aktualisiere das versteckte Passwort-Feld
+  hiddenPassword.value = storedPassword;
+
+  // Zeige die Sternchen im sichtbaren Textfeld
+  passwordFieldRef.value = '*'.repeat(storedPassword.length);
+  });
+}
+*/
