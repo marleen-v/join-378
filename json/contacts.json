@@ -2,101 +2,121 @@
     {
       "firstName": "Anna",
       "lastName": "Müller",
-      "email": "anna.mueller@gmail.com"
+      "email": "anna.mueller@gmail.com",
+      "initials": "AM"
     },
     {
       "firstName": "Max",
       "lastName": "Schneider",
-      "email": "max.schneider@gmx.de"
+      "email": "max.schneider@gmx.de",
+      "initials": "MS"
     },
     {
       "firstName": "Julia",
       "lastName": "Weber",
-      "email": "julia.weber@yahoo.de"
+      "email": "julia.weber@yahoo.de",
+      "initials": "JW"
     },
     {
       "firstName": "Lukas",
       "lastName": "Fischer",
-      "email": "lukas.fischer@outlook.com"
+      "email": "lukas.fischer@outlook.com",
+      "initials": "LF"
     },
     {
       "firstName": "Sophia",
       "lastName": "Schmidt",
-      "email": "sophia.schmidt@hotmail.com"
+      "email": "sophia.schmidt@hotmail.com",
+      "initials": "SS"
     },
     {
       "firstName": "Tim",
       "lastName": "Bauer",
-      "email": "tim.bauer@gmail.com"
+      "email": "tim.bauer@gmail.com",
+      "initials": "TB"
     },
     {
       "firstName": "Mia",
       "lastName": "Koch",
-      "email": "mia.koch@gmx.de"
+      "email": "mia.koch@gmx.de",
+      "initials": "MK"
     },
     {
       "firstName": "Jonas",
       "lastName": "Wolf",
-      "email": "jonas.wolf@yahoo.com"
+      "email": "jonas.wolf@yahoo.com",
+      "initials": "JW"
     },
     {
       "firstName": "Emma",
       "lastName": "Hofmann",
-      "email": "emma.hofmann@outlook.de"
+      "email": "emma.hofmann@outlook.de",
+      "initials": "EH"
     },
     {
       "firstName": "Paul",
       "lastName": "Kaiser",
-      "email": "paul.kaiser@icloud.com"
+      "email": "paul.kaiser@icloud.com",
+      "initials": "PK"
     },
     {
       "firstName": "Clara",
       "lastName": "Peters",
-      "email": "clara.peters@web.de"
+      "email": "clara.peters@web.de",
+      "initials": "CP"
     },
     {
       "firstName": "Felix",
       "lastName": "Mayer",
-      "email": "felix.mayer@gmail.com"
+      "email": "felix.mayer@gmail.com",
+      "initials": "FM"
     },
     {
       "firstName": "Lea",
       "lastName": "Becker",
-      "email": "lea.becker@gmx.de"
+      "email": "lea.becker@gmx.de",
+      "initials": "LB"
     },
     {
       "firstName": "Nico",
       "lastName": "Frank",
-      "email": "nico.frank@yahoo.com"
+      "email": "nico.frank@yahoo.com",
+      "initials": "NF"
     },
     {
       "firstName": "Laura",
       "lastName": "Lange",
-      "email": "laura.lange@outlook.com"
+      "email": "laura.lange@outlook.com",
+      "initials": "LL"
     },
     {
       "firstName": "David",
       "lastName": "Krause",
-      "email": "david.krause@gmail.com"
+      "email": "david.krause@gmail.com",
+      "initials": "DK"
     },
     {
       "firstName": "Elena",
       "lastName": "Schulz",
-      "email": "elena.schulz@gmx.de"
+      "email": "elena.schulz@gmx.de",
+      "initials": "ES"
     },
     {
       "firstName": "Simon",
       "lastName": "Wagner",
-      "email": "simon.wagner@yahoo.de"
+      "email": "simon.wagner@yahoo.de",
+      "initials": "SW"
     },
     {
       "firstName": "Hannah",
       "lastName": "Zimmermann",
-      "email": "hannah.zimmermann@outlook.com"
+      "email": "hannah.zimmermann@outlook.com",
+      "initials": "HZ"
     },
     {
       "firstName": "Jan",
       "lastName": "Neumann",
-      "email": "jan.neumann@gmail.com"
+      "email": "jan.neumann@gmail.com",
+      "initials": "JN"
     }
 ]
