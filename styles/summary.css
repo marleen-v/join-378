@@ -150,6 +150,46 @@ h1 {
   color: #2A3647;
 }
 
+.urgent-ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  /* padding: 28px 48px; */
+}
 
+.urgent-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 2px solid #d1d1d1;
+  padding-right: 48px;
+}
 
+.urgent-left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
 
+.date-ctn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 48px;
+  gap: 13px;
+}
+
+.font21w700 {
+  font-size: 21px;
+  font-weight: 700;
+  color: #2A3647;
+}
+
+.font16w400 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2A3647;
+}
