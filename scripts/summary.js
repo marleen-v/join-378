@@ -2,7 +2,88 @@ const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabas
 const USERS_DIR = '/users';
 const TASKS_DIR = '/tasks';
 const CONTACTS_DIR = '/contacts';
-let tasksFromFirebase = [];
+let tasksFromFirebase =  [
+  {
+  "Title": "Projektinitialisierung",
+  "Description": "Initialisierung des JavaScript-Projekts mit npm und Git-Repository.",
+  "Date": "2024-10-10",
+  "Priority": "Medium",
+  "Category": "To Do",
+  "persons": ["Julia Weber"]
+},
+{
+  "Title": "Erstellung der Grundstruktur",
+  "Description": "HTML, CSS und JavaScript-Dateien anlegen und grundlegende Struktur erstellen.",
+  "Date": "2024-10-11",
+  "Priority": "Urgent",
+  "Category": "In Progress",
+  "persons": ["Max Schneider"]
+},
+{
+  "Title": "API-Integration",
+  "Description": "Eine externe API in das Projekt integrieren, um Daten abzurufen.",
+  "Date": "2024-10-13",
+  "Priority": "Urgent",
+  "Category": "To Do",
+  "persons": ["Max Schneider", "Mia Koch"]
+},
+{
+  "Title": "Datenbankanbindung",
+  "Description": "Verbindung zur Datenbank herstellen und CRUD-Operationen implementieren.",
+  "Date": "2024-10-15",
+  "Priority": "Medium",
+  "Category": "Await Feedback",
+  "persons": ["Paul Kaiser", "Sophia Schmidt", "Mia Koch"]
+},
+{
+  "Title": "UI-Design verbessern",
+  "Description": "Das User Interface für bessere Usability und ansprechendes Design optimieren.",
+  "Date": "2024-10-17",
+  "Priority": "Low",
+  "Category": "In Progress",
+  "persons": ["Sophia Schmidt", "Mia Koch"]
+},
+{
+  "Title": "Unit Tests schreiben",
+  "Description": "Unit Tests für kritische Funktionen im JavaScript-Code erstellen.",
+  "Date": "2024-10-19",
+  "Priority": "Medium",
+  "Category": "To Do",
+  "persons": ["Emma Hofmann", "Sophia Schmidt", "Mia Koch"]
+},
+{
+  "Title": "Bugfixing",
+  "Description": "Bekannte Fehler im Projekt beheben, die durch Testing aufgedeckt wurden.",
+  "Date": "2024-10-21",
+  "Priority": "Urgent",
+  "Category": "Await Feedback",
+  "persons": ["Julia Weber"]
+},
+{
+  "Title": "Dokumentation erstellen",
+  "Description": "Erstellung der technischen Dokumentation und Benutzeranleitung.",
+  "Date": "2024-10-23",
+  "Priority": "Low",
+  "Category": "To Do",
+  "persons": ["Tim Bauer", "Anna Müller"]
+},
+{
+  "Title": "Code Review",
+  "Description": "Durchführen eines Code Reviews zur Verbesserung der Codequalität.",
+  "Date": "2024-10-25",
+  "Priority": "Medium",
+  "Category": "In Progress",
+  "persons": ["Lukas Fischer", "Max Schneider"]
+},
+{
+  "Title": "Projektabschluss",
+  "Description": "Projektabnahme und Übergabe an den Kunden.",
+  "Date": "2024-10-30",
+  "Priority": "Urgent",
+  "Category": "Done",
+  "persons": ["Lukas Fischer", "Sophia Schmidt"]
+}
+];
 
 
 let currentUserFirstName = "Sofia";
@@ -10,7 +91,8 @@ let currentUserLastName = "Müller";
 
 
 function initSummary(){
-  loadData(TASKS_DIR);
+  // loadData(TASKS_DIR);
+  document.getElementById("main_summary").innerHTML = getTemplateMainSummary();
   showGreetingDependingOnDaytime();
 }
 
@@ -28,7 +110,16 @@ function getNumberUrgentTasks(){
       counter++;
     }
   }  
-  console.log(counter);
+  return counter;  
+}
+
+function getNumberToDoTasks(){
+  let counter = 0;  
+  for(let i = 0; i < tasksFromFirebase.length; i++){
+    if(tasksFromFirebase[i].Category === 'To Do'){
+      counter++;
+    }
+  }  
   return counter;  
 }
 
@@ -36,14 +127,65 @@ function getNumberUrgentTasks(){
 function getNumberDoneTasks(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
-    console.log(tasksFromFirebase[i].Category);
-    if(tasksFromFirebase[i].Category === 'Done'){counter++;//console.log(counter);
-      }
+    if(tasksFromFirebase[i].Category === 'Done'){
+      counter++;
+    }
   }
   return counter;  
 }
 
-// document.getElementById("done_tasks").innerHTML = getNumberDoneTasks();
+
+function getNumberTasksInProgress(){
+  let counter = 0;  
+  for(let i = 0; i < tasksFromFirebase.length; i++){
+    if(tasksFromFirebase[i].Category === 'In Progress'){
+      counter++;
+    }
+  }
+  return counter;  
+}
+
+
+function getNumberTasksAwaitingFeedback(){
+  let counter = 0;  
+  for(let i = 0; i < tasksFromFirebase.length; i++){
+    if(tasksFromFirebase[i].Category === 'Await Feedback'){
+      counter++;
+    }
+  }
+  return counter;  
+}
+
+
+function getTasksInBoard(){
+  return tasksFromFirebase.length;
+}
+
+
+function getNearestDate(){
+  let dateArr = [];
+  for (let i = 0; i < tasksFromFirebase.length; i++) {
+    dateArr.push(tasksFromFirebase[i].Date);
+  }
+  dateArr.sort();
+  return dateArr[0];
+}
+
+
+function getDeadlineYear(){
+  return getNearestDate().split('-')[0];
+}
+
+
+function getDeadlineMonth(){
+  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return month[getNearestDate().split('-')[1] - 1];
+}
+
+
+function getDeadlineDay(){
+  return getNearestDate().split('-')[2];
+}
 
 
 function getGreetingTemplate(greetFormula){
@@ -64,63 +206,3 @@ function showGreetingDependingOnDaytime(){
   document.getElementById("greeting_ctn").innerHTML = getGreetingTemplate(formula);
 }
 
-
-
-
-function getTemplateMainSummary(){
-  return `
-    <section class="summary-section">
-        <div class="header-main">
-          <h1>Join 360</h1>
-          <span>Key Metrics at a Glance</span>
-        </div>
-
-        <div class="data-ctn">
-          <div class="object-data">
-
-            <div class="todo-done-ctn">
-              <div class="todo bgwhite-colblack-br30 w264h168">
-                <div class="circle69"><img src="../assets/icons/edit.png" alt=""></div>
-                <div><p class="font64colblackw600">1</p><p class="color2A">To-Do</p></div>
-              </div>
-              <div class="done bgwhite-colblack-br30 w264h168">
-                <div class="circle69"><img src="../assets/icons/Vector@2x.png" alt=""></div>
-                <div><p class="font64colblackw600" id="done_tasks">${getNumberDoneTasks()}</p><p class="color2A">Done</p></div>
-              </div>
-            </div>
-
-            <div class="urgent-ctn bgwhite-colblack-br30 w560h168">
-              <div class="urgent-left-side">
-                <div class="circle-urgent"><img src="../assets/icons/Prio alta.png" alt=""></div>
-              
-                <div class="urgent-data">
-                  <p class="font64colblackw600" id="urgent_tasks">${getNumberUrgentTasks()}</p>
-                  <p class="color2A">Urgent</p>
-                </div>
-              
-              </div>
-              <div class="date-ctn">
-                <p class="font21w700">October 16, 2022</p>
-                <p class="font16w400">Upcoming Deadline</p>
-              </div>
-            </div>
-
-            <div class="tasks-ctn">
-              <div class="board bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">5</p><p class="color2A">Tasks in Board</p></div>
-              <div class="progress bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">2</p><p class="color2A">Tasks in Progress</p></div>
-              <div class="feedback bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">2</p><p class="color2A">Awaiting Feedback</p></div>
-            </div>
-            
-          </div>
-
-          <div id="greeting_ctn" class="greeting-ctn"></div>
-
-        </div>
-
-
-      </section>
-  `;
-}
-
-
-document.getElementById("main_summary").innerHTML = getTemplateMainSummary();
