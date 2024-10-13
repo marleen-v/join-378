@@ -13,22 +13,32 @@ let passwordInputRef = document.getElementById("passwordInput");
 
 
 function init() {
-    //nur zum testen
-    initBoard();
+ 
 }
 
 
-async function loadBoard() {
-    const htmlContent = await loadHTML('./html/board.html');
+function openBoards() {
+    window.location = "../html/boards.html";
+}
+
+
+function openAddTask() {
+    window.location = "../html/add-task.html";
+}
+
+
+async function loadBoards() {
+    const htmlContent = await loadHTML('../templates/boards.html');
 
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
+        showData();
     }    
 }
 
 
 async function loadAddTask() {
-    const htmlContent = await loadHTML('./html/add-task.html');
+    const htmlContent = await loadHTML('../templates/add-task.html');
 
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten

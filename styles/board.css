@@ -3,7 +3,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
     font-family: Inter, arial, sans-serif;
 }
 
@@ -14,17 +14,21 @@ main {
 
 .boards {
     display: grid;
-    grid-template-rows: 64px 232px 24px 1fr;
+    grid-template-rows: 232px 24px 1fr;
     grid-template-columns: calc(100% - 64px);
     width: 100%;
     height: 100vh;
     padding: 0 64px 0 64px;
     max-width: 1440px;
+    background-color: #F6F7F8;
 }
 
 
 .board-head {
-    
+    display: grid;
+    grid-template-columns: auto 312px 222px;
+    height: 232px;
+    gap: 32px;
 }
 
 
@@ -53,7 +57,7 @@ main {
 
 .board-bar {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 252px);
     grid-template-rows: 1fr;
     gap: 16px;
 }
@@ -61,9 +65,12 @@ main {
 
 .board-main {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 252px);
     grid-template-rows: 1fr;
     overflow-y: auto;
+    width: 1200px;
+    height: 100%;
+    padding: 16px 0 128px 0;
 }
 
 
@@ -162,27 +169,28 @@ main {
 
 .board-to-do {
     display: grid;
-    grid-template-columns: 200px 24px;
+    grid-template-columns: 228px 24px;
     grid-template-rows: 1fr;
 }
 
+
 .board-In-progress {
     display: grid;
-    grid-template-columns: 200px 24px;
+    grid-template-columns: 228px 24px;
     grid-template-rows: 1fr;
 }
 
 
 .board-feedback {
     display: grid;
-    grid-template-columns: 200px 24px;
+    grid-template-columns: 228px 24px;
     grid-template-rows: 1fr;
 }
 
 
 .board-done {
     display: grid;
-    grid-template-columns: 200px 24px;
+    grid-template-columns: 228px 24px;
     grid-template-rows: 1fr;
 }
 
@@ -195,6 +203,19 @@ main {
 
 .clickable {
     cursor: pointer;
+}
+
+.task-card {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    border-radius: 24px;
+    border: 2px solid #FFFFFF;
+    padding: 16px;
+    margin: 8px 2px 8px 2px;
+    width: 252px;
+    height: 244px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 
 @font-face {
