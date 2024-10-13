@@ -1,3 +1,10 @@
+let currentUserFirstName = "Sofia";
+let currentUserLastName = "Müller";
+
+let emailInputRef = document.getElementById("emailInput");
+let passwordInputRef = document.getElementById("passwordInput");
+
+
 function initSummary(){
   loadData(TASKS_DIR);
 }

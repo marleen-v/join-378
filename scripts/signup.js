@@ -20,7 +20,7 @@ function signUpUser(){
   addUser();
   resetValues();
   putData(USERS_DIR, dataFromFirebase);
-  window.location.href = '../index.html';
+  window.location.href = './summary.html';
 }
 
 

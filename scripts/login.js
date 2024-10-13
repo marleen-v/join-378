@@ -69,7 +69,7 @@ function checkUserPassword(){
 function guestLogin(){
   currentUserFirstName = "Guest";
   currentUserLastName = "";
-  window.location.href = '../summary.html';
+  window.location.href = './summary.html';
 }
 
 

@@ -8,9 +8,6 @@ let tasksFromFirebase = [];
 let currentUserFirstName = "Sofia";
 let currentUserLastName = "Müller";
 
-let emailInputRef = document.getElementById("emailInput");
-let passwordInputRef = document.getElementById("passwordInput");
-
 
 function init() {
  
