@@ -18,6 +18,7 @@ async function loadBoards() {
 
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
+        showData();
     }    
 }
 
