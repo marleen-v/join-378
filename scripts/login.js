@@ -17,19 +17,6 @@ async function loadData(path=""){
 }
 
 
-async function putData(path="", data={}){
-  let res = await fetch(FIREBASE_URL + path + ".json",
-  {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data)
-  });
-  let resToJson = await res.json();
-}
-
-
 function showData(){
   loadData(USERS_DIR);
 }
