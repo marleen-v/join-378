@@ -64,6 +64,7 @@ main {
     grid-template-columns: repeat(4, 252px);
     grid-template-rows: 1fr;
     overflow-y: auto;
+    width: 1200px;
 }
 
 
