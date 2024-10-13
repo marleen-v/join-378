@@ -11,7 +11,15 @@ let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "d
 function initContacts () {
   loadContactData();
   renderContacts();
+  
 }
+
+function addNewContact() {
+  const dialog = document.querySelector("dialog");
+  dialog.showModal();
+ 
+}
+
 
 
 /**
@@ -134,6 +142,7 @@ function toggleActiveBtnColor (btnIndex){
   }
 }
 
+
 /**
  * This function returns the html for the rendering of each contact
  *
@@ -143,7 +152,7 @@ function toggleActiveBtnColor (btnIndex){
 function getContactHTML(contact, index) {
   return `
     <button class="single-contact-btn flex align-items-center" onclick="showContactInfo(${index})">
-            <span class="ellipse ${contact.color} flex justify-content-center align-items-center">
+            <span class="circle ${contact.color} flex justify-content-center align-items-center">
               <span>${contact.initials}</span>
             </span>
             <span class="name-email flex flex-column">
@@ -164,7 +173,7 @@ function getContactInfoTemplate() {
    <div class="contact-info">
               <div class="single-contact-large flex align-items-center">
                 <div
-                  class="ellipse ${currentContact.color} ellipse-large flex justify-content-center align-items-center"
+                  class="circle ${currentContact.color} circle-large flex justify-content-center align-items-center"
                 >
                   <span>${currentContact.initials}</span>
                 </div>
