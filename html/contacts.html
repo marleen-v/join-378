@@ -9,14 +9,14 @@
       type="image/x-icon"
     />
 
-    <script src="../scripts/assets.js"></script>
-    <script src="../scripts/template.js"></script>
-    <script src="../scripts/add-task.js"></script>
-    <script src="../scripts/summary.js"></script>
-    <script src="../scripts/boards.js"></script>
-    <script src="../scripts/contacts.js"></script>
-    <script src="../scripts/login.js"></script>
-    <script src="../script.js"></script>
+    <script src="../scripts/assets.js" defer></script>
+    <script src="../scripts/template.js" defer></script>
+    <script src="../scripts/add-task.js" defer></script>
+    <script src="../scripts/summary.js" defer></script>
+    <script src="../scripts/boards.js" defer></script>
+    <script src="../scripts/contacts.js" defer></script>
+    <script src="../scripts/login.js" defer></script>
+    <script src="../script.js" defer></script>
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/assets.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
@@ -27,50 +27,74 @@
     <title>Join</title>
   </head>
 
-  <body onload="renderContacts()">
+  <body onload="initContacts()">
+    <header>
+      <div class="header-wrapper">
+        <div class="title">Kanban Project Management Tool</div>
+        <div class="header-right">
+          <button class="help">
+            <img src="../assets/img/help.png" alt="help-icon" />
+          </button>
+          <div class="user-profil">
+            <div class="dropdown-menu">
+              <button class="profil-img" onclick="openCloseDropdownMenu()">
+                <img src="../assets/img/user-profil.png" alt="" />
+              </button>
+              <div class="dropdown d_none" id="dropdown-menu">
+                <button class="dropdown-btn"><span>Legal Notice</span></button>
+                <button class="dropdown-btn">
+                  <span>Privacy Policy</span>
+                </button>
+                <button class="dropdown-btn"><span>Log out</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <nav>
+      <img src="../assets/img/logo-weiss.png" alt="join-logo" />
+      <div class="menu-bar">
+        <button class="nav-btn">
+          <span class="nav-icon"
+            ><img src="../assets/icons/summary.png" alt=""
+          /></span>
+          <span class="nav-text">Summary</span>
+        </button>
+        <button class="nav-btn">
+          <span class="nav-icon"
+            ><img src="../assets/icons/add-task.png" alt=""
+          /></span>
+          <span class="nav-text clickable" onclick="loadAddTask()"
+            >Add Task</span
+          >
+        </button>
+        <button class="nav-btn">
+          <span class="nav-icon"
+            ><img src="../assets/icons/board.png" alt=""
+          /></span>
+          <span class="nav-text clickable" onclick="loadBoard()">Board</span>
+        </button>
+        <button class="nav-btn">
+          <span class="nav-icon"
+            ><img src="../assets/icons/contact.png" alt=""
+          /></span>
+          <span class="nav-text">Contacts</span>
+        </button>
+      </div>
+      <div class="data-protection">
+        <button class="data-policy"><span>Privacy Policy</span></button>
+        <button class="data-policy"><span>Legal notice</span></button>
+      </div>
+    </nav>
+
     <main>
       <div class="content flex">
         <section class="contacts-container flex flex-column align-items-center">
           <div
             class="contacts flex flex-column align-items-center"
             id="contact-container"
-          >
-            <div class="letter">A</div>
-            <div class="single-contact-container flex align-items-center">
-              <div
-                class="ellipse flex justify-content-center align-items-center"
-              >
-                <span>AM</span>
-              </div>
-              <div class="name-email flex flex-column">
-                <span class="contact-name">Anton Mayer</span>
-                <span class="contact-email">antom@gmail.com</span>
-              </div>
-            </div>
-            <div class="single-contact-container flex align-items-center">
-              <div
-                class="ellipse flex justify-content-center align-items-center"
-              >
-                <span>AS</span>
-              </div>
-              <div class="name-email flex flex-column">
-                <span class="contact-name">Anja Schulz</span>
-                <span class="contact-email">schulz@gmail.com</span>
-              </div>
-            </div>
-            <div class="letter">B</div>
-            <span class="single-contact-container flex align-items-center">
-              <div
-                class="ellipse flex justify-content-center align-items-center"
-              >
-                <span>BZ</span>
-              </div>
-              <div class="name-email flex flex-column">
-                <span class="contact-name">Ben Ziegler</span>
-                <span class="contact-email">Ziegler@gmail.com</span>
-              </div>
-            </span>
-          </div>
+          ></div>
           <div
             class="add-contact-container flex justify-content-center align-items-center"
           >
@@ -82,11 +106,52 @@
             </button>
           </div>
         </section>
-        <section class="contact-info-container">
+        <section class="contact-info-container flex flex-column">
           <div class="contact-title flex align-items-center">
             <h1>Contacts</h1>
             <div class="vertical-line"></div>
             <span>Better with a team</span>
+          </div>
+
+          <div id="single-contact">
+           <!--  <div class="contact-info">
+              <div class="single-contact-large flex align-items-center">
+                <div
+                  class="ellipse ellipse-large flex justify-content-center align-items-center"
+                >
+                  <span>AS</span>
+                </div>
+                <div class="name-email flex flex-column">
+                  <div class="contact-name-large">Anja Schulz</div>
+                  <div class="icon-container flex">
+                    <button class="contact-icon-btn flex align-items-center">
+                      <img src="../assets/img/edit.svg" alt="" />
+                      <span>Edit</span>
+                    </button>
+                    <button class="contact-icon-btn flex align-items-center">
+                      <img src="../assets/img/delete.svg" alt="" />
+                      <span>Delet</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="contact-info-text flex align-items-center">
+              Contact Information
+            </div>
+            <div
+              class="email-phone-container flex flex-column"
+              style="gap: 22px"
+            >
+              <div class="email flex flex-column" style="gap: 15px">
+                <div style="font-weight: 700">Email</div>
+                <div class="contact-email">autom@gmail.com</div>
+              </div>
+              <div class="phone flex flex-column" style="gap: 15px">
+                <div style="font-weight: 700">Phone</div>
+                <div>+23534767487</div>
+              </div>
+            </div> -->
           </div>
         </section>
       </div>

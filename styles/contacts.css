@@ -1,6 +1,20 @@
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #A8A8A8; 
+  border-radius: 10px;
+}
+
+
 .contacts-container {
   background-color: #fff;
-  box-shadow: 4px 0 6px 0 rgb(0 0 0 / 0.08);
+  box-shadow: 4px 0 6px 0 rgb(0 0 0 / 0.08);   
   width: 456px;
   position: relative;
   height: 100vh;
@@ -31,6 +45,7 @@
 
 .contacts {
   padding: 90px 24px 32px 24px;
+  width:440px;
   overflow-y: scroll; /* Show scrollbars */
 }
 
@@ -40,28 +55,57 @@
   border-bottom: 1px solid #d1d1d1;
 }
 
-.single-contact-container {
-  width: 100%;
+.single-contact-btn {
+  width: 352px;
   padding: 15px 24px;
   gap: 35px;
+  color: #000;
 }
+
+.single-contact-btn:hover {
+  background: linear-gradient(180deg, rgba(249,249,249,1) 0%, rgba(240,240,240,1) 100%);
+}
+
+.single-contact-btn-active{
+  width: 352px;
+  padding: 15px 24px;
+  gap: 35px;
+  background-color: #2A3647;
+  color: #fff;
+}
+
+.single-contact-btn-active:hover{
+  background: rgb(42,54,71);
+}
+
 
 .name-email {
   gap: 5px;
 }
 
+.contact-name {
+  font-size: 20px;
+  text-align: left;
+}
+
+.contact-email {
+  color: #007CEE;
+}
+
 .ellipse {
   color: #fff;
   font-size: 12px;
-  width: 42px;
+  min-width: 42px;
   height: 42px;
   border-radius: 25px;
+  border: 2px solid #fff;
   background-color: #ff7a00;
 }
 
 .contact-info-container {
   padding-left: 45px;
   padding-top: 80px;
+  gap: 21px;
 }
 
 .contact-title {
@@ -74,16 +118,66 @@
   height: 59px;
 }
 
-
-::-webkit-scrollbar {
-  width: 8px;
+.single-contact-large {
+  gap: 54px;
+  color: #000;
 }
 
-::-webkit-scrollbar-track {
-  border-radius: 3px;
+.ellipse-large{
+  width:120px;
+  height: 120px;
+  border-radius: 70px;
+  font-size: 47px;
+  font-weight: 500;
 }
- 
-::-webkit-scrollbar-thumb {
-  background: #A8A8A8; 
-  border-radius: 10px;
+
+.contact-name-large{
+  font-size: 47px;
+}
+
+.icon-container{
+  gap: 13px;
+}
+
+.contact-icon-btn{
+  gap: 8px;
+  color: #000;
+}
+
+.contact-icon-btn:hover{
+  color:#007CEE;
+  filter: invert(65%) sepia(100%) saturate(7155%) hue-rotate(196deg) brightness(103%) contrast(102%);
+}
+
+.contact-info-text{
+
+  font-size: 22px;
+  padding: 20px 0;
+}
+
+
+/* Colors fors single contacts */
+.orange {
+  background-color:#FF7A00;
+}
+.violet {
+  background-color:#9327FF;
+}
+.purple {
+  background-color:#6E52FF;
+}
+.pink{
+  background-color:#FC71FF;
+}
+.yellow {
+  background-color:#FFBB2B;
+}
+.green {
+  background-color:#1FD7C1;
+}
+.dark_purple {
+  background-color:#462F8A;
+}
+.red {
+  background-color:#FF4646;
 }
