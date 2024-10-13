@@ -173,6 +173,12 @@ input:focus {
   outline: none;
 }
 
+#error_message {
+  color: rgb(184, 4, 4);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .checkbox-ctn {
   display: flex;
   align-items: center;

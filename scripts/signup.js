@@ -1,3 +1,6 @@
+currentUserFirstName = "";
+currentUserLastName = "";
+
 let nameInputRef = document.getElementById("nameInput");
 let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
@@ -20,7 +23,6 @@ function signUpUser(){
   addUser();
   resetValues();
   putData(USERS_DIR, dataFromFirebase);
-  window.location.href = './summary.html';
 }
 
 
@@ -76,6 +78,7 @@ function addUser(){
     });
     currentUserFirstName = firstName;
     currentUserLastName = lastName;
+    window.location.href = './summary.html';
   } else {
     showErrorMessage();
   }
