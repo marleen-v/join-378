@@ -36,13 +36,28 @@
         <div class="input-ctn">
           <input id="nameInput" class="name-input" type="text" placeholder="Name" required>
           <input autocomplete="username" id="emailInput" class="email-input" type="email" placeholder="Email" required>
-          <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" placeholder="Password" required>
-          <input autocomplete="new-password" id="passwordInputConfirm" class="password-input" type="password" placeholder="Confirm Password" required>
+          
+          <div class="password-input-1">
+            <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" placeholder="Password" required>
+            <img id="hidepwd1" onclick="togglePasswordIcon(1)" src="../assets/img/lock.png" alt="Lock-Icon">
+            <img id="showpwd1" onclick="togglePasswordIcon(1)" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
+          </div>
+          
+          <div class="password-input-2">
+            <input autocomplete="new-password" id="passwordInputConfirm" class="password-input" type="password" placeholder="Confirm Password" required>
+            <img id="hidepwd2" onclick="togglePasswordIcon(2)" src="../assets/img/lock.png" alt="Lock-Icon">
+            <img id="showpwd2" onclick="togglePasswordIcon(2)" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
+          </div>
+
+          <div id="error_message"></div>
+          
         </div>
+        
         <div class="checkbox-ctn">
           <input type="checkbox" id="checkbox" onclick="enableButtonAfterChecked()">
           <label for="checkbox">I accept the <a href="#">Privacy policy</a></label>
         </div>
+
         <div class="login-ctn-btn">
           <button id="btn" class="login-btn" disabled="true">Sign up</button>
         </div>

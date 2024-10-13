@@ -61,6 +61,15 @@ function resetValues(){
 }
 
 
+function showErrorMessage(){
+  let errorRef = document.getElementById('error_message');
+  errorRef.innerHTML = 'Passwords do not match!';
+  setTimeout(function(){
+    errorRef.innerHTML = '';
+  }, 3000);
+}
+
+
 function addUser(){
   let firstName = nameInputRef.value.split(' ')[0];
   let lastName = nameInputRef.value.split(' ')[1];
@@ -72,7 +81,7 @@ function addUser(){
       "password": passwordInputRef.value
     });
   } else {
-    alert("Passwords do not match");
+    showErrorMessage();
   }
   // console.log(dataFromFirebase);
 }
@@ -85,5 +94,22 @@ function enableButtonAfterChecked(){
     buttonRef.removeAttribute("disabled");
   } else {
     buttonRef.disabled = "true";
+  }
+}
+
+
+function togglePasswordIcon(pwdIdx){
+  document.getElementById("hidepwd" + pwdIdx).classList.toggle("dnone");
+  document.getElementById("showpwd" + pwdIdx).classList.toggle("dnone");
+  let pwdInputRef;
+  if(pwdIdx == 1){
+    pwdInputRef = document.getElementById("passwordInput");
+  } else {
+    pwdInputRef = document.getElementById("passwordInputConfirm");
+  }
+  if(document.getElementById("showpwd" + pwdIdx).classList.contains("dnone")){
+    pwdInputRef.type = "password";
+  } else {
+    pwdInputRef.type = "text";
   }
 }

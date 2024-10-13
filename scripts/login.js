@@ -76,18 +76,47 @@ function checkUserPassword(){
 }
 
 
+function guestLogin(){
+  window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
+}
+
+
+function togglePasswordIcon(){
+  document.getElementById("hidepwd").classList.toggle("dnone");
+  document.getElementById("showpwd").classList.toggle("dnone");
+  let pwdInputRef = document.getElementById("passwordInput");
+  if(document.getElementById("showpwd").classList.contains("dnone")){
+    pwdInputRef.type = "password";
+  } else {
+    pwdInputRef.type = "text";
+  }
+}
 
 
 /*
-function addUser(){
-  let email = document.getElementById('email');
-  let password = document.getElementById('password');
-  users.push(
-    { email: email.value, 
-      password: password.value
-    });
+function changePwdMaskChar(){
+  const passwordFieldRef = document.getElementById('passwordInput');
+  const hiddenPassword = document.getElementById('hiddenPassword');
 
-  // Weiterleitung zur Login-Seite + Nachricht anzeigen: "Erfolgreiche Registrierung"
-  window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
+  passwordFieldRef.addEventListener('input', (e) => {
+  const currentValue = passwordFieldRef.value;
+            
+  // Holen wir uns den vorherigen Wert (da der Wert hier maskiert ist)
+  let storedPassword = hiddenPassword.value;
+
+  // Wenn der Benutzer ein Zeichen löscht
+  if (currentValue.length < storedPassword.length) {
+    storedPassword = storedPassword.slice(0, currentValue.length);
+  } else {
+  
+  // Füge das neue Zeichen dem gespeicherten Passwort hinzu
+  storedPassword += currentValue[currentValue.length - 1];
+            }
+  // Aktualisiere das versteckte Passwort-Feld
+  hiddenPassword.value = storedPassword;
+
+  // Zeige die Sternchen im sichtbaren Textfeld
+  passwordFieldRef.value = '*'.repeat(storedPassword.length);
+  });
 }
 */

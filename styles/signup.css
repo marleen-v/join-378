@@ -105,6 +105,12 @@ input::placeholder {
   padding-right: 21px;
   /* padding: 12px 21px; */
   margin-bottom: 16px;
+  font-size: 24px;
+}
+
+input:focus {
+  border: 2px solid #29ABE2;
+  outline: none;
 }
 
 .name-input {
@@ -121,12 +127,30 @@ input::placeholder {
   background-position-x: 420px;
 }
 
-.password-input {
+.password-input-1, .password-input-2 {
+  position: relative;
+}
+
+.password-input-1 img, .password-input-2 img {
+  position: absolute;
+  top: 16px;
+  right: 26px;
+}
+
+.password-input-1 img:hover, .password-input-2 img:hover {
+  cursor: pointer;
+}
+
+#error_message {
+  color: rgb(184, 4, 4);
+}
+
+/* .password-input {
   background-image: url(../assets/img/lock.png);
   background-repeat: no-repeat;
   background-position: right;
   background-position-x: 420px;
-}
+} */
 
 a {
   text-decoration: none;
@@ -144,6 +168,7 @@ a {
 }
 
 .checkbox-ctn input {
+  position: relative;
   width: 16px;
   height: 16px;
   border-radius: 3px;
@@ -156,9 +181,14 @@ a {
   /* border-radius: 3px; */
 }
 
-.checkbox-ctn input:checked {
+.checkbox-ctn input:checked:after {
+  position: absolute;
   appearance: auto;
-  background-color: #29ABE2;
+  /* background-color: #29ABE2; */
+  content: '✔';
+  font-size: 26px;
+  top: -17px;
+  left: -2px;
 }
 
 .login-ctn-btn {
@@ -193,3 +223,6 @@ a {
   color: #29ABE2;
 }
 
+.dnone {
+  display: none;
+}

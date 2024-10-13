@@ -66,9 +66,10 @@ button {
   background-color: #2A3647;
   width: 91px;
   height: 49px;
-  /* padding: 15px 20px; */
+  /* padding: 15px 16px; */
   border-radius: 8px;
   border: none;
+  box-sizing: content-box;
 }
 
 .signup-ctn button a {
@@ -89,6 +90,7 @@ button {
   border-radius: 30px;
   background-color: #ffffff;
   padding: 48px 115px 48px 115px;
+  box-shadow: 0 0 14px 3px rgb(0 0 0 / 0.04);
 }
 
 .login-text {
@@ -118,6 +120,23 @@ button {
   margin-top: 20px;
 }
 
+.email-input-ctn, .password-input-ctn {
+  position: relative;
+}
+
+.password-input-ctn img:hover {
+  cursor: pointer;
+}
+
+.input-ctn img {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 24px;
+  right: 20px;
+}
+
+/*
 .email-input {
   background-image: url(../assets/img/mail.png);
   background-repeat: no-repeat;
@@ -131,6 +150,7 @@ button {
   background-position: right;
   background-position-x: 420px;
 }
+*/
 
 input::placeholder {
   font-size: 20px;
@@ -145,6 +165,12 @@ input::placeholder {
   border: 1px solid #D1D1D1;
   padding: 12px 21px;
   margin-bottom: 32px;
+  font-size: 24px;
+}
+
+input:focus {
+  border: 2px solid #29ABE2;
+  outline: none;
 }
 
 .checkbox-ctn {
@@ -153,6 +179,7 @@ input::placeholder {
 }
 
 .checkbox-ctn input {
+  position: relative;
   border-radius: 3px;
   margin-right: 8px;
   margin-left: 39px;
@@ -167,11 +194,15 @@ input::placeholder {
   cursor: pointer;
 }
 
-.checkbox-ctn input:checked {
+.checkbox-ctn input:checked:after {
+  position: absolute;
   appearance: auto;
-  background-color: #29ABE2;
+  /* background-color: #29ABE2; */
+  content: '✔';
+  font-size: 26px;
+  top: -17px;
+  left: -2px;
 }
-
 
 .checkbox-ctn label {
   font-size: 16px;
@@ -230,4 +261,12 @@ input::placeholder {
 
 .legal-ctn a:hover {
   color: #29ABE2;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.dnone {
+  display: none;
 }
