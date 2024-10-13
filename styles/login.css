@@ -1,5 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'); */
-
 @font-face {
   font-family: 'Inter';
   src: url('../fonts/Inter_28pt-Regular.ttf') format('truetype');
@@ -8,7 +6,6 @@
 }
 
 * {
-  /* box-sizing: border-box; */
   font-family: 'Inter', sans-serif;
 }
 
@@ -20,6 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #F6F7F8;
+  visibility: visible;
 }
 
 button {
@@ -35,12 +33,49 @@ button {
   height: 100%;
   max-width: 1440px;
   max-height: 1024px;
+  z-index: ;
 }
 
 .logo {
+  /* position: absolute;
+  top: 80px;
+  left: 77px; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(246, 247, 248);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 1s ease-out;
+  z-index: 100;
+}
+
+.img-logo {
+  width: 274px;
+  height: 335px;
+  transition: all 1s ease-out;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: url(../assets/img/logo.png)
+}
+
+.logo-small {
+  position: absolute;
+  width: 100px;
+  height: 122px;
   top: 80px;
   left: 77px;
+  transform: none;
+  content: url(../assets/img/logo.png);
+}
+
+.ctn-transparent {
+  background-color: transparent !important;
 }
 
 .signup-ctn {

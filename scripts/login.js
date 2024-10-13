@@ -81,6 +81,19 @@ function togglePasswordIcon(){
 }
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  let logoContainerRef = document.querySelector(".logo");
+  let logoRef = document.querySelector(".img-logo");
+  setTimeout(() => {
+    logoRef.classList.add("logo-small");
+    logoContainerRef.classList.add("ctn-transparent");
+  }, 1000);
+  setTimeout(() => {
+    logoContainerRef.style.pointerEvents = "none";
+    logoRef.style.zIndex = "101";
+  }, 1500);
+});
+
 /*
 function changePwdMaskChar(){
   const passwordFieldRef = document.getElementById('passwordInput');
