@@ -26,3 +26,14 @@
     flex-direction:row;
 }
 
+.grid {
+    display:grid;
+}
+
+.position-absolute{
+    position: absolute;
+}
+
+.position-relative{
+    position: relative;
+}
