@@ -206,6 +206,12 @@ input:focus {
   outline: none;
 }
 
+#error_message {
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
+}
+
 .checkbox-ctn {
   display: flex;
   align-items: center;
