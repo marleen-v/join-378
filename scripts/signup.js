@@ -20,7 +20,12 @@ function signUpUser(){
   addUser();
   resetValues();
   putData(USERS_DIR, dataFromFirebase);
-  window.location.href = '../index.html?msg=Du hast dich erfolgreich registriert!';
+  window.location.href = "./summary.html";
+}
+
+
+function timedRedirect(){
+
 }
 
 
@@ -74,6 +79,7 @@ function addUser(){
       "lastName": lastName,
       "password": passwordInputRef.value
     });
+    setTimeout(openPopup(), 3000);
   } else {
     showErrorMessage();
   }
@@ -105,4 +111,10 @@ function togglePasswordIcon(pwdIdx){
   } else {
     pwdInputRef.type = "text";
   }
+}
+
+
+function openPopup(){
+  let popup = document.getElementById("popupsuccess");
+  popup.classList.add("open-popup");
 }

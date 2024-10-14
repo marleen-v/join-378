@@ -150,13 +150,6 @@ input:focus {
   color: rgb(184, 4, 4);
 }
 
-/* .password-input {
-  background-image: url(../assets/img/lock.png);
-  background-repeat: no-repeat;
-  background-position: right;
-  background-position-x: 420px;
-} */
-
 a {
   text-decoration: none;
   color: #29ABE2;
@@ -183,13 +176,11 @@ a {
   -webkit-appearance: none;
   outline: none;
   cursor: pointer;
-  /* border-radius: 3px; */
 }
 
 .checkbox-ctn input:checked:after {
   position: absolute;
   appearance: auto;
-  /* background-color: #29ABE2; */
   content: '✔';
   font-size: 26px;
   top: -17px;
@@ -212,6 +203,30 @@ a {
 .login-btn:disabled {
   color: grey;
   cursor: auto;
+}
+
+.signup-popup {
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  background-color: #2A3647;
+  padding: 20px 60px;
+  color: #ffffff;
+  border: none;
+  font-size: 24px;
+  border-radius: 16px;
+  text-wrap: nowrap;
+  border: 0;
+  outline: none;
+  transition: transform 1.4s, bottom 1.4s;
+  visibility: hidden;
+}
+
+.open-popup {
+  bottom: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  visibility: visible;
 }
 
 .legal-ctn {
