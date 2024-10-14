@@ -46,7 +46,7 @@ async function showData() {
             let currentCard = document.querySelector(`.add-task-card${index}`);
             currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
             currentCard.querySelector('.add-task-card-description').innerHTML = element.Description;
-
+            currentCard.setAttribute("ondrop", `moveTo('add-task-card${index}', 'to-do')`);
             let personsHTML = "";
             element.persons.forEach(person => {
                 personsHTML += /*html*/`
@@ -78,8 +78,9 @@ function getTaskCard(element) {
     `;
 }
 
-function moveTo(column) {
-
+function moveTo(id, column) {
+    console.log(column);
+    
 }
 
 function allowDrop(ev) {
