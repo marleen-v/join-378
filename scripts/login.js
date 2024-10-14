@@ -33,25 +33,17 @@ async function putData(path="", data={}){
 }
 
 
-function addUser(){
-  dataFromFirebase.push({
-    "email": emailInputRef.value,
-    "firstName": "Michael",
-    "lastName": "Bulbasaur",
-    "password": passwordInputRef.value
-  });
-  console.log(dataFromFirebase);
-  putData(USERS_DIR, dataFromFirebase);
-}
-
-
 function showData(){
   loadData(USERS_DIR);
 }
 
 
-function returnFalse(){
-  return false;
+function showErrorMessage(){
+  let errorRef = document.getElementById('error_message');
+  errorRef.innerHTML = 'Passwords do not match!';
+  setTimeout(function(){
+    errorRef.innerHTML = '';
+  }, 3000);
 }
 
 
@@ -59,16 +51,13 @@ function checkUserPassword(){
   let unknownUser = true;
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
-      // console.log("Willkommen " + dataFromFirebase[i].firstName);
       unknownUser = false;
       alert("Hallo " + dataFromFirebase[i].firstName + " " + dataFromFirebase[i].lastName);
       window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
     }
   }
-
   if(unknownUser){
-    // console.log("Benutzer nicht bekannt.");
-    alert("Benutzer nicht bekannt.")
+    showErrorMessage();
   }
 
   emailInputRef.value = '';
@@ -92,6 +81,19 @@ function togglePasswordIcon(){
   }
 }
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  let logoContainerRef = document.querySelector(".logo");
+  let logoRef = document.querySelector(".img-logo");
+  setTimeout(() => {
+    logoRef.classList.add("logo-small");
+    logoContainerRef.classList.add("ctn-transparent");
+  }, 1000);
+  setTimeout(() => {
+    logoContainerRef.style.pointerEvents = "none";
+    logoRef.style.zIndex = "101";
+  }, 1500);
+});
 
 /*
 function changePwdMaskChar(){
