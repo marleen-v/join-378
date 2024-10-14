@@ -40,6 +40,11 @@ button {
   left: 77px;
 }
 
+.logo img {
+  width: 101px;
+  height: 122px;
+}
+
 .login-ctn {
   position: relative;
   width: 598px;

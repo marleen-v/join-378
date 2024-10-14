@@ -30,7 +30,6 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1920px;
   height: 100%;
   max-width: 1440px;
   max-height: 1024px;
@@ -161,8 +160,6 @@ button {
 
 .input-ctn img {
   position: absolute;
-  width: 24px;
-  height: 24px;
   top: 24px;
   right: 20px;
 }
