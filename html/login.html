@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="../styles/login.css">
 
+  <script src="../script.js" defer></script>
   <script src="../scripts/login.js" defer></script>
 </head>
 <body onload="init()">
@@ -46,7 +47,7 @@
           <label for="checkbox">Remember me</label>
         </div>
         <div class="login-guest-ctn">
-          <button class="login-btn">Log in</button>
+          <button class="login-btn" onclick="checkUserPassword()">Log in</button>
           <button onclick="guestLogin()" class="guest-btn">Guest Log in</button>
         </div>
       </form>

@@ -39,14 +39,12 @@ function checkUserPassword(){
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
       unknownUser = false;
-      alert("Hallo " + dataFromFirebase[i].firstName + " " + dataFromFirebase[i].lastName);
       window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
     }
   }
   if(unknownUser){
     showErrorMessage();
   }
-
   emailInputRef.value = '';
   passwordInputRef.value = '';
 }
@@ -81,31 +79,3 @@ document.addEventListener("DOMContentLoaded", () => {
     logoRef.style.zIndex = "101";
   }, 1500);
 });
-
-/*
-function changePwdMaskChar(){
-  const passwordFieldRef = document.getElementById('passwordInput');
-  const hiddenPassword = document.getElementById('hiddenPassword');
-
-  passwordFieldRef.addEventListener('input', (e) => {
-  const currentValue = passwordFieldRef.value;
-            
-  // Holen wir uns den vorherigen Wert (da der Wert hier maskiert ist)
-  let storedPassword = hiddenPassword.value;
-
-  // Wenn der Benutzer ein Zeichen löscht
-  if (currentValue.length < storedPassword.length) {
-    storedPassword = storedPassword.slice(0, currentValue.length);
-  } else {
-  
-  // Füge das neue Zeichen dem gespeicherten Passwort hinzu
-  storedPassword += currentValue[currentValue.length - 1];
-            }
-  // Aktualisiere das versteckte Passwort-Feld
-  hiddenPassword.value = storedPassword;
-
-  // Zeige die Sternchen im sichtbaren Textfeld
-  passwordFieldRef.value = '*'.repeat(storedPassword.length);
-  });
-}
-*/
