@@ -1,5 +1,8 @@
-currentUserFirstName = "";
-currentUserLastName = "";
+const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
+const USERS_DIR = '/users';
+const TASKS_DIR = '/tasks';
+const CONTACTS_DIR = '/contacts';
+let dataFromFirebase = [];
 
 let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
@@ -17,17 +20,38 @@ async function loadData(path=""){
 }
 
 
+async function putData(path="", data={}){
+  let res = await fetch(FIREBASE_URL + path + ".json",
+  {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+  let resToJson = await res.json();
+}
+
+
+function addUser(){
+  dataFromFirebase.push({
+    "email": emailInputRef.value,
+    "firstName": "Michael",
+    "lastName": "Bulbasaur",
+    "password": passwordInputRef.value
+  });
+  console.log(dataFromFirebase);
+  putData(USERS_DIR, dataFromFirebase);
+}
+
+
 function showData(){
   loadData(USERS_DIR);
 }
 
 
-function showErrorMessage(){
-  let errorRef = document.getElementById('error_message');
-  errorRef.innerHTML = 'Passwords do not match!';
-  setTimeout(function(){
-    errorRef.innerHTML = '';
-  }, 3000);
+function returnFalse(){
+  return false;
 }
 
 
@@ -35,24 +59,25 @@ function checkUserPassword(){
   let unknownUser = true;
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
+      // console.log("Willkommen " + dataFromFirebase[i].firstName);
       unknownUser = false;
-      currentUserFirstName = dataFromFirebase[i].firstName;
-      currentUserLastName = dataFromFirebase[i].lastName;
-      window.location.href = './summary.html';
+      alert("Hallo " + dataFromFirebase[i].firstName + " " + dataFromFirebase[i].lastName);
+      window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
     }
   }
+
   if(unknownUser){
-    showErrorMessage();
+    // console.log("Benutzer nicht bekannt.");
+    alert("Benutzer nicht bekannt.")
   }
+
   emailInputRef.value = '';
   passwordInputRef.value = '';
 }
 
 
 function guestLogin(){
-  currentUserFirstName = "Guest";
-  currentUserLastName = "";
-  window.location.href = './summary.html';
+  window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
 }
 
 
@@ -67,19 +92,6 @@ function togglePasswordIcon(){
   }
 }
 
-
-document.addEventListener("DOMContentLoaded", () => {
-  let logoContainerRef = document.querySelector(".logo");
-  let logoRef = document.querySelector(".img-logo");
-  setTimeout(() => {
-    logoRef.classList.add("logo-small");
-    logoContainerRef.classList.add("ctn-transparent");
-  }, 1000);
-  setTimeout(() => {
-    logoContainerRef.style.pointerEvents = "none";
-    logoRef.style.zIndex = "101";
-  }, 1500);
-});
 
 /*
 function changePwdMaskChar(){
