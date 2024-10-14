@@ -1,9 +1,3 @@
-const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
-const USERS_DIR = '/users';
-const TASKS_DIR = '/tasks';
-const CONTACTS_DIR = '/contacts';
-let dataFromFirebase = [];
-
 let nameInputRef = document.getElementById("nameInput");
 let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
@@ -26,7 +20,7 @@ function signUpUser(){
   addUser();
   resetValues();
   putData(USERS_DIR, dataFromFirebase);
-  // window.location.href = '../index.html?msg=Du hast dich erfolgreich registriert!';
+  window.location.href = '../index.html?msg=Du hast dich erfolgreich registriert!';
 }
 
 
@@ -83,7 +77,6 @@ function addUser(){
   } else {
     showErrorMessage();
   }
-  // console.log(dataFromFirebase);
 }
 
 
