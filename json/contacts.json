@@ -1,122 +1,142 @@
 [
-    {
-      "firstName": "Anna",
-      "lastName": "Müller",
-      "email": "anna.mueller@gmail.com",
-      "initials": "AM"
-    },
-    {
-      "firstName": "Max",
-      "lastName": "Schneider",
-      "email": "max.schneider@gmx.de",
-      "initials": "MS"
-    },
-    {
-      "firstName": "Julia",
-      "lastName": "Weber",
-      "email": "julia.weber@yahoo.de",
-      "initials": "JW"
-    },
-    {
-      "firstName": "Lukas",
-      "lastName": "Fischer",
-      "email": "lukas.fischer@outlook.com",
-      "initials": "LF"
-    },
-    {
-      "firstName": "Sophia",
-      "lastName": "Schmidt",
-      "email": "sophia.schmidt@hotmail.com",
-      "initials": "SS"
-    },
-    {
-      "firstName": "Tim",
-      "lastName": "Bauer",
-      "email": "tim.bauer@gmail.com",
-      "initials": "TB"
-    },
-    {
-      "firstName": "Mia",
-      "lastName": "Koch",
-      "email": "mia.koch@gmx.de",
-      "initials": "MK"
-    },
-    {
-      "firstName": "Jonas",
-      "lastName": "Wolf",
-      "email": "jonas.wolf@yahoo.com",
-      "initials": "JW"
-    },
-    {
-      "firstName": "Emma",
-      "lastName": "Hofmann",
-      "email": "emma.hofmann@outlook.de",
-      "initials": "EH"
-    },
-    {
-      "firstName": "Paul",
-      "lastName": "Kaiser",
-      "email": "paul.kaiser@icloud.com",
-      "initials": "PK"
-    },
-    {
-      "firstName": "Clara",
-      "lastName": "Peters",
-      "email": "clara.peters@web.de",
-      "initials": "CP"
-    },
-    {
-      "firstName": "Felix",
-      "lastName": "Mayer",
-      "email": "felix.mayer@gmail.com",
-      "initials": "FM"
-    },
-    {
-      "firstName": "Lea",
-      "lastName": "Becker",
-      "email": "lea.becker@gmx.de",
-      "initials": "LB"
-    },
-    {
-      "firstName": "Nico",
-      "lastName": "Frank",
-      "email": "nico.frank@yahoo.com",
-      "initials": "NF"
-    },
-    {
-      "firstName": "Laura",
-      "lastName": "Lange",
-      "email": "laura.lange@outlook.com",
-      "initials": "LL"
-    },
-    {
-      "firstName": "David",
-      "lastName": "Krause",
-      "email": "david.krause@gmail.com",
-      "initials": "DK"
-    },
-    {
-      "firstName": "Elena",
-      "lastName": "Schulz",
-      "email": "elena.schulz@gmx.de",
-      "initials": "ES"
-    },
-    {
-      "firstName": "Simon",
-      "lastName": "Wagner",
-      "email": "simon.wagner@yahoo.de",
-      "initials": "SW"
-    },
-    {
-      "firstName": "Hannah",
-      "lastName": "Zimmermann",
-      "email": "hannah.zimmermann@outlook.com",
-      "initials": "HZ"
-    },
-    {
-      "firstName": "Jan",
-      "lastName": "Neumann",
-      "email": "jan.neumann@gmail.com",
-      "initials": "JN"
-    }
+  {
+    "firstName": "Anna",
+    "lastName": "Müller",
+    "email": "anna.mueller@gmail.com",
+    "initials": "AM",
+    "phone": "+49 151 23456789"
+  },
+  {
+    "firstName": "Max",
+    "lastName": "Schneider",
+    "email": "max.schneider@gmx.de",
+    "initials": "MS",
+    "phone": "+49 152 98765432"
+  },
+  {
+    "firstName": "Julia",
+    "lastName": "Weber",
+    "email": "julia.weber@yahoo.de",
+    "initials": "JW",
+    "phone": "+49 171 54321678"
+  },
+  {
+    "firstName": "Lukas",
+    "lastName": "Fischer",
+    "email": "lukas.fischer@outlook.com",
+    "initials": "LF",
+    "phone": "+49 172 87654321"
+  },
+  {
+    "firstName": "Sophia",
+    "lastName": "Schmidt",
+    "email": "sophia.schmidt@hotmail.com",
+    "initials": "SS",
+    "phone": "+49 160 13579246"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Bauer",
+    "email": "tim.bauer@gmail.com",
+    "initials": "TB",
+    "phone": "+49 151 98712345"
+  },
+  {
+    "firstName": "Mia",
+    "lastName": "Koch",
+    "email": "mia.koch@gmx.de",
+    "initials": "MK",
+    "phone": "+49 152 24681357"
+  },
+  {
+    "firstName": "Jonas",
+    "lastName": "Wolf",
+    "email": "jonas.wolf@yahoo.com",
+    "initials": "JW",
+    "phone": "+49 171 35724680"
+  },
+  {
+    "firstName": "Emma",
+    "lastName": "Hofmann",
+    "email": "emma.hofmann@outlook.de",
+    "initials": "EH",
+    "phone": "+49 172 46802468"
+  },
+  {
+    "firstName": "Paul",
+    "lastName": "Kaiser",
+    "email": "paul.kaiser@icloud.com",
+    "initials": "PK",
+    "phone": "+49 160 23458697"
+  },
+  {
+    "firstName": "Clara",
+    "lastName": "Peters",
+    "email": "clara.peters@web.de",
+    "initials": "CP",
+    "phone": "+49 151 12457896"
+  },
+  {
+    "firstName": "Felix",
+    "lastName": "Mayer",
+    "email": "felix.mayer@gmail.com",
+    "initials": "FM",
+    "phone": "+49 152 85792468"
+  },
+  {
+    "firstName": "Lea",
+    "lastName": "Becker",
+    "email": "lea.becker@gmx.de",
+    "initials": "LB",
+    "phone": "+49 171 47925813"
+  },
+  {
+    "firstName": "Nico",
+    "lastName": "Frank",
+    "email": "nico.frank@yahoo.com",
+    "initials": "NF",
+    "phone": "+49 172 56802468"
+  },
+  {
+    "firstName": "Laura",
+    "lastName": "Lange",
+    "email": "laura.lange@outlook.com",
+    "initials": "LL",
+    "phone": "+49 160 34680257"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Krause",
+    "email": "david.krause@gmail.com",
+    "initials": "DK",
+    "phone": "+49 151 95847631"
+  },
+  {
+    "firstName": "Elena",
+    "lastName": "Schulz",
+    "email": "elena.schulz@gmx.de",
+    "initials": "ES",
+    "phone": "+49 152 64798235"
+  },
+  {
+    "firstName": "Simon",
+    "lastName": "Wagner",
+    "email": "simon.wagner@yahoo.de",
+    "initials": "SW",
+    "phone": "+49 171 35690248"
+  },
+  {
+    "firstName": "Hannah",
+    "lastName": "Zimmer",
+    "email": "hannah.zimmer@web.de",
+    "initials": "HZ",
+    "phone": "+49 172 12345678"
+  },
+  {
+    "firstName": "Jan",
+    "lastName": "Neumann",
+    "email": "jan.neumann@gmail.com",
+    "initials": "JN",
+    "phone": "+49 160 12345678"
+  }
 ]
