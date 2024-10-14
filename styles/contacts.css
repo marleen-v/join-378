@@ -92,14 +92,14 @@
   color: #007CEE;
 }
 
-.circle {
+.ellipse {
   color: #fff;
   font-size: 12px;
   min-width: 42px;
   height: 42px;
   border-radius: 25px;
   border: 2px solid #fff;
-  background-color: #D9D9D9;
+  background-color: #ff7a00;
 }
 
 .contact-info-container {
@@ -123,8 +123,8 @@
   color: #000;
 }
 
-.circle-large{
-  min-width:120px;
+.ellipse-large{
+  width:120px;
   height: 120px;
   border-radius: 70px;
   font-size: 47px;
@@ -180,155 +180,4 @@
 }
 .red {
   background-color:#FF4646;
-}
-
-/*------------- Dialog ----------------------------------------------*/
-
-dialog{
-  z-index: 5000;
-  width: 1212px;
-  height: 592px;
-  border: none;
-  border-radius: 30px;
-  margin: auto;
-  padding: 0;
-  position: relative;
-  background-color: transparent;
-}
-
-::backdrop{
-  background-color:#191b1d4a;
- 
-}
-
-.join-logo {
-  position:absolute; 
-  top:120px;
-  left:48px;
-  width:56px;
-  height:auto;
-}
-
-.dialog-title{
-  background: #2A3647;
-  height: 100%;
-  padding:66px 48px;
-  color:#fff;
-  gap:16px;
-  width: inherit;
-}
-
-.horizontal-line {
-  width: 90px;
-  background-color:  #29abe2;
-  height: 3px;
-}
-
-
-.form-container{
-  background-color: #fff;
-  width: 80%;
-  height:100%;
-  padding: 60px;
-  gap: 40px;
-}
-
-.circle-icon {
-  font-size: 64px;
-}
-
-form {
-  gap: 32px;
-  width: 422px;
-}
-
-input::placeholder {
-  color: #D1D1D1;
-}
-
-label {
-  border: 1px solid #D1D1D1;
-  border-radius: 10px;
-  padding: 13px 21px;
-  color: #D1D1D1;
-  cursor: text;
-  
-  
-  
-}
-
-label:focus-within {
-  border: 3px solid #29abe2;
-
-}
-
-label>input {
-  outline: none;
-  border: none;
-  background: transparent;
-  width:100%;
-  font-size: 20px;
-  align-self: center;
- 
-}
-
-.input-icon{
-  height: 16px;
-  width: 16px;
-  align-self: center;
-}
-
-.close-btn{
-  top:60px;
-  right: 60px;
-  width: 24px;
-  height:24px;
-  border-radius: 25px;
-}
-
-.close-btn:hover{
-  background-color: #D1D1D1;
-}
-
-.btn-container {
-  gap: 24px;
-}
-
-.create-conatct-btn{
-  background-color: #2A3647;
-
-  
-}
-
-.create-conatct-btn:hover{
-  background-color: #29abe2;
-
-}
-
-.cancel-btn{
-  font-size: 20px;
-  gap:10px;
-  border: 1px solid #2A3647;
-  border-radius: 10px;
-  padding: 13px 21px;
-  color: #2A3647;
-  
-}
-
-.cancel-btn:hover{
-  color: #29abe2;
- /*  box-shadow: 0 4px 0 4px #00000040;    */
-  filter: invert(65%) sepia(100%) saturate(7155%) hue-rotate(196deg) brightness(103%) contrast(102%); 
-}
-
-
-.cancel-icon, .check-icon{
-  width: 24px;
-  height:24px;
-}
-
-input[type=submit]{
-  color: #fff;
-  font-family: 'Inter';
-  font-weight: 700;
 }
