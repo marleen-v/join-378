@@ -19,12 +19,12 @@ function openSummary() {
 }
 
 function openBoards() {
-    window.location = "./html/boards.html";
+    window.location = "../html/boards.html";
 }
 
 
 function openAddTask() {
-    window.location = "./html/add-task.html";
+    window.location = "../html/add-task.html";
 }
 
 
