@@ -17,6 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #F6F7F8;
+  position: relative;
 }
 
 button {
@@ -29,16 +30,14 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 1920px;
   height: 100%;
   max-width: 1440px;
   max-height: 1024px;
 }
 
 .logo {
-  /* position: absolute;
-  top: 80px;
-  left: 77px; */
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
@@ -82,7 +81,6 @@ button {
   justify-content: center;
   align-items: center;
   top: 67px;
-  /* left: 1039px; */
   right: 122px;
   gap: 35px;
   width: 279px;
@@ -169,22 +167,6 @@ button {
   right: 20px;
 }
 
-/*
-.email-input {
-  background-image: url(../assets/img/mail.png);
-  background-repeat: no-repeat;
-  background-position: right;
-  background-position-x: 420px;
-}
-
-.password-input {
-  background-image: url(../assets/img/lock.png);
-  background-repeat: no-repeat;
-  background-position: right;
-  background-position-x: 420px;
-}
-*/
-
 input::placeholder {
   font-size: 20px;
   font-weight: 400;
@@ -236,7 +218,6 @@ input:focus {
 .checkbox-ctn input:checked:after {
   position: absolute;
   appearance: auto;
-  /* background-color: #29ABE2; */
   content: '✔';
   font-size: 26px;
   top: -17px;
