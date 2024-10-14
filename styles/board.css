@@ -239,7 +239,9 @@ main {
     height: 100vh;
 }
 
-
+.add-task-card-headline {
+    font-weight: bold;
+}
 
 .add-task-right {
     overflow: auto !important;
