@@ -39,7 +39,7 @@ function checkUserPassword(){
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
       unknownUser = false;
-      window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
+      window.location.href = './summary.html';
     }
   }
   if(unknownUser){
@@ -51,7 +51,7 @@ function checkUserPassword(){
 
 
 function guestLogin(){
-  window.location.href = '../index.html?msg=Du hast dich erfolgreich angemeldet!';
+  window.location.href = './summary.html';
 }
 
 
