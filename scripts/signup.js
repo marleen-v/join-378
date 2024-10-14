@@ -11,21 +11,13 @@ async function loadData(path=""){
 }
 
 
-function init(){
+function initSignup(){
   loadData(USERS_DIR);
 }
 
 
 function signUpUser(){
   addUser();
-  resetValues();
-  putData(USERS_DIR, dataFromFirebase);
-  window.location.href = "./summary.html";
-}
-
-
-function timedRedirect(){
-
 }
 
 
@@ -69,6 +61,14 @@ function showErrorMessage(){
 }
 
 
+function signupSuccess(){
+  openPopup();
+  resetValues();
+  putData(USERS_DIR, dataFromFirebase);
+  setTimeout(function(){window.location.href = "./summary.html"}, 3000);
+}
+
+
 function addUser(){
   let firstName = nameInputRef.value.split(' ')[0];
   let lastName = nameInputRef.value.split(' ')[1];
@@ -79,9 +79,10 @@ function addUser(){
       "lastName": lastName,
       "password": passwordInputRef.value
     });
-    setTimeout(openPopup(), 3000);
+    signupSuccess();
   } else {
     showErrorMessage();
+    resetValues();
   }
 }
 
