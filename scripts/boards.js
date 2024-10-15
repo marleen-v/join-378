@@ -50,6 +50,7 @@ function setCard(element, index, id, column) {
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description;
     currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
+    currentCard.querySelector('.add-task-card-subtasks').innerHTML = (element.Subtasks == null) ? "0 Subtasks" : element.Subtasks + " Subtasks";
     let personsHTML = "";
     element.Persons.forEach(person => { personsHTML += /*html*/`<div>${person}</div> `; });
     currentCard.querySelector('.add-task-card-assigned-to').innerHTML = personsHTML;
