@@ -33,6 +33,7 @@ function setCard(element, index, id, column) {
     let card = document.querySelector('.add-task-card');
     card.classList.replace("add-task-card", `add-task-card${index}`);
     let currentCard = document.querySelector(`.add-task-card${index}`);
+    currentCard.querySelector('.add-task-card-top').innerHTML = element.Category;
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description;
     currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
