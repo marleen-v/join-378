@@ -119,7 +119,17 @@ function getGreetingTemplate(greetFormula){
 }
 
 
+async function loadActiveUser(path=""){
+  let res = await fetch(FIREBASE_URL + path + ".json");
+  activeUser = await res.json();
+  currentUserFirstName = activeUser[0].firstName;
+  currentUserLastName = activeUser[0].LastName;
+}
+
+
 function showGreetingDependingOnDaytime(){
+  loadActiveUser(ACTIVE_DIR);
+  
   const HOURS = new Date().getHours();
   let formula = "Hallöchen";
   if(HOURS >= 6 && HOURS < 12){formula = "Good morning";} else

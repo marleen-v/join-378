@@ -2,11 +2,13 @@ const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabas
 const USERS_DIR = '/users';
 const TASKS_DIR = '/tasks';
 const CONTACTS_DIR = '/contacts';
+const ACTIVE_DIR = '/active';
 let dataFromFirebase = [];
 let tasksFromFirebase = [];
+let activeUser = [];
 
-let currentUserFirstName = "Sofia";
-let currentUserLastName = "Müller";
+let currentUserFirstName = "";
+let currentUserLastName = "";
 
 
 function init() {
@@ -48,6 +50,7 @@ async function loadData(path=""){
     let resToJson = await res.json();
     dataFromFirebase = resToJson;
 }
+
 
 async function putData(path="", data={}){
     let res = await fetch(FIREBASE_URL + path + ".json",

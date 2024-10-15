@@ -4,6 +4,7 @@ let passwordInputRef = document.getElementById("passwordInput");
 
 function init(){
   loadData(USERS_DIR);
+  loadActiveUser(ACTIVE_DIR);
 }
 
 
@@ -17,6 +18,13 @@ async function putData(path="", data={}){
     body: JSON.stringify(data)
   });
   let resToJson = await res.json();
+}
+
+
+async function loadActiveUser(path=""){
+  let res = await fetch(FIREBASE_URL + path + ".json");
+  let resToJson = await res.json();
+  activeUser = resToJson;
 }
 
 
@@ -51,6 +59,13 @@ function checkUserPassword(){
 
 
 function guestLogin(){
+  activeUser = [
+  {
+    "firstName": "Guest",
+    "lastName": "",
+    "initials": "GG"
+  }];
+  putData(ACTIVE_DIR, activeUser);
   window.location.href = './summary.html';
 }
 
