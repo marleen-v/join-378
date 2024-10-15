@@ -2,7 +2,7 @@ let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
 
 
-function init(){
+function initLogin(){
   loadData(USERS_DIR);
   loadActiveUser(ACTIVE_DIR);
 }
@@ -47,6 +47,13 @@ function checkUserPassword(){
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
       unknownUser = false;
+      activeUser = [
+        {
+          "firstName": dataFromFirebase[i].firstName,
+          "lastName": dataFromFirebase[i].lastName,
+          "initials": dataFromFirebase[i].initials
+        }];
+      putData(ACTIVE_DIR, activeUser);
       window.location.href = './summary.html';
     }
   }
