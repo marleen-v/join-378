@@ -101,6 +101,10 @@ main {
     border: none;
 }
 
+.btn-task:hover {
+    background-color: #29abe2;
+}
+
 .btn-task-container {
     display: flex;
     align-items: center;
@@ -206,6 +210,11 @@ main {
     justify-content: center;
     border-radius: 8px;
     border: 2px solid rgb(42,53,71);
+}
+
+.add-btn:hover {
+    color: #29abe2;
+    border-color: #29abe2;
 }
 
 .clickable {
