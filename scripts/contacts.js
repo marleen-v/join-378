@@ -1,4 +1,5 @@
 const contactListRef = document.getElementById("contact-container");
+const contactBtns = document.querySelectorAll(".single-contact-btn");
 const inputNameRef = document.getElementById("c-name");
 const inputEmailRef = document.getElementById("c-email");
 const inputPhoneRef = document.getElementById("c-phone");
@@ -16,7 +17,9 @@ let lastName;
 
 async function initContacts () {
   contactList = await loadContactData();
+ 
   renderContacts();
+
 }
 
 /**
@@ -87,12 +90,17 @@ function showContactInfo(index) {
   const singleContactRef = document.getElementById("single-contact");
   currentContact = contactList[index];
   singleContactRef.innerHTML = "";
-  singleContactRef.innerHTML = getContactInfoTemplate();
+  singleContactRef.innerHTML = getContactInfoTemplate(index);
   toggleActiveBtnColor (index);
 }
 
+function closeContactInfo() {
+  const singleContactRef = document.getElementById("single-contact");
+  singleContactRef.innerHTML = "";
+}
+
 function toggleActiveBtnColor (btnIndex){
-  const contactBtns = document.querySelectorAll(".single-contact-btn");
+  
 
   for (let index = 0; index <  contactBtns.length; index++) {
     const element =  contactBtns[index];
@@ -131,6 +139,13 @@ async function addNewContact() {
 
   await putData(CONTACTS_DIR, contactList);
   renderNewContact();
+  // neuen Kontakt finden und anzeigen
+ 
+/*  const emailRef = (element) => element.children[1].childNodes[3].innerHTML == inputEmailRef.value;
+  const btnIndex = contactBtns.findIndex((emailRef));
+  console.log(btnIndex);
+  toggleActiveBtnColor(btnIndex);  */
+ 
   emptyInputFields();
  }
 
@@ -174,11 +189,17 @@ function addContactColor(){
 }
 }
 
-
 function emptyInputFields(){
 inputNameRef.value =""; 
 inputEmailRef.value ="";  
 inputPhoneRef.value =""; 
 }
 
+
+async function deleteContact(index) {
+  contactList.splice(index, 1);
+  renderContacts();
+  closeContactInfo(); 
+  await putData(CONTACTS_DIR, contactList); 
+}
 

@@ -78,7 +78,7 @@ function getContactHTML(contact, index) {
  * 
  * @returns 
  */
-function getContactInfoTemplate() {
+function getContactInfoTemplate(index) {
   return `
    <div class="contact-info">
               <div class="single-contact-large flex align-items-center">
@@ -94,7 +94,7 @@ function getContactInfoTemplate() {
                       <img src="../assets/img/edit.svg" alt="" />
                       <span>Edit</span>
                     </button>
-                    <button class="contact-icon-btn flex align-items-center">
+                    <button class="contact-icon-btn flex align-items-center" onclick="deleteContact(${index})">
                       <img src="../assets/img/delete.svg" alt="" />
                       <span>Delete</span>
                     </button>
@@ -122,7 +122,7 @@ function getContactInfoTemplate() {
 }
 
 /**
- * This function returns the html-template of a new Letter-Section
+ * This function returns the html-template of a new Letter-Section in the conatctlist
  * 
  * @param {String} firstLetter 
  * @returns 

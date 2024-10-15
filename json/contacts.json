@@ -1,5 +1,4 @@
-{
-  "contacts":[
+[
   {
     "color": "orange",
     "email": "andre@gmbh.de",
@@ -169,4 +168,3 @@
     "phone": "+49 151 98712345"
   }
 ]
-}
