@@ -66,7 +66,8 @@ function guestLogin(){
     "initials": "GG"
   }];
   putData(ACTIVE_DIR, activeUser);
-  window.location.href = './summary.html';
+  // setTimeout(function(){window.location.href = "./summary.html"}, 3000);
+  window.location.href = "./summary.html";
 }
 
 

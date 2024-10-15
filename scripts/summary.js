@@ -16,7 +16,8 @@ async function loadData(path=""){
 
 function displayHTML(){
   showMainTemplate();
-  showGreetingDependingOnDaytime();
+  //showGreetingDependingOnDaytime();
+  loadActiveUser(ACTIVE_DIR);
 }
 
 
@@ -123,13 +124,12 @@ async function loadActiveUser(path=""){
   let res = await fetch(FIREBASE_URL + path + ".json");
   activeUser = await res.json();
   currentUserFirstName = activeUser[0].firstName;
-  currentUserLastName = activeUser[0].LastName;
+  currentUserLastName = activeUser[0].lastName;
+  showGreetingDependingOnDaytime();
 }
 
 
-function showGreetingDependingOnDaytime(){
-  loadActiveUser(ACTIVE_DIR);
-  
+function showGreetingDependingOnDaytime(){  
   const HOURS = new Date().getHours();
   let formula = "Hallöchen";
   if(HOURS >= 6 && HOURS < 12){formula = "Good morning";} else
