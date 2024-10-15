@@ -27,7 +27,7 @@ async function loadBoards() {
 
 function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
-    let taskTemplate = getTaskCard(taskId, element.Category);
+    let taskTemplate = getTaskCard(taskId, element.Column);
     let className = document.querySelector(`.board-main-${column}`);
     className.innerHTML += taskTemplate;
     let card = document.querySelector('.add-task-card');
@@ -37,7 +37,7 @@ function setCard(element, index, id, column) {
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description;
     currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
     let personsHTML = "";
-    element.persons.forEach(person => { personsHTML += /*html*/`<div>${person}</div> `; });
+    element.Persons.forEach(person => { personsHTML += /*html*/`<div>${person}</div> `; });
     currentCard.querySelector('.add-task-card-assigned-to').innerHTML = personsHTML;
 }
 
@@ -45,10 +45,10 @@ function setCard(element, index, id, column) {
 function showData() {    
     let index = 0;
     tasks.forEach((element, id) => {
-        if (element.Category === "To Do") setCard(element, index, id, "to-do");
-        if (element.Category === "In Progress") setCard(element, index, id, "in-progress");
-        if (element.Category === "Await Feedback") setCard(element, index, id, "await-feedback");
-        if (element.Category === "Done") setCard(element, index, id, "done");
+        if (element.Column === "To Do") setCard(element, index, id, "to-do");
+        if (element.Column === "In Progress") setCard(element, index, id, "in-progress");
+        if (element.Column === "Await Feedback") setCard(element, index, id, "await-feedback");
+        if (element.Column === "Done") setCard(element, index, id, "done");
         index++;
     });
 }
@@ -78,7 +78,7 @@ function moveTo(column) {
     tasks.forEach((element, id) => {
         const task = 'taskId' + id;
         if (task === currentDraggedElement) {
-            element.Category = column;
+            element.Column = column;
         }
 
     });
