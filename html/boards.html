@@ -1,80 +1,123 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../assets/icons/favicon.png" type="image/x-icon">
 
-    <!--<script src="../scripts/assets.js" defer></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../assets/icons/favicon.png" type="image/x-icon">
+
+  <!--<script src="../scripts/assets.js" defer></script>
     <script src="../scripts/template.js" defer></script>
     <script src="../scripts/add-task.js" defer></script>-->
-    <!--<script src="../scripts/summary.js" defer></script>-->
-    <script type="module" src="../scripts/boards.js"></script>
-    <link rel="stylesheet" href="../styles/board.css">
-    <!--<script src="../scripts/contacts.js" defer></script>
+  <!--<script src="../scripts/summary.js" defer></script>-->
+  <script type="module" src="../scripts/boards.js"></script>
+  <link rel="stylesheet" href="../styles/board.css">
+  <!--<script src="../scripts/contacts.js" defer></script>
     <script src="../scripts/login.js" defer></script>-->
-    <script src="../script.js" defer></script>
-    <!--<link rel="stylesheet" href="../styles/standard.css" />
+  <script src="../script.js" defer></script>
+  <!--<link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/assets.css" />-->
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-auth.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-database.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-firestore.js"></script>
-    <link rel="icon" type="image/png" href="../assets/img/logo.png" />
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-database.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.0/firebase-firestore.js"></script>
+  <link rel="icon" type="image/png" href="../assets/img/logo.png" />
 
-    <title>Join</title>
+  <title>Join</title>
 
-  </head>
-  <body onload="loadBoards()">
-    <header>
-      <div class="header-wrapper">
-        <div class="title">Kanban Project Management Tool</div>
-        <div class="header-right">
-          <button class="help">
-            <img src="../assets/img/help.png" alt="help-icon">
-          </button>
-          <div class="user-profil">
-            <div class="dropdown-menu">
-              <button class="profil-img" onclick="openCloseDropdownMenu()">
-                <img src="../assets/img/user-profil.png" alt="" />
-              </button>
-              <div class="dropdown d_none" id="dropdown-menu">
-                <button class="dropdown-btn"><span>Legal Notice</span></button>
-                <button class="dropdown-btn"><span>Privacy Policy</span></button>
-                <button class="dropdown-btn"><span>Log out</span></button>
-              </div>
+</head>
+
+<body onload="loadBoards()">
+  <header>
+    <div class="header-wrapper">
+      <div class="title">Kanban Project Management Tool</div>
+      <div class="header-right">
+        <button class="help">
+          <img src="../assets/img/help.png" alt="help-icon">
+        </button>
+        <div class="user-profil">
+          <div class="dropdown-menu">
+            <button class="profil-img" onclick="openCloseDropdownMenu()">
+              <img src="../assets/img/user-profil.png" alt="" />
+            </button>
+            <div class="dropdown d_none" id="dropdown-menu">
+              <button class="dropdown-btn"><span>Legal Notice</span></button>
+              <button class="dropdown-btn"><span>Privacy Policy</span></button>
+              <button class="dropdown-btn"><span>Log out</span></button>
             </div>
           </div>
         </div>
       </div>
-    </header>
-    <nav>
-      <img src="../assets/img/logo-weiss.png" alt="join-logo">
-      <div class="menu-bar">
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/summary.png" alt=""></span>
-          <span class="nav-text">Summary</span>
-        </button>
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/add-task.png" alt=""></span>
-          <span class="nav-text clickable" onclick="openAddTask()">Add Task</span>
-        </button>
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/board.png" alt=""></span>
-          <span class="nav-text clickable" onclick="openBoards()">Board</span>
-        </button>
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/contact.png" alt=""></span>
-          <span class="nav-text">Contacts</span>
-        </button>
+    </div>
+  </header>
+  <nav>
+    <img src="../assets/img/logo-weiss.png" alt="join-logo">
+    <div class="menu-bar">
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/summary.png" alt=""></span>
+        <span class="nav-text" onclick="openSummary()">Summary</span>
+      </button>
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/add-task.png" alt=""></span>
+        <span class="nav-text clickable" onclick="openAddTask()">Add Task</span>
+      </button>
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/board.png" alt=""></span>
+        <span class="nav-text clickable" onclick="openBoards()">Board</span>
+      </button>
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/contact.png" alt=""></span>
+        <span class="nav-text clickable" onclick="openContacts()">Contacts</span>
+      </button>
+    </div>
+    <div class="data-protection">
+      <button class="data-policy"><span>Privacy Policy</span></button>
+      <button class="data-policy"><span>Legal notice</span></button>
+    </div>
+  </nav>
+  <main>
+    <section id="boards" class="boards">
+      <!--<div class="board-head"></div>-->
+      <div class="board-head">
+        <div class="board-headline">
+          <h1>Board</h1>
+        </div>
+        <div class="search-task">
+          <form class="board-form">
+            <input class="board-search-input" type="search" placeholder="Find task...">
+            <button class="btn-task" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="btn-task-container"><button class="btn-task clickable">Add Task +</button></div>
       </div>
-      <div class="data-protection">
-        <button class="data-policy"><span>Privacy Policy</span></button>
-        <button class="data-policy"><span>Legal notice</span></button>
+      <div class="board-bar">
+        <div class="board-to-do">
+          <div>To Do</div>
+          <div class="add-btn clickable">+</div>
+        </div>
+        <div class="board-In-progress">
+          <div>In Progress</div>
+          <div class="add-btn clickable">+</div>
+        </div>
+        <div class="board-feedback">
+          <div>Await feedback</div>
+          <div class="add-btn clickable">+</div>
+        </div>
+        <div class="board-done">
+          <div>Done</div>
+          <div class="add-btn clickable">+</div>
+        </div>
       </div>
-    </nav>
-    <main></main>
-  </body>
+      <div class="board-main">
+        <div class="board-main-to-do" ondrop="moveTo('To Do')" ondragover="allowDrop(event)"></div>
+        <div class="board-main-in-progress" ondrop="moveTo('In Progress')" ondragover="allowDrop(event)"></div>
+        <div class="board-main-await-feedback" ondrop="moveTo('Await Feedback')" ondragover="allowDrop(event)"></div>
+        <div class="board-main-done" ondrop="moveTo('Done')" ondragover="allowDrop(event)"></div>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>

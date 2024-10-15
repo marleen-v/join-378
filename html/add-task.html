@@ -1,77 +1,158 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../assets/icons/favicon.png" type="image/x-icon">
 
-    <!--<script src="../scripts/assets.js" defer></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../assets/icons/favicon.png" type="image/x-icon">
+
+  <!--<script src="../scripts/assets.js" defer></script>
     <script src="../scripts/template.js" defer></script>
     <script src="../scripts/add-task.js" defer></script>-->
-    <!--<script src="../scripts/summary.js" defer></script>-->
-    <script type="module" src="../scripts/add-task.js"></script>
-    <link rel="stylesheet" href="../styles/board.css">
-    <!--<script src="../scripts/contacts.js" defer></script>
+  <!--<script src="../scripts/summary.js" defer></script>-->
+  <script type="module" src="../scripts/add-task.js"></script>
+  <link rel="stylesheet" href="../styles/board.css">
+  <!--<script src="../scripts/contacts.js" defer></script>
     <script src="../scripts/login.js" defer></script>-->
-    <script src="../script.js" defer></script>
-    <!--<link rel="stylesheet" href="../styles/standard.css" />
+  <script src="../script.js" defer></script>
+  <!--<link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/assets.css" />-->
 
-    <link rel="icon" type="image/png" href="../assets/img/logo.png" />
+  <link rel="icon" type="image/png" href="../assets/img/logo.png" />
 
-    <title>Join</title>
+  <title>Join</title>
 
-  </head>
-  <body onload="loadAddTask()">
-    <header>
-      <div class="header-wrapper">
-        <div class="title">Kanban Project Management Tool</div>
-        <div class="header-right">
-          <button class="help">
-            <img src="../assets/img/help.png" alt="help-icon">
-          </button>
-          <div class="user-profil">
-            <div class="dropdown-menu">
-              <button class="profil-img" onclick="openCloseDropdownMenu()">
-                <img src="../assets/img/user-profil.png" alt="" />
-              </button>
-              <div class="dropdown d_none" id="dropdown-menu">
-                <button class="dropdown-btn"><span>Legal Notice</span></button>
-                <button class="dropdown-btn"><span>Privacy Policy</span></button>
-                <button class="dropdown-btn"><span>Log out</span></button>
-              </div>
+</head>
+
+<body>
+  <header>
+    <div class="header-wrapper">
+      <div class="title">Kanban Project Management Tool</div>
+      <div class="header-right">
+        <button class="help">
+          <img src="../assets/img/help.png" alt="help-icon">
+        </button>
+        <div class="user-profil">
+          <div class="dropdown-menu">
+            <button class="profil-img" onclick="openCloseDropdownMenu()">
+              <img src="../assets/img/user-profil.png" alt="" />
+            </button>
+            <div class="dropdown d_none" id="dropdown-menu">
+              <button class="dropdown-btn"><span>Legal Notice</span></button>
+              <button class="dropdown-btn"><span>Privacy Policy</span></button>
+              <button class="dropdown-btn"><span>Log out</span></button>
             </div>
           </div>
         </div>
       </div>
-    </header>
-    <nav>
-      <img src="../assets/img/logo-weiss.png" alt="join-logo">
-      <div class="menu-bar">
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/summary.png" alt=""></span>
-          <span class="nav-text">Summary</span>
-        </button>
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/add-task.png" alt=""></span>
-          <span class="nav-text clickable" onclick="openAddTask()">Add Task</span>
-        </button>
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/board.png" alt=""></span>
-          <span class="nav-text clickable" onclick="openBoards()">Board</span>
-        </button>
-        <button class="nav-btn">
-          <span class="nav-icon"><img src="../assets/icons/contact.png" alt=""></span>
-          <span class="nav-text">Contacts</span>
-        </button>
+    </div>
+  </header>
+  <nav>
+    <img src="../assets/img/logo-weiss.png" alt="join-logo">
+    <div class="menu-bar">
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/summary.png" alt=""></span>
+        <span class="nav-text" onclick="openSummary()">Summary</span>
+      </button>
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/add-task.png" alt=""></span>
+        <span class="nav-text clickable" onclick="openAddTask()">Add Task</span>
+      </button>
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/board.png" alt=""></span>
+        <span class="nav-text clickable" onclick="openBoards()">Board</span>
+      </button>
+      <button class="nav-btn">
+        <span class="nav-icon"><img src="../assets/icons/contact.png" alt=""></span>
+        <span class="nav-text clickable" onclick="openContacts()">Contacts</span>
+      </button>
+    </div>
+    <div class="data-protection">
+      <button class="data-policy"><span>Privacy Policy</span></button>
+      <button class="data-policy"><span>Legal notice</span></button>
+    </div>
+  </nav>
+  <main>
+    <section id="add-task" class="add-task">
+      <div class="add-task-head">
+        <div class="add-task-headline">
+          <h1>Add Task</h1>
+        </div>
       </div>
-      <div class="data-protection">
-        <button class="data-policy"><span>Privacy Policy</span></button>
-        <button class="data-policy"><span>Legal notice</span></button>
+      <div class="add-task-main">
+        <form id="task-form" class="task-form">
+          <!-- Linker und rechter Bereich mit senkrechter Linie -->
+          <div class="form-row">
+            <!-- Linke Seite (Titel und Zuweisen an) -->
+            <div class="left-side">
+              <div>
+                <!-- Titel -->
+                <label class="task-label" for="title">Title</label>
+                <input class="task-input" type="text" id="title" name="title" required>
+              </div>
+              <!-- Beschreibung -->
+              <label class="task-label" for="description">Description</label>
+              <textarea class="task-textarea" id="description" name="description" rows="4"
+                placeholder="Enter a description" required></textarea>
+              <div>
+                <!-- Zuweisen an -->
+                <label class="task-label" for="assigned-to">Assigned to</label>
+                <select class="task-select" id="assigned-to" name="assigned_to" required>
+                  <option value="" disabled selected>Select contacts to assign</option>
+                  <option value="mitarbeiter1">Mitarbeiter 1</option>
+                  <option value="mitarbeiter2">Mitarbeiter 2</option>
+                  <option value="mitarbeiter3">Mitarbeiter 3</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Rechte Seite (Fälligkeitsdatum) mit vertikaler Trennung -->
+            <div class="right-side divider-vertical">
+              <div>
+                <!-- Fälligkeitsdatum -->
+                <label class="task-label" for="due-date">Due date</label>
+                <input class="task-input" type="date" id="due-date" name="due_date" required>
+              </div>
+
+              <!-- Priorität als Buttons -->
+              <label>Priority</label>
+              <div class="priority-buttons">
+                <button class="task-button clickable" type="button" class="priority-button" id="urgent"
+                  data-priority="hoch" onclick="selectPriority(this)">Urgent</button>
+                <button class="task-button clickable" type="button" class="priority-button active" id="medium"
+                  data-priority="mittel" onclick="selectPriority(this)">Medium</button>
+                <button class="task-button clickable" type="button" class="priority-button" id="low"
+                  data-priority="niedrig" onclick="selectPriority(this)">Low</button>
+              </div>
+
+              <!-- Kategorie -->
+              <label class="task-label" for="category">Category</label>
+              <select class="task-select" id="category" name="category" required>
+                <option value="" disabled selected>Select task category</option>
+                <option value="entwicklung">Entwicklung</option>
+                <option value="marketing">Marketing</option>
+                <option value="design">Design</option>
+              </select>
+
+              <!-- Subtasks -->
+              <label class="task-label">Subtasks</label>
+              <div id="subtasks-container">
+                <div class="subtask-container">
+                  <input class="task-input" type="text" name="subtasks[]" placeholder="Add new subtask">
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" onclick="addSubtask()">Weitere Unteraufgabe hinzufügen</button>
+
+          <!-- Absenden -->
+          <button type="submit">Aufgabe erstellen</button>
+        </form>
       </div>
-    </nav>
-    <main></main>
-  </body>
+    </section>
+  </main>
+</body>
+
 </html>

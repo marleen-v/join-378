@@ -15,7 +15,7 @@ function init() {
 
 
 function openSummary() {
-    window.location = "./html/summary.html";
+    window.location = "../html/summary.html";
 }
 
 function openBoards() {
@@ -25,6 +25,11 @@ function openBoards() {
 
 function openAddTask() {
     window.location = "../html/add-task.html";
+}
+
+
+function openContacts() {
+    window.location = "../html/contacts.html";
 }
 
 

@@ -15,11 +15,11 @@ async function loadData(path = "") {
 
 
 async function loadBoards() {
-    const htmlContent = await loadHTML('../html/boards-main.html');
+    //const htmlContent = await loadHTML('../html/boards-main.html');
     tasks = await loadData(TASKS_DIR);
 
-    if (htmlContent) {
-        processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
+    if (tasks) {
+        //processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
         showData();
     }
 }
