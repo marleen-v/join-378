@@ -33,7 +33,7 @@ function setCard(element, index, id, column) {
     let card = document.querySelector('.add-task-card');
     card.classList.replace("add-task-card", `add-task-card${index}`);
     let currentCard = document.querySelector(`.add-task-card${index}`);
-    currentCard.querySelector('.add-task-card-top').innerHTML = element.Category;
+    currentCard.querySelector('.add-task-card-category').innerHTML = element.Category;
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description;
     currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
@@ -63,7 +63,7 @@ function startDragging(id) {
 function getTaskCard(taskId, element) {
     return /*html*/`
         <section id="${taskId}" class="task-card add-task-card" draggable="true" ondragstart="startDragging(${element['id']})">
-            <div class="add-task-card-top"></div>
+            <div class="add-task-card-top"><div class="add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>
             <div class="add-task-card-subtasks"></div>
