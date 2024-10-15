@@ -10,7 +10,7 @@ let currentUserLastName = "Müller";
 
 
 function init() {
- 
+    openSummary();
 }
 
 
@@ -30,6 +30,16 @@ function openAddTask() {
 
 function openContacts() {
     window.location = "../html/contacts.html";
+}
+
+
+function openPolicy() {
+    window.location = "../html/policy.html";
+}
+
+
+function openImprint() {
+    window.location = "../html/impressum.html";
 }
 
 
