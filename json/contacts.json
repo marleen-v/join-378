@@ -1,142 +1,172 @@
-[
+{
+  "contacts":[
   {
-    "firstName": "Anna",
-    "lastName": "Müller",
+    "color": "orange",
+    "email": "andre@gmbh.de",
+    "firstName": "Andre",
+    "initials": "A",
+    "lastName": "",
+    "phone": "123456"
+  },
+  {
+    "color": "violet",
     "email": "anna.mueller@gmail.com",
+    "firstName": "Anna",
     "initials": "AM",
+    "lastName": "Müller",
     "phone": "+49 151 23456789"
   },
   {
-    "firstName": "Max",
-    "lastName": "Schneider",
-    "email": "max.schneider@gmx.de",
-    "initials": "MS",
-    "phone": "+49 152 98765432"
-  },
-  {
-    "firstName": "Julia",
-    "lastName": "Weber",
-    "email": "julia.weber@yahoo.de",
-    "initials": "JW",
-    "phone": "+49 171 54321678"
-  },
-  {
-    "firstName": "Lukas",
-    "lastName": "Fischer",
-    "email": "lukas.fischer@outlook.com",
-    "initials": "LF",
-    "phone": "+49 172 87654321"
-  },
-  {
-    "firstName": "Sophia",
-    "lastName": "Schmidt",
-    "email": "sophia.schmidt@hotmail.com",
-    "initials": "SS",
-    "phone": "+49 160 13579246"
-  },
-  {
-    "firstName": "Tim",
-    "lastName": "Bauer",
-    "email": "tim.bauer@gmail.com",
-    "initials": "TB",
-    "phone": "+49 151 98712345"
-  },
-  {
-    "firstName": "Mia",
-    "lastName": "Koch",
-    "email": "mia.koch@gmx.de",
-    "initials": "MK",
-    "phone": "+49 152 24681357"
-  },
-  {
-    "firstName": "Jonas",
-    "lastName": "Wolf",
-    "email": "jonas.wolf@yahoo.com",
-    "initials": "JW",
-    "phone": "+49 171 35724680"
-  },
-  {
-    "firstName": "Emma",
-    "lastName": "Hofmann",
-    "email": "emma.hofmann@outlook.de",
-    "initials": "EH",
-    "phone": "+49 172 46802468"
-  },
-  {
-    "firstName": "Paul",
-    "lastName": "Kaiser",
-    "email": "paul.kaiser@icloud.com",
-    "initials": "PK",
-    "phone": "+49 160 23458697"
-  },
-  {
-    "firstName": "Clara",
-    "lastName": "Peters",
+    "color": "purple",
     "email": "clara.peters@web.de",
+    "firstName": "Clara",
     "initials": "CP",
+    "lastName": "Peters",
     "phone": "+49 151 12457896"
   },
   {
-    "firstName": "Felix",
-    "lastName": "Mayer",
-    "email": "felix.mayer@gmail.com",
-    "initials": "FM",
-    "phone": "+49 152 85792468"
-  },
-  {
-    "firstName": "Lea",
-    "lastName": "Becker",
-    "email": "lea.becker@gmx.de",
-    "initials": "LB",
-    "phone": "+49 171 47925813"
-  },
-  {
-    "firstName": "Nico",
-    "lastName": "Frank",
-    "email": "nico.frank@yahoo.com",
-    "initials": "NF",
-    "phone": "+49 172 56802468"
-  },
-  {
-    "firstName": "Laura",
-    "lastName": "Lange",
-    "email": "laura.lange@outlook.com",
-    "initials": "LL",
-    "phone": "+49 160 34680257"
-  },
-  {
-    "firstName": "David",
-    "lastName": "Krause",
+    "color": "pink",
     "email": "david.krause@gmail.com",
+    "firstName": "David",
     "initials": "DK",
+    "lastName": "Krause",
     "phone": "+49 151 95847631"
   },
   {
-    "firstName": "Elena",
-    "lastName": "Schulz",
+    "color": "yellow",
     "email": "elena.schulz@gmx.de",
+    "firstName": "Elena",
     "initials": "ES",
+    "lastName": "Schulz",
     "phone": "+49 152 64798235"
   },
   {
-    "firstName": "Simon",
-    "lastName": "Wagner",
-    "email": "simon.wagner@yahoo.de",
-    "initials": "SW",
-    "phone": "+49 171 35690248"
+    "color": "green",
+    "email": "emma.hofmann@outlook.de",
+    "firstName": "Emma",
+    "initials": "EH",
+    "lastName": "Hofmann",
+    "phone": "+49 172 46802468"
   },
   {
-    "firstName": "Hannah",
-    "lastName": "Zimmer",
+    "color": "dark_purple",
+    "email": "felix.mayer@gmail.com",
+    "firstName": "Felix",
+    "initials": "FM",
+    "lastName": "Mayer",
+    "phone": "+49 152 85792468"
+  },
+  {
+    "color": "red",
     "email": "hannah.zimmer@web.de",
+    "firstName": "Hannah",
     "initials": "HZ",
+    "lastName": "Zimmer",
     "phone": "+49 172 12345678"
   },
   {
-    "firstName": "Jan",
-    "lastName": "Neumann",
+    "color": "orange",
     "email": "jan.neumann@gmail.com",
+    "firstName": "Jan",
     "initials": "JN",
+    "lastName": "Neumann",
     "phone": "+49 160 12345678"
+  },
+  {
+    "color": "violet",
+    "email": "jonas.wolf@yahoo.com",
+    "firstName": "Jonas",
+    "initials": "JW",
+    "lastName": "Wolf",
+    "phone": "+49 171 35724680"
+  },
+  {
+    "color": "purple",
+    "email": "julia.weber@yahoo.de",
+    "firstName": "Julia",
+    "initials": "JW",
+    "lastName": "Weber",
+    "phone": "+49 171 54321678"
+  },
+  {
+    "color": "pink",
+    "email": "laura.lange@outlook.com",
+    "firstName": "Laura",
+    "initials": "LL",
+    "lastName": "Lange",
+    "phone": "+49 160 34680257"
+  },
+  {
+    "color": "yellow",
+    "email": "lea.becker@gmx.de",
+    "firstName": "Lea",
+    "initials": "LB",
+    "lastName": "Becker",
+    "phone": "+49 171 47925813"
+  },
+  {
+    "color": "green",
+    "email": "lukas.fischer@outlook.com",
+    "firstName": "Lukas",
+    "initials": "LF",
+    "lastName": "Fischer",
+    "phone": "+49 172 87654321"
+  },
+  {
+    "color": "dark_purple",
+    "email": "max.schneider@gmx.de",
+    "firstName": "Max",
+    "initials": "MS",
+    "lastName": "Schneider",
+    "phone": "+49 152 98765432"
+  },
+  {
+    "color": "red",
+    "email": "mia.koch@gmx.de",
+    "firstName": "Mia",
+    "initials": "MK",
+    "lastName": "Koch",
+    "phone": "+49 152 24681357"
+  },
+  {
+    "color": "orange",
+    "email": "nico.frank@yahoo.com",
+    "firstName": "Nico",
+    "initials": "NF",
+    "lastName": "Frank",
+    "phone": "+49 172 56802468"
+  },
+  {
+    "color": "violet",
+    "email": "paul.kaiser@icloud.com",
+    "firstName": "Paul",
+    "initials": "PK",
+    "lastName": "Kaiser",
+    "phone": "+49 160 23458697"
+  },
+  {
+    "color": "purple",
+    "email": "simon.wagner@yahoo.de",
+    "firstName": "Simon",
+    "initials": "SW",
+    "lastName": "Wagner",
+    "phone": "+49 171 35690248"
+  },
+  {
+    "color": "pink",
+    "email": "sophia.schmidt@hotmail.com",
+    "firstName": "Sophia",
+    "initials": "SS",
+    "lastName": "Schmidt",
+    "phone": "+49 160 13579246"
+  },
+  {
+    "color": "yellow",
+    "email": "tim.bauer@gmail.com",
+    "firstName": "Tim",
+    "initials": "TB",
+    "lastName": "Bauer",
+    "phone": "+49 151 98712345"
   }
 ]
+}
