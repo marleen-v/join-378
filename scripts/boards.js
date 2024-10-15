@@ -24,6 +24,18 @@ async function loadBoards() {
     }
 }
 
+function setBgColor(currentCard, element) {
+    if(element.Category === "User Story") {
+        currentCard.querySelector('.add-task-card-category').classList.add('bg-color-blue'); 
+        currentCard.querySelector('.add-task-card-category').classList.remove('bg-color-turkey');
+    }
+    else {
+        currentCard.querySelector('.add-task-card-category').classList.remove('bg-color-blue'); 
+        currentCard.querySelector('.add-task-card-category').classList.add('bg-color-turkey');
+    }
+
+}
+
 
 function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
@@ -34,6 +46,7 @@ function setCard(element, index, id, column) {
     card.classList.replace("add-task-card", `add-task-card${index}`);
     let currentCard = document.querySelector(`.add-task-card${index}`);
     currentCard.querySelector('.add-task-card-category').innerHTML = element.Category;
+    setBgColor(currentCard, element);
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description;
     currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);

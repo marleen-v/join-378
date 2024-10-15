@@ -277,6 +277,14 @@ main {
     text-align: center;
 }
 
+.bg-color-turkey {
+    background-color: #1FD7C1;
+}
+
+.bg-color-blue {
+    background-color: #0038FF;
+}
+
 .add-task-card-headline {
     font-weight: bold;
 }
