@@ -73,7 +73,6 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 252px);
     grid-template-rows: 1fr;
-    overflow-y: hidden;
     width: 100%;
     height: 100%;
     padding: 16px 0 128px 0;
@@ -229,7 +228,7 @@ main {
     padding: 16px;
     margin: 8px 2px 8px 2px;
     width: 252px;
-    height: 244px;
+    height: 252px;
     gap: 16px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
