@@ -17,8 +17,9 @@ main {
 
 .boards {
     display: grid;
+    grid-column: 1;
     grid-template-rows: 232px 24px 1fr;
-    grid-template-columns: calc(100% - 64px);
+    grid-template-columns: 1fr;
     width: 100%;
     height: 100vh;
     padding: 0 64px 0 64px;
@@ -71,7 +72,7 @@ main {
     grid-template-columns: repeat(4, 252px);
     grid-template-rows: 1fr;
     overflow-y: auto;
-    width: 1200px;
+    width: 100%;
     height: 100%;
     padding: 16px 0 128px 0;
     gap: 16px;
@@ -220,6 +221,29 @@ main {
     height: 244px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+@media screen and (max-width: 1730px) {
+    /*
+    .board-head {
+        display: grid;
+        grid-template-columns: 400px 200px 200px;
+    }
+
+    .header-wrapper {
+        display: grid;
+        grid-template-columns: calc(100% - 64px) 128px;
+    }
+
+    .boards {
+        display: grid;
+        grid-template-columns: 200px;    
+    }
+
+    .board-bar {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+    }*/
 }
 
 @font-face {
