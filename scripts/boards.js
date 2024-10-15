@@ -4,7 +4,7 @@ const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabas
 const USERS_DIR = '/users';
 const TASKS_DIR = '/tasks';
 let currentDraggedElement;
-let tasks;
+let tasks = [];
 
 
 async function loadData(path = "") {
@@ -16,6 +16,7 @@ async function loadData(path = "") {
 
 async function loadBoards() {
     const htmlContent = await loadHTML('../html/boards-main.html');
+    tasks = await loadData(TASKS_DIR);
 
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
@@ -41,11 +42,9 @@ function setCard(element, index, id, column) {
 }
 
 
-async function showData() {
-    let json = await loadData(TASKS_DIR);
-    
+function showData() {    
     let index = 0;
-    json.forEach((element, id) => {
+    tasks.forEach((element, id) => {
         if (element.Category === "To Do") setCard(element, index, id, "to-do");
         if (element.Category === "In Progress") setCard(element, index, id, "in-progress");
         if (element.Category === "Await Feedback") setCard(element, index, id, "await-feedback");
@@ -72,22 +71,19 @@ function getTaskCard(taskId, element) {
     `;
 }
 
-async function moveTo(column) {
-    let json = await loadData(TASKS_DIR);
-    tasks = await json;
-
+function moveTo(column) {
     let currentCard = document.getElementById(currentDraggedElement);
     currentCard.querySelector('.add-task-card-headline');
 
-    json.forEach((element, id) => {
+    tasks.forEach((element, id) => {
         const task = 'taskId' + id;
         if (task === currentDraggedElement) {
             element.Category = column;
         }
 
     });
-    putData(TASKS_DIR, json);
-    await loadBoards();
+    putData(TASKS_DIR, tasks);
+    refresh();
 }
 
 function refresh() {
