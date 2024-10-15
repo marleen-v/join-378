@@ -39,7 +39,7 @@ function getNumberUrgentTasks(){
 function getNumberToDoTasks(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
-    if(tasksFromFirebase[i].Category === 'To Do'){
+    if(tasksFromFirebase[i].Column === 'To Do'){
       counter++;
     }
   }  
@@ -50,7 +50,7 @@ function getNumberToDoTasks(){
 function getNumberDoneTasks(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
-    if(tasksFromFirebase[i].Category === 'Done'){
+    if(tasksFromFirebase[i].Column === 'Done'){
       counter++;
     }
   }
@@ -61,7 +61,7 @@ function getNumberDoneTasks(){
 function getNumberTasksInProgress(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
-    if(tasksFromFirebase[i].Category === 'In Progress'){
+    if(tasksFromFirebase[i].Column === 'In Progress'){
       counter++;
     }
   }
@@ -72,7 +72,7 @@ function getNumberTasksInProgress(){
 function getNumberTasksAwaitingFeedback(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
-    if(tasksFromFirebase[i].Category === 'Await Feedback'){
+    if(tasksFromFirebase[i].Column === 'Await Feedback'){
       counter++;
     }
   }
