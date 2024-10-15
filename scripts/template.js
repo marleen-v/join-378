@@ -51,3 +51,84 @@ function getTemplateMainSummary(){
       </section>
   `;
 }
+
+
+/**
+ * This function returns the html for the rendering of each contact
+ *
+ * @param {Array} contact - this is a single contact info
+ * @returns
+ */
+function getContactHTML(contact, index) {
+  return `
+    <button class="single-contact-btn flex align-items-center" onclick="showContactInfo(${index})">
+            <span class="circle ${contact.color} flex justify-content-center align-items-center">
+              <span>${contact.initials}</span>
+            </span>
+            <span class="name-email flex flex-column">
+              <span class="contact-name">${contact.firstName} ${contact.lastName}</span>
+              <span class="contact-email">${contact.email}</span>
+            </span>
+          </button>
+    `;
+}
+
+/**
+ * This function returns the html-template for the contact-info of a clicked contact 
+ * 
+ * @returns 
+ */
+function getContactInfoTemplate() {
+  return `
+   <div class="contact-info">
+              <div class="single-contact-large flex align-items-center">
+                <div
+                  class="circle ${currentContact.color} circle-large flex justify-content-center align-items-center"
+                >
+                  <span>${currentContact.initials}</span>
+                </div>
+                <div class="name-email flex flex-column">
+                  <div class="contact-name-large">${currentContact.firstName} ${currentContact.lastName}</div>
+                  <div class="icon-container flex">
+                    <button class="contact-icon-btn flex align-items-center">
+                      <img src="../assets/img/edit.svg" alt="" />
+                      <span>Edit</span>
+                    </button>
+                    <button class="contact-icon-btn flex align-items-center">
+                      <img src="../assets/img/delete.svg" alt="" />
+                      <span>Delete</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="contact-info-text flex align-items-center">
+              Contact Information
+            </div>
+            <div
+              class="email-phone-container flex flex-column"
+              style="gap: 22px"
+            >
+              <div class="email flex flex-column" style="gap: 15px">
+                <div style="font-weight: 700">Email</div>
+                <div class="contact-email">${currentContact.email}</div>
+              </div>
+              <div class="phone flex flex-column" style="gap: 15px">
+                <div style="font-weight: 700">Phone</div>
+                <div>+23534767487</div>
+              </div>
+            </div>
+            `;
+}
+
+/**
+ * This function returns the html-template of a new Letter-Section
+ * 
+ * @param {String} firstLetter 
+ * @returns 
+ */
+function getNewSectionHTML(firstLetter) {
+  return `
+  <div class="letter">${firstLetter}</div>
+  `;
+}

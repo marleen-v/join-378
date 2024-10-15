@@ -48,3 +48,16 @@ async function loadData(path=""){
     let resToJson = await res.json();
     dataFromFirebase = resToJson;
 }
+
+async function putData(path="", data={}){
+    let res = await fetch(FIREBASE_URL + path + ".json",
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    });
+    let resToJson = await res.json();
+  }
+  

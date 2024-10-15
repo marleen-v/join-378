@@ -1,24 +1,22 @@
-const BASE_URL =
-  "https://join-378-default-rtdb.europe-west1.firebasedatabase.app/";
-
 const contactListRef = document.getElementById("contact-container");
+const inputNameRef = document.getElementById("c-name");
+const inputEmailRef = document.getElementById("c-email");
+const inputPhoneRef = document.getElementById("c-phone");
+
 
 let contactList = [];
 let currentContact = [];
 
 let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
 
-function initContacts () {
-  loadContactData();
+let firstName;
+let lastName;
+
+
+
+async function initContacts () {
+  contactList = await loadContactData();
   renderContacts();
-}
-
-  
-
-function addNewContact() {
-  const dialog = document.querySelector("dialog");
-  dialog.showModal();
- 
 }
 
 /**
@@ -28,7 +26,7 @@ function addNewContact() {
  */
 async function loadContactData() {
   try {
-    const response = await fetch(BASE_URL + "/contacts" + ".json");
+    const response = await fetch(FIREBASE_URL  + CONTACTS_DIR + ".json");
     const data = await response.json();
     return data
   } catch (error) {
@@ -36,33 +34,27 @@ async function loadContactData() {
   }
 }
 
+async function renderNewContact() {
+  contactList = await loadContactData();
+  renderContacts();
+}
+
 /**
  *
  * This function renders the contacts on the page
  */
-  async function renderContacts() {
-    contactList = await loadContactData();
+  function renderContacts() {
+  
   contactListRef.innerHTML = "";
   sortContactsByFirstName();
-
+  
   for (let index = 0; index < contactList.length; index++) {
-    addContactColor(index); 
-   
     const contact = contactList[index];
     addNewContactSection(index);
     contactListRef.innerHTML += getContactHTML(contact, index);
   }
 }
 
-/**
- * This function adds a color to each contact
- * 
- * @param {Number} index 
- */
-function addContactColor(index){
-    let contactIndex = index % contactColors.length; // because there can be more contacts than colors
-    contactList[index].color = contactColors[contactIndex];
-}
 
 /**
  * This function adds a new Letter-Section to the contactlist on the page
@@ -84,35 +76,6 @@ function addNewContactSection(index) {
   }
 }
 
-/**
- * This function returns the html-template of a new Letter-Section
- * 
- * @param {String} firstLetter 
- * @returns 
- */
-function getNewSectionHTML(firstLetter) {
-  return `
-  <div class="letter">${firstLetter}</div>
-  `;
-}
-
-
-/**
- * This function sorts the contacts alphabetically
- *
- * @param {Array} contacts - this is the json array with all contacts
- */
-function sortContactsByFirstName() {
-  contactList.sort((a, b) => {
-    if (a.firstName < b.firstName) {
-      return -1;
-    }
-    if (a.firstName > b.firstName) {
-      return 1;
-    }
-    return 0;
-  });
-}
 
 /**
  * This function renders the information of a clicked contact
@@ -141,70 +104,81 @@ function toggleActiveBtnColor (btnIndex){
   }
 }
 
-/**
- * This function returns the html for the rendering of each contact
+function openDialog() {
+  const dialog = document.querySelector("dialog");
+  dialog.showModal();
+
+}
+
+async function addNewContact() {
+  let initials;
+  
+  firstName = inputNameRef.value.split(' ')[0];
+  firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  lastName = inputNameRef.value.split(' ')[1];
+  initials = findInitials(initials); 
+
+  contactList.push({
+    "email": inputEmailRef.value,
+    "firstName": firstName,
+    "initials": initials,
+    "lastName": lastName,
+    "phone": inputPhoneRef.value
+  });
+
+  sortContactsByFirstName();
+  addContactColor();
+
+  await putData(CONTACTS_DIR, contactList);
+  renderNewContact();
+  emptyInputFields();
+ }
+
+ /**
+ * This function sorts the contacts alphabetically
  *
- * @param {Array} contact - this is a single contact info
- * @returns
+ * @param {Array} contacts - this is the json array with all contacts
  */
-function getContactHTML(contact, index) {
-  return `
-    <button class="single-contact-btn flex align-items-center" onclick="showContactInfo(${index})">
-            <span class="circle ${contact.color} flex justify-content-center align-items-center">
-              <span>${contact.initials}</span>
-            </span>
-            <span class="name-email flex flex-column">
-              <span class="contact-name">${contact.firstName} ${contact.lastName}</span>
-              <span class="contact-email">${contact.email}</span>
-            </span>
-          </button>
-    `;
+function sortContactsByFirstName() {
+  contactList.sort((a, b) => {
+    if (a.firstName < b.firstName) {
+      return -1;
+    }
+    if (a.firstName > b.firstName) {
+      return 1;
+    }
+    return 0;
+  });
+}
+
+
+ function findInitials(initials){
+  if(lastName !== undefined ){
+    initials = firstName.charAt(0) + lastName.charAt(0);
+  }else{
+    initials = firstName.charAt(0);
+    lastName = ""; // empty string, because if not, page shows undefined
+  }
+  return initials
 }
 
 /**
- * This function returns the html-template for the contact-info of a clicked contact 
+ * This function adds a color to each contact
  * 
- * @returns 
+ * @param {Number} index 
  */
-function getContactInfoTemplate() {
-  return `
-   <div class="contact-info">
-              <div class="single-contact-large flex align-items-center">
-                <div
-                  class="circle ${currentContact.color} circle-large flex justify-content-center align-items-center"
-                >
-                  <span>${currentContact.initials}</span>
-                </div>
-                <div class="name-email flex flex-column">
-                  <div class="contact-name-large">${currentContact.firstName} ${currentContact.lastName}</div>
-                  <div class="icon-container flex">
-                    <button class="contact-icon-btn flex align-items-center">
-                      <img src="../assets/img/edit.svg" alt="" />
-                      <span>Edit</span>
-                    </button>
-                    <button class="contact-icon-btn flex align-items-center">
-                      <img src="../assets/img/delete.svg" alt="" />
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="contact-info-text flex align-items-center">
-              Contact Information
-            </div>
-            <div
-              class="email-phone-container flex flex-column"
-              style="gap: 22px"
-            >
-              <div class="email flex flex-column" style="gap: 15px">
-                <div style="font-weight: 700">Email</div>
-                <div class="contact-email">${currentContact.email}</div>
-              </div>
-              <div class="phone flex flex-column" style="gap: 15px">
-                <div style="font-weight: 700">Phone</div>
-                <div>+23534767487</div>
-              </div>
-            </div>
-            `;
+function addContactColor(){
+  for (let index = 0; index < contactList.length; index++) {
+    let contactIndex = index % contactColors.length; // because there can be more contacts than colors
+    contactList[index].color = contactColors[contactIndex];
 }
+}
+
+
+function emptyInputFields(){
+inputNameRef.value =""; 
+inputEmailRef.value ="";  
+inputPhoneRef.value =""; 
+}
+
+

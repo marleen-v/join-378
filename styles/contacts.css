@@ -181,7 +181,6 @@
 .red {
   background-color:#FF4646;
 }
-
 /*------------- Dialog ----------------------------------------------*/
 dialog{
   z-index: 5000;
@@ -300,9 +299,11 @@ label>input {
   width: 24px;
   height:24px;
 }
-input[type=submit]{
-  color: #fff;
-  font-family: 'Inter';
-  font-weight: 700;
-}
 
+
+.submit-btn{
+  border-radius: 10px;
+  padding: 13px 21px;
+  color: #fff;
+  font-size: 20px;
+}

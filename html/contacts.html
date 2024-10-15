@@ -11,12 +11,14 @@
 
     <script src="../scripts/assets.js" defer></script>
     <script src="../scripts/template.js" defer></script>
+    <script src="../script.js" defer></script>
     <!-- <script src="../scripts/add-task.js" defer></script>
     <script src="../scripts/summary.js" defer></script>
     <script src="../scripts/boards.js" defer></script> -->
     <script src="../scripts/contacts.js" defer></script>
   <!--   <script src="../scripts/login.js" defer></script> -->
-    <script src="../script.js" defer></script>
+ 
+    
     <link rel="stylesheet" href="../styles/standard.css" />
     <link rel="stylesheet" href="../styles/assets.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
@@ -100,7 +102,7 @@
           >
             <button
               class="add-contact-btn flex justify-content-center align-items-center"
-              onclick="addNewContact()"
+              onclick="openDialog()"
             >
               <span>Add new contact</span
               ><span><img src="../assets/img/person_add.png" alt="" /></span>
@@ -138,7 +140,7 @@
           <img src="../assets/icons/person.svg" alt="" class="circle-icon" />
         </div>
       </div>
-        <form method="dialog" class="flex flex-column">
+        <form onsubmit="addNewContact()" method="dialog" class="flex flex-column">
           <label class="flex justify-content-between">
             <input
               class="contact-input"
@@ -187,14 +189,15 @@
           <span>Cancel</span>
           <img class="cancel-icon" src="../assets/icons/close.svg" alt="">
           </button>
-          <label class="flex justify-content-between create-conatct-btn">
-            <input type="submit" value="Create Contact" class="contact-input"/>
-            <img
+          
+            <button  type="submit" value="Create Contact" class="submit-btn flex justify-content-between create-conatct-btn contact-input align-items-center">
+            Create Contact
+              <img
               class="check-icon input-icon "
               src="../assets/icons/check.svg"
               alt=""
             />
-            </label>
+          </button>
         </div>
 
         </form>
