@@ -1,25 +1,19 @@
 const contactListRef = document.getElementById("contact-container");
-const contactBtns = document.querySelectorAll(".single-contact-btn");
+
 const inputNameRef = document.getElementById("c-name");
 const inputEmailRef = document.getElementById("c-email");
 const inputPhoneRef = document.getElementById("c-phone");
 
-
 let contactList = [];
 let currentContact = [];
-
 let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
-
 let firstName;
 let lastName;
 
 
-
 async function initContacts () {
   contactList = await loadContactData();
- 
   renderContacts();
-
 }
 
 /**
@@ -91,7 +85,7 @@ function showContactInfo(index) {
   currentContact = contactList[index];
   singleContactRef.innerHTML = "";
   singleContactRef.innerHTML = getContactInfoTemplate(index);
-  toggleActiveBtnColor (index);
+  toggleActiveBtnColor(index);
 }
 
 function closeContactInfo() {
@@ -100,8 +94,7 @@ function closeContactInfo() {
 }
 
 function toggleActiveBtnColor (btnIndex){
-  
-
+  const contactBtns = document.querySelectorAll(".single-contact-btn");
   for (let index = 0; index <  contactBtns.length; index++) {
     const element =  contactBtns[index];
     if (element == contactBtns[btnIndex]) {
@@ -119,6 +112,7 @@ function openDialog() {
 }
 
 async function addNewContact() {
+  const contactBtns = document.querySelectorAll(".single-contact-btn");
   let initials;
   
   firstName = inputNameRef.value.split(' ')[0];
@@ -139,12 +133,15 @@ async function addNewContact() {
 
   await putData(CONTACTS_DIR, contactList);
   renderNewContact();
-  // neuen Kontakt finden und anzeigen
  
-/*  const emailRef = (element) => element.children[1].childNodes[3].innerHTML == inputEmailRef.value;
-  const btnIndex = contactBtns.findIndex((emailRef));
+/*  const emailRef = (element) => {element.children[1].childNodes[3].innerHTML == inputEmailRef.value; */
+/*   const btnIndex = contactBtns.findIndex((element) => element.children[1].childNodes[3].innerHTML == inputEmailRef.value); */
+
+/* let btnIndex = contactList.find(contact => contact.email === inputEmailRef.value);
+btnIndex = contactList.findIndex(btnIndex);
+
   console.log(btnIndex);
-  toggleActiveBtnColor(btnIndex);  */
+  toggleActiveBtnColor(btnIndex);  */ 
  
   emptyInputFields();
  }
@@ -184,7 +181,7 @@ function sortContactsByFirstName() {
  */
 function addContactColor(){
   for (let index = 0; index < contactList.length; index++) {
-    let contactIndex = index % contactColors.length; // because there can be more contacts than colors
+    let contactIndex = index % contactColors.length; // because there can be more contacts than colors in "contactColors"
     contactList[index].color = contactColors[contactIndex];
 }
 }
@@ -197,9 +194,15 @@ inputPhoneRef.value ="";
 
 
 async function deleteContact(index) {
-  contactList.splice(index, 1);
+  contactList.splice(index, 1); 
   renderContacts();
   closeContactInfo(); 
   await putData(CONTACTS_DIR, contactList); 
 }
 
+function validateForm(){
+  const submitBtnRef = document.getElementById("submit-btn");
+  if (inputNameRef.value !="" && inputEmailRef.value !="" &&  inputPhoneRef.value !="" ) {
+    submitBtnRef.classList.remove("inactive-btn");
+    }
+}

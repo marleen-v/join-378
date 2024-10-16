@@ -307,3 +307,14 @@ label>input {
   color: #fff;
   font-size: 20px;
 }
+
+.inactiv-btn {
+  background-color: #2A3647;
+  color: #A8A8A8;
+}
+
+.inactiv-btn:hover {
+  cursor:default;
+  background-color:#2A3647;
+  color: #A8A8A8;
+}
