@@ -1,5 +1,6 @@
 @import url(./assets.css);
 @import url(../style.css);
+@import url(../styles/contacts.css);
 
 html,
 body {
@@ -232,6 +233,51 @@ main {
     gap: 16px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.user-initial-circle {
+    width: 352px;
+    padding: 15px 24px;
+    gap: 35px;
+    color: #000;
+    color: #fff;
+    font-size: 12px;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 25px;
+    border: 2px solid #fff;
+}
+
+.add-task-card-subtasks {
+    display: grid;
+    grid-template-columns: 118px 85px;
+    grid-template-rows: 1fr;
+    gap: 8px;
+    font-size: small;
+}
+
+.add-task-card-description {
+    color: #A8A8A8;
+}
+
+.add-task-card-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.add-task-card-priority {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.add-task-card-assigned-to {
+    display: flex;
+}
+
+.add-task-card-assigned-to > span {
+    margin-right: -16px;
 }
 
 @media screen and (max-width: 1730px) {

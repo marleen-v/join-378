@@ -2,8 +2,9 @@ let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
 
 
-function init(){
+function initLogin(){
   loadData(USERS_DIR);
+  loadActiveUser(ACTIVE_DIR);
 }
 
 
@@ -17,6 +18,13 @@ async function putData(path="", data={}){
     body: JSON.stringify(data)
   });
   let resToJson = await res.json();
+}
+
+
+async function loadActiveUser(path=""){
+  let res = await fetch(FIREBASE_URL + path + ".json");
+  let resToJson = await res.json();
+  activeUser = resToJson;
 }
 
 
@@ -39,6 +47,13 @@ function checkUserPassword(){
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
       unknownUser = false;
+      activeUser = [
+        {
+          "firstName": dataFromFirebase[i].firstName,
+          "lastName": dataFromFirebase[i].lastName,
+          "initials": dataFromFirebase[i].initials
+        }];
+      putData(ACTIVE_DIR, activeUser);
       window.location.href = './summary.html';
     }
   }
@@ -51,7 +66,15 @@ function checkUserPassword(){
 
 
 function guestLogin(){
-  window.location.href = './summary.html';
+  activeUser = [
+  {
+    "firstName": "Guest",
+    "lastName": "",
+    "initials": "GG"
+  }];
+  putData(ACTIVE_DIR, activeUser);
+  // setTimeout(function(){window.location.href = "./summary.html"}, 3000);
+  window.location.href = "./summary.html";
 }
 
 

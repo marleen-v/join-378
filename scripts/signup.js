@@ -13,11 +13,19 @@ async function loadData(path=""){
 
 function initSignup(){
   loadData(USERS_DIR);
+  loadActiveUser(ACTIVE_DIR);
 }
 
 
 function signUpUser(){
   addUser();
+}
+
+
+async function loadActiveUser(path=""){
+  let res = await fetch(FIREBASE_URL + path + ".json");
+  let resToJson = await res.json();
+  activeUser = resToJson;
 }
 
 
@@ -79,6 +87,13 @@ function addUser(){
       "lastName": lastName,
       "password": passwordInputRef.value
     });
+    activeUser = [
+      {
+        "firstName": firstName,
+        "lastName": lastName,
+        "initials": firstName[0] + lastName[0]
+      }];
+    putData(ACTIVE_DIR, activeUser);
     signupSuccess();
   } else {
     showErrorMessage();
