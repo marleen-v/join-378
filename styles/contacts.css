@@ -156,31 +156,7 @@
 }
 
 
-/* Colors fors single contacts */
-.orange {
-  background-color:#FF7A00;
-}
-.violet {
-  background-color:#9327FF;
-}
-.purple {
-  background-color:#6E52FF;
-}
-.pink{
-  background-color:#FC71FF;
-}
-.yellow {
-  background-color:#FFBB2B;
-}
-.green {
-  background-color:#1FD7C1;
-}
-.dark_purple {
-  background-color:#462F8A;
-}
-.red {
-  background-color:#FF4646;
-}
+
 /*------------- Dialog ----------------------------------------------*/
 dialog{
   z-index: 5000;

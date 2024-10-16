@@ -6,6 +6,7 @@ const ACTIVE_DIR = '/active';
 let dataFromFirebase = [];
 let tasksFromFirebase = [];
 let activeUser = [];
+let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
 
 let currentUserFirstName = "";
 let currentUserLastName = "";
