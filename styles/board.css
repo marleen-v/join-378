@@ -252,6 +252,18 @@ main {
     color: #A8A8A8;
 }
 
+.add-task-card-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.add-task-card-priority {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .add-task-card-assigned-to {
     display: flex;
 }
