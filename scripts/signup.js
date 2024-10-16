@@ -4,28 +4,15 @@ let passwordInputRef = document.getElementById("passwordInput");
 let passwordInputConfirmRef = document.getElementById("passwordInputConfirm");
 
 
-async function loadData(path=""){
-  let res = await fetch(FIREBASE_URL + path + ".json");
-  let resToJson = await res.json();
-  dataFromFirebase = resToJson;
-}
-
 
 function initSignup(){
-  loadData(USERS_DIR);
-  loadActiveUser(ACTIVE_DIR);
+  dataFromFirebase = loadData(USERS_DIR);
+  activeUser = loadData(ACTIVE_DIR);
 }
 
 
 function signUpUser(){
   addUser();
-}
-
-
-async function loadActiveUser(path=""){
-  let res = await fetch(FIREBASE_URL + path + ".json");
-  let resToJson = await res.json();
-  activeUser = resToJson;
 }
 
 
@@ -91,7 +78,8 @@ function addUser(){
       {
         "firstName": firstName,
         "lastName": lastName,
-        "initials": firstName[0] + lastName[0]
+        "initials": firstName[0] + lastName[0],
+        "email": emailInputRef.value
       }];
     putData(ACTIVE_DIR, activeUser);
     signupSuccess();

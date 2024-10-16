@@ -166,5 +166,85 @@
     "initials": "TB",
     "lastName": "Bauer",
     "phone": "+49 151 98712345"
+  },
+  {
+    "color": "orange",
+    "email": "max.mustermann@example.com",
+    "firstName": "Max",
+    "initials": "MM",
+    "lastName": "Mustermann",
+    "phone": ""
+  },
+  {
+    "color": "green",
+    "email": "anna.mueller@example.com",
+    "firstName": "Anna",
+    "initials": "AM",
+    "lastName": "Müller",
+    "phone": ""
+  },
+  {
+    "color": "pink",
+    "email": "peter.schmidt@example.com",
+    "firstName": "Peter",
+    "initials": "PS",
+    "lastName": "Schmidt",
+    "phone": ""
+  },
+  {
+    "color": "violet",
+    "email": "julia.klein@example.com",
+    "firstName": "Julia",
+    "initials": "JK",
+    "lastName": "Klein",
+    "phone": ""
+  },
+  {
+    "color": "purple",
+    "email": "sophie.lehmann@test.de",
+    "firstName": "Sophie",
+    "initials": "SL",
+    "lastName": "Lehmann",
+    "phone": ""
+  },
+  {
+    "color": "red",
+    "email": "thomas.schneider@stadt.de",
+    "firstName": "Thomas",
+    "initials": "TS",
+    "lastName": "Schneider",
+    "phone": ""
+  },
+  {
+    "color": "yellow",
+    "email": "laura.weber@land.gov",
+    "firstName": "Laura",
+    "initials": "LW",
+    "lastName": "Weber",
+    "phone": ""
+  },
+  {
+    "color": "green",
+    "email": "felix.fischer@test.de",
+    "firstName": "Felix",
+    "initials": "FF",
+    "lastName": "Fischer",
+    "phone": ""
+  },
+  {
+    "color": "violet",
+    "email": "lisa.wagner@stadt.de",
+    "firstName": "Lisa",
+    "initials": "LW",
+    "lastName": "Wagner",
+    "phone": ""
+  },
+  {
+    "color": "orange",
+    "email": "david.krueger@land.gov",
+    "firstName": "David",
+    "initials": "DK",
+    "lastName": "Krüger",
+    "phone": ""
   }
 ]
