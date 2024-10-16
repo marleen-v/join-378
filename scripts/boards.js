@@ -116,9 +116,11 @@ function setCardElements(element, index, taskId) {
 function getProgressBar(element) {
     let done = (element.Subtasks.Done.length > 0 && element.Subtasks.Done[0] !== "") ? element.Subtasks.Done.length : 0;
     let procent = (done / element.Subtasks.Total.length) * 100;
+    console.log(procent);
+    
     return /*html*/`
-        <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 20px">
-            <div class="progress-bar" style="width: ${procent}%"></div>
+        <div class="progressbar-container">
+            <div class="progressbar" style="width: ${procent}%"></div>
         </div>
         <span class="flex align-items-center">${done}/${element.Subtasks.Total.length} Subtasks</span>
     `

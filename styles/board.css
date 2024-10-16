@@ -288,6 +288,22 @@ main {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+.progressbar-container { 
+    background-color: #F4F4F4; 
+    width: 90%; 
+    height: 40%;
+    border-radius: 15px; 
+} 
+
+.progressbar {
+    background-color: #4589FF; 
+    color: white; 
+    text-align: right; 
+    font-size: 20px; 
+    border-radius: 15px; 
+    height: 100%;
+}
+
 
 @media screen and (max-width: 1730px) {
     /*
