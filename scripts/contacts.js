@@ -6,7 +6,7 @@ const inputPhoneRef = document.getElementById("c-phone");
 
 let contactList = [];
 let currentContact = [];
-let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
+
 let firstName;
 let lastName;
 

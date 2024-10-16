@@ -6,6 +6,7 @@ const ACTIVE_DIR = '/active';
 let dataFromFirebase = [];
 let tasksFromFirebase = [];
 let activeUser = [];
+let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
 
 let currentUserFirstName = "";
 let currentUserLastName = "";
@@ -48,7 +49,7 @@ function openImprint() {
 async function loadData(path=""){
     let res = await fetch(FIREBASE_URL + path + ".json");
     let resToJson = await res.json();
-    dataFromFirebase = resToJson;
+    return resToJson;
 }
 
 

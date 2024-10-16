@@ -4,7 +4,7 @@
   border-collapse: collapse;
   display: block;
   overflow-y: auto;
-  max-height: 760px;
+  max-height: calc(100% - 150px);
 }
 
 h2, h3, div {
