@@ -48,7 +48,7 @@ function openImprint() {
 async function loadData(path=""){
     let res = await fetch(FIREBASE_URL + path + ".json");
     let resToJson = await res.json();
-    dataFromFirebase = resToJson;
+    return resToJson;
 }
 
 

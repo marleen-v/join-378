@@ -2,6 +2,7 @@
   {
     "firstName": "Sofia",
     "lastName": "Müller",
-    "initials": "SM"
+    "initials": "SM",
+    "email": "sofia.mueller@example.com"
   }
 ]
