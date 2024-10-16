@@ -102,7 +102,7 @@
           >
             <button
               class="add-contact-btn flex justify-content-center align-items-center"
-              onclick="openDialog()"
+              onclick="openAddContactDialog()"
             >
               <span>Add new contact</span
               ><span><img src="../assets/img/person_add.png" alt="" /></span>
@@ -121,12 +121,12 @@
       </div>
     </main>
     <dialog class="flex align-items-center" id="contact-dialog">
-      <img
+      <!-- <img
         src="../assets/img/logo-weiss.png"
         class="join-logo"
         alt="join-logo"
       />
-      <div class="dialog-title flex flex-column justify-content-center">
+      <div class="dialog-title flex flex-column justify-content-center" id="dialog-title">
         <h1>Add contact</h1>
         <span>Tasks are better with a team!</span>
         <div class="horizontal-line"></div>
@@ -140,66 +140,66 @@
           <img src="../assets/icons/person.svg" alt="" class="circle-icon" />
         </div>
       </div>
-        <form  onsubmit="addNewContact(); /* return false */" method="dialog" class="flex flex-column">
-          <button  class="close-btn position-absolute" id="close" aria-label="close" formnovalidate><img src="../assets/icons/close.svg" alt="" ></button>
-          <label class="flex justify-content-between">
-            <input required
-              class="contact-input"
-              type="text"
-              id="c-name"
-              name="c-name"
-              placeholder="Name"
-            />
-            <img
-              class="input-icon"
-              src="../assets/icons/person-grey.svg"
-              alt=""
-            />
-          </label>
-          <label class="flex justify-content-between">
-            <input required
-              class="contact-input"
-              type="email"
-            id="c-email"
-            name="c-email"
-            placeholder="Email"
-            />
-            <img
-              class="input-icon"
-              src="../assets/icons/mail.svg"
-              alt=""
-            />
-          </label>
-          <label class="flex justify-content-between">
-            <input required
-              class="contact-input"
-              type="tel"
-              id="c-phone"
-              name="c-phone"
-              placeholder="Phone"
-            />
-            <img
-              class="input-icon"
-              src="../assets/icons/phone.svg"
-              alt=""
-            />
-          </label>
-          
-          <div class="btn-container flex flex-row">
-          <button class="cancel-btn flex justify-content-between align-items-center"  aria-label="close" formnovalidate>
-          <span>Cancel</span>
-          <img class="cancel-icon" src="../assets/icons/close.svg" alt="">
-          </button>
-          
-            <button   type="submit" id="submit-btn" class="submit-btn flex justify-content-between create-conatct-btn contact-input align-items-center">
-            Create Contact
-              <img class="check-icon input-icon" src="../assets/icons/check.svg"   alt=""/>
-          </button>
-        </div>
+      <form  onsubmit="addNewContact(); /* return false */" method="dialog" class="flex flex-column">
+        <button  class="close-btn position-absolute" id="close" aria-label="close" formnovalidate><img src="../assets/icons/close.svg" alt="" ></button>
+        <label class="flex justify-content-between">
+          <input required
+            class="contact-input"
+            type="text"
+            id="c-name"
+            name="c-name"
+            placeholder="Name"
+          />
+          <img
+            class="input-icon"
+            src="../assets/icons/person-grey.svg"
+            alt=""
+          />
+        </label>
+        <label class="flex justify-content-between">
+          <input required
+            class="contact-input"
+            type="email"
+          id="c-email"
+          name="c-email"
+          placeholder="Email"
+          />
+          <img
+            class="input-icon"
+            src="../assets/icons/mail.svg"
+            alt=""
+          />
+        </label>
+        <label class="flex justify-content-between">
+          <input required
+            class="contact-input"
+            type="tel"
+            id="c-phone"
+            name="c-phone"
+            placeholder="Phone"
+          />
+          <img
+            class="input-icon"
+            src="../assets/icons/phone.svg"
+            alt=""
+          />
+        </label>
         
-        </form>
+        <div class="btn-container flex flex-row">
+        <button class="cancel-btn flex justify-content-between align-items-center"  aria-label="close" formnovalidate>
+        <span>Cancel</span>
+        <img class="cancel-icon" src="../assets/icons/close.svg" alt="">
+        </button>
         
+          <button   type="submit" id="submit-btn" class="submit-btn flex justify-content-between create-conatct-btn contact-input align-items-center">
+          Create Contact
+            <img class="check-icon input-icon" src="../assets/icons/check.svg"   alt=""/>
+        </button>
       </div>
+      
+      </form>
+        
+      </div> -->
     </dialog>
   </body>
 </html>

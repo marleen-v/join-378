@@ -11,13 +11,16 @@
   border-radius: 10px;
 }
 
+.content {
+  max-height: 100vh;
+}
 
 .contacts-container {
   background-color: #fff;
   box-shadow: 4px 0 6px 0 rgb(0 0 0 / 0.08);   
   width: 456px;
   position: relative;
-  height: 100vh;
+  max-height: calc(100% - 96px); 
 }
 
 .add-contact-container {
