@@ -62,7 +62,7 @@ function setBgColor(currentCard, element) {
 function getUserColor(firstName, lastName) {
     let color = "";
     contacts.forEach(element => {
-        if (element.firstName == firstName && element.lastName == lastName) {
+        if (element.firstName == firstName || element.lastName == lastName) {
             color = element.color;
         }
     });
@@ -145,7 +145,7 @@ function setSubtasks(currentCard, element) {
  */
 function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
-    let taskTemplate = getTaskCard(taskId, element.Column);    
+    let taskTemplate = getTaskCard(taskId);    
     let className = document.querySelector(`.board-main-${column}`);
     className.innerHTML += taskTemplate;
     let card = document.querySelector('.add-task-card');
@@ -185,7 +185,7 @@ function startDragging(id) {
  * @param {*} element
  * @returns {string}
  */
-function getTaskCard(taskId, element) {    
+function getTaskCard(taskId) {    
     return /*html*/`
         <section id="${taskId}" class="task-card add-task-card" draggable="true" ondragstart="startDragging('${taskId}')">
             <div class="add-task-card-top"><div class="add-task-card-category"></div></div>
@@ -206,17 +206,13 @@ function getTaskCard(taskId, element) {
  * @param {*} column
  */
 function moveTo(column) {
-    let currentCard = document.getElementById(currentDraggedElement);
-    console.log(currentDraggedElement);
-    
+    let currentCard = document.getElementById(currentDraggedElement);    
     currentCard.querySelector('.add-task-card-headline');
 
     tasks.forEach((element, id) => {
         const task = 'taskId' + id;
         if (task === currentDraggedElement) {
             element.Column = column;
-            console.log(element);
-
         }
         
     });
