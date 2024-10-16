@@ -116,6 +116,23 @@ function setUserInitial(currentCard, element) {
     currentCard.querySelector('.add-task-card-assigned-to').innerHTML = personsHTML;
 }
 
+function setCardElements(element, index, taskId) {
+    let currentCard = document.querySelector(`.add-task-card${index}`);
+    currentCard.querySelector('.add-task-card-category').innerHTML = element.Category;
+    setBgColor(currentCard, element);
+    currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
+    currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
+    currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
+    setSubtasks(currentCard, element);    
+    setUserInitial(currentCard, element);
+    currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);
+}
+
+function setSubtasks(currentCard, element) {
+    if(element.Subtasks.length < 2) currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
+    else currentCard.querySelector('.add-task-card-subtasks').innerHTML = element.Subtasks.length + " Subtasks";
+}
+
 function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
     let taskTemplate = getTaskCard(taskId, element.Column);
@@ -123,15 +140,7 @@ function setCard(element, index, id, column) {
     className.innerHTML += taskTemplate;
     let card = document.querySelector('.add-task-card');
     card.classList.replace("add-task-card", `add-task-card${index}`);
-    let currentCard = document.querySelector(`.add-task-card${index}`);
-    currentCard.querySelector('.add-task-card-category').innerHTML = element.Category;
-    setBgColor(currentCard, element);
-    currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
-    currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
-    currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
-    currentCard.querySelector('.add-task-card-subtasks').innerHTML = (element.Subtasks == null) ? "0 Subtasks" : element.Subtasks + " Subtasks";
-    setUserInitial(currentCard, element);
-    currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);
+    setCardElements(element, index);
 }
 
 
