@@ -212,6 +212,8 @@ main {
     justify-content: center;
     border-radius: 8px;
     border: 2px solid rgb(42,53,71);
+    height: 24px;
+    align-items: center;
 }
 
 .add-btn:hover {
