@@ -2,9 +2,11 @@ import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 
 const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
 const USERS_DIR = '/users';
+const CONTACTS_DIR = '/contacts';
 const TASKS_DIR = '/tasks';
 let currentDraggedElement;
 let tasks = [];
+let contacts = [];
 
 
 async function loadData(path = "") {
@@ -17,6 +19,7 @@ async function loadData(path = "") {
 async function loadBoards() {
     //const htmlContent = await loadHTML('../html/boards-main.html');
     tasks = await loadData(TASKS_DIR);
+    contacts = await loadData(CONTACTS_DIR);
 
     if (tasks) {
         //processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
@@ -36,6 +39,28 @@ function setBgColor(currentCard, element) {
 
 }
 
+function getUserColor(firstName, lastName) {   
+    let color = ""; 
+    contacts.forEach(element => {        
+        if(element.firstName == firstName && element.lastName == lastName) {  
+            color = element.color;
+        }
+    });
+    return color;
+}
+
+function setUserInitial(currentCard, element) {
+    let personsHTML = "";
+    element.Persons.forEach(person => { 
+        let splittedName = person.split(' ');
+        let firstName = splittedName[0].charAt(0);
+        let lastName = splittedName[1].charAt(0);
+        let initial =  firstName + lastName;      
+        let color = getUserColor(splittedName[0], splittedName[1]);          
+        personsHTML += /*html*/`<span class="circle ${color} flex justify-content-center align-items-center"><span>${initial}</span></span> `; 
+    });
+    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = personsHTML;
+}
 
 function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
@@ -48,12 +73,10 @@ function setCard(element, index, id, column) {
     currentCard.querySelector('.add-task-card-category').innerHTML = element.Category;
     setBgColor(currentCard, element);
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
-    currentCard.querySelector('.add-task-card-description').innerHTML = element.Description;
+    currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
     currentCard.querySelector('.add-task-card-subtasks').innerHTML = (element.Subtasks == null) ? "0 Subtasks" : element.Subtasks + " Subtasks";
-    let personsHTML = "";
-    element.Persons.forEach(person => { personsHTML += /*html*/`<div>${person}</div> `; });
-    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = personsHTML;
+    setUserInitial(currentCard, element);
 }
 
 
