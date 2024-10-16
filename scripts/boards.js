@@ -174,6 +174,7 @@ function showData() {
  * @param {*} id
  */
 function startDragging(id) {
+    if(!id) return;
     currentDraggedElement = id;
 }
 
@@ -198,6 +199,14 @@ function getTaskCard(taskId) {
             </div>
         </section>  
     `;
+}
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
 /**
@@ -262,7 +271,8 @@ async function putBoardData(path = "", data = {}) {
     return await res.json();
 }
 
-
+window.highlight = highlight;
+window.removeHighlight = removeHighlight;
 window.startDragging = startDragging;
 window.allowDrop = allowDrop;
 window.moveTo = moveTo;
