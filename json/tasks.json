@@ -6,7 +6,10 @@
     "Date": "2024-10-10",
     "Priority": "Medium",
     "Category": "Technical Task",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Julia Weber"]
   },
   {
@@ -16,7 +19,10 @@
     "Date": "2024-10-11",
     "Priority": "Urgent",
     "Category": "Technical Task",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Max Schneider"]
   },
   {
@@ -26,7 +32,10 @@
     "Date": "2024-10-13",
     "Priority": "Urgent",
     "Category": "Technical Task",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Max Schneider", "Mia Koch"]
   },
   {
@@ -36,7 +45,10 @@
     "Date": "2024-10-15",
     "Priority": "Medium",
     "Category": "Technical Task",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Paul Kaiser", "Sophia Schmidt", "Mia Koch"]
   },
   {
@@ -46,7 +58,10 @@
     "Date": "2024-10-17",
     "Priority": "Low",
     "Category": "User Story",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Sophia Schmidt", "Mia Koch"]
   },
   {
@@ -56,7 +71,10 @@
     "Date": "2024-10-19",
     "Priority": "Medium",
     "Category": "User Story",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Emma Hofmann", "Sophia Schmidt", "Mia Koch"]
   },
   {
@@ -66,7 +84,10 @@
     "Date": "2024-10-21",
     "Priority": "Urgent",
     "Category": "User Story",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Julia Weber"]
   },
   {
@@ -76,7 +97,10 @@
     "Date": "2024-10-23",
     "Priority": "Low",
     "Category": "User Story",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Tim Bauer", "Anna Müller"]
   },
   {
@@ -86,7 +110,10 @@
     "Date": "2024-10-25",
     "Priority": "Medium",
     "Category": "User Story",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Lukas Fischer", "Max Schneider"]
   },
   {
@@ -96,7 +123,10 @@
     "Date": "2024-10-30",
     "Priority": "Urgent",
     "Category": "User Story",
-    "Subtasks": [""],
+    "Subtasks": {
+      "Total": [""],
+      "Done": [""]
+    },
     "Persons": ["Lukas Fischer", "Sophia Schmidt"]
   }
 ]

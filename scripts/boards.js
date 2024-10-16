@@ -128,9 +128,20 @@ function setCardElements(element, index, taskId) {
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);
 }
 
+function getProgressBar(element) {
+    //let procent = element.Subtasks.Done / element.Subtasks.length;
+    let done = (element.Subtasks.Done.length > 0 && element.Subtasks.Done[0] !== "") ? element.Subtasks.Done.length : 0;
+    return /*html*/`
+        <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 20px">
+            <div class="progress-bar" style="width: 25%"></div>
+        </div>
+        <span class="flex align-items-center">${done}/${element.Subtasks.Total.length} Subtasks</span>
+    `
+}
+
 function setSubtasks(currentCard, element) {
-    if(element.Subtasks.length < 2) currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
-    else currentCard.querySelector('.add-task-card-subtasks').innerHTML = element.Subtasks.length + " Subtasks";
+    if(element.Subtasks.Total.length < 2 && element.Subtasks.Total[0] === "") currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
+    else currentCard.querySelector('.add-task-card-subtasks').innerHTML = getProgressBar(element); //element.Subtasks.length + " Subtasks";
 }
 
 function setCard(element, index, id, column) {
@@ -167,7 +178,7 @@ function getTaskCard(taskId, element) {
             <div class="add-task-card-top"><div class="add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>
-            <div class="add-task-card-subtasks"></div>
+            <div class="add-task-card-subtasks align-items-center"></div>
             <div class="add-task-card-bottom">
                 <div class="add-task-card-assigned-to"></div>
                 <div class="add-task-card-priority"></div>

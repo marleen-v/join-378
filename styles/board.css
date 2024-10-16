@@ -248,6 +248,14 @@ main {
     border: 2px solid #fff;
 }
 
+.add-task-card-subtasks {
+    display: grid;
+    grid-template-columns: 118px 85px;
+    grid-template-rows: 1fr;
+    gap: 8px;
+    font-size: small;
+}
+
 .add-task-card-description {
     color: #A8A8A8;
 }
