@@ -90,7 +90,7 @@ function getContactInfoTemplate(index) {
                 <div class="name-email flex flex-column">
                   <div class="contact-name-large">${currentContact.firstName} ${currentContact.lastName}</div>
                   <div class="icon-container flex">
-                    <button class="contact-icon-btn flex align-items-center">
+                    <button class="contact-icon-btn flex align-items-center" onclick="editContact(${index})">
                       <img src="../assets/img/edit.svg" alt="" />
                       <span>Edit</span>
                     </button>
@@ -115,7 +115,7 @@ function getContactInfoTemplate(index) {
               </div>
               <div class="phone flex flex-column" style="gap: 15px">
                 <div style="font-weight: 700">Phone</div>
-                <div>+23534767487</div>
+                <div>${currentContact.phone}</div>
               </div>
             </div>
             `;
@@ -131,4 +131,90 @@ function getNewSectionHTML(firstLetter) {
   return `
   <div class="letter">${firstLetter}</div>
   `;
+}
+
+
+function contactDialogTemplateHtml() {
+
+  return `
+  <img
+        src="../assets/img/logo-weiss.png"
+        class="join-logo"
+        alt="join-logo"
+      />
+      <div class="dialog-title flex flex-column justify-content-center" id="dialog-title">
+        <h1>Add contact</h1>
+        <span>Tasks are better with a team!</span>
+        <div class="horizontal-line"></div>
+      </div>
+      <div class="form-container flex align-items-center justify-content-between position-relative">
+        <div class="circle-container flex align-items-center justify-content-center" style="width:30%;">
+        <div
+          class="circle circle-large flex justify-content-center align-items-center"
+         
+        >
+          <img src="../assets/icons/person.svg" alt="" class="circle-icon" />
+        </div>
+      </div>
+      <form  onsubmit="addNewContact(); /* return false */" method="dialog" class="flex flex-column" id="contact-form">
+        <button  class="close-btn position-absolute" id="close" aria-label="close" formnovalidate><img src="../assets/icons/close.svg" alt="" ></button>
+        <label class="flex justify-content-between">
+          <input required
+            class="contact-input"
+            type="text"
+            id="c-name"
+            name="c-name"
+            placeholder="Name";
+          />
+          <img
+            class="input-icon"
+            src="../assets/icons/person-grey.svg"
+            alt=""
+          />
+        </label>
+        <label class="flex justify-content-between">
+          <input required
+            class="contact-input"
+            type="email"
+          id="c-email"
+          name="c-email"
+          placeholder="Email"
+          />
+          <img
+            class="input-icon"
+            src="../assets/icons/mail.svg"
+            alt=""
+          />
+        </label>
+        <label class="flex justify-content-between">
+          <input required
+            class="contact-input"
+            type="tel"
+            id="c-phone"
+            name="c-phone"
+            placeholder="Phone"
+          />
+          <img
+            class="input-icon"
+            src="../assets/icons/phone.svg"
+            alt=""
+          />
+        </label>
+        
+        <div class="btn-container flex flex-row">
+        <button class="cancel-btn flex justify-content-between align-items-center"  aria-label="close" formnovalidate>
+        <span>Cancel</span>
+        <img class="cancel-icon" src="../assets/icons/close.svg" alt="">
+        </button>
+        
+          <button   type="submit" id="submit-btn" class="submit-btn flex justify-content-between create-conatct-btn contact-input align-items-center">
+          Create Contact
+            <img class="check-icon input-icon" src="../assets/icons/check.svg"   alt=""/>
+        </button>
+      </div>
+      
+      </form>
+        
+      </div>
+  `
 }
