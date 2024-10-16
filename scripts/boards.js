@@ -102,7 +102,6 @@ function setCardElements(element, index, taskId) {
     setBgColor(currentCard, element);
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
-    currentCard.setAttribute("ondragstart", `startDragging('${taskId}')`);
     setSubtasks(currentCard, element);    
     setUserInitial(currentCard, element);
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);//getPriority(element);
@@ -146,7 +145,7 @@ function setSubtasks(currentCard, element) {
  */
 function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
-    let taskTemplate = getTaskCard(taskId, element.Column);
+    let taskTemplate = getTaskCard(taskId, element.Column);    
     let className = document.querySelector(`.board-main-${column}`);
     className.innerHTML += taskTemplate;
     let card = document.querySelector('.add-task-card');
@@ -186,9 +185,9 @@ function startDragging(id) {
  * @param {*} element
  * @returns {string}
  */
-function getTaskCard(taskId, element) {
+function getTaskCard(taskId, element) {    
     return /*html*/`
-        <section id="${taskId}" class="task-card add-task-card" draggable="true" ondragstart="startDragging(${element['id']})">
+        <section id="${taskId}" class="task-card add-task-card" draggable="true" ondragstart="startDragging('${taskId}')">
             <div class="add-task-card-top"><div class="add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>
@@ -208,16 +207,20 @@ function getTaskCard(taskId, element) {
  */
 function moveTo(column) {
     let currentCard = document.getElementById(currentDraggedElement);
+    console.log(currentDraggedElement);
+    
     currentCard.querySelector('.add-task-card-headline');
 
     tasks.forEach((element, id) => {
         const task = 'taskId' + id;
         if (task === currentDraggedElement) {
             element.Column = column;
-        }
+            console.log(element);
 
+        }
+        
     });
-    putData(TASKS_DIR, tasks);
+    putBoardData(TASKS_DIR, tasks);
     refresh();
 }
 
@@ -251,7 +254,7 @@ function allowDrop(ev) {
  * @param {{}} [data={}]
  * @returns {unknown}
  */
-async function putData(path = "", data = {}) {
+async function putBoardData(path = "", data = {}) {
     let res = await fetch(FIREBASE_URL + path + ".json",
         {
             method: "PUT",
