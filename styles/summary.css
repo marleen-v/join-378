@@ -7,10 +7,12 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* align-items: center; */
   align-items: flex-start;
   width: 100%;
   height: 100%;
   margin-left: 120px;
+  /* border: 1px solid black; */
 }
 
 .header-main {
@@ -18,6 +20,7 @@ main {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 30px;
+  /* border: 1px solid black; */
 }
 
 h1 {
@@ -69,6 +72,35 @@ h1 {
   color: #d1d1d1;
   transform: scale(1.05);
 }
+
+.w264h168:hover .circle69 {
+  background-color: #ffffff;
+  
+}
+
+.w264h168:hover .circle69 img {
+  /* filter: hue-rotate(180deg);
+  -webkit-filter: hue-rotate(180deg); */
+  filter: brightness(0) saturate(100%) invert(15%) sepia(10%) saturate(5000%) hue-rotate(190deg) brightness(95%) contrast(90%);
+  /* color: #2A3647; */
+}
+
+.w264h168:hover .color2A {
+  color: #d1d1d1;
+}
+
+.w560h168:hover .color2A {
+  color: #d1d1d1;
+}
+
+.w560h168:hover .date-ctn {
+  color: #d1d1d1;
+}
+
+.w168h168:hover .color2A {
+  color: #d1d1d1;
+}
+
 
 .data-ctn {
   display: flex;
@@ -164,10 +196,6 @@ h1 {
   
 }
 
-/* .font64colblackw600:hover {
-  color: inherit;
-} */
-
 .color2A {
   font-size: 20px;
   color: #2A3647;
@@ -214,11 +242,9 @@ h1 {
 .font21w700 {
   font-size: 21px;
   font-weight: 700;
-  /* color: #2A3647; */
 }
 
 .font16w400 {
   font-size: 16px;
   font-weight: 400;
-  /* color: #2A3647; */
 }
