@@ -46,6 +46,18 @@
     margin-top: 8px;
 }
 
+.mg-right-16px {
+    margin-right: 16px;
+}
+
+.mg-right-8px {
+    margin-right: 8px;
+}
+
+.mg-right-left-8px {
+    margin: 0 8px 0 8px;
+}
+
 .grid-columns-2 {
     grid-template-columns: auto auto;
 }
