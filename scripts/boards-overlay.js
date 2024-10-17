@@ -46,7 +46,7 @@ function getDetailedCard() {
             <div class="add-task-card-date"></div>
             <div class="add-task-card-priority flex align-items-center justify-content-flex-start"></div>
             <div class="add-task-card-assigned-to">Assigned to:
-                <div class="add-task-card-persons grid align-items-center grid-columns-2-64px-1fr gap-8px mg-top-8px"></div>
+                <div class="add-task-card-persons grid align-items-center grid-columns-2-48px-1fr gap-8px mg-top-8px"></div>
             </div>
             <div>Subtasks
                 <div class="add-task-card-subtasks grid align-items-center grid-columns-2-32px-1fr mg-top-8px"></div>

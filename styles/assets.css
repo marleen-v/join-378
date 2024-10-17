@@ -54,6 +54,10 @@
     grid-template-columns: 32px 1fr !important;
 }
 
+.grid-columns-2-48px-1fr {
+    grid-template-columns: 48px 1fr !important;
+}
+
 .grid-columns-2-64px-1fr {
     grid-template-columns: 64px 1fr !important;
 }
