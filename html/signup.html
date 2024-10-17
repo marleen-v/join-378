@@ -32,13 +32,13 @@
           <input autocomplete="username" id="emailInput" class="email-input" type="email" placeholder="Email" required>
           
           <div class="password-input-1">
-            <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" placeholder="Password" required>
+            <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" minlength="3" placeholder="Password" required>
             <img id="hidepwd1" onclick="togglePasswordIcon(1)" src="../assets/img/lock.png" alt="Lock-Icon">
             <img id="showpwd1" onclick="togglePasswordIcon(1)" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
           </div>
           
           <div class="password-input-2">
-            <input autocomplete="new-password" id="passwordInputConfirm" class="password-input" type="password" placeholder="Confirm Password" required>
+            <input autocomplete="new-password" id="passwordInputConfirm" class="password-input" type="password" minlength="3" placeholder="Confirm Password" required>
             <img id="hidepwd2" onclick="togglePasswordIcon(2)" src="../assets/img/lock.png" alt="Lock-Icon">
             <img id="showpwd2" onclick="togglePasswordIcon(2)" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
           </div>
