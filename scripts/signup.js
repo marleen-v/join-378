@@ -39,6 +39,13 @@ function checkCorrectPassword(){
   }
 }
 
+
+function checkCountSpaces(str){
+  let count = (str.split(" ").length - 1);
+  return count;
+}
+
+
 function resetValues(){
   emailInputRef.value = '';
   nameInputRef.value = '';
@@ -53,7 +60,8 @@ function showErrorMessage(str){
   let errorRef = document.getElementById('error_message');
   let errorStr = 'Error';
   if(str === "wrongPassword"){errorStr = 'Passwords do not match!';} else
-  if(str === "emailExists"){errorStr = 'Email already exists!';};
+  if(str === "emailExists"){errorStr = 'Email already exists!';} else
+  if(str === "nameFormatIncorrect"){errorStr = 'Please enter your first and last name separated by a blank!';}
   errorRef.innerHTML = errorStr;
   setTimeout(function(){
     errorRef.innerHTML = '';
@@ -100,15 +108,16 @@ function emailNotExists(){
 
 
 function addUser(){
-  let firstName = nameInputRef.value.split(' ')[0];
-  let lastName = nameInputRef.value.split(' ')[1];
-  if(checkCorrectPassword() && emailNotExists()){
+  let spaces = checkCountSpaces(nameInputRef.value);
+  if((checkCorrectPassword()) && (emailNotExists()) && (spaces === 1)){
+    let firstName = nameInputRef.value.split(' ')[0];
+    let lastName = nameInputRef.value.split(' ')[1];
     pushEverythingNecessaryToFireBase(firstName, lastName);
     signupSuccess();
   } else {
     if(!checkCorrectPassword()){showErrorMessage('wrongPassword');} else
-    if(!emailNotExists()){showErrorMessage('emailExists');}
-    // showErrorMessage();
+    if(!emailNotExists()){showErrorMessage('emailExists');} else
+    if(spaces !== 1){showErrorMessage('nameFormatIncorrect');}
     resetValues();
   }
 }
