@@ -332,6 +332,16 @@ main {
     height: 100%;
 }
 
+.detailed-card-close {
+    width: 32px;
+    height: 32px;
+}
+
+.detailed-card-close:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+}
+
 
 @media screen and (max-width: 1730px) {
     /*
