@@ -255,6 +255,7 @@ main {
 
 .detailed-card {
     display: grid;
+    position: relative;
     grid-template-rows: 36px repeat(6, 1fr);
     border-radius: 24px;
     border: 2px solid #FFFFFF;
@@ -342,6 +343,34 @@ main {
     border-radius: 50%;
 }
 
+.runInAnimation {
+    animation-name: moveFromRightToCenter;
+    animation-duration: 0.5s;
+}
+
+.runOutAnimation {
+    animation-name: moveFromCenterToRight;
+    animation-duration: 0.5s;
+}
+
+@keyframes moveFromRightToCenter {
+    from {
+        left: 100%;
+    }
+    to {
+        left: 0%;
+    }
+}
+
+
+@keyframes moveFromCenterToRight {
+    from {
+        left: 0%;
+    }
+    to {
+        left: 100%;
+    }
+}
 
 @media screen and (max-width: 1730px) {
     /*

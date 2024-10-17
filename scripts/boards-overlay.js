@@ -21,6 +21,8 @@ export function openOverlay(id) {
     overlay.classList.add('z-index-2000');
     overlay.innerHTML = getDetailedCard();
     let detailedCard = document.querySelector('.detailed-card');
+    detailedCard.classList.remove('runOutAnimation');
+    detailedCard.classList.add('runInAnimation');
     detailedCard.querySelector('.add-task-card-category').innerHTML = tasks[id].Category;
     setBgColor(detailedCard, tasks[id]);
     detailedCard.querySelector('.add-task-card-headline').innerHTML = tasks[id].Title;
@@ -91,11 +93,16 @@ function isDone(task) {
 
 
 function closeOverlay() {
-    let overlay = document.querySelector('.overlay');
-    overlay.classList.add('d_none');
-    overlay.classList.remove('z-index-2000');
-    overlay.classList.add('z-index-minus-1');
-    unsetOpacity();
+    let detailedCard = document.querySelector('.detailed-card');
+    detailedCard.classList.add('runOutAnimation');
+    detailedCard.classList.remove('runInAnimation');
+    setTimeout(() => {
+        let overlay = document.querySelector('.overlay');
+        overlay.classList.add('d_none');
+        overlay.classList.remove('z-index-2000');
+        overlay.classList.add('z-index-minus-1');
+        unsetOpacity();
+    }, "300");
 }
 
 function editSVG() {
