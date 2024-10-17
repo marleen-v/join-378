@@ -18,7 +18,7 @@ function init() {
 
 
 function openSummary() {
-    window.location = "./html/summary.html";
+    window.location = "../html/summary.html";
 }
 
 function openBoards() {
