@@ -1,13 +1,14 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { getPriority } from "./add-task.js";
+import { openOverlay } from "./boards-overlay.js";
 
 const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
 const USERS_DIR = '/users';
 const CONTACTS_DIR = '/contacts';
 const TASKS_DIR = '/tasks';
 let currentDraggedElement;
-let tasks = [];
-let contacts = [];
+export let tasks = [];
+export let contacts = [];
 
 
 async function loadData(path = "") {
@@ -40,7 +41,7 @@ async function loadBoards() {
  * @param {*} currentCard
  * @param {*} element
  */
-function setBgColor(currentCard, element) {
+export function setBgColor(currentCard, element) {
     if (element.Category === "User Story") {
         currentCard.querySelector('.add-task-card-category').classList.add('bg-color-blue');
         currentCard.querySelector('.add-task-card-category').classList.remove('bg-color-turkey');
@@ -76,7 +77,7 @@ function getUserColor(firstName, lastName) {
  * @param {*} currentCard
  * @param {*} element
  */
-function setUserInitial(currentCard, element) {
+export function setUserInitial(currentCard, element, displayFullName = false) {    
     let personsHTML = "";
     element.Persons.forEach(person => {
         let splittedName = person.split(' ');
@@ -84,9 +85,12 @@ function setUserInitial(currentCard, element) {
         let lastName = splittedName[1].charAt(0);
         let initial = firstName + lastName;
         let color = getUserColor(splittedName[0], splittedName[1]);        
-        personsHTML += /*html*/`<span class="circle ${color} flex justify-content-center align-items-center"><span>${initial}</span></span> `;
-    });
-    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = personsHTML;
+        personsHTML += /*html*/`
+            <span class="circle ${color} flex justify-content-center align-items-center"><span>${initial}</span></span> 
+            ${(displayFullName)? "<span>" + person + "</span>" : ""}
+        `;
+    });    
+    return personsHTML;
 }
 
 /**
@@ -96,14 +100,14 @@ function setUserInitial(currentCard, element) {
  * @param {*} index
  * @param {*} taskId
  */
-function setCardElements(element, index, taskId) {
+function setCardElements(element, index) {
     let currentCard = document.querySelector(`.add-task-card${index}`);
     currentCard.querySelector('.add-task-card-category').innerHTML = element.Category;
     setBgColor(currentCard, element);
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     setSubtasks(currentCard, element);    
-    setUserInitial(currentCard, element);
+    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(currentCard, element);
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);//getPriority(element);
 }
 
@@ -146,7 +150,7 @@ function setSubtasks(currentCard, element) {
  */
 function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
-    let taskTemplate = getTaskCard(taskId);    
+    let taskTemplate = getTaskCard(id, taskId);    
     let className = document.querySelector(`.board-main-${column}`);
     className.innerHTML += taskTemplate;
     let card = document.querySelector('.add-task-card');
@@ -187,16 +191,16 @@ function startDragging(id) {
  * @param {*} element
  * @returns {string}
  */
-function getTaskCard(taskId) {    
+function getTaskCard(id, taskId) {    
     return /*html*/`
-        <section id="${taskId}" class="task-card add-task-card" draggable="true" ondragstart="startDragging('${taskId}')">
-            <div class="add-task-card-top"><div class="add-task-card-category"></div></div>
+        <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card" draggable="true" ondragstart="startDragging('${taskId}')">
+            <div class="flex align-items-center add-task-card-top"><div class="flex align-items-center justify-content-center add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>
             <div class="add-task-card-subtasks align-items-center"></div>
             <div class="add-task-card-bottom">
-                <div class="add-task-card-assigned-to"></div>
-                <div class="add-task-card-priority"></div>
+                <div class="add-task-card-assigned-to flex"></div>
+                <div class="add-task-card-priority flex align-items-center justify-content-flex-end"></div>
             </div>
         </section>  
     `;
@@ -279,5 +283,5 @@ window.allowDrop = allowDrop;
 window.moveTo = moveTo;
 window.loadBoards = loadBoards;
 window.refresh = refresh;
-
+window.openOverlay = openOverlay;
 
