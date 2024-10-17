@@ -1,6 +1,14 @@
 const contactListRef = document.getElementById("contact-container");
-const dialog = document.querySelector("dialog");
 
+// Dialog
+const dialog = document.querySelector("dialog");
+const cancelBtn = document.getElementById('cancelBtn');
+const submitBtn = document.getElementById('submitBtn');
+const checkIcon = document.getElementById('checkIcon')
+let dialogElements = [];
+
+//Input Fields
+const contactForm = document.getElementById("contactForm");
 const inputNameRef = document.getElementById("c-name");
 const inputEmailRef = document.getElementById("c-email");
 const inputPhoneRef = document.getElementById("c-phone");
@@ -98,32 +106,87 @@ function toggleActiveBtnColor (btnIndex){
   }
 }
 
-function renderContactDialog(){
-  dialog.innerHTML = "";
-  dialog.innerHTML = contactDialogTemplateHtml();
+
+function openContactDialog() {
+ 
+  dialog.showModal();
+  
+ 
   
 }
 
-
-function openContactDialog() {
-  dialog.showModal();
+function closeDialog() {
+  dialog.close();
+ 
 }
 
+/* function clearContactForm() {
+  contactForm.reset(); 
+  submitBtn.classList.add("inactiv-btn");
+  checkIcon.classList.add("inactive-color")
+} 
+ */
+/* function checkForm() {
+  if (contactForm.checkValidity()) {
+      submitBtn.classList.remove("inactiv-btn");
+      checkIcon.classList.remove("inactive-color")
+  } else {
+    submitBtn.classList.add("inactiv-btn");
+    checkIcon.classList.remove("inactive-color");
+  }
+} 
+
+inputNameRef.addEventListener('input', checkForm);
+inputEmailRef.addEventListener('input', checkForm);  */
 
 
 function openAddContactDialog(){
 
+  dialogElements = {
+    "onsubmit": "addNewContact()",
+    "title": "Add contact",
+    "subline" : "Tasks are better with a team!",
+    "color": "neutralColor",
+    "initials": '<img src="../assets/icons/person.svg" alt="" class="circle-icon" />',
+    "cancelBtn": "Cancel",
+    "onclick_cancelBtn": "closeDialog()",
+    "submitBtn": "Create Contact",
+    "inactiveBtn": "inactiv-btn",
+    "inactiveIcon": "inactive-color"
+  }
+
   
-  dialog.innerHTML = "";
   dialog.innerHTML = contactDialogTemplateHtml();
+  
+  openContactDialog();
+} 
+
+function openEditContactDialog(index){
+  dialogElements = {
+    "onsubmit": "updateContactInfo(" + index + ")",
+    "title": "Edit contact",
+    "subline" : " ",
+    "color": currentContact.color,
+    "initials": currentContact.initials,
+    "cancelBtn": "Delete",
+    "onclick_cancelBtn": "deleteContact(" + index + ")",
+    "submitBtn": "Save",
+    
+  }
+  
+  dialog.innerHTML = contactDialogTemplateHtml();
+  fillInputFields(index);
+  
   
   openContactDialog();
 }
 
-async function addNewContact() {
-  const singleContactBtnRef = document.querySelectorAll(".single-contact-btn");
+async function addNewContact()  {
+  const inputNameRef = document.getElementById("c-name");
+  const inputEmailRef = document.getElementById("c-email");
+  const inputPhoneRef = document.getElementById("c-phone");
   let initials;
-  
+
   firstName = inputNameRef.value.split(' ')[0];
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
   lastName = inputNameRef.value.split(' ')[1];
@@ -146,8 +209,8 @@ async function addNewContact() {
   setTimeout(() => {
     btnIndex = contactList.findIndex(contact => contact.email === inputEmailRef.value);
     showContactInfo(btnIndex);
-    console.log(singleContactBtnRef[btnIndex]);
-    emptyInputFields();
+  
+    closeDialog();
   }, 200);
 
  }
@@ -192,42 +255,58 @@ function addContactColor(){
 }
 }
 
-function emptyInputFields(){
-inputNameRef.value =""; 
-inputEmailRef.value ="";  
-inputPhoneRef.value =""; 
-}
 
 async function deleteContact(index) {
   contactList.splice(index, 1); 
   renderContacts();
   closeContactInfo(); 
+  closeDialog();
   await putData(CONTACTS_DIR, contactList); 
 }
 
-/* function validateForm(){
-  const submitBtnRef = document.getElementById("submit-btn");
-  if (inputNameRef.value !="" && inputEmailRef.value !="" &&  inputPhoneRef.value !="" ) {
-    submitBtnRef.classList.remove("inactive-btn");
-    }
-} */
 
 
-function editContact(index) {
-    renderContactDialog();
-    const contactForm = document.getElementById("contact-form");
-    const dialogTitelRef = document.getElementById("dialog-title");
+function fillInputFields(index) {
     const nameInputField = document.getElementById("c-name");
     const emailInputField = document.getElementById("c-email");
     const phoneInputField = document.getElementById("c-phone");
    
-    
-    dialogTitelRef.innerHTML = `<h1>Edit contact</h1>
-        <div class="horizontal-line"></div>`
    nameInputField.value = contactList[index].firstName + " " + contactList[index].lastName;
    emailInputField.value = contactList[index].email;
    phoneInputField.value = contactList[index].phone; 
-    openContactDialog();
+
+   
+   
   }
  
+
+  async function updateContactInfo(index){
+    let initials;
+    const inputNameRef = document.getElementById("c-name");
+    const inputEmailRef = document.getElementById("c-email");
+    const inputPhoneRef = document.getElementById("c-phone");
+
+    firstName = inputNameRef.value.split(' ')[0];
+    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    lastName = inputNameRef.value.split(' ')[1];
+    initials = findInitials(initials);
+    
+    contactList[index] = {
+      "email": inputEmailRef.value,
+      "firstName": firstName,
+      "initials": initials,
+      "lastName": lastName,
+      "phone": inputPhoneRef.value
+  }
+  sortContactsByFirstName();
+  addContactColor();
+  await putData(CONTACTS_DIR, contactList);
+  renderNewContact();
  
+  setTimeout(() => {
+    btnIndex = contactList.findIndex(contact => contact.email === inputEmailRef.value);
+    showContactInfo(btnIndex);
+  
+    closeDialog();
+  }, 200);
+};
