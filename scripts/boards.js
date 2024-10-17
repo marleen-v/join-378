@@ -159,18 +159,33 @@ function setCard(element, index, id, column) {
 }
 
 
+function searchColumnEntry(value) {
+    for (let index = 0; index < tasks.length; index++) 
+        if(tasks[index].Column === value) return true;
+    return false;
+}
+
+
+function checkEmptyColumns() {
+    if(!searchColumnEntry("To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
+    if(!searchColumnEntry("In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
+    if(!searchColumnEntry("Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();
+    if(!searchColumnEntry("Done")) document.querySelector(`.board-main-done`).innerHTML = getEmptyColumn();
+}
+
 /** 
  * Show all data to board it exists 4 columns | To Do | In Progress | Await Feedback | Done
 */
 function showData() {
     let index = 0;
-    tasks.forEach((element, id) => {
+    tasks.forEach((element, id) => {          
         if (element.Column === "To Do") setCard(element, index, id, "to-do");
         if (element.Column === "In Progress") setCard(element, index, id, "in-progress");
         if (element.Column === "Await Feedback") setCard(element, index, id, "await-feedback");
         if (element.Column === "Done") setCard(element, index, id, "done");
         index++;
-    });
+    });   
+    checkEmptyColumns();
 }
 
 /**
@@ -181,6 +196,15 @@ function showData() {
 function startDragging(id) {
     if(!id) return;
     currentDraggedElement = id;
+}
+
+
+function getEmptyColumn() {
+    return /*html*/`
+        <section class="flex justify-content-center align-items-center emptyColumn">
+            <span>No tasks To do</span>
+        </section>
+    `;
 }
 
 

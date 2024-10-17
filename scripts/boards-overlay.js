@@ -86,8 +86,8 @@ function getDetailedCard() {
                 <div class="add-task-card-subtasks grid align-items-center grid-columns-2-32px-1fr mg-top-8px"></div>
             </div>
             <div class="add-task-card-bottom flex justify-content-flex-end align-items-center">
-                <div class="add-task-delete mg-right-left-8px clickable">${trashSVG()}</div><span class="mg-right-8px clickable">Delete</span>
-                <div class="add-task-edit mg-right-left-8px clickable">${editSVG()}</div><span class="clickable">Edit</span>
+                <div onclick="deleteTask()" class="add-task-delete mg-right-left-8px clickable">${trashSVG()}</div><span onclick="deleteTask()" class="mg-right-8px clickable">Delete</span>
+                <div onclick="editTask()" class="add-task-edit mg-right-left-8px clickable">${editSVG()}</div><span onclick="editTask()" class="clickable">Edit</span>
             </div>
         </section>  
     `;
