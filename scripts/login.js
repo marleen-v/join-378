@@ -2,9 +2,9 @@ let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
 
 
-function initLogin(){
-  loadData(USERS_DIR);
-  loadActiveUser(ACTIVE_DIR);
+async function initLogin(){
+  dataFromFirebase = await loadData(USERS_DIR);
+  activeUser = await loadActiveUser(ACTIVE_DIR);
 }
 
 

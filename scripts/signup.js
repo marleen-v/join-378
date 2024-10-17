@@ -3,11 +3,13 @@ let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
 let passwordInputConfirmRef = document.getElementById("passwordInputConfirm");
 
+let contactsUser = [];
 
 
-function initSignup(){
-  dataFromFirebase = loadData(USERS_DIR);
-  activeUser = loadData(ACTIVE_DIR);
+async function initSignup(){
+  dataFromFirebase = await loadData(USERS_DIR);
+  activeUser = await loadData(ACTIVE_DIR);
+  contactsUser = await loadData(CONTACTS_DIR);
 }
 
 
@@ -47,6 +49,19 @@ function resetValues(){
 }
 
 
+function showErrorMessage(str){
+  let errorRef = document.getElementById('error_message');
+  let errorStr = 'Error';
+  if(str === "wrongPassword"){errorStr = 'Passwords do not match!';} else
+  if(str === "emailExists"){errorStr = 'Email already exists!';};
+  errorRef.innerHTML = errorStr;
+  setTimeout(function(){
+    errorRef.innerHTML = '';
+  }, 3000);
+}
+
+
+/*
 function showErrorMessage(){
   let errorRef = document.getElementById('error_message');
   errorRef.innerHTML = 'Passwords do not match!';
@@ -54,39 +69,73 @@ function showErrorMessage(){
     errorRef.innerHTML = '';
   }, 3000);
 }
-
+*/
 
 function signupSuccess(){
   openPopup();
   resetValues();
+  putData(ACTIVE_DIR, activeUser);
   putData(USERS_DIR, dataFromFirebase);
-  setTimeout(function(){window.location.href = "./summary.html"}, 3000);
+  putData(CONTACTS_DIR, contactsUser);
+  setTimeout(function(){window.location.href = "./summary.html"}, 2500);
+}
+
+
+function getRandomColor(){
+  let r = Math.floor(Math.random() * 8);
+  return contactColors[r];
+}
+
+
+function emailNotExists(){
+  let emailCheck = true;
+  for(let i = 0; i < contactsUser.length; i++){
+    if(emailInputRef.value == contactsUser[i].email){
+      console.log(contactsUser[i].email);
+      emailCheck = false;
+    }
+  }
+  return emailCheck;
 }
 
 
 function addUser(){
   let firstName = nameInputRef.value.split(' ')[0];
   let lastName = nameInputRef.value.split(' ')[1];
-  if(checkCorrectPassword()){
-    dataFromFirebase.push({
-      "email": emailInputRef.value,
-      "firstName": firstName,
-      "lastName": lastName,
-      "password": passwordInputRef.value
-    });
-    activeUser = [
-      {
-        "firstName": firstName,
-        "lastName": lastName,
-        "initials": firstName[0] + lastName[0],
-        "email": emailInputRef.value
-      }];
-    putData(ACTIVE_DIR, activeUser);
+  if(checkCorrectPassword() && emailNotExists()){
+    pushEverythingNecessaryToFireBase(firstName, lastName);
     signupSuccess();
   } else {
-    showErrorMessage();
+    if(!checkCorrectPassword()){showErrorMessage('wrongPassword');} else
+    if(!emailNotExists()){showErrorMessage('emailExists');}
+    // showErrorMessage();
     resetValues();
   }
+}
+
+
+function pushEverythingNecessaryToFireBase(first, last){
+  dataFromFirebase.push({
+    "email": emailInputRef.value,
+    "firstName": first,
+    "lastName": last,
+    "password": passwordInputRef.value
+  });
+  activeUser = [
+    {
+      "firstName": first,
+      "lastName": last,
+      "initials": first[0] + last[0],
+      "email": emailInputRef.value
+    }];
+  contactsUser.push({
+      "color": getRandomColor(),
+      "email": emailInputRef.value,
+      "firstName": first,
+      "initials": first[0] + last[0],
+      "lastName": last,
+      "phone": ""
+  });
 }
 
 
