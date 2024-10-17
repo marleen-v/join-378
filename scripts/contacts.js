@@ -2,16 +2,30 @@ const contactListRef = document.getElementById("contact-container");
 
 // Dialog
 const dialog = document.querySelector("dialog");
+
+let dialogElements = [];
+
+
+// Contactform 
+const dialogTitle = document.getElementById("dialog-title");
+const dialogSubline = document.getElementById("dialogSubline");
+const dialogColor = document.getElementById("dialogColor");
+const dialogInitials = document.getElementById("dialogInitials");
+const contactForm = document.getElementById("contactForm");
+
 const cancelBtn = document.getElementById('cancelBtn');
 const submitBtn = document.getElementById('submitBtn');
 const checkIcon = document.getElementById('checkIcon')
-let dialogElements = [];
 
 //Input Fields
-const contactForm = document.getElementById("contactForm");
+
 const inputNameRef = document.getElementById("c-name");
 const inputEmailRef = document.getElementById("c-email");
 const inputPhoneRef = document.getElementById("c-phone");
+
+
+
+
 
 let contactList = [];
 let currentContact = [];
@@ -19,8 +33,7 @@ let currentContact = [];
 let firstName;
 let lastName;
 
-let onsubmitFunction;
-let dialogTitle;
+
 
 
 async function initContacts () {
@@ -171,7 +184,6 @@ function openEditContactDialog(index){
     "cancelBtn": "Delete",
     "onclick_cancelBtn": "deleteContact(" + index + ")",
     "submitBtn": "Save",
-    
   }
   
   dialog.innerHTML = contactDialogTemplateHtml();
