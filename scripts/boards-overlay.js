@@ -14,27 +14,24 @@ function unsetOpacity() {
 }
 
 
-export function openOverlay(id) {
+function setDate(card, id) {
+    const date = new Date(tasks[id].Date);
+    const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const formattedDate = formatter.format(date);
+    card.querySelector('.add-task-card-date').innerHTML = "Due date: " + formattedDate;
+}
+
+
+function getOverlay() {
     let overlay = document.querySelector('.overlay');
     overlay.classList.remove('d_none');
     overlay.classList.remove('z-index-minus-1');
     overlay.classList.add('z-index-2000');
-    overlay.innerHTML = getDetailedCard();
-    let detailedCard = document.querySelector('.detailed-card');
-    detailedCard.classList.remove('runOutAnimation');
-    detailedCard.classList.add('runInAnimation');
-    detailedCard.querySelector('.add-task-card-category').innerHTML = tasks[id].Category;
-    setBgColor(detailedCard, tasks[id]);
-    detailedCard.querySelector('.add-task-card-headline').innerHTML = tasks[id].Title;
-    detailedCard.querySelector('.add-task-card-description').innerHTML = tasks[id].Description;
-    const date = new Date(tasks[id].Date);
-    const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    const formattedDate = formatter.format(date);
-    detailedCard.querySelector('.add-task-card-date').innerHTML = "Due date: " + formattedDate;
-    detailedCard.querySelector('.add-task-card-priority').innerHTML = `<div class="mg-right-8px">Priority:</div><div class="mg-right-8px">${tasks[id].Priority}</div><div class="flex align-items-center">${getPriority(tasks[id])}</div>`;
-    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(detailedCard, tasks[id], true);
-    let userIcons = detailedCard.querySelectorAll('.circle');
-    userIcons.forEach(element => { element.style.width = "42px"});
+    return overlay;
+}
+
+
+function setSubtasks(detailedCard, id) {
     totalTasks = tasks[id].Subtasks.Total;
     doneTasks = tasks[id].Subtasks.Done;
     tasks[id].Subtasks.Total.forEach((element) => {
@@ -43,6 +40,30 @@ export function openOverlay(id) {
             else detailedCard.querySelector('.add-task-card-subtasks').innerHTML += uncheckedBoxSVG() + " " + element;
         }
     });
+}
+
+
+function setDetailedCard(id) {
+    let detailedCard = document.querySelector('.detailed-card');
+    detailedCard.classList.remove('runOutAnimation');
+    detailedCard.classList.add('runInAnimation');
+    detailedCard.querySelector('.add-task-card-category').innerHTML = tasks[id].Category;
+    setBgColor(detailedCard, tasks[id]);
+    detailedCard.querySelector('.add-task-card-headline').innerHTML = tasks[id].Title;
+    detailedCard.querySelector('.add-task-card-description').innerHTML = tasks[id].Description;
+    setDate(detailedCard, id);
+    detailedCard.querySelector('.add-task-card-priority').innerHTML = `<div class="mg-right-8px">Priority:</div><div class="mg-right-8px">${tasks[id].Priority}</div><div class="flex align-items-center">${getPriority(tasks[id])}</div>`;
+    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(detailedCard, tasks[id], true);
+    let userIcons = detailedCard.querySelectorAll('.circle');
+    userIcons.forEach(element => { element.style.width = "42px"});
+    setSubtasks(detailedCard, id);
+}
+
+
+export function openOverlay(id) {
+    let overlay = getOverlay();
+    overlay.innerHTML = getDetailedCard();
+    setDetailedCard(id);
     setOpacity();
 }
 
