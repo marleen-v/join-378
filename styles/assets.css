@@ -90,3 +90,8 @@
 .z-index-minus-1 {
     z-index: -1;
 }
+
+
+.trans-dark-bg-p-50 {
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -4,6 +4,16 @@ import { setBgColor, setUserInitial, tasks } from "./boards.js";
 let totalTasks = [], doneTasks = [];
 
 
+function setOpacity() {
+    document.querySelector('.overlay').classList.add('trans-dark-bg-p-50');
+}
+
+
+function unsetOpacity() {
+    document.querySelector('.overlay').classList.remove('trans-dark-bg-p-50');
+}
+
+
 export function openOverlay(id) {
     let overlay = document.querySelector('.overlay');
     overlay.classList.remove('d_none');
@@ -31,6 +41,7 @@ export function openOverlay(id) {
             else detailedCard.querySelector('.add-task-card-subtasks').innerHTML += uncheckedBoxSVG() + " " + element;
         }
     });
+    setOpacity();
 }
 
 
@@ -84,6 +95,7 @@ function closeOverlay() {
     overlay.classList.add('d_none');
     overlay.classList.remove('z-index-2000');
     overlay.classList.add('z-index-minus-1');
+    unsetOpacity();
 }
 
 function editSVG() {
