@@ -19,7 +19,7 @@ export function openOverlay(id) {
     const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const formattedDate = formatter.format(date);
     detailedCard.querySelector('.add-task-card-date').innerHTML = "Due date: " + formattedDate;
-    detailedCard.querySelector('.add-task-card-priority').innerHTML = `<div class="mg-right-8px">Priority:</div><div class="mg-right-8px">${tasks[id].Priority}</div><div>${getPriority(tasks[id])}</div>`;
+    detailedCard.querySelector('.add-task-card-priority').innerHTML = `<div class="mg-right-8px">Priority:</div><div class="mg-right-8px">${tasks[id].Priority}</div><div class="flex align-items-center">${getPriority(tasks[id])}</div>`;
     detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(detailedCard, tasks[id], true);
     let userIcons = detailedCard.querySelectorAll('.circle');
     userIcons.forEach(element => { element.style.width = "42px"});
