@@ -20,20 +20,44 @@ export function search(array, key, value) {
 }
 
 
+function formatDate(input) {
+    // Prüfe, ob der Input im Format dd.mm.yyyy vorliegt (z.B. 15.10.2024)
+    const datePattern1 = /^(\d{2})\.(\d{2})\.(\d{4})$/;
+    
+    if (datePattern1.test(input)) {
+      const [ , day, month, year] = input.match(datePattern1);
+      return `${year}-${month}-${day}`;  // yyyy-mm-dd Format
+    }
+  
+    // Versuch, den Input als reguläres Datum zu parsen
+    const d = new Date(input);
+    
+    // Prüfe, ob das Datum gültig ist
+    if (!isNaN(d.getTime())) {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');  // Monate sind 0-basiert
+      const day = String(d.getDate()).padStart(2, '0');  // Tag formatieren
+      
+      return `${year}-${month}-${day}`;
+    }
+  
+    // Wenn kein gültiges Datum gefunden wurde
+    return "Ungültiges Datum";
+  }
+
+
 function filterByNestedKeyAndArray(data, searchString) {
     return data.filter(item => {
         // Suche in "details.description"
         const title = item.Title.toLowerCase().includes(searchString.toLowerCase());
-
-        const date = item.Date.toLowerCase().includes(searchString.toLowerCase());
-
+        const date = item.Date.toLowerCase().includes(formatDate(searchString).toLowerCase());
+        const priority = item.Priority.toLowerCase().includes(searchString.toLowerCase());
+        const description = item.Description.toLowerCase().includes(searchString.toLowerCase());
+        const subtasks = item.Subtasks.Total.some(member => member.toLowerCase().includes(searchString.toLowerCase()));
         // Suche im "team"-Array
-        const persons = item.Persons.some(member =>
-            member.toLowerCase().includes(searchString.toLowerCase())
-        );
-
+        const persons = item.Persons.some(member => member.toLowerCase().includes(searchString.toLowerCase()));
         // Gib das Element zurück, wenn entweder die Beschreibung oder ein Team-Mitglied übereinstimmt
-        return title || persons || date;
+        return title || persons || date || priority || description || subtasks;
     });
 }
 
@@ -41,14 +65,14 @@ function filterByNestedKeyAndArray(data, searchString) {
 function mergeArraysWithoutDuplicates(oldArray, newArray) {
     // Kombiniere das neue Array zuerst, dann das alte Array
     const combinedArray = newArray.concat(oldArray);
-  
+
     // Erstelle ein neues Array mit eindeutigen Objekten, basierend auf der 'id'
     const uniqueArray = combinedArray.filter((item, index, self) =>
-      index === self.findIndex((t) => t.id === item.id)
+        index === self.findIndex((t) => t.id === item.id)
     );
-  
+
     return uniqueArray;
-  }
+}
 
 
 function orderTasks(input) {
