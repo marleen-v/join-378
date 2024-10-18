@@ -1,5 +1,6 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { getPriority } from "./add-task.js";
+import { search } from "./boards-filter.js";
 import { openOverlay } from "./boards-overlay.js";
 
 const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -77,7 +78,7 @@ function getUserColor(firstName, lastName) {
  * @param {*} currentCard
  * @param {*} element
  */
-export function setUserInitial(currentCard, element, displayFullName = false) {    
+export function setUserInitial(element, displayFullName = false) {    
     let personsHTML = "";
     element.Persons.forEach(person => {
         let splittedName = person.split(' ');
@@ -107,7 +108,7 @@ function setCardElements(element, index) {
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     setSubtasks(currentCard, element);    
-    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(currentCard, element);
+    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);//getPriority(element);
 }
 
@@ -148,7 +149,7 @@ function setSubtasks(currentCard, element) {
  * @param {*} id
  * @param {*} column
  */
-function setCard(element, index, id, column) {
+export function setCard(element, index, id, column) {
     let taskId = 'taskId' + id;
     let taskTemplate = getTaskCard(id, taskId);    
     let className = document.querySelector(`.board-main-${column}`);
@@ -159,18 +160,11 @@ function setCard(element, index, id, column) {
 }
 
 
-function searchColumnEntry(value) {
-    for (let index = 0; index < tasks.length; index++) 
-        if(tasks[index].Column === value) return true;
-    return false;
-}
-
-
-function checkEmptyColumns() {
-    if(!searchColumnEntry("To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
-    if(!searchColumnEntry("In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
-    if(!searchColumnEntry("Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();
-    if(!searchColumnEntry("Done")) document.querySelector(`.board-main-done`).innerHTML = getEmptyColumn();
+export function checkEmptyColumns() {
+    if(!search(tasks, "Column", "To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
+    if(!search(tasks, "Column", "In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
+    if(!search(tasks, "Column", "Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();
+    if(!search(tasks, "Column", "Done")) document.querySelector(`.board-main-done`).innerHTML = getEmptyColumn();
 }
 
 /** 

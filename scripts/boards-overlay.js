@@ -53,7 +53,7 @@ function setDetailedCard(id) {
     detailedCard.querySelector('.add-task-card-description').innerHTML = tasks[id].Description;
     setDate(detailedCard, id);
     detailedCard.querySelector('.add-task-card-priority').innerHTML = `<div class="mg-right-8px">Priority:</div><div class="mg-right-8px">${tasks[id].Priority}</div><div class="flex align-items-center">${getPriority(tasks[id])}</div>`;
-    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(detailedCard, tasks[id], true);
+    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true);
     let userIcons = detailedCard.querySelectorAll('.circle');
     userIcons.forEach(element => { element.style.width = "42px"});
     setSubtasks(detailedCard, id);
