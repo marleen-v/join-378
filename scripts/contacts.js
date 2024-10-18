@@ -157,7 +157,7 @@ function renderAddContactDialog() {
     '<img src="../assets/icons/person.svg" alt="" class="circle-icon" />';
   cancelBtnTitle.innerHTML = "Cancel";
   submitBtnTitle.innerHTML = "Create Contact";
-  dialogColor.classList.add("neutralColor");
+  /* dialogColor.classList.add("neutralColor"); */
   cancelBtn.onclick = function () {
     closeContactDialog();
   };
@@ -183,8 +183,11 @@ function renderEditContactDialog(index) {
   submitBtnTitle.innerHTML = "Save";
   dialogColor.classList.add(currentContact.color);
   dialogInitials.innerHTML = currentContact.initials;
-  cancelBtn.onclick = function () {deleteContact(index)};
-  contactForm.onsubmit = function () {updateContactInfo(index)};
+  cancelBtn.onclick = function () {deleteContact(index); dialogColor.classList.remove(currentContact.color)};
+  contactForm.onsubmit = function () {
+    updateContactInfo(index);
+    dialogColor.classList.remove(currentContact.color);
+  };
 
   fillInputFields(index);
 
