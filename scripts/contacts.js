@@ -3,6 +3,7 @@ const singleContactRef = document.getElementById("single-contact");
 
 // Dialog
 const dialog = document.querySelector("dialog");
+const errorMessage = document.getElementById("error-message");
 
 // Dialog Contactform
 const dialogTitle = document.getElementById("dialog-title");
@@ -25,6 +26,8 @@ const inputPhoneRef = document.getElementById("c-phone");
 let contactList = [];
 let currentContact = [];
 
+let emailExists;
+
 let firstName;
 let lastName;
 let initials;
@@ -35,7 +38,6 @@ let initials;
 async function initContacts() {
   contactList = await loadData(CONTACTS_DIR);
   renderContacts();
-  findAndMarkActiveUser();
 }
 
 /**
@@ -50,7 +52,20 @@ function renderContacts() {
     addNewContactSection(index);
     contactListRef.innerHTML += getContactHTML(contact, index);
   }
+  findAndMarkActiveUser()
 }
+
+/**
+ * This function finds loged-in-User in contact-List and adds "(ich)" im Namen
+ */
+function findAndMarkActiveUser() {
+  const singleContactRef = document.querySelectorAll(".contact-name");
+  let activeUserIndex = contactList.findIndex((contact) => contact.email === "clara.peters@web.de");
+
+  singleContactRef[activeUserIndex].innerHTML += "(ich)";
+  console.log(activeUserIndex);
+}
+ 
 
 /**
  * This function renders the new contact-list
@@ -129,23 +144,44 @@ function closeContactDialog() {
   dialog.close();
   contactForm.reset();
   dialogColor.classList.remove(currentContact.color);
+  errorMessage.classList.add("d_none");
 }
 
 /**
  * This function validates the form
  */
 function checkForm() {
-  if (contactForm.checkValidity()) {
+
+  emailExists = checkContactEmail();
+  if (contactForm.checkValidity() && !emailExists) {
     submitBtn.classList.remove("inactiv-btn");
     checkIcon.classList.remove("inactive-color");
+    errorMessage.classList.add("d_none");
   } else {
     submitBtn.classList.add("inactiv-btn");
     checkIcon.classList.add("inactive-color");
+  
   }
 }
 
 inputNameRef.addEventListener("input", checkForm);
 inputEmailRef.addEventListener("input", checkForm);
+
+
+function checkContactEmail() {
+  emailExists = contactList.some((contact) => contact.email === inputEmailRef.value);
+  if(emailExists){ //if email exists check if this email is in currentContact, if it is return false
+    if (currentContact != [] && currentContact.email === inputEmailRef.value) {
+      errorMessage.classList.add("d_none");
+      return !emailExists
+    } else{
+      errorMessage.classList.remove("d_none");
+      return emailExists;
+      
+    }
+  }
+} 
+
 
 /**
  * This function renders the dialog to add a contact
@@ -163,7 +199,9 @@ function renderAddContactDialog() {
     closeContactDialog();
   };
   contactForm.onsubmit = function () {
-    addNewContact();
+    if(!emailExists){
+      addNewContact();
+    } else { return false;}
   };
 
   submitBtn.classList.add("inactiv-btn");
@@ -184,10 +222,13 @@ function renderEditContactDialog(index) {
   submitBtnTitle.innerHTML = "Save";
   dialogColor.classList.add(currentContact.color);
   dialogInitials.innerHTML = currentContact.initials;
-  cancelBtn.onclick = function () {deleteContact(index); dialogColor.classList.remove(currentContact.color)};
+  cancelBtn.onclick = function () {deleteContact(index); dialogColor.classList.remove(currentContact.color); errorMessage.classList.add("d_none"); };
   contactForm.onsubmit = function () {
+    if(!emailExists){
     updateContactInfo(index);
     dialogColor.classList.remove(currentContact.color);
+    errorMessage.classList.add("d_none");
+  } else { return false;}
   };
 
   fillInputFields(index);
@@ -337,21 +378,10 @@ async function updateContactInfo(index) {
 }
 
 //to do:
-// active User markieren ... (ich) --> muss noch geädert werden
+// active User markieren ... (ich) --> Funktion jedes mal aufrufen, wenn Kontaktliste neu gerendert wird
 // email schon einmal vorhanden? Dann kann nicht submitted werden
 // springen zum neu angelegten Kontakt
 // Animation
 
 
-/**
- * This function finds loged-in-User in contact-List and adds "(ich)" im Namen
- * 
- */
-function findAndMarkActiveUser() {
-  const singleContactRef = document.querySelectorAll(".contact-name");
-  let activeUserIndex = contactList.findIndex((contact) => contact.email === "clara.peters@web.de");
 
-  singleContactRef[activeUserIndex ].innerHTML += "(ich)";
-  console.log(activeUserIndex);
-}
- 
