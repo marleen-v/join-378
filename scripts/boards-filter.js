@@ -1,7 +1,7 @@
 import { setCard, checkEmptyColumns, tasks, updateTasks, showData } from "./boards.js";
 export let searchList = [];
 export let collectedList = [];
-let old = "";
+
 
 function checkValue(array, key, value, i, j) {
     if (array[i][key] === value || array[j][key] === value) return true;
@@ -19,27 +19,6 @@ export function search(array, key, value) {
     return false;
 }
 
-
-function isNoIndicies(indicies, index) {
-    for (let i = 0; i < indicies.length; i++) {
-        if (indicies[i] === index) return false;
-    }
-    return true;
-}
-
-
-function collectResults(list, tasks) {
-    collectedList = mergeArraysWithoutDuplicates(tasks, list);
-    //tasks.forEach((element, index) => { if (isNoIndicies(indicies, index)) collectedList.push(element) });
-    showSearchData();
-}
-
-
-function filterBySubstring(data, key, searchString) {
-    if (key !== "Persons") return data.filter(item =>
-        item[key].toLowerCase().includes(searchString.toLowerCase())
-    );
-}
 
 function filterByNestedKeyAndArray(data, searchString) {
     return data.filter(item => {
@@ -72,22 +51,18 @@ function mergeArraysWithoutDuplicates(oldArray, newArray) {
   }
 
 
-function iterateTasks(input) {
+function orderTasks(input) {
     collectedList = [];
     const searchString = input.value;  // Wir suchen nach "dev" im Team oder in der Beschreibung
     const result = filterByNestedKeyAndArray(tasks, searchString);
-    collectResults(result, tasks);
+    collectedList = mergeArraysWithoutDuplicates(tasks, result);
 }
 
 
 function searchEntry() {
     let input = document.getElementById('boards-search');
     if (input.value === "") return;
-    iterateTasks(input);
-}
-
-
-function showSearchData() {
+    orderTasks(input);
     updateTasks(collectedList);
     showData();
 }
