@@ -35,6 +35,7 @@ let initials;
 async function initContacts() {
   contactList = await loadData(CONTACTS_DIR);
   renderContacts();
+  findAndMarkActiveUser();
 }
 
 /**
@@ -336,10 +337,21 @@ async function updateContactInfo(index) {
 }
 
 //to do:
-// active User markieren ... (ich)
+// active User markieren ... (ich) --> muss noch geädert werden
 // email schon einmal vorhanden? Dann kann nicht submitted werden
 // springen zum neu angelegten Kontakt
-// Farben beim Öffnen des Dialogs stimmen nicht überein --> Klassen müssen beim Schließen immer entfernt werden
 // Animation
 
-function findAndMarkActiveUser() {}
+
+/**
+ * This function finds loged-in-User in contact-List and adds "(ich)" im Namen
+ * 
+ */
+function findAndMarkActiveUser() {
+  const singleContactRef = document.querySelectorAll(".contact-name");
+  let activeUserIndex = contactList.findIndex((contact) => contact.email === "clara.peters@web.de");
+
+  singleContactRef[activeUserIndex ].innerHTML += "(ich)";
+  console.log(activeUserIndex);
+}
+ 
