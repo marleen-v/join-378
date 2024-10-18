@@ -1,4 +1,4 @@
-import { setCard, checkEmptyColumns, tasks } from "./boards.js";
+import { setCard, checkEmptyColumns, tasks, updateTasks, showData } from "./boards.js";
 export let searchList = [];
 export let collectedList = [];
 
@@ -16,36 +16,6 @@ export function search(array, key, value) {
         --j;
     } while (i < j);
     return false;
-}
-
-
-function getPositionOfEntry(array, key, value) {
-    let i = 0, j = array.length - 1;
-    do {
-        if (checkValue(array, key, value, i, j)) return i;
-        else if (checkValue(array, key, value, i, j)) return j;
-        ++i;
-        --j;
-    } while (i < j);
-    return -1;
-}
-
-
-function getKey(input) {
-    const result = filterBySubstring(tasks, "Title", input.value);
-    console.log(result.Title);
-    
-    let resultInTitle = search(tasks, "Title", result.Title);
-    let resultInDate = search(tasks, "Date", input.value);
-    let resultInAssignedTo = "No Entry";
-    tasks.forEach(element => { resultInAssignedTo = search(element.Persons, "", input.value); });
-    for (let index = 0; index < tasks.length; index++) {
-        if (search(tasks[index].Persons, "", input.value)) resultInAssignedTo = "Persons";
-    }
-    if (resultInTitle) return "Title";
-    else if (resultInDate) return "Date";
-    else if (resultInAssignedTo) return resultInAssignedTo;
-    return "No Entry";
 }
 
 
@@ -71,7 +41,6 @@ function filterBySubstring(data, key, searchString) {
 }
 
 
-
 function iterateTasks(input) {
     collectedList = [];
     let lookAtTitles = filterBySubstring(tasks, "Title", input.value);
@@ -95,11 +64,6 @@ function iterateTasks(input) {
 }
 
 
-function filterItems(string, substring) {
-    return string.toLowerCase().includes(substring.toLowerCase());
-}
-
-
 function searchEntry() {
     let input = document.getElementById('boards-search');
     if (input.value === "") return;
@@ -108,20 +72,8 @@ function searchEntry() {
 
 
 function showSearchData() {
-    document.querySelector(`.board-main-to-do`).innerHTML = "";
-    document.querySelector(`.board-main-in-progress`).innerHTML = "";
-    document.querySelector(`.board-main-await-feedback`).innerHTML = "";
-    document.querySelector(`.board-main-done`).innerHTML = "";
-    let index = 0;
-    collectedList.forEach((element, id) => {
-        if (element.Column === "To Do") setCard(element, index, id, "to-do");
-        if (element.Column === "In Progress") setCard(element, index, id, "in-progress");
-        if (element.Column === "Await Feedback") setCard(element, index, id, "await-feedback");
-        if (element.Column === "Done") setCard(element, index, id, "done");
-        index++;
-    });
-    checkEmptyColumns();
-
+    updateTasks(collectedList);
+    showData();
 }
 
 

@@ -12,6 +12,11 @@ export let tasks = [];
 export let contacts = [];
 
 
+export function updateTasks(list) {
+    tasks = list;
+}
+
+
 async function loadData(path = "") {
     let res = await fetch(FIREBASE_URL + path + ".json");
     let resToJson = await res.json();
@@ -167,10 +172,19 @@ export function checkEmptyColumns() {
     if(!search(tasks, "Column", "Done")) document.querySelector(`.board-main-done`).innerHTML = getEmptyColumn();
 }
 
+
+function clearColumns() {
+    document.querySelector(`.board-main-to-do`).innerHTML = "";
+    document.querySelector(`.board-main-in-progress`).innerHTML = "";
+    document.querySelector(`.board-main-await-feedback`).innerHTML = "";
+    document.querySelector(`.board-main-done`).innerHTML = "";
+}
+
 /** 
  * Show all data to board it exists 4 columns | To Do | In Progress | Await Feedback | Done
 */
-function showData() {
+export function showData() {
+    clearColumns();
     let index = 0;
     tasks.forEach((element, id) => {          
         if (element.Column === "To Do") setCard(element, index, id, "to-do");
