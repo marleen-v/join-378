@@ -156,7 +156,7 @@
             alt=""
           />
         </label>
-        <label class="flex justify-content-between">
+        <label class="flex justify-content-between position-relative">
           <input required
             class="contact-input"
             type="email"
@@ -168,7 +168,8 @@
             class="input-icon"
             src="../assets/icons/mail.svg"
             alt=""
-          />
+          /> 
+          <div id="error-message" class="d_none position-absolute" style="color:red; bottom:-23px; right:5px; font-weight:700;">This email already exists</div>
         </label>
         <label class="flex justify-content-between">
           <input 
@@ -201,7 +202,7 @@
       </form>
         
       </div>   
-      <div id="error-message" class="d_none" style="color:red; position:absolute; bottom:65px; right:65px;">This email already exists</div>
+      
     </dialog>
   </body>
 </html>
