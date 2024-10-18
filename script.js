@@ -64,4 +64,9 @@ async function putData(path="", data={}){
     });
     let resToJson = await res.json();
   }
+
+  function getRandomColor(){
+    let r = Math.floor(Math.random() * 8);
+    return contactColors[r];
+  }
   

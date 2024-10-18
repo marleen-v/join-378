@@ -89,12 +89,6 @@ function signupSuccess(){
 }
 
 
-function getRandomColor(){
-  let r = Math.floor(Math.random() * 8);
-  return contactColors[r];
-}
-
-
 function emailNotExists(){
   let emailCheck = true;
   for(let i = 0; i < contactsUser.length; i++){
