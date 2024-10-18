@@ -238,6 +238,7 @@ function removeHighlight(id) {
  * @param {*} column
  */
 function moveTo(column) {
+    document.getElementById('boards-search').value = "";
     let currentCard = document.getElementById(currentDraggedElement);    
     currentCard.querySelector('.add-task-card-headline');
 
