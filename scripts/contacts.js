@@ -201,6 +201,7 @@ function renderAddContactDialog() {
   contactForm.onsubmit = function () {
     if(!emailExists){
       addNewContact();
+      errorMessage.classList.add("d_none");
     } else { return false;}
   };
 
