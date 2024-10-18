@@ -151,7 +151,7 @@ function closeContactDialog() {
  * This function validates the form
  */
 function checkForm() {
-
+  errorMessage.classList.add("d_none");
   emailExists = checkContactEmail();
   if (contactForm.checkValidity() && !emailExists) {
     submitBtn.classList.remove("inactiv-btn");
@@ -166,6 +166,7 @@ function checkForm() {
 
 inputNameRef.addEventListener("input", checkForm);
 inputEmailRef.addEventListener("input", checkForm);
+inputPhoneRef.addEventListener("input", checkForm);
 
 
 function checkContactEmail() {
@@ -260,7 +261,7 @@ async function addNewContact() {
   firstName = inputNameRef.value.split(" ")[0];
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
   lastName = inputNameRef.value.split(" ")[1];
-  initials = findInitials(initials);
+  initials = findInitials();
 
   contactList.push({
     email: inputEmailRef.value,
@@ -309,7 +310,7 @@ function sortContactsByFirstName() {
  * @param {*} initials
  * @returns
  */
-function findInitials(initials) {
+function findInitials() {
   if (lastName !== undefined) {
     initials = firstName.charAt(0) + lastName.charAt(0);
   } else {
@@ -353,7 +354,7 @@ async function updateContactInfo(index) {
   firstName = inputNameRef.value.split(" ")[0];
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
   lastName = inputNameRef.value.split(" ")[1];
-  initials = findInitials(initials);
+  initials = findInitials();
 
   contactList[index] = {
     email: inputEmailRef.value,
@@ -383,6 +384,8 @@ async function updateContactInfo(index) {
 // email schon einmal vorhanden? Dann kann nicht submitted werden
 // springen zum neu angelegten Kontakt
 // Animation
+// Input-Felder trimmen
+// Funktionen kürzen
 
 
 
