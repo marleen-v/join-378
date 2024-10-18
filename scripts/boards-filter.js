@@ -56,7 +56,7 @@ function iterateTasks(input) {
 
     if(lookAtDates.length > 0) {
         list.push(lookAtDates[0]);
-        let index = tasks.findIndex(item => item.Date === lookAtTitles[0].Date);
+        let index = tasks.findIndex(item => item.Date === lookAtDates[0].Date);
         indicies.push(index);
     }    
 
