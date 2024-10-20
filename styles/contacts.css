@@ -174,7 +174,9 @@ dialog{
   padding: 0;
   position: relative;
   background-color: transparent;
+
 }
+
 ::backdrop{
   background-color:#191b1d4a;
  
@@ -304,3 +306,13 @@ label>input {
 .inactive-color{
   filter: invert(51%) sepia(0%) saturate(2329%) hue-rotate(52deg) brightness(129%) contrast(102%);
 }
+
+.runInAnimation {
+  animation-name: moveFromRightToCenter;
+  animation-duration: 0.5s ease;
+}
+
+.runOutAnimation {
+  animation-name: moveFromCenterToRight;
+  animation-duration: 0.5s ease;
+}   
