@@ -118,6 +118,13 @@ function setCardElements(element, index) {
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);//getPriority(element);
 }
 
+
+export function calculateDoneSubtasks(element) {
+    let done = 0;
+    element.Subtasks.forEach(element => { (element.Done == true) ? done+=1 : done+=0 });
+    return done;
+}
+
 /**
  * Get progress bar with bootstrap and show if exists subtasks
  *
@@ -125,14 +132,14 @@ function setCardElements(element, index) {
  * @returns {string}
  */
 function getProgressBar(element) {
-    let done = (element.Subtasks.Done.length > 0 && element.Subtasks.Done[0] !== "") ? element.Subtasks.Done.length : 0;
-    let procent = (done / element.Subtasks.Total.length) * 100;
+    let done = calculateDoneSubtasks(element);
+    let procent = (done / element.Subtasks.length) * 100;
     
     return /*html*/`
         <div class="progressbar-container">
             <div class="progressbar" style="width: ${procent}%"></div>
         </div>
-        <span class="flex align-items-center">${done}/${element.Subtasks.Total.length} Subtasks</span>
+        <span class="flex align-items-center">${done}/${element.Subtasks.length} Subtasks</span>
     `
 }
 
@@ -143,7 +150,7 @@ function getProgressBar(element) {
  * @param {*} element
  */
 function setSubtasks(currentCard, element) {
-    if(element.Subtasks.Total.length < 2 && element.Subtasks.Total[0] === "") currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
+    if(element.Subtasks == null) currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
     else currentCard.querySelector('.add-task-card-subtasks').innerHTML = getProgressBar(element); //element.Subtasks.length + " Subtasks";
 }
 
@@ -311,8 +318,8 @@ async function putBoardData(path = "", data = {}) {
 }
 
 function clearHighlightedTasks() {
-    if(searchId.value == "") tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
-
+    if(searchId.value == "") 
+        tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
 
 

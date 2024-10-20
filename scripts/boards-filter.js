@@ -56,7 +56,7 @@ function filterByNestedKeyAndArray(data, searchString) {
         const date = item.Date.toLowerCase().includes(formatDate(searchString).toLowerCase());
         const priority = item.Priority.toLowerCase().includes(searchString.toLowerCase());
         const description = item.Description.toLowerCase().includes(searchString.toLowerCase());
-        const subtasks = item.Subtasks.Total.some(member => member.toLowerCase().includes(searchString.toLowerCase()));
+        const subtasks = (item.Subtasks != null) ? item.Subtasks.some(member => member.Description.toLowerCase().includes(searchString.toLowerCase())) : null;        
         // Suche im "team"-Array
         const persons = item.Persons.some(member => member.toLowerCase().includes(searchString.toLowerCase()));
         // Gib das Element zurück, wenn entweder die Beschreibung oder ein Team-Mitglied übereinstimmt
@@ -83,7 +83,7 @@ function highlightResults(result) {
         tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = '#E7E7E7'; });
         result.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
         return;
-    }
+    }    
     tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
 

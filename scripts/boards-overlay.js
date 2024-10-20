@@ -1,5 +1,5 @@
 import { getPriority } from "./add-task.js";
-import { setBgColor, setUserInitial, tasks } from "./boards.js";
+import { setBgColor, setUserInitial, tasks, calculateDoneSubtasks } from "./boards.js";
 
 let totalTasks = [], doneTasks = [];
 
@@ -32,12 +32,11 @@ function getOverlay() {
 
 
 function setSubtasks(detailedCard, id) {
-    totalTasks = tasks[id].Subtasks.Total;
-    doneTasks = tasks[id].Subtasks.Done;
-    tasks[id].Subtasks.Total.forEach((element) => {
+    if(tasks[id].Subtasks == null) return;
+    tasks[id].Subtasks.forEach((element) => {
         if(element !== "") { 
-            if(totalTasks.find(isDone)) detailedCard.querySelector('.add-task-card-subtasks').innerHTML += checkedBoxSVG() + " " + element;
-            else detailedCard.querySelector('.add-task-card-subtasks').innerHTML += uncheckedBoxSVG() + " " + element;
+            if(element.Done == true) detailedCard.querySelector('.add-task-card-subtasks').innerHTML += checkedBoxSVG() + " " + element.Description;
+            else detailedCard.querySelector('.add-task-card-subtasks').innerHTML += uncheckedBoxSVG() + " " + element.Description;
         }
     });
 }
