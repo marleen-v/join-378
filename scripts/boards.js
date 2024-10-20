@@ -8,6 +8,7 @@ const USERS_DIR = '/users';
 const CONTACTS_DIR = '/contacts';
 const TASKS_DIR = '/tasks';
 let currentDraggedElement;
+let searchId = document.getElementById('boards-search');
 export let tasks = [];
 export let contacts = [];
 
@@ -309,11 +310,15 @@ async function putBoardData(path = "", data = {}) {
     return await res.json();
 }
 
-/*
-document.getElementById('boards-search').addEventListener('input', function(e) {
-    if(e.value == "") tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
+function clearHighlightedTasks() {
+    if(searchId.value == "") tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 
-});*/
+}
+
+
+searchId.addEventListener('input', function(e) {
+    clearHighlightedTasks();
+});
 
 window.highlightColumn = highlightColumn;
 window.removeHighlightColumn = removeHighlightColumn;
