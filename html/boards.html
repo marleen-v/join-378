@@ -107,10 +107,10 @@
         </div>
       </div>
       <div class="board-main">
-        <div id="to-do" class="board-main-to-do" ondrop="moveTo('To Do'); removeHighlight('to-do')" ondragover="allowDrop(event); highlight('to-do')" ondragleave="removeHighlight('to-do')"></div>
-        <div id="in-progress" class="board-main-in-progress" ondrop="moveTo('In Progress'); removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')" ondragleave="removeHighlight('in-progress')"></div>
-        <div id="await-feedback" class="board-main-await-feedback" ondrop="moveTo('Await Feedback'); removeHighlight('await-feedback')" ondragover="allowDrop(event); highlight('await-feedback')" ondragleave="removeHighlight('await-feedback')"></div>
-        <div id="done" class="board-main-done" ondrop="moveTo('Done'); removeHighlight('done')" ondragover="allowDrop(event); highlight('done')" ondragleave="removeHighlight('done')"></div>
+        <div id="to-do" class="board-main-to-do" ondrop="moveTo('To Do'); removeHighlightColumn('to-do')" ondragover="allowDrop(event); highlightColumn('to-do')" ondragleave="removeHighlightColumn('to-do')"></div>
+        <div id="in-progress" class="board-main-in-progress" ondrop="moveTo('In Progress'); removeHighlightColumn('in-progress')" ondragover="allowDrop(event); highlightColumn('in-progress')" ondragleave="removeHighlightColumn('in-progress')"></div>
+        <div id="await-feedback" class="board-main-await-feedback" ondrop="moveTo('Await Feedback'); removeHighlightColumn('await-feedback')" ondragover="allowDrop(event); highlightColumn('await-feedback')" ondragleave="removeHighlightColumn('await-feedback')"></div>
+        <div id="done" class="board-main-done" ondrop="moveTo('Done'); removeHighlightColumn('done')" ondragover="allowDrop(event); highlightColumn('done')" ondragleave="removeHighlightColumn('done')"></div>
       </div>
     </section>
   </main>

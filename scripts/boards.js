@@ -238,11 +238,11 @@ function getTaskCard(id, taskId) {
     `;
 }
 
-function highlight(id) {
+function highlightColumn(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
 
-function removeHighlight(id) {
+function removeHighlightColumn(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
@@ -315,8 +315,8 @@ document.getElementById('boards-search').addEventListener('input', function(e) {
 
 });*/
 
-window.highlight = highlight;
-window.removeHighlight = removeHighlight;
+window.highlightColumn = highlightColumn;
+window.removeHighlightColumn = removeHighlightColumn;
 window.startDragging = startDragging;
 window.allowDrop = allowDrop;
 window.moveTo = moveTo;
