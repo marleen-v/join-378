@@ -37,7 +37,7 @@ async function loadBoards() {
 
     if (tasks) {
         //processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
-        showData();
+        showData(tasks);
     }
 }
 
@@ -154,9 +154,9 @@ function setSubtasks(currentCard, element) {
  * @param {*} id
  * @param {*} column
  */
-export function setCard(element, index, id, column) {
-    let taskId = 'taskId' + id;
-    let taskTemplate = getTaskCard(id, taskId);    
+export function setCard(element, index, column) {
+    let taskId = 'taskId' + element.id;
+    let taskTemplate = getTaskCard(element.id, taskId);    
     let className = document.querySelector(`.board-main-${column}`);
     className.innerHTML += taskTemplate;
     let card = document.querySelector('.add-task-card');
@@ -183,14 +183,14 @@ function clearColumns() {
 /** 
  * Show all data to board it exists 4 columns | To Do | In Progress | Await Feedback | Done
 */
-export function showData() {
+export function showData(array) {
     clearColumns();
-    let index = 0;
-    tasks.forEach((element, id) => {          
-        if (element.Column === "To Do") setCard(element, index, id, "to-do");
-        if (element.Column === "In Progress") setCard(element, index, id, "in-progress");
-        if (element.Column === "Await Feedback") setCard(element, index, id, "await-feedback");
-        if (element.Column === "Done") setCard(element, index, id, "done");
+    //let index = 0;
+    array.forEach((element, index) => {          
+        if (element.Column === "To Do") setCard(element, index, "to-do");
+        if (element.Column === "In Progress") setCard(element, index, "in-progress");
+        if (element.Column === "Await Feedback") setCard(element, index, "await-feedback");
+        if (element.Column === "Done") setCard(element, index, "done");
         index++;
     });   
     checkEmptyColumns();

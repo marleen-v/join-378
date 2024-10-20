@@ -1,6 +1,6 @@
 import { setCard, checkEmptyColumns, tasks, updateTasks, showData } from "./boards.js";
 export let searchList = [];
-export let collectedList = [];
+export let sortedList = [];
 
 
 function checkValue(array, key, value, i, j) {
@@ -78,11 +78,22 @@ function mergeArraysWithoutDuplicates(oldArray, newArray) {
 }
 
 
+function highlightResults(result) {    
+    if(result.length > 0 && result.length != tasks.length)  {
+        tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = '#E7E7E7'; });
+        result.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
+        return;
+    }
+    tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
+}
+
+
 function orderTasks(input) {
-    collectedList = [];
     const searchString = input.value;  // Wir suchen nach "dev" im Team oder in der Beschreibung
     const result = filterByNestedKeyAndArray(tasks, searchString);
-    collectedList = mergeArraysWithoutDuplicates(tasks, result);
+    sortedList = mergeArraysWithoutDuplicates(tasks, result);
+    showData(sortedList);
+    highlightResults(result);
 }
 
 
@@ -90,8 +101,6 @@ function searchEntry() {
     let input = document.getElementById('boards-search');
     if (input.value === "") return;
     orderTasks(input);
-    updateTasks(collectedList);
-    showData();
 }
 
 
