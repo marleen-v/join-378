@@ -276,7 +276,7 @@ function refresh() {
     document.querySelector('.board-main-in-progress').innerHTML = "";
     document.querySelector('.board-main-await-feedback').innerHTML = "";
     document.querySelector('.board-main-done').innerHTML = "";
-    showData();
+    showData(tasks);
 }
 
 /**
@@ -308,6 +308,12 @@ async function putBoardData(path = "", data = {}) {
         });
     return await res.json();
 }
+
+/*
+document.getElementById('boards-search').addEventListener('input', function(e) {
+    if(e.value == "") tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
+
+});*/
 
 window.highlight = highlight;
 window.removeHighlight = removeHighlight;
