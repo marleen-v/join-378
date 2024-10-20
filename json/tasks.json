@@ -18,7 +18,11 @@
     "Date": "2024-10-11",
     "Priority": "Urgent",
     "Category": "Technical Task",
-    "Subtasks": [{"Description": "Prototyp", "Done": false }],
+    "Subtasks": [
+                  {"Description": "HTML Dateien angelegt", "Done": true }, 
+                  {"Description": "CSS Dateien angelegt", "Done": false },
+                  {"Description": "Javascript Dateien angelegt", "Done": false }
+                ],
     "Persons": ["Max Schneider"]
   },
   {

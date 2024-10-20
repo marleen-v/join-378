@@ -309,6 +309,12 @@ main {
 }
 
 
+.detailed-task-card-subtasks {
+    overflow-y: auto;
+    height: 100px;
+}
+
+
 .add-task-card-assigned-to > span {
     margin-right: -16px;
 }
