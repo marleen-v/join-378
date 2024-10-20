@@ -165,7 +165,7 @@ export function setCard(element, index, id, column) {
 }
 
 
-export function checkEmptyColumns() {
+export function checkEmptyColumns() {    
     if(!search(tasks, "Column", "To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
     if(!search(tasks, "Column", "In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
     if(!search(tasks, "Column", "Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();

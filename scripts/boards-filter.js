@@ -10,6 +10,7 @@ function checkValue(array, key, value, i, j) {
 }
 
 export function search(array, key, value) {
+    if(array.length == 0) return false;
     let i = 0, j = array.length - 1;
     do {
         if (checkValue(array, key, value, i, j)) return true;
@@ -19,6 +20,19 @@ export function search(array, key, value) {
     return false;
 }
 
+
+function validateDate(d) {
+    // Prüfe, ob das Datum gültig ist
+    if (!isNaN(d.getTime())) {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');  // Monate sind 0-basiert
+        const day = String(d.getDate()).padStart(2, '0');  // Tag formatieren
+        return `${year}-${month}-${day}`;
+      }
+
+    // Wenn kein gültiges Datum gefunden wurde
+    return "Invalid date";
+}
 
 function formatDate(input) {
     // Prüfe, ob der Input im Format dd.mm.yyyy vorliegt (z.B. 15.10.2024)
@@ -31,18 +45,7 @@ function formatDate(input) {
   
     // Versuch, den Input als reguläres Datum zu parsen
     const d = new Date(input);
-    
-    // Prüfe, ob das Datum gültig ist
-    if (!isNaN(d.getTime())) {
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');  // Monate sind 0-basiert
-      const day = String(d.getDate()).padStart(2, '0');  // Tag formatieren
-      
-      return `${year}-${month}-${day}`;
-    }
-  
-    // Wenn kein gültiges Datum gefunden wurde
-    return "Ungültiges Datum";
+    return validateDate(d);
   }
 
 
