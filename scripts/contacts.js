@@ -1,36 +1,17 @@
 const contactListRef = document.getElementById("contact-container");
 const singleContactRef = document.getElementById("single-contact");
 
-// Dialog
-const dialog = document.querySelector("dialog");
-const errorMessage = document.getElementById("error-message");
-
-// Dialog Contactform
-const dialogTitle = document.getElementById("dialog-title");
-const dialogSubline = document.getElementById("dialogSubline");
-const dialogColor = document.getElementById("dialogColor");
-const dialogInitials = document.getElementById("dialogInitials");
-const contactForm = document.getElementById("contactForm");
-
-// Dialog Contactform Buttons
-const cancelBtnTitle = document.getElementById("cancelBtnTitle");
-const cancelBtn = document.getElementById("cancelBtn");
-const submitBtnTitle = document.getElementById("submitBtnTitle");
-const checkIcon = document.getElementById("checkIcon");
-
-//Dialog Contactform Input Fields
-const inputNameRef = document.getElementById("c-name");
-const inputEmailRef = document.getElementById("c-email");
-const inputPhoneRef = document.getElementById("c-phone");
 
 let contactList = [];
 let currentContact = [];
 
-let emailExists;
+
 
 let firstName;
 let lastName;
 let initials;
+
+
 
 /**
  * This function loads the contactdata from firebase and renders the contact list
@@ -60,7 +41,7 @@ function renderContacts() {
  */
 function findAndMarkActiveUser() {
   const singleContactRef = document.querySelectorAll(".contact-name");
-  let activeUserIndex = contactList.findIndex((contact) => contact.email === "clara.peters@web.de");
+  let activeUserIndex = contactList.findIndex((contact) => contact.email === "david.krause@gmail.com");
 
   singleContactRef[activeUserIndex].innerHTML += "(ich)";
   console.log(activeUserIndex);
@@ -134,14 +115,14 @@ function toggleActiveBtnColor(btnIndex) {
  * This function opens the dialog
  */
 function openContactDialog() {
-  dialog.showModal();
+  dialogRef.showModal();
 }
 
 /**
  * This function closes the dialog
  */
 function closeContactDialog() {
-  dialog.close();
+  dialogRef.close();
   contactForm.reset();
   dialogColor.classList.remove(currentContact.color);
   errorMessage.classList.add("d_none");
@@ -164,11 +145,15 @@ function checkForm() {
   }
 }
 
+// checks validation of inputfields
 inputNameRef.addEventListener("input", checkForm);
 inputEmailRef.addEventListener("input", checkForm);
 inputPhoneRef.addEventListener("input", checkForm);
 
-
+/**
+ * This function checks if entered email already exist
+ * @returns - true or false
+ */
 function checkContactEmail() {
   emailExists = contactList.some((contact) => contact.email === inputEmailRef.value);
   if(emailExists){ //if email exists check if this email is in currentContact, if it is return false
@@ -184,18 +169,22 @@ function checkContactEmail() {
 } 
 
 
+
 /**
  * This function renders the dialog to add a contact
  *
  */
 function renderAddContactDialog() {
-  dialogTitle.innerHTML = "Add Contact";
+  dialogDetails = dialogContents.add;
+  renderContactDialog();
+ /*  dialogTitle.innerHTML = "Add Contact";
   dialogSubline.innerHTML = "Tasks are better with a team!";
   dialogInitials.innerHTML =
     '<img src="../assets/icons/person.svg" alt="" class="circle-icon" />';
   cancelBtnTitle.innerHTML = "Cancel";
-  submitBtnTitle.innerHTML = "Create Contact";
+  submitBtnTitle.innerHTML = "Create Contact"; */
   /* dialogColor.classList.add("neutralColor"); */
+
   cancelBtn.onclick = function () {
     closeContactDialog();
   };
@@ -218,12 +207,14 @@ function renderAddContactDialog() {
  * @param {Number} index
  */
 function renderEditContactDialog(index) {
-  dialogTitle.innerHTML = "Edit Contact";
+  dialogDetails = dialogContents.edit;
+  renderContactDialog();
+  /* dialogTitle.innerHTML = "Edit Contact";
   dialogSubline.innerHTML = "";
   cancelBtnTitle.innerHTML = "Delete";
   submitBtnTitle.innerHTML = "Save";
   dialogColor.classList.add(currentContact.color);
-  dialogInitials.innerHTML = currentContact.initials;
+  dialogInitials.innerHTML = currentContact.initials; */
   cancelBtn.onclick = function () {deleteContact(index); dialogColor.classList.remove(currentContact.color); errorMessage.classList.add("d_none"); };
   contactForm.onsubmit = function () {
     if(!emailExists){
@@ -240,6 +231,16 @@ function renderEditContactDialog(index) {
 
   openContactDialog();
 }
+
+ function renderContactDialog() {
+  dialogTitle.innerHTML = dialogDetails.dialogTitle;
+  dialogSubline.innerHTML = dialogDetails.dialogSubline;
+  dialogInitials.innerHTML = dialogDetails.dialogInitials;
+  cancelBtnTitle.innerHTML = dialogDetails.cancelBtnTitle;
+  submitBtnTitle.innerHTML = dialogDetails.submitBtnTitle;
+} 
+
+
 
 /**
  * This function fills in
@@ -386,6 +387,9 @@ async function updateContactInfo(index) {
 // Animation
 // Input-Felder trimmen
 // Funktionen kürzen
+// Farben math random für Farben bei -> bei michael schauen
+
+// wenn Contact editiert wird, muss geprüft werden, ob es sich bei dem Contact ein User handelt, wenn ja dann user.json aktualisieren
 
 
 
