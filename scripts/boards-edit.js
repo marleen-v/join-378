@@ -43,7 +43,7 @@ export function getDetailedEditableCard(taskId) {
                 <input class="due-date p-left-8px p-right-8px input-border" type="date" id="due-date" name="due_date" required="">
             </div>
             <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
-                <span class="flex justify-content-center detailed-card-label">Priority</span>
+                <span class="flex detailed-card-label">Priority</span>
                 <div class="priority-buttons flex">
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">
                     <span class="flex align-items-center justify-content-center set-width-84">Urgent</span>    
