@@ -271,7 +271,7 @@ function moveTo(column) {
         }
         
     });
-    putBoardData(TASKS_DIR, tasks);
+    putData(TASKS_DIR, tasks);
     refresh();
 }
 

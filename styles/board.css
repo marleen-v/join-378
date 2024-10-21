@@ -267,6 +267,11 @@ main {
     gap: 32px;
 }
 
+.detailed-card-editable-container {
+    margin: -64px 0 0 0;
+    height: 100%;
+}
+
 
 .detailed-card-top {
     display: grid;
@@ -313,7 +318,6 @@ main {
     overflow-y: auto;
     height: 100px;
 }
-
 
 .add-task-card-assigned-to > span {
     margin-right: -16px;

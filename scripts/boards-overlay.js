@@ -1,6 +1,6 @@
 import { getPriority } from "./add-task.js";
-import { setBgColor, setUserInitial, tasks, calculateDoneSubtasks } from "./boards.js";
-
+import { getDetailedEditableCard, setDetailedEditableCard } from "./boards-edit.js";
+import { setBgColor, setUserInitial, tasks, calculateDoneSubtasks, showData } from "./boards.js";
 let totalTasks = [], doneTasks = [];
 
 
@@ -59,15 +59,35 @@ function setDetailedCard(id) {
 }
 
 
+function editTask(taskId) {
+    let overlay = document.querySelector('.overlay');
+    overlay.innerHTML = getDetailedEditableCard(taskId);
+    setDetailedEditableCard(taskId);    
+}
+
+
+function deleteTask(taskId) {    
+    for (let i = 0; i < tasks.length; i++) {
+        let task = "taskId" + i;
+        if (task === taskId) {
+            tasks.splice(i, 1);
+        }
+    }
+    putData(TASKS_DIR, tasks);
+    closeOverlay();
+    showData(tasks);
+}
+
+
 export function openOverlay(id) {
     let overlay = getOverlay();
-    overlay.innerHTML = getDetailedCard();
+    overlay.innerHTML = getDetailedCard('taskId' + id);
     setDetailedCard(id);
     setOpacity();
 }
 
 
-function getDetailedCard() {
+function getDetailedCard(taskId) {
     return /*html*/`
         <section class="detailed-card">
             <div class="detailed-card-top">
@@ -78,22 +98,26 @@ function getDetailedCard() {
             <div class="add-task-card-description"></div>
             <div class="add-task-card-date"></div>
             <div class="add-task-card-priority flex align-items-center justify-content-flex-start"></div>
-            <div class="add-task-card-assigned-to">Assigned to:
-                <div class="add-task-card-persons grid align-items-center grid-columns-2-48px-1fr gap-8px mg-top-8px"></div>
+            <div>
+                Assigned to:
+                <div class="add-task-card-assigned-to set-height-100 auto-overflow-y">
+                    <div class="add-task-card-persons grid align-items-center grid-columns-2-48px-1fr gap-8px mg-top-8px"></div>
+                </div>
             </div>
-            <div>Subtasks
+            <div>
+                Subtasks
                 <div class="detailed-task-card-subtasks add-task-card-subtasks grid align-items-center grid-columns-2-32px-1fr mg-top-8px"></div>
             </div>
             <div class="add-task-card-bottom flex justify-content-flex-end align-items-center">
-                <div onclick="deleteTask()" class="add-task-delete mg-right-left-8px clickable">${trashSVG()}</div><span onclick="deleteTask()" class="mg-right-8px clickable">Delete</span>
-                <div onclick="editTask()" class="add-task-edit mg-right-left-8px clickable">${editSVG()}</div><span onclick="editTask()" class="clickable">Edit</span>
+                <div onclick="deleteTask('${taskId}')" class="add-task-delete mg-right-left-8px clickable">${trashSVG()}</div><span onclick="deleteTask('${taskId}')" class="mg-right-8px clickable">Delete</span>
+                <div onclick="editTask('${taskId}')" class="add-task-edit mg-right-left-8px clickable">${editSVG()}</div><span onclick="editTask('${taskId}')" class="clickable">Edit</span>
             </div>
         </section>  
     `;
 }
 
 
-function getCloseSVG() {
+export function getCloseSVG() {
     return /*html*/`
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_239190_2246" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
@@ -107,12 +131,9 @@ function getCloseSVG() {
 }
 
 
-function isDone(task) {
-    return doneTasks === task;
-}
 
 
-function closeOverlay() {
+export function closeOverlay() {
     let detailedCard = document.querySelector('.detailed-card');
     detailedCard.classList.add('runOutAnimation');
     detailedCard.classList.remove('runInAnimation');
@@ -170,3 +191,5 @@ function checkedBoxSVG() {
 
 
 window.closeOverlay = closeOverlay;
+window.deleteTask = deleteTask;
+window.editTask = editTask;
