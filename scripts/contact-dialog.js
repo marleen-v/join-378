@@ -28,16 +28,22 @@ let emailExists;
 function openContactDialog() {
     dialog.showModal();
     dialog.classList.remove('runOutAnimation');
-    dialog.classList.add('runInAnimation');   
+    dialog.classList.add('runInAnimation');  
+    setTimeout(() => {
+      dialog.classList.remove('runInAnimation');  
+    }, 1000); 
   }
   
   /**
    * This function closes the dialog
    */
   function closeContactDialog() {
-  /*   dialog.classList.remove("runInAnimation");
-    dialog.classList.add("runOutAnimation");  */
-    dialog.close();
+    dialog.classList.add('runOutAnimation'); 
+    dialog.close(); 
+    setTimeout(() => {
+      dialog.classList.remove('runOutAnimation'); 
+    }, 1000); 
+    
     
     
     contactForm.reset();

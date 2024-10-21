@@ -24,7 +24,7 @@
 
 .align-items-center{
     align-items: center;
-    height: 100%;
+  /*   height: 100%; --- hat mir meine Anordnung kaput gemacht, evtl eigene Klasse erstellen?*/ 
 }
 
 .flex-column {

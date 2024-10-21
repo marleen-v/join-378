@@ -58,7 +58,7 @@ function addNewContactSection(index) {
 function findAndMarkActiveUser() {
   const singleContactRef = document.querySelectorAll(".contact-name");
   let activeUserIndex = contactList.findIndex((contact) => contact.email === "clara.peters@web.de");
-  singleContactRef[activeUserIndex].innerHTML += "(ich)";
+  singleContactRef[activeUserIndex].innerHTML += " (ich)";
 }
  
 /**
@@ -67,15 +67,7 @@ function findAndMarkActiveUser() {
  * @param {Array} contacts - this is the json array with all contacts
  */
 function sortContactsByFirstName() {
-  contactList.sort((a, b) => {
-    if (a.firstName < b.firstName) {
-      return -1;
-    }
-    if (a.firstName > b.firstName) {
-      return 1;
-    }
-    return 0;
-  });
+  contactList.sort((a, b) => a.firstName.localeCompare(b.firstName));
 }
 
 /**
@@ -194,6 +186,7 @@ async function updateContactInfo(index) {
   assignContactData();
 
   contactList[index] = {
+    color: currentContact.color,
     email: inputEmailRef.value,
     firstName: firstName,
     initials: initials,
@@ -202,26 +195,13 @@ async function updateContactInfo(index) {
   };
 
   sortContactsByFirstName();
- /*  addContactColor(); */
-  await putData(CONTACTS_DIR, contactList);
   renderContactList();
-
-  setTimeout(() => {
-    btnIndex = contactList.findIndex(
-      (contact) => contact.email === inputEmailRef.value
-    );
-    showContactInfo(btnIndex);
-
-    closeContactDialog();
-  }, 200);
+  btnIndex = contactList.findIndex((contact) => contact.email === inputEmailRef.value);
+  showContactInfo(btnIndex);
+  closeContactDialog();
+  await putData(CONTACTS_DIR, contactList);
+  
 }
-
-//to do:
-// active User markieren ... (ich) --> findet active User nicht
-// email schon einmal vorhanden? Dann kann nicht submitted werden -> erledigt
-// Animation
-// Input-Felder trimmen
-
 
 
 
