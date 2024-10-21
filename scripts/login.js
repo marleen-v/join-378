@@ -11,19 +11,6 @@ async function initLogin(){
 }
 
 
-async function putData(path="", data={}){
-  let res = await fetch(FIREBASE_URL + path + ".json",
-  {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data)
-  });
-  let resToJson = await res.json();
-}
-
-
 async function loadActiveUser(path=""){
   let res = await fetch(FIREBASE_URL + path + ".json");
   let resToJson = await res.json();
@@ -76,7 +63,6 @@ function guestLogin(){
     "initials": "GG"
   }];
   putData(ACTIVE_DIR, activeUser);
-  // setTimeout(function(){window.location.href = "./summary.html"}, 3000);
   window.location.href = "./summary.html";
 }
 
@@ -115,4 +101,16 @@ function logoutPopup(){
   setTimeout(function(){
     popupRef.style.visibility = "hidden";
   }, 3500);
+  resetActiveUser();
+}
+
+
+function resetActiveUser(){
+  activeUser = [
+    {
+      "firstName": "",
+      "lastName": "",
+      "initials": ""
+    }];
+  putData(ACTIVE_DIR, activeUser);
 }
