@@ -26,23 +26,21 @@ export function getDetailedEditableCard(taskId) {
                 <div></div>
                 <div onclick="closeOverlay()"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
             </div>
-            <div class="detailed-card-editable-container auto-overflow-y">
-            <div class="add-task-card-headline grid grid-rows-2">
+            <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
+            <div class="add-task-card-headline grid grid-rows-2 mg-right-8px">
                 <span class="input-edit-label">Title</span>
                 <input id="input-edit-headline" class="input-edit-headline" type="text">
             </div>
-            <div class="add-task-card-description grid grid-rows-2">
+            <div class="add-task-card-description grid grid-rows-2 mg-right-8px">
                 <span class="input-edit-label">Description</span>
                 <textarea name="" id="textarea-edit-description" class="textarea-edit-description"></textarea>
             </div>
-            <div class="add-task-card-date">
-            <div>
+            <div class="add-task-card-date grid grid-rows-2 gap-8px mg-right-8px">
                 <!-- Fälligkeitsdatum -->
                 <label class="task-label" for="due-date">Due date</label>
                 <input class="due-date" type="date" id="due-date" name="due_date" required="">
-              </div>
             </div>
-            <div class="add-task-card-priority grid grid-rows-2 align-items-center justify-content-flex-start">
+            <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
                 <span>Priority</span>
                 <div class="priority-buttons flex">
                     <button class="task-button clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">Urgent</button>
@@ -51,21 +49,26 @@ export function getDetailedEditableCard(taskId) {
                 </div>
               
             </div>
-            <div>
-                Assigned to:
-                <div class="add-task-card-assigned-to grid grid-rows-2 clickable">
+            <div class="grid grid-rows-2 gap-8px mg-right-8px">
+                <span>Assigned to:</span>
+                <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px clickable">
                     <div class="assign-to-select-box">
-                        <span>Select contacts to assign</span>
+                        <span class="mg-left-8px">Select contacts to assign</span>
                         <img src="../assets/icons/arrow_drop_downaa.svg" alt="">
                     </div>
-                    <div class="add-task-card-persons grid align-items-center grid-columns-2-48px-1fr gap-8px mg-top-8px"></div>
+                    <div class="add-task-card-persons flex"></div>
                 </div>
             </div>
-            <div>
-                Subtasks
-                <div class="detailed-task-card-subtasks add-task-card-subtasks grid align-items-center grid-columns-2-32px-1fr mg-top-8px"></div>
+            <div class="grid grid-rows-2 gap-8px mg-right-8px">
+                <span>Subtasks</span>
+                <div class="detailed-task-card-subtasks flex">
+                    <div class="subtasks-add-box">
+                        <span class="mg-left-8px">Add new subtask</span>
+                        <img src="../assets/icons/subtasks_plus.svg" alt="">
+                    </div>
+                </div>
             </div>
-            <div class="add-task-card-bottom flex justify-content-flex-end align-items-center">
+            <div class="add-task-card-bottom flex justify-content-flex-end align-items-center mg-right-8px">
             </div>
             </div>
         </section>  

@@ -312,16 +312,29 @@ main {
 .assign-to-select-box {
     border: 1px solid;
     border-color: #D1D1D1;
-    border-radius: 10px;
-    height: 24px;
+    border-radius: 8px;
+    height: 32px;
     display: flex;
+    width: 100%;
     justify-content: space-between;
+    align-items: center;
 }
 
 
 .detailed-task-card-subtasks {
     overflow-y: auto;
     height: 100px;
+}
+
+.subtasks-add-box {
+    border: 1px solid;
+    border-color: #D1D1D1;
+    border-radius: 8px;
+    height: 32px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .add-task-card-assigned-to > span {
