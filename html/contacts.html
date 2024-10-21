@@ -125,12 +125,13 @@
         </section>
       </div>
     </main>
-    <dialog class="flex align-items-center" id="contact-dialog">
+    <dialog class="flex align-items-center position-relative" id="contact-dialog">
      <img
         src="../assets/img/logo-weiss.png"
         class="join-logo"
         alt="join-logo"
       />
+      <button  type="button" class="close-btn position-absolute filter-color-to-white" id="close" ><img src="../assets/icons/close.svg" alt="" onclick="closeContactDialog()"></button>
       <div class="dialog-title flex flex-column justify-content-center" >
         <h1 id="dialog-title"></h1>
         <span id="dialogSubline"></span>
@@ -146,7 +147,7 @@
         </div>
       </div>
       <form  method="dialog" class="flex flex-column" id="contactForm">
-        <button  type="button" class="close-btn position-absolute" id="close" ><img src="../assets/icons/close.svg" alt="" onclick="closeContactDialog()"></button>
+        
         <label class="flex justify-content-between">
           <input required
             class="contact-input"
