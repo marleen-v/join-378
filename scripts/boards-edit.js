@@ -27,18 +27,18 @@ export function getDetailedEditableCard(taskId) {
                 <div onclick="closeOverlay()"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
             </div>
             <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
-            <div class="add-task-card-headline grid grid-rows-2 mg-right-8px">
+            <div class="add-task-card-headline grid grid-rows-2 mg-right-8px gap-8px">
                 <span class="input-edit-label">Title</span>
-                <input id="input-edit-headline" class="input-edit-headline" type="text">
+                <input id="input-edit-headline" class="input-edit-headline input-border p-left-8px" type="text">
             </div>
-            <div class="add-task-card-description grid grid-rows-2 mg-right-8px">
+            <div class="add-task-card-description grid grid-rows-2 mg-right-8px gap-8px">
                 <span class="input-edit-label">Description</span>
-                <textarea name="" id="textarea-edit-description" class="textarea-edit-description"></textarea>
+                <textarea name="" id="textarea-edit-description" class="textarea-edit-description input-border p-left-8px set-height-100px p-top-8px"></textarea>
             </div>
             <div class="add-task-card-date grid grid-rows-2 gap-8px mg-right-8px">
                 <!-- Fälligkeitsdatum -->
-                <label class="task-label" for="due-date">Due date</label>
-                <input class="due-date" type="date" id="due-date" name="due_date" required="">
+                <span class="input-edit-label">Due date</span>
+                <input class="due-date p-left-8px p-right-8px input-border" type="date" id="due-date" name="due_date" required="">
             </div>
             <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
                 <span>Priority</span>

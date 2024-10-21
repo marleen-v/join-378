@@ -327,6 +327,14 @@ main {
     grid-template-rows: 1fr;
 }
 
+
+.input-border {
+    border: 1px solid;
+    border-color: #D1D1D1;
+    border-radius: 8px;
+    min-height: 32px;
+}
+
 .assign-to-select-box {
     border: 1px solid;
     border-color: #D1D1D1;
