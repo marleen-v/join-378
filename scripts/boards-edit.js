@@ -14,7 +14,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.input-edit-headline').value = tasks[id].Title;
     detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
-    detailedCard.querySelector('.priority-buttons').innerHTML = setUserInitial(tasks[id], false);
+    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], false);
 }
 
 
