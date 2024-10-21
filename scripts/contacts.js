@@ -1,5 +1,6 @@
 const contactListRef = document.getElementById("contact-container");
 const singleContactRef = document.getElementById("single-contact");
+const contactInfoRef = document.getElementById("contactInfoSection");
 
 
 let contactList = [];
@@ -76,6 +77,7 @@ function sortContactsByFirstName() {
  * @param {*} index
  */
 function showContactInfo(index) {
+  contactInfoRef.classList.remove("d_none");
   currentContact = contactList[index];
   singleContactRef.innerHTML = "";
   singleContactRef.innerHTML = getContactInfoTemplate(index);
@@ -104,6 +106,10 @@ function toggleActiveBtnColor(btnIndex) {
  */
 function closeContactInfo() {
   singleContactRef.innerHTML = "";
+}
+
+function closeContactInfoMobile(){
+  contactInfoRef.classList.add("d_none");
 }
 
 function assignContactData() {
