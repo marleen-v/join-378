@@ -1,5 +1,6 @@
 let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
+let chkboxRef = document.getElementById("login_checkbox");
 
 
 async function initLogin(){
@@ -8,6 +9,7 @@ async function initLogin(){
   if (document.referrer.includes("summary.html")){
     logoutPopup();
   }
+  loadCheckboxStatus();
 }
 
 
@@ -44,6 +46,7 @@ function checkUserPassword(){
           "initials": dataFromFirebase[i].initials
         }];
       putData(ACTIVE_DIR, activeUser);
+      rememberMeCheck();
       window.location.href = './summary.html';
     }
   }
@@ -113,4 +116,26 @@ function resetActiveUser(){
       "initials": ""
     }];
   putData(ACTIVE_DIR, activeUser);
+}
+
+
+function loadCheckboxStatus(){
+  if (localStorage.checkbox && localStorage.checkbox !== "") {
+    chkboxRef.setAttribute("checked", "checked");
+    emailInputRef.value = localStorage.username;
+  } else {
+    chkboxRef.removeAttribute("checked");
+    emailInputRef.value = "";
+  }
+}
+
+
+function rememberMeCheck(){
+  if (chkboxRef.checked && emailInputRef.value !== "") {
+    localStorage.username = emailInputRef.value;
+    localStorage.checkbox = chkboxRef.value;
+  } else {
+    localStorage.username = "";
+    localStorage.checkbox = "";
+  }
 }
