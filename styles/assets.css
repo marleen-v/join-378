@@ -114,8 +114,8 @@
 }
 
 .set-bg-orange {
-    background-color: #FFA800;
-    color: white;
+    background-color: #FFA800 !important;
+    color: white !important;
 }
 
 .grid-columns-2 {
@@ -128,6 +128,10 @@
 
 .grid-columns-2-48px-1fr {
     grid-template-columns: 48px 1fr !important;
+}
+
+.filter-color-to-white {
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1000%) contrast(100%);
 }
 
 .grid-columns-2-64px-1fr {

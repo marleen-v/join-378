@@ -1,4 +1,4 @@
-import { getPriority } from "./add-task.js";
+import { getPriority, setPriorityColor } from "./add-task.js";
 import { getCloseSVG, closeOverlay } from "./boards-overlay.js";
 import { tasks, setUserInitial } from "./boards.js";
 
@@ -16,6 +16,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
     detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], false);
+    setPriorityColor(".detailed-card", id);
 }
 
 
@@ -42,20 +43,20 @@ export function getDetailedEditableCard(taskId) {
                 <input class="due-date p-left-8px p-right-8px input-border" type="date" id="due-date" name="due_date" required="">
             </div>
             <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
-                <span class="detailed-card-label">Priority</span>
+                <span class="flex justify-content-center detailed-card-label">Priority</span>
                 <div class="priority-buttons flex">
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">
-                    <span class="flex align-items-center set-width-84">Urgent</span>    
+                    <span class="flex align-items-center justify-content-center set-width-84">Urgent</span>    
                     <div class="flex align-items-center">${getPriority("Urgent")}</div>
                     </button>
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="selectPriority(this)">
                         
-                        <span class="flex align-items-center set-width-84">Medium</span>    
+                        <span class="flex align-items-center justify-content-center set-width-84">Medium</span>    
                         <div class="flex align-items-center">${getPriority("Medium")}</div>
                     </button>
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="selectPriority(this)">
                         
-                        <span class="flex align-items-center set-width-84">Low</span>    
+                        <span class="flex align-items-center justify-content-center set-width-84">Low</span>    
                         <div class="flex align-items-center">${getPriority("Low")}</div>
                     </button>
                 </div>
