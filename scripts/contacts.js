@@ -77,7 +77,7 @@ function sortContactsByFirstName() {
  * @param {*} index
  */
 function showContactInfo(index) {
-  contactInfoRef.classList.remove("d_none");
+  contactInfoRef.classList.remove("d_none"); // necessary for mobile
   currentContact = contactList[index];
   singleContactRef.innerHTML = "";
   singleContactRef.innerHTML = getContactInfoTemplate(index);
