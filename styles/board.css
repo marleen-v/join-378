@@ -331,9 +331,8 @@ main {
 }
 
 .add-task-card-bottom {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
+    justify-content: flex-end;
 }
 
 

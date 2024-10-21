@@ -60,18 +60,18 @@ export function getDetailedEditableCard(taskId) {
                 <span class="flex detailed-card-label">Priority</span>
                 <div class="priority-buttons flex">
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority('${taskId}', 'Urgent')">
-                    <span class="flex align-items-center justify-content-center set-width-84">Urgent</span>    
-                    <div class="flex align-items-center">${getPriority("Urgent")}</div>
+                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Urgent</span>    
+                    <div class="flex align-items-center set-height-100">${getPriority("Urgent")}</div>
                     </button>
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="selectPriority('${taskId}', 'Medium')">
                         
-                        <span class="flex align-items-center justify-content-center set-width-84">Medium</span>    
-                        <div class="flex align-items-center">${getPriority("Medium")}</div>
+                        <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Medium</span>    
+                        <div class="flex align-items-center set-height-100">${getPriority("Medium")}</div>
                     </button>
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="selectPriority('${taskId}', 'Low')">
                         
-                        <span class="flex align-items-center justify-content-center set-width-84">Low</span>    
-                        <div class="flex align-items-center">${getPriority("Low")}</div>
+                        <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Low</span>    
+                        <div class="flex align-items-center set-height-100">${getPriority("Low")}</div>
                     </button>
                 </div>
               
