@@ -130,6 +130,10 @@
     grid-template-columns: 32px 1fr !important;
 }
 
+.grid-columns-2-1fr-100px {
+    grid-template-columns: 1fr 100px !important;
+}
+
 .grid-columns-2-48px-1fr {
     grid-template-columns: 48px 1fr !important;
 }

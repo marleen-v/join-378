@@ -319,10 +319,6 @@ main {
 
 
 .add-task-card-subtasks {
-    display: grid;
-    grid-template-columns: 118px 85px;
-    grid-template-rows: 1fr;
-    gap: 8px;
     font-size: small;
 }
 
@@ -331,8 +327,8 @@ main {
 }
 
 .add-task-card-bottom {
-    display: flex;
-    justify-content: flex-end;
+    /*display: flex;
+    justify-content: flex-end;*/
 }
 
 

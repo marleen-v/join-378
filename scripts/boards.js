@@ -237,8 +237,8 @@ function getTaskCard(id, taskId) {
             <div class="flex align-items-center add-task-card-top"><div class="flex align-items-center justify-content-center add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>
-            <div class="add-task-card-subtasks align-items-center"></div>
-            <div class="add-task-card-bottom">
+            <div class="add-task-card-subtasks grid grid-columns-2-1fr-100px align-items-center"></div>
+            <div class="add-task-card-bottom grid grid-columns-2">
                 <div class="add-task-card-assigned-to flex"></div>
                 <div class="add-task-card-priority flex align-items-center justify-content-flex-end"></div>
             </div>
