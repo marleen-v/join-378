@@ -21,7 +21,7 @@ export function setDetailedEditableCard(taskId) {
 
 export function getDetailedEditableCard(taskId) {
     return /*html*/`
-        <section class="detailed-card grid-rows-2">
+        <section class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div></div>
                 <div onclick="closeOverlay()"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
@@ -68,7 +68,13 @@ export function getDetailedEditableCard(taskId) {
                     </div>
                 </div>
             </div>
+            </div>  
             <div class="add-task-card-bottom flex justify-content-flex-end align-items-center mg-right-8px">
+            <div class="flex">
+                <button class="flex justify-content-center align-items-center btn-ok clickable" onclick="closeOverlay()">
+                    <span class="mg-right-8px">Ok</span>
+                    <img src="../assets/icons/check.svg" alt="">
+                </button>
             </div>
             </div>
         </section>  
