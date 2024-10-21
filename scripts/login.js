@@ -5,6 +5,9 @@ let passwordInputRef = document.getElementById("passwordInput");
 async function initLogin(){
   dataFromFirebase = await loadData(USERS_DIR);
   activeUser = await loadActiveUser(ACTIVE_DIR);
+  if (document.referrer.includes("summary.html")){
+    logoutPopup();
+  }
 }
 
 
@@ -104,3 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function logoutPopup(){
+  let popupRef = document.getElementById("logout_popup");
+  setTimeout(() => {
+    popupRef.style.visibility = "visible";
+  }, 1500);
+  setTimeout(function(){
+    popupRef.style.visibility = "hidden";
+  }, 3500);
+}
