@@ -1,4 +1,5 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
+import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { tasks } from "./boards.js";
 
 
@@ -71,6 +72,7 @@ function getLowSVG() {
 
 function setBgColor(element) {
     let div = document.querySelector(`#${element}`);
+    
     div.classList.add('set-bg-orange');  
     div.querySelector('svg').classList.add('filter-color-to-white');  
 }
@@ -87,8 +89,7 @@ function removePriorityColor(element) {
 }
 
 export function setPriorityColor(element, id) {
-    removePriorityColor(element);
-    console.log(tasks[id].Priority.toLowerCase());
+    removePriorityColor(element);    
     
     switch (tasks[id].Priority) {
         case 'Urgent': setBgColor(tasks[id].Priority.toLowerCase()); break;
@@ -114,6 +115,9 @@ export function getPriority(priority) {
     }
     return svg;
 }
+
+
+
 
 
 window.loadAddTask = loadAddTask;

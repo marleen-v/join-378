@@ -3,7 +3,7 @@ import { getCloseSVG, closeOverlay } from "./boards-overlay.js";
 import { tasks, setUserInitial } from "./boards.js";
 
 
-function parseTaskIdToNumberId(taskId) {
+export function parseTaskIdToNumberId(taskId) {
     let splitId = taskId.split('taskId');
     return parseInt(splitId[1]);
 }
@@ -19,6 +19,14 @@ export function setDetailedEditableCard(taskId) {
     setPriorityColor(".detailed-card", id);
 }
 
+function selectPriority(taskId, priority) {
+    let id = parseTaskIdToNumberId(taskId);
+
+    tasks[id].Priority = priority;
+    document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
+    setDetailedEditableCard(taskId);
+    
+}
 
 
 export function getDetailedEditableCard(taskId) {
@@ -45,16 +53,16 @@ export function getDetailedEditableCard(taskId) {
             <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
                 <span class="flex detailed-card-label">Priority</span>
                 <div class="priority-buttons flex">
-                    <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">
+                    <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority('${taskId}', 'Urgent')">
                     <span class="flex align-items-center justify-content-center set-width-84">Urgent</span>    
                     <div class="flex align-items-center">${getPriority("Urgent")}</div>
                     </button>
-                    <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="selectPriority(this)">
+                    <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="selectPriority('${taskId}', 'Medium')">
                         
                         <span class="flex align-items-center justify-content-center set-width-84">Medium</span>    
                         <div class="flex align-items-center">${getPriority("Medium")}</div>
                     </button>
-                    <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="selectPriority(this)">
+                    <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="selectPriority('${taskId}', 'Low')">
                         
                         <span class="flex align-items-center justify-content-center set-width-84">Low</span>    
                         <div class="flex align-items-center">${getPriority("Low")}</div>
@@ -93,3 +101,5 @@ export function getDetailedEditableCard(taskId) {
         </section>  
     `;
 }
+
+window.selectPriority = selectPriority;

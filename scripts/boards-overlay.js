@@ -143,6 +143,7 @@ export function closeOverlay() {
         overlay.classList.remove('z-index-2000');
         overlay.classList.add('z-index-minus-1');
         unsetOpacity();
+        showData(tasks);
     }, "300");
 }
 
