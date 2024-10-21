@@ -1,0 +1,16 @@
+.help-wrapper {
+  margin-top: 20px;
+  margin-left: 40px;
+  border-collapse: collapse;
+  display: block;
+  overflow-y: auto;
+  max-height: 760px;
+}
+
+h1, h3 {
+  margin-bottom: 10px;
+}
+
+a {
+  color: blueviolet;
+}

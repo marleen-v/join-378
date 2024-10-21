@@ -16,6 +16,9 @@ function init() {
     openSummary();
 }
 
+function openHelp() {
+    window.location = "../html/help.html";
+}
 
 function openSummary() {
     window.location = "../html/summary.html";
