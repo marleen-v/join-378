@@ -1,5 +1,5 @@
 import { getCloseSVG, closeOverlay } from "./boards-overlay.js";
-import { tasks } from "./boards.js";
+import { tasks, setUserInitial } from "./boards.js";
 
 
 function parseTaskIdToNumberId(taskId) {
@@ -14,6 +14,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.input-edit-headline').value = tasks[id].Title;
     detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
+    detailedCard.querySelector('.priority-buttons').innerHTML = setUserInitial(tasks[id], false);
 }
 
 
@@ -52,7 +53,11 @@ export function getDetailedEditableCard(taskId) {
             </div>
             <div>
                 Assigned to:
-                <div class="add-task-card-assigned-to">
+                <div class="add-task-card-assigned-to grid grid-rows-2 clickable">
+                    <div class="assign-to-select-box">
+                        <span>Select contacts to assign</span>
+                        <img src="../assets/icons/arrow_drop_downaa.svg" alt="">
+                    </div>
                     <div class="add-task-card-persons grid align-items-center grid-columns-2-48px-1fr gap-8px mg-top-8px"></div>
                 </div>
             </div>

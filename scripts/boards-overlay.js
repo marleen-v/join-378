@@ -92,7 +92,7 @@ function getDetailedCard(taskId) {
         <section class="detailed-card">
             <div class="detailed-card-top">
                 <div class="flex justify-content-center align-items-center add-task-card-category"></div>
-                <div onclick="closeOverlay()"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
+                <div onclick="closeOverlay()"class="flex justify-content-center align-items-center detailed-card-close clickable">${getCloseSVG()}</div>
             </div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>

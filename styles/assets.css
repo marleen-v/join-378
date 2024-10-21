@@ -34,6 +34,10 @@
     flex-direction:row;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .grid {
     display:grid;
 }
@@ -60,6 +64,11 @@
 
 .grid-rows-2 {
     grid-template-rows: auto auto !important;
+}
+
+.set-width-height-42 {
+    width: 42px !important;
+    height: 42px !important;
 }
 
 .auto-overflow-y {

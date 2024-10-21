@@ -93,7 +93,7 @@ export function setUserInitial(element, displayFullName = false) {
         let initial = firstName + lastName;
         let color = getUserColor(splittedName[0], splittedName[1]);        
         personsHTML += /*html*/`
-            <span class="circle ${color} flex justify-content-center align-items-center"><span>${initial}</span></span> 
+            <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${initial}</span></span> 
             ${(displayFullName)? "<span>" + person + "</span>" : ""}
         `;
     });    
@@ -233,7 +233,7 @@ function getEmptyColumn() {
  */
 function getTaskCard(id, taskId) {    
     return /*html*/`
-        <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card" draggable="true" ondragstart="startDragging('${taskId}')">
+        <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card clickable" draggable="true" ondragstart="startDragging('${taskId}')">
             <div class="flex align-items-center add-task-card-top"><div class="flex align-items-center justify-content-center add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>
