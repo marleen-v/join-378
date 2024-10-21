@@ -1,3 +1,4 @@
+import { getPriority } from "./add-task.js";
 import { getCloseSVG, closeOverlay } from "./boards-overlay.js";
 import { tasks, setUserInitial } from "./boards.js";
 
@@ -28,39 +29,50 @@ export function getDetailedEditableCard(taskId) {
             </div>
             <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
             <div class="add-task-card-headline grid grid-rows-2 mg-right-8px gap-8px">
-                <span class="input-edit-label">Title</span>
+                <span class="input-edit-label detailed-card-label">Title</span>
                 <input id="input-edit-headline" class="input-edit-headline input-border p-left-8px" type="text">
             </div>
-            <div class="add-task-card-description grid grid-rows-2 mg-right-8px gap-8px">
-                <span class="input-edit-label">Description</span>
-                <textarea name="" id="textarea-edit-description" class="textarea-edit-description input-border p-left-8px set-height-100px p-top-8px"></textarea>
+            <div class="grid grid-rows-2 mg-right-8px gap-8px">
+                <span class="input-edit-label detailed-card-label">Description</span>
+                <textarea name="" id="textarea-edit-description" class="textarea-edit-description input-border p-left-8px p-right-8px set-height-100px p-top-8px"></textarea>
             </div>
             <div class="add-task-card-date grid grid-rows-2 gap-8px mg-right-8px">
                 <!-- Fälligkeitsdatum -->
-                <span class="input-edit-label">Due date</span>
+                <span class="input-edit-label detailed-card-label">Due date</span>
                 <input class="due-date p-left-8px p-right-8px input-border" type="date" id="due-date" name="due_date" required="">
             </div>
             <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
-                <span>Priority</span>
+                <span class="detailed-card-label">Priority</span>
                 <div class="priority-buttons flex">
-                    <button class="task-button clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">Urgent</button>
-                    <button class="task-button clickable" type="button" id="medium" data-priority="mittel" onclick="selectPriority(this)">Medium</button>
-                    <button class="task-button clickable" type="button" id="low" data-priority="niedrig" onclick="selectPriority(this)">Low</button>
+                    <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">
+                    <span class="flex align-items-center set-width-84">Urgent</span>    
+                    <div class="flex align-items-center">${getPriority("Urgent")}</div>
+                    </button>
+                    <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="selectPriority(this)">
+                        
+                        <span class="flex align-items-center set-width-84">Medium</span>    
+                        <div class="flex align-items-center">${getPriority("Medium")}</div>
+                    </button>
+                    <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="selectPriority(this)">
+                        
+                        <span class="flex align-items-center set-width-84">Low</span>    
+                        <div class="flex align-items-center">${getPriority("Low")}</div>
+                    </button>
                 </div>
               
             </div>
             <div class="grid grid-rows-2 gap-8px mg-right-8px">
-                <span>Assigned to:</span>
+                <span class="detailed-card-label">Assigned to:</span>
                 <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px clickable">
                     <div class="assign-to-select-box">
                         <span class="mg-left-8px">Select contacts to assign</span>
                         <img src="../assets/icons/arrow_drop_downaa.svg" alt="">
                     </div>
-                    <div class="add-task-card-persons flex"></div>
+                    <div class="add-task-card-persons flex auto-overflow-y"></div>
                 </div>
             </div>
             <div class="grid grid-rows-2 gap-8px mg-right-8px">
-                <span>Subtasks</span>
+                <span class="detailed-card-label">Subtasks</span>
                 <div class="detailed-task-card-subtasks flex">
                     <div class="subtasks-add-box">
                         <span class="mg-left-8px">Add new subtask</span>

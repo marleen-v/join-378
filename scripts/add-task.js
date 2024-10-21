@@ -75,9 +75,9 @@ function getLowSVG() {
  * @param {*} element
  * @returns {string}
  */
-export function getPriority(element) {
+export function getPriority(priority) {
     let svg = "";    
-    switch (element.Priority) {
+    switch (priority) {
         case 'Urgent': svg = getUrgentSVG(); break;
         case 'Medium': svg = getMediumSVG(); break;
         case 'Low': svg = getLowSVG(); break;

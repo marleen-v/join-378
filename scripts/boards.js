@@ -115,7 +115,7 @@ function setCardElements(element, index) {
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     setSubtasks(currentCard, element);    
     currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);
-    currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element);//getPriority(element);
+    currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element.Priority);//getPriority(element);
 }
 
 

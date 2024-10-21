@@ -281,9 +281,18 @@ main {
     gap: 32px;
 }
 
+
+.detailed-card-label {
+    font-weight: 400;
+}
+
 .detailed-card-editable-container {
     margin: 0;
     height: 100%;
+}
+
+.textarea-edit-description {
+    font-family: Inter, arial, sans-serif;
 }
 
 
@@ -513,6 +522,9 @@ main {
 
 .priority-buttons {
     display: flex;
+    height: 56px;
+    width: 136px;
+
 }
 
 .task-form {
@@ -541,6 +553,7 @@ main {
     border: 1px solid #D1D1D1;
     margin-right: 16px;
     background-color: white;
+    height: 100%;
 }
 
 .form-row {
