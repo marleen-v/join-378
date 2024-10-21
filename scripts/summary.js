@@ -138,3 +138,13 @@ function showGreetingDependingOnDaytime(){
   {formula = "Good night";}
   document.getElementById("greeting_ctn").innerHTML = getGreetingTemplate(formula);
 }
+
+
+function logoutPopup(){
+  let popupRef = document.getElementById("logout_popup");
+  // popupRef.classList.remove("dnone");
+  popupRef.classList.add(".open-logout-popup");
+  setTimeout(function(){
+      window.location.href = "./login.html";      
+  }, 3000);
+}

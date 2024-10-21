@@ -102,3 +102,5 @@ document.addEventListener("DOMContentLoaded", () => {
     logoRef.style.zIndex = "101";
   }, 1500);
 });
+
+

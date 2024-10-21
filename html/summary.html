@@ -9,6 +9,7 @@
     <script src="../scripts/template.js" defer></script>
     <script src="../scripts/add-task.js" defer></script> -->
     <script src="../script.js" defer></script>
+    <script src="../scripts/assets.js" defer></script>
     <script src="../scripts/template.js" defer></script>
     <script src="../scripts/summary.js" defer></script>
     <!-- <script src="../scripts/boards.js" defer></script>
@@ -36,13 +37,13 @@
           </button>
           <div class="user-profil">
             <div class="dropdown-menu">
-              <button class="profil-img" onclick="">
+              <button class="profil-img" onclick="openCloseDropdownMenu()">
                 <img src="../assets/img/user-profil.png" alt="" />
               </button>
               <div class="dropdown d_none" id="dropdown-menu">
                 <button class="dropdown-btn"><span>Legal Notice</span></button>
                 <button class="dropdown-btn"><span>Privacy Policy</span></button>
-                <button class="dropdown-btn"><span>Log out</span></button>
+                <button class="dropdown-btn" onclick="logoutPopup()"><span>Log out</span></button>
               </div>
             </div>
           </div>
@@ -78,6 +79,8 @@
 
     <main id="main_summary">
     </main>
+
+    <div class="logout-popup" id="logout_popup">You have successfully logged out!</div>
 
   </body>
 </html>
