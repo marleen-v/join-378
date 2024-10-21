@@ -1,5 +1,5 @@
 import { getPriority, setPriorityColor } from "./add-task.js";
-import { getCloseSVG, closeOverlay } from "./boards-overlay.js";
+import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard } from "./boards-overlay.js";
 import { tasks, setUserInitial } from "./boards.js";
 
 
@@ -26,6 +26,12 @@ function selectPriority(taskId, priority) {
     document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
     setDetailedEditableCard(taskId);
     
+}
+
+function closeEdit(taskId) {
+    let id = parseTaskIdToNumberId(taskId);
+    document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
+    setDetailedCard(id);
 }
 
 
@@ -92,7 +98,7 @@ export function getDetailedEditableCard(taskId) {
             </div>  
             <div class="add-task-card-bottom flex justify-content-flex-end align-items-center mg-right-8px">
             <div class="flex">
-                <button class="flex justify-content-center align-items-center btn-ok clickable" onclick="closeOverlay()">
+                <button class="flex justify-content-center align-items-center btn-ok clickable" onclick="closeEdit('${taskId}')">
                     <span class="mg-right-8px">Ok</span>
                     <img src="../assets/icons/check.svg" alt="">
                 </button>
@@ -103,3 +109,4 @@ export function getDetailedEditableCard(taskId) {
 }
 
 window.selectPriority = selectPriority;
+window.closeEdit = closeEdit;

@@ -42,10 +42,8 @@ function setSubtasks(detailedCard, id) {
 }
 
 
-function setDetailedCard(id) {
+export function setDetailedCard(id) {
     let detailedCard = document.querySelector('.detailed-card');
-    detailedCard.classList.remove('runOutAnimation');
-    detailedCard.classList.add('runInAnimation');
     detailedCard.querySelector('.add-task-card-category').innerHTML = tasks[id].Category;
     setBgColor(detailedCard, tasks[id]);
     detailedCard.querySelector('.add-task-card-headline').innerHTML = tasks[id].Title;
@@ -82,12 +80,15 @@ function deleteTask(taskId) {
 export function openOverlay(id) {
     let overlay = getOverlay();
     overlay.innerHTML = getDetailedCard('taskId' + id);
+    let detailedCard = document.querySelector('.detailed-card');
+    detailedCard.classList.remove('runOutAnimation');
+    detailedCard.classList.add('runInAnimation');
     setDetailedCard(id);
     setOpacity();
 }
 
 
-function getDetailedCard(taskId) {
+export function getDetailedCard(taskId) {
     return /*html*/`
         <section class="detailed-card">
             <div class="detailed-card-top">
