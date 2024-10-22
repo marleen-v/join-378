@@ -360,7 +360,7 @@ label>input {
   }
 
   .add-contact-container{
-    bottom:120px;
+    bottom:20px;
     right:20px;
     background-color: transparent;
     height:auto;
@@ -413,7 +413,7 @@ label>input {
     .back-arrow {
       display:block !important;
       right: 40px;
-      top: 60px;
+      top: 40px;
     }
 
     dialog{
