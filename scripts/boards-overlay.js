@@ -84,6 +84,7 @@ function deleteTask(taskId) {
             tasks.splice(i, 1);
         }
     }
+    tasks.forEach((element, index) => { element.id = index });
     putData(TASKS_DIR, tasks);
     closeOverlay();
     showData(tasks);
