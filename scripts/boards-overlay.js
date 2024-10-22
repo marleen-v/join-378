@@ -16,7 +16,7 @@ function unsetOpacity() {
 
 function setDate(card, id) {
     const date = new Date(tasks[id].Date);
-    const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const formatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const formattedDate = formatter.format(date);
     card.querySelector('.add-task-card-date').innerHTML = "Due date: " + formattedDate;
 }

@@ -53,6 +53,7 @@ main {
     height: 48px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
+    outline: none;
 }
 
 .board-headline {
@@ -445,8 +446,9 @@ main {
     grid-template-rows: 1fr;
 }
 
-.subtask-input > input {
+.subtask-input > div > input {
     border: none;
+    outline: none;
 }
 
 .divider {

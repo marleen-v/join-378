@@ -30,6 +30,10 @@ function selectPriority(taskId, priority) {
 
 function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
+    tasks[id].Title = document.querySelector('#input-edit-headline').value;
+    tasks[id].Description = document.querySelector('#textarea-edit-description').value;    
+    tasks[id].Date = document.querySelector('#due-date').value;
+    putData(TASKS_DIR, tasks);
     document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
     setDetailedCard(id);
 }
@@ -142,23 +146,32 @@ function assignContact(taskId) {
     }
 }
 
-function getSubtaskMask() {
+function getSubtaskMask(taskId) {
     return /*html*/`
-        <div onclick="addSubtask()" class="subtasks-add-box p-right-8px clickable">
+        <div onclick="addSubtask('${taskId}')" class="subtasks-add-box p-right-8px clickable">
             <span class="mg-left-8px">Add new subtask</span>
             <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
         </div>
     `;
 }
 
+function pushSubtask(taskId) {
+    let id = parseTaskIdToNumberId(taskId);
+    let input = document.querySelector('#add-new-subtask').value;
+    if(input == "") return;
+    if(tasks[id].Subtasks) tasks[id].Subtasks.push({"Description": input, "Done": false});   
+    else tasks[id]["Subtasks"] = [{"Description": input, "Done": false}];
+    document.querySelector('.detailed-task-card-subtasks').innerHTML = getSubtaskMask(taskId);
+}
 
-function getSubtaskInput() {
+
+function getSubtaskInput(taskId) {
     return /*html*/`
         <div class="subtasks-add-box subtask-input p-right-8px">
-            <input type="text">
+            <div class="p-left-8px"><input id="add-new-subtask" type="text" placeholder="Add new task..."></div>
             <div onclick="cancelSubtask()" class="size-16px flex justify-content-center click-item clickable"><img src="../assets/icons/close.svg" alt=""></div>
             <div class="divider"></div>
-            <div onclick="" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
+            <div onclick="pushSubtask('${taskId}')" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
         </div>
     `;
 }
@@ -170,7 +183,7 @@ function cancelSubtask() {
 
 function addSubtask(taskId) {
     let container = document.querySelector('.detailed-task-card-subtasks');
-    container.innerHTML = getSubtaskInput();
+    container.innerHTML = getSubtaskInput(taskId);
 }
 
 
@@ -228,7 +241,7 @@ export function getDetailedEditableCard(taskId) {
             <div class="grid grid-rows-2 gap-8px mg-right-8px">
                 <span class="detailed-card-label mg-top-8px">Subtasks</span>
                 <div class="detailed-task-card-subtasks flex">
-                    ${getSubtaskMask()}
+                    ${getSubtaskMask(taskId)}
                 </div>
             </div>
             </div>  
@@ -250,3 +263,4 @@ window.assignContact = assignContact;
 window.chooseContact = chooseContact;
 window.addSubtask = addSubtask;
 window.cancelSubtask = cancelSubtask;
+window.pushSubtask = pushSubtask;
