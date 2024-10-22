@@ -69,16 +69,6 @@ function showErrorMessage(str){
 }
 
 
-/*
-function showErrorMessage(){
-  let errorRef = document.getElementById('error_message');
-  errorRef.innerHTML = 'Passwords do not match!';
-  setTimeout(function(){
-    errorRef.innerHTML = '';
-  }, 3000);
-}
-*/
-
 function signupSuccess(){
   openPopup();
   resetValues();
@@ -106,6 +96,7 @@ function addUser(){
   if((checkCorrectPassword()) && (emailNotExists()) && (spaces === 1)){
     let firstName = nameInputRef.value.split(' ')[0];
     let lastName = nameInputRef.value.split(' ')[1];
+    saveActiveUserToSessionStorage(emailInputRef.value);
     pushEverythingNecessaryToFireBase(firstName, lastName);
     signupSuccess();
   } else {
@@ -173,4 +164,9 @@ function togglePasswordIcon(pwdIdx){
 function openPopup(){
   let popup = document.getElementById("popupsuccess");
   popup.classList.add("open-popup");
+}
+
+
+function saveActiveUserToSessionStorage(value){
+  sessionStorage.username = value;
 }

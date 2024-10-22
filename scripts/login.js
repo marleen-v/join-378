@@ -6,6 +6,7 @@ let chkboxRef = document.getElementById("login_checkbox");
 async function initLogin(){
   dataFromFirebase = await loadData(USERS_DIR);
   activeUser = await loadActiveUser(ACTIVE_DIR);
+  // localStorage.setItem('active', JSON.stringify(activeUser));
   if (document.referrer.includes("summary.html")){
     logoutPopup();
   }
@@ -46,6 +47,7 @@ function checkUserPassword(){
           "initials": dataFromFirebase[i].initials
         }];
       putData(ACTIVE_DIR, activeUser);
+      saveActiveUserToSessionStorage(emailInputRef.value);
       rememberMeCheck();
       window.location.href = './summary.html';
     }
@@ -65,6 +67,7 @@ function guestLogin(){
     "lastName": "",
     "initials": "GG"
   }];
+  saveActiveUserToSessionStorage('Guest');
   putData(ACTIVE_DIR, activeUser);
   window.location.href = "./summary.html";
 }
@@ -120,9 +123,9 @@ function resetActiveUser(){
 
 
 function loadCheckboxStatus(){
-  if (sessionStorage.checkbox && sessionStorage.checkbox !== "") {
+  if (localStorage.checkbox && localStorage.checkbox !== "") {
     chkboxRef.setAttribute("checked", "checked");
-    emailInputRef.value = sessionStorage.username;
+    emailInputRef.value = localStorage.username;
   } else {
     chkboxRef.removeAttribute("checked");
     emailInputRef.value = "";
@@ -132,12 +135,17 @@ function loadCheckboxStatus(){
 
 function rememberMeCheck(){
   if (chkboxRef.checked && emailInputRef.value !== "") {
-    sessionStorage.username = emailInputRef.value;
-    sessionStorage.checkbox = chkboxRef.value;
+    localStorage.username = emailInputRef.value;
+    localStorage.checkbox = chkboxRef.value;
   } else {
-    sessionStorage.username = "";
-    sessionStorage.checkbox = "";
+    localStorage.username = "";
+    localStorage.checkbox = "";
   }
+}
+
+
+function saveActiveUserToSessionStorage(value){
+  sessionStorage.username = value;
 }
 
 
@@ -146,3 +154,4 @@ window.guestLogin = guestLogin;
 window.togglePasswordIcon = togglePasswordIcon;
 window.showData = showData;
 window.checkUserPassword = checkUserPassword;
+window.saveActiveUserToSessionStorage = saveActiveUserToSessionStorage;
