@@ -77,3 +77,4 @@ function getRandomColor(){
   return contactColors[r];
 }
 
+

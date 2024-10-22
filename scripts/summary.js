@@ -1,6 +1,3 @@
-
-
-
 function initSummary(){
   loadData(TASKS_DIR);
 }
@@ -16,8 +13,21 @@ async function loadData(path=""){
 
 function displayHTML(){
   showMainTemplate();
-  //showGreetingDependingOnDaytime();
   loadActiveUser(ACTIVE_DIR);
+  setUserLogo();
+}
+
+
+async function loadDataActive(path=""){
+  let res = await fetch(FIREBASE_URL + path + ".json");
+  let resToJson = await res.json();
+  return resToJson;
+}
+
+
+async function setUserLogo(){
+  activeUser = await loadDataActive(ACTIVE_DIR);
+  document.getElementById("userinitials").innerHTML = activeUser[0].initials;
 }
 
 
@@ -109,14 +119,6 @@ function getDeadlineMonth(){
 
 function getDeadlineDay(){
   return getNearestDate().split('-')[2];
-}
-
-
-function getGreetingTemplate(greetFormula){
-  return `
-    <p class="greeting-formula">${greetFormula},</p>
-    <p class="greeting-person">${currentUserFirstName}&nbsp;${currentUserLastName}</p>
-  `;
 }
 
 
