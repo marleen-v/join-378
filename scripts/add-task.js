@@ -73,8 +73,15 @@ function getLowSVG() {
 function setBgColor(element) {
     let div = document.querySelector(`#${element}`);
     
-    div.classList.add('set-bg-orange');  
-    div.querySelector('svg').classList.add('filter-color-to-white');  
+    //div.classList.add('set-bg-orange');  
+    //div.querySelector('svg').classList.add('filter-color-to-white'); 
+    switch (element) {
+        case 'urgent': div.classList.add('set-bg-red'); break;
+        case 'medium': div.classList.add('set-bg-orange'); break;  
+        case 'low': div.classList.add('set-bg-green'); break;
+    } 
+    div.querySelector('svg').classList.add('filter-color-to-white');
+
 }
 
 
@@ -83,7 +90,9 @@ function removePriorityColor(element) {
     let buttons = detailedCard.querySelectorAll('.priority-buttons > button');
     
     buttons.forEach(item => {
+        item.classList.remove('set-bg-red');
         item.classList.remove('set-bg-orange');
+        item.classList.remove('set-bg-green');
         item.querySelector('svg').classList.remove('filter-color-to-white');
     });
 }

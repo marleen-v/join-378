@@ -126,6 +126,16 @@
     color: white !important;
 }
 
+.set-bg-red {
+    background-color: #FF3D00 !important;
+    color: white !important;
+}
+
+.set-bg-green {
+    background-color: #7AE229 !important;
+    color: white !important;
+}
+
 .grid-columns-2 {
     grid-template-columns: auto auto !important;
 }
