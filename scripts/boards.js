@@ -11,6 +11,7 @@ let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 export let tasks = [];
 export let contacts = [];
+export let activeUser = [];
 
 
 export function updateTasks(list) {
@@ -24,6 +25,13 @@ async function loadData(path = "") {
     return resToJson;
 }
 
+async function loadActiveUser(path=""){
+    let res = await fetch(FIREBASE_URL + path + ".json");
+    return await res.json();;
+    //currentUserFirstName = activeUser[0].firstName;
+    //currentUserLastName = activeUser[0].lastName;
+  }
+
 
 /**
  * Load board and store all data for board from firebase strorage
@@ -35,7 +43,10 @@ async function loadBoards() {
     //const htmlContent = await loadHTML('../html/boards-main.html');
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
-
+    activeUser = await loadActiveUser(ACTIVE_DIR);
+    console.log(activeUser);
+    
+    
     if (tasks) {
         //processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
         showData(tasks);

@@ -101,12 +101,16 @@
     overflow-y: auto !important;
 }
 
+.hidden-overflow-y {
+    overflow:  hidden !important;
+}
+
 .set-height-100px {
     height: 100px;
 }
 
-.set-height-128px {
-    height: 128px;
+.set-height-140px {
+    height: 140px;
 }
 
 .set-height-100 {
@@ -128,6 +132,11 @@
 
 .set-bg-red {
     background-color: #FF3D00 !important;
+    color: white !important;
+}
+
+.set-bg-dark-blue {
+    background-color: #2A3647 !important;
     color: white !important;
 }
 

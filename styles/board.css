@@ -331,6 +331,15 @@ main {
     justify-content: flex-end;*/
 }
 
+.task-user-select {
+    padding: 2px 0 2px 8px;
+}
+
+.task-user-select:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
 
 .input-border {
     border: 1px solid;

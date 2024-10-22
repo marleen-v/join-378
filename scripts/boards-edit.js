@@ -1,6 +1,6 @@
 import { getPriority, setPriorityColor } from "./add-task.js";
 import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard, uncheckedBoxSVG, checkedBoxSVG } from "./boards-overlay.js";
-import { tasks, setUserInitial, contacts, getUserColor } from "./boards.js";
+import { tasks, setUserInitial, contacts, getUserColor, activeUser } from "./boards.js";
 let toggleContactList = false;
 
 export function parseTaskIdToNumberId(taskId) {
@@ -72,39 +72,63 @@ function chooseContact(index, taskId) {
     }
 }
 
+function getActiveUser(element) {
+    if(element.email === activeUser.email) return true;
+    return false;
+}
+
 function addLinkedItem(element, index, taskId) {
     let color = getUserColor(element.firstName, element.lastName); 
     let id = parseTaskIdToNumberId(taskId); 
     let selectBox = isChecked(element, taskId);
+    let active = (getActiveUser(element)) ? " (you)" : "";
     return /*html*/`
-        <div class="grid grid-columns-3-48px-1fr-48px">
+        <div class="task-user-select grid grid-columns-3-48px-1fr-48px">
             <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
-            <span class="flex align-items-center">${element.firstName} ${element.lastName}</span>
+            <span class="flex align-items-center">${element.firstName} ${element.lastName}${active}</span>
             <div onclick="chooseContact(${index}, '${taskId}')" class="flex align-items-center">${selectBox}</div>
         </div>
     `;
 }
 
 
-function openContactSelectBox(taskId) {
+function focusUserSelectBox(active) {
     let container = document.querySelector('.detailed-card-editable-container');
-    container.scrollTo(0,100);
-    let assignBox = document.querySelector('.assign-to-select-box > span');
-    assignBox.innerHTML = "|";
-    let persons = document.querySelector('.add-task-card-persons');
-    persons.classList.add('set-height-128px');
-    let contactsSelectBox = "";
-    contacts.forEach((element, index) => { contactsSelectBox += addLinkedItem(element, index, taskId) });
-    persons.innerHTML = contactsSelectBox;
+    if(active) {
+        container.classList.remove('auto-overflow-y');
+        container.classList.add('hidden-overflow-y');
+        container.scrollTo(0,100);
+    }
+    else {
+        container.classList.add('auto-overflow-y');
+        container.classList.remove('hidden-overflow-y');
+    }
 }
 
 
-function closeContactSelectBox() {
+function openContactSelectBox(taskId) {
+    focusUserSelectBox(true);
+    let assignBox = document.querySelector('.assign-to-select-box > span');
+    assignBox.innerHTML = "|";
+    let persons = document.querySelector('.add-task-card-persons');
+    persons.classList.add('set-height-140px');
+    persons.innerHTML = "";
+    contacts.forEach((element, index) => { 
+        persons.innerHTML += addLinkedItem(element, index, taskId);
+        if(getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
+        else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
+    });
+}
+
+
+function closeContactSelectBox(taskId) {
+    focusUserSelectBox(false);
     let assignBox = document.querySelector('.assign-to-select-box > span');
     assignBox.innerHTML = "Select contacts to assign";
     let persons = document.querySelector('.add-task-card-persons');
-    persons.classList.remove('set-height-128px');
+    persons.classList.remove('set-height-140px');
     persons.innerHTML = "";
+    setDetailedEditableCard(taskId);
 }
 
 
@@ -114,7 +138,7 @@ function assignContact(taskId) {
         openContactSelectBox(taskId);
     } 
     else {
-        closeContactSelectBox();
+        closeContactSelectBox(taskId);
     }
 }
 
@@ -171,7 +195,7 @@ export function getDetailedEditableCard(taskId) {
                 </div>
             </div>
             <div class="grid grid-rows-2 gap-8px mg-right-8px">
-                <span class="detailed-card-label">Subtasks</span>
+                <span class="detailed-card-label mg-top-8px">Subtasks</span>
                 <div class="detailed-task-card-subtasks flex">
                     <div class="subtasks-add-box">
                         <span class="mg-left-8px">Add new subtask</span>
