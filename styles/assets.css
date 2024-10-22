@@ -105,6 +105,10 @@
     height: 100px;
 }
 
+.set-height-128px {
+    height: 128px;
+}
+
 .set-height-100 {
     height: 100%;
 }
@@ -132,6 +136,10 @@
 
 .grid-columns-2-1fr-100px {
     grid-template-columns: 1fr 100px !important;
+}
+
+.grid-columns-3-48px-1fr-48px {
+    grid-template-columns: 48px 1fr  48px !important;
 }
 
 .grid-columns-2-48px-1fr {
@@ -167,7 +175,3 @@
 .trans-dark-bg-p-50 {
     background-color: rgba(0, 0, 0, 0.5);
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 5cc8c281c6e75ca234e7caf194b7c6598e958588

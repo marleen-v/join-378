@@ -67,7 +67,7 @@ export function setBgColor(currentCard, element) {
  * @param {*} lastName
  * @returns {string}
  */
-function getUserColor(firstName, lastName) {
+export function getUserColor(firstName, lastName) {
     let color = "";
     contacts.forEach(element => {
         if (element.firstName == firstName || element.lastName == lastName) {

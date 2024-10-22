@@ -1,5 +1,5 @@
 import { getPriority } from "./add-task.js";
-import { getDetailedEditableCard, setDetailedEditableCard } from "./boards-edit.js";
+import { getDetailedEditableCard, parseTaskIdToNumberId, setDetailedEditableCard } from "./boards-edit.js";
 import { setBgColor, setUserInitial, tasks, calculateDoneSubtasks, showData } from "./boards.js";
 let totalTasks = [], doneTasks = [];
 
@@ -31,15 +31,24 @@ function getOverlay() {
 }
 
 
+function checkDone(taskId, index) {
+    let id = parseTaskIdToNumberId(taskId);
+    tasks[id].Subtasks[index].Done = !tasks[id].Subtasks[index].Done;
+    putData(TASKS_DIR, tasks);
+    document.querySelector('.overlay').innerHTML = getDetailedCard('taskId' + id);
+    setDetailedCard(id);
+}
+
+
 function setSubtasks(detailedCard, id) {
     if(tasks[id].Subtasks == null) return;
-    tasks[id].Subtasks.forEach((element) => {
+    tasks[id].Subtasks.forEach((element, index) => {
         if(element !== "") { 
             if(element.Done == true) detailedCard.querySelector('.add-task-card-subtasks').innerHTML += /*html*/`
-                <div onclick="checkDone('tasksId${id}')" class="grid grid-columns-2-32px-1fr align-items-center"><div>${checkedBoxSVG()}</div><div class="flex align-items-center">${element.Description}</div></div>
+                <div onclick="checkDone('taskId${id}', ${index})" class="grid grid-columns-2-32px-1fr align-items-center"><div class="clickable">${checkedBoxSVG()}</div><div class="flex align-items-center">${element.Description}</div></div>
             `;
             else detailedCard.querySelector('.add-task-card-subtasks').innerHTML += /*html*/`
-                <div onclick="checkDone('tasksId${id}')" class="grid grid-columns-2-32px-1fr align-items-center"><div>${uncheckedBoxSVG()}</div><div class="flex align-items-center">${element.Description}</div></div>
+                <div onclick="checkDone('taskId${id}', ${index})" class="grid grid-columns-2-32px-1fr align-items-center"><div class="clickable">${uncheckedBoxSVG()}</div><div class="flex align-items-center">${element.Description}</div></div>
             `;
         }
     });
@@ -178,7 +187,7 @@ function trashSVG() {
     `;
 }
 
-function uncheckedBoxSVG() {
+export function uncheckedBoxSVG() {
     return /*html*/`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="4" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
@@ -186,7 +195,7 @@ function uncheckedBoxSVG() {
     `;
 }
 
-function checkedBoxSVG() {
+export function checkedBoxSVG() {
     return /*html*/`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 11V17C20 18.6569 18.6569 20 17 20H7C5.34315 20 4 18.6569 4 17V7C4 5.34315 5.34315 4 7 4H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -199,3 +208,4 @@ function checkedBoxSVG() {
 window.closeOverlay = closeOverlay;
 window.deleteTask = deleteTask;
 window.editTask = editTask;
+window.checkDone = checkDone;

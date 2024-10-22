@@ -1,7 +1,7 @@
 import { getPriority, setPriorityColor } from "./add-task.js";
-import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard } from "./boards-overlay.js";
-import { tasks, setUserInitial } from "./boards.js";
-
+import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard, uncheckedBoxSVG, checkedBoxSVG } from "./boards-overlay.js";
+import { tasks, setUserInitial, contacts, getUserColor } from "./boards.js";
+let toggleContactList = false;
 
 export function parseTaskIdToNumberId(taskId) {
     let splitId = taskId.split('taskId');
@@ -32,6 +32,90 @@ function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
     setDetailedCard(id);
+}
+
+
+function findPersons(data, searchString) {     
+    for (let index = 0; index < data.length; index++) {
+        if(data[index] === searchString) return true;
+    }
+    return false;
+}
+
+function removePerson(data, elementToRemove) {
+    data.forEach((item, index) => {
+        if (item === elementToRemove) {
+            data.splice(index, 1);
+        }
+    });
+    return data;
+}
+
+
+function isChecked(element, taskId) {
+    let id = parseTaskIdToNumberId(taskId); 
+    let person = element.firstName + " " + element.lastName;    
+    if(findPersons(tasks[id].Persons, person)) return checkedBoxSVG();
+    return uncheckedBoxSVG();
+}
+
+function chooseContact(index, taskId) {
+    let id = parseTaskIdToNumberId(taskId); 
+    let person = contacts[index].firstName + " " + contacts[index].lastName; 
+    if(!findPersons(tasks[id].Persons, person)) {
+        tasks[id].Persons.push(person);
+        openContactSelectBox(taskId);
+    }
+    else {
+        removePerson(tasks[id].Persons, person);
+        openContactSelectBox(taskId);
+    }
+}
+
+function addLinkedItem(element, index, taskId) {
+    let color = getUserColor(element.firstName, element.lastName); 
+    let id = parseTaskIdToNumberId(taskId); 
+    let selectBox = isChecked(element, taskId);
+    return /*html*/`
+        <div class="grid grid-columns-3-48px-1fr-48px">
+            <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
+            <span class="flex align-items-center">${element.firstName} ${element.lastName}</span>
+            <div onclick="chooseContact(${index}, '${taskId}')" class="flex align-items-center">${selectBox}</div>
+        </div>
+    `;
+}
+
+
+function openContactSelectBox(taskId) {
+    let container = document.querySelector('.detailed-card-editable-container');
+    container.scrollTo(0,100);
+    let assignBox = document.querySelector('.assign-to-select-box > span');
+    assignBox.innerHTML = "|";
+    let persons = document.querySelector('.add-task-card-persons');
+    persons.classList.add('set-height-128px');
+    let contactsSelectBox = "";
+    contacts.forEach((element, index) => { contactsSelectBox += addLinkedItem(element, index, taskId) });
+    persons.innerHTML = contactsSelectBox;
+}
+
+
+function closeContactSelectBox() {
+    let assignBox = document.querySelector('.assign-to-select-box > span');
+    assignBox.innerHTML = "Select contacts to assign";
+    let persons = document.querySelector('.add-task-card-persons');
+    persons.classList.remove('set-height-128px');
+    persons.innerHTML = "";
+}
+
+
+function assignContact(taskId) {
+    toggleContactList = !toggleContactList;
+    if(toggleContactList) {
+        openContactSelectBox(taskId);
+    } 
+    else {
+        closeContactSelectBox();
+    }
 }
 
 
@@ -79,11 +163,11 @@ export function getDetailedEditableCard(taskId) {
             <div class="grid grid-rows-2 gap-8px mg-right-8px">
                 <span class="detailed-card-label">Assigned to:</span>
                 <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px clickable">
-                    <div class="assign-to-select-box">
+                    <div class="assign-to-select-box" onclick="assignContact('${taskId}')">
                         <span class="mg-left-8px">Select contacts to assign</span>
                         <img src="../assets/icons/arrow_drop_downaa.svg" alt="">
                     </div>
-                    <div class="add-task-card-persons flex auto-overflow-y"></div>
+                    <div class="add-task-card-persons grid grid-rows-auto auto-overflow-y set-height-128px"></div>
                 </div>
             </div>
             <div class="grid grid-rows-2 gap-8px mg-right-8px">
@@ -110,3 +194,5 @@ export function getDetailedEditableCard(taskId) {
 
 window.selectPriority = selectPriority;
 window.closeEdit = closeEdit;
+window.assignContact = assignContact;
+window.chooseContact = chooseContact;
