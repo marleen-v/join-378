@@ -113,17 +113,20 @@ function closeContactInfoMobile(){
   contactInfoRef.classList.add("d_none");
 }
 
-
-  
+  /**
+  * This function checks if the size of the screen is under 1200px 
+  */ 
   function checkScreenSize() {
     if (window.innerWidth < 1200) {
       contactInfoRef.classList.add('d_none');
+      document.getElementById("close").classList.add("filter-color-to-white")
     } else {
       contactInfoRef.classList.remove('d_none');
+      document.getElementById("close").classList.remove("filter-color-to-white")
     }
   }
 
-  // Überwache Änderungen der Bildschirmgröße
+  // Monitors screen size changes
   window.addEventListener('resize', checkScreenSize);
 
 
