@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../assets/icons/favicon.png" type="image/x-icon">
     <script src="../script.js" defer></script>
-    <!-- <script src="../scripts/assets.js" defer></script>
-    <script src="../scripts/template.js" defer></script>
+    <script src="../scripts/assets.js" defer></script>
+    <!--<script src="../scripts/template.js" defer></script>
     <script src="../scripts/add-task.js" defer></script> -->
     <!-- <script src="../scripts/template.js" defer></script>
     <script src="../scripts/summary.js" defer></script> -->
@@ -21,24 +21,24 @@
     <link rel="icon" type="image/png" href="../assets/img/logo.png" />
     <title>Join Privacy Policy</title>
   </head>
-  <body>
+  <body onload="getLogo()">
     <header>
       <div class="header-wrapper">
         <div class="title">Kanban Project Management Tool</div>
         <img src="../assets/icons/logo-dark.svg" alt="join-logo" class="main-logo-header d_none">
         <div class="header-right">
-          <button class="help">
+          <button class="help" onclick="openHelp()">
             <img src="../assets/img/help.png" alt="help-icon">
           </button>
           <div class="user-profil">
             <div class="dropdown-menu">
-              <button class="profil-img" onclick="">
-                <img src="../assets/img/user-profil.png" alt="" />
+              <button id="userlogo" class="profil-img" onclick="openCloseDropdownMenu()">
+                <!-- <img src="../assets/img/user-profil.png" alt="" /> -->
               </button>
               <div class="dropdown d_none" id="dropdown-menu">
-                <button class="dropdown-btn"><span>Legal Notice</span></button>
-                <button class="dropdown-btn"><span>Privacy Policy</span></button>
-                <button class="dropdown-btn"><span>Log out</span></button>
+                <button class="dropdown-btn" onclick="openImprint()"><span>Legal Notice</span></button>
+                <button class="dropdown-btn" onclick="openPolicy()"><span>Privacy Policy</span></button>
+                <button class="dropdown-btn" onclick="openLogin()"><span>Log out</span></button>
               </div>
             </div>
           </div>

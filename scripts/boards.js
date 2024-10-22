@@ -45,6 +45,7 @@ async function loadBoards() {
     contacts = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
     showData(tasks);
+    getLogo();
 }
 
 /**
