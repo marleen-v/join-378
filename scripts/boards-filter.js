@@ -10,7 +10,7 @@ function checkValue(array, key, value, i, j) {
 }
 
 export function search(array, key, value) {
-    if(array.length == 0 || array == null) return false;
+    if(array == null) return false;
     let i = 0, j = array.length - 1;
     do {
         if (checkValue(array, key, value, i, j)) return true;

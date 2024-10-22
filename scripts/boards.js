@@ -44,13 +44,7 @@ async function loadBoards() {
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
-    console.log(activeUser);
-    
-    
-    if (tasks) {
-        //processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
-        showData(tasks);
-    }
+    showData(tasks);
 }
 
 /**
@@ -184,7 +178,7 @@ export function setCard(element, index, column) {
 }
 
 
-export function checkEmptyColumns() {    
+export function checkEmptyColumns() {        
     if(!search(tasks, "Column", "To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
     if(!search(tasks, "Column", "In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
     if(!search(tasks, "Column", "Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();
@@ -203,15 +197,16 @@ function clearColumns() {
  * Show all data to board it exists 4 columns | To Do | In Progress | Await Feedback | Done
 */
 export function showData(array) {
-    clearColumns();
-    //let index = 0;
-    array.forEach((element, index) => {          
-        if (element.Column === "To Do") setCard(element, index, "to-do");
-        if (element.Column === "In Progress") setCard(element, index, "in-progress");
-        if (element.Column === "Await Feedback") setCard(element, index, "await-feedback");
-        if (element.Column === "Done") setCard(element, index, "done");
-        index++;
-    });   
+    clearColumns();    
+    if(array !== null) {
+        array.forEach((element, index) => {          
+            if (element.Column === "To Do") setCard(element, index, "to-do");
+            if (element.Column === "In Progress") setCard(element, index, "in-progress");
+            if (element.Column === "Await Feedback") setCard(element, index, "await-feedback");
+            if (element.Column === "Done") setCard(element, index, "done");
+            index++;
+        });   
+    }   
     checkEmptyColumns();
 }
 
