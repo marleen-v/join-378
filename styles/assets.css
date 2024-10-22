@@ -102,7 +102,7 @@
 }
 
 .auto-overflow-y {
-    overflow-y: auto !important;
+    overflow-y: auto;
 }
 
 .hidden-overflow-y {
