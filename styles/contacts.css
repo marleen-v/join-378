@@ -390,6 +390,7 @@ label>input {
   /* --------------------- */
 
     .contact-info-container{
+    
       position: absolute;
       background-color: #fff;
       width: 100%;
@@ -418,7 +419,8 @@ label>input {
 
     dialog{
       flex-direction: column;
-      max-width: 600px;
+      max-width: 450px;
+      max-height: 750px;
       height:auto;
       background-color: #fff;
     }

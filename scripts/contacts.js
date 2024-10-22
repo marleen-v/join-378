@@ -14,6 +14,7 @@ let initials;
  * This function loads the contactdata from firebase and renders the contact list
  */
 async function initContacts() {
+  checkScreenSize();
   contactList = await loadData(CONTACTS_DIR);
   renderContactList();
 }
@@ -111,6 +112,20 @@ function closeContactInfo() {
 function closeContactInfoMobile(){
   contactInfoRef.classList.add("d_none");
 }
+
+
+  
+  function checkScreenSize() {
+    if (window.innerWidth < 1200) {
+      contactInfoRef.classList.add('d_none');
+    } else {
+      contactInfoRef.classList.remove('d_none');
+    }
+  }
+
+  // Überwache Änderungen der Bildschirmgröße
+  window.addEventListener('resize', checkScreenSize);
+
 
 function assignContactData() {
   firstName = inputNameRef.value.split(" ")[0];
