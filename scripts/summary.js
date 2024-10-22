@@ -1,23 +1,31 @@
-function initSummary(){
-  loadData(TASKS_DIR);
+async function initSummary(){
+  tasksFromFirebase = await loadData(TASKS_DIR);
+  displayHTML();
+  // loadTasksData(TASKS_DIR);
 }
 
 
-async function loadData(path=""){
+/*
+async function loadTasksData(path=""){
   let res = await fetch(FIREBASE_URL + path + ".json");
   let resToJson = await res.json();
   tasksFromFirebase = resToJson;
   displayHTML();
 }
+*/
 
 
-function displayHTML(){
+async function displayHTML(){
   showMainTemplate();
-  loadActiveUser(ACTIVE_DIR);
-  setUserLogo();
+  //loadActiveUser(ACTIVE_DIR);
+  //setUserLogo();
+  activeUser = await loadData(ACTIVE_DIR);
+  document.getElementById("userlogo").innerHTML = activeUser[0].initials;
 }
 
 
+
+/*
 async function loadDataActive(path=""){
   let res = await fetch(FIREBASE_URL + path + ".json");
   let resToJson = await res.json();
@@ -27,8 +35,9 @@ async function loadDataActive(path=""){
 
 async function setUserLogo(){
   activeUser = await loadDataActive(ACTIVE_DIR);
-  document.getElementById("userinitials").innerHTML = activeUser[0].initials;
+  document.getElementById("userlogo").innerHTML = activeUser[0].initials;
 }
+*/
 
 
 function showMainTemplate(){
