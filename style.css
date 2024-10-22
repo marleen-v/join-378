@@ -209,12 +209,12 @@ nav {
   background-color: #2a3647;
   padding-top: 64px;
   padding-bottom: 64px;
-  width: 232px;
+ /*  width: 232px;
   position: sticky;
   top: 0;
   bottom: 0;
-  left: 0;
-  height: 100vh;
+  left: 0;*/
+  height: 100vh; 
   z-index: 2000;
   color: #cdcdcd;
 }
@@ -269,4 +269,66 @@ main {
 .data-protection span:hover {
   color: #29abe2;
   font-weight: 700;
+}
+
+/* -------------------------- responsive ----------------------------*/
+@media only screen and (max-width: 1200px) {
+  body {
+    grid-template:  " head"
+                    "main"
+                    "nav ";
+  
+      grid-template-columns: 1fr;
+      grid-template-rows: 80px 1fr 80px;
+      /*padding: 0 256px 0 264px;*/
+
+  }
+
+  header{
+    padding: 20px 16px;
+    height:auto;
+  }
+
+ main {
+  height:auto;
+ }
+
+ nav{
+  flex-direction: row;
+  height:auto;
+  padding: 0;
+  gap:15px;
+ }
+
+ .menu-bar{
+  flex-direction: row;
+  justify-content: space-evenly;
+ }
+
+ .nav-btn{
+  justify-content: center;
+  flex-direction: column;
+  height:76px;
+  width: 76px;
+  gap:4px;
+  padding:0;
+ }
+
+ .main-logo, .title{
+  display:none;
+ }
+
+
+ .main-logo-header{
+  display: block !important;
+ }
+
+ .data-protection{
+  display:none;
+}
+
+
+
+
+  
 }

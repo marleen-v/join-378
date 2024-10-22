@@ -321,6 +321,9 @@ label>input {
   animation-duration: 0.5s ease;
 }   
 
+
+/*--------------------------- Responsive ------------------------*/
+
  @media only screen and (max-width: 1200px) {
   main {
     position: relative;
@@ -425,4 +428,6 @@ label>input {
       background-color: transparent;
     }
     
+    
+
 } 
