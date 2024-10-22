@@ -13,7 +13,7 @@ async function initLogin(){
 }
 
 
-async function loadActiveUser(path=""){
+export async function loadActiveUser(path=""){
   let res = await fetch(FIREBASE_URL + path + ".json");
   let resToJson = await res.json();
   activeUser = resToJson;
@@ -120,9 +120,9 @@ function resetActiveUser(){
 
 
 function loadCheckboxStatus(){
-  if (localStorage.checkbox && localStorage.checkbox !== "") {
+  if (sessionStorage.checkbox && sessionStorage.checkbox !== "") {
     chkboxRef.setAttribute("checked", "checked");
-    emailInputRef.value = localStorage.username;
+    emailInputRef.value = sessionStorage.username;
   } else {
     chkboxRef.removeAttribute("checked");
     emailInputRef.value = "";
@@ -132,10 +132,17 @@ function loadCheckboxStatus(){
 
 function rememberMeCheck(){
   if (chkboxRef.checked && emailInputRef.value !== "") {
-    localStorage.username = emailInputRef.value;
-    localStorage.checkbox = chkboxRef.value;
+    sessionStorage.username = emailInputRef.value;
+    sessionStorage.checkbox = chkboxRef.value;
   } else {
-    localStorage.username = "";
-    localStorage.checkbox = "";
+    sessionStorage.username = "";
+    sessionStorage.checkbox = "";
   }
 }
+
+
+window.initLogin = initLogin;
+window.guestLogin = guestLogin;
+window.togglePasswordIcon = togglePasswordIcon;
+window.showData = showData;
+window.checkUserPassword = checkUserPassword;
