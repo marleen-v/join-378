@@ -144,7 +144,7 @@ function assignContact(taskId) {
 
 function getSubtaskMask() {
     return /*html*/`
-        <div class="subtasks-add-box p-right-8px clickable">
+        <div onclick="addSubtask()" class="subtasks-add-box p-right-8px clickable">
             <span class="mg-left-8px">Add new subtask</span>
             <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
         </div>
@@ -156,13 +156,17 @@ function getSubtaskInput() {
     return /*html*/`
         <div class="subtasks-add-box subtask-input p-right-8px">
             <input type="text">
-            <div class="size-16px flex justify-content-center click-item"><img src="../assets/icons/close.svg" alt=""></div>
+            <div onclick="cancelSubtask()" class="size-16px flex justify-content-center click-item clickable"><img src="../assets/icons/close.svg" alt=""></div>
             <div class="divider"></div>
-            <div class="size-16px flex justify-content-center click-item mg-left-8px "><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
+            <div onclick="" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
         </div>
     `;
 }
 
+function cancelSubtask() {
+    let container = document.querySelector('.detailed-task-card-subtasks');
+    container.innerHTML = getSubtaskMask();
+}
 
 function addSubtask(taskId) {
     let container = document.querySelector('.detailed-task-card-subtasks');
@@ -223,7 +227,7 @@ export function getDetailedEditableCard(taskId) {
             </div>
             <div class="grid grid-rows-2 gap-8px mg-right-8px">
                 <span class="detailed-card-label mg-top-8px">Subtasks</span>
-                <div onclick="addSubtask('${taskId}')" class="detailed-task-card-subtasks flex">
+                <div class="detailed-task-card-subtasks flex">
                     ${getSubtaskMask()}
                 </div>
             </div>
@@ -245,3 +249,4 @@ window.closeEdit = closeEdit;
 window.assignContact = assignContact;
 window.chooseContact = chooseContact;
 window.addSubtask = addSubtask;
+window.cancelSubtask = cancelSubtask;
