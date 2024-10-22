@@ -123,9 +123,9 @@ export function getDetailedCard(taskId) {
                 Subtasks
                 <div class="detailed-task-card-subtasks add-task-card-subtasks set-height-100px auto-overflow-y mg-top-8px"></div>
             </div>
-            <div class="add-task-card-bottom flex justify-content-flex-end">
-                <div onclick="deleteTask('${taskId}')" class="add-task-delete mg-right-left-8px clickable">${trashSVG()}</div><span onclick="deleteTask('${taskId}')" class="mg-right-8px clickable">Delete</span>
-                <div onclick="editTask('${taskId}')" class="add-task-edit mg-right-left-8px clickable">${editSVG()}</div><span onclick="editTask('${taskId}')" class="clickable">Edit</span>
+            <div class="add-task-card-bottom flex justify-content-flex-end align-items-center">
+                <div onclick="deleteTask('${taskId}')" class="add-task-delete mg-right-left-8px p-top-4px clickable">${trashSVG()}</div><span onclick="deleteTask('${taskId}')" class="mg-right-8px clickable">Delete</span>
+                <div onclick="editTask('${taskId}')" class="add-task-edit mg-right-left-8px p-top-4px clickable">${editSVG()}</div><span onclick="editTask('${taskId}')" class="clickable">Edit</span>
             </div>
         </section>  
     `;
