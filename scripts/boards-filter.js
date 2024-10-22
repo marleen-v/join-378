@@ -53,7 +53,7 @@ function filterByNestedKeyAndArray(data, searchString) {
     return data.filter(item => {
         // Suche in "details.description"
         const title = item.Title.toLowerCase().includes(searchString.toLowerCase());
-        const date = item.Date.toLowerCase().includes(formatDate(searchString).toLowerCase());
+        const date = item.Date.toLowerCase().includes(formatDate(formatDate(searchString)).toLowerCase());
         const priority = item.Priority.toLowerCase().includes(searchString.toLowerCase());
         const description = item.Description.toLowerCase().includes(searchString.toLowerCase());
         const subtasks = (item.Subtasks != null) ? item.Subtasks.some(member => member.Description.toLowerCase().includes(searchString.toLowerCase())) : null;        

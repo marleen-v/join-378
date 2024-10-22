@@ -445,8 +445,9 @@ main {
     grid-template-rows: 1fr;
 }
 
-.subtask-input > input {
+.subtask-input > div > input {
     border: none;
+    outline: none;
 }
 
 .divider {
