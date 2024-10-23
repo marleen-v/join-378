@@ -16,7 +16,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
     detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
-    setPriorityColor(".detailed-card", id);
+    setPriorityColor(".detailed-card", tasks[id]);
 }
 
 function selectPriority(taskId, priority) {
@@ -94,10 +94,10 @@ function addLinkedItem(element, index, taskId) {
     let selectBox = isChecked(element, taskId);
     let active = (getActiveUser(element)) ? " (you)" : "";
     return /*html*/`
-        <div class="task-user-select grid grid-columns-3-48px-1fr-48px">
+        <div class="task-user-select grid grid-columns-3-48px-1fr-48px clickable" onclick="chooseContact(${index}, '${taskId}')">
             <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
             <span class="flex align-items-center">${element.firstName} ${element.lastName}${active}</span>
-            <div onclick="chooseContact(${index}, '${taskId}')" class="flex align-items-center">${selectBox}</div>
+            <div class="flex align-items-center">${selectBox}</div>
         </div>
     `;
 }

@@ -25,6 +25,21 @@ main {
     width: 944px;
 }
 
+.part-1-form {
+    display: grid;
+    grid-template-rows: 80px 120px 32px 64px;
+}
+
+
+.select-box-contacts {
+    display: grid;
+    grid-auto-rows: auto;
+    overflow-y: auto;
+    height: 84px;
+    border-radius: 8px;
+}
+
+
 .btn-container {
     display: flex;
     align-items: center;
@@ -65,6 +80,23 @@ main {
     filter: brightness(0) saturate(100%) invert(55%) sepia(91%) saturate(483%) hue-rotate(163deg) brightness(91%) contrast(95%);
 
 } 
+
+.circle {
+    color: #fff;
+    font-size: 12px;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 25px;
+    border: 2px solid #fff;
+  }
+
+.bg-white {
+    background-color: white;
+}
+
+.border-radius-8px {
+    border-radius: 8px;
+}
 
 
 /* add Task Styles */

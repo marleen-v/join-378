@@ -1,22 +1,96 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
-import { tasks } from "./boards.js";
 import { getCloseSVG } from './boards-overlay.js';
 let priority = "medium";
+let toggleContactList = false;
+let tasks = [];
+let contacts = [];
+let addedUser = [];
+let activeUser = [];
 
 async function loadAddTask() {
-    //const htmlContent = await loadHTML('../html/add-task-main.html');
+    tasks = await loadData(TASKS_DIR);
+    contacts = await loadData(CONTACTS_DIR);
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
-    /*
-    if (htmlContent) {
-        processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
-    }    */
 }
 
 function addTask() {
     console.log("Add");
 
+}
+
+function isChecked(element, taskId) {
+    let id = parseTaskIdToNumberId(taskId);
+    let person = element.firstName + " " + element.lastName;
+    if (findPersons(tasks[id].Persons, person)) return checkedBoxSVG();
+    return uncheckedBoxSVG();
+}
+
+
+function findPersons(data, searchString) {
+    for (let index = 0; index < data.length; index++) {
+        if (data[index] === searchString) return true;
+    }
+    return false;
+}
+
+function addUser(index) {
+    addedUser.push(contacts[index].email);
+    console.log(addedUser);
+    
+}
+
+
+function addUserItem(element, index) {
+    //let color = getUserColor(element.firstName, element.lastName);
+    //let id = parseTaskIdToNumberId(taskId);
+    //let selectBox = isChecked(element, taskId);
+    //let active = (getActiveUser(element)) ? " (you)" : "";
+    //let selectBox = isChecked(element, taskId);
+    return /*html*/`
+        <div class="task-user-select grid grid-columns-3-48px-1fr-48px" onclick="addUser(${index})">
+            <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
+            <span class="flex align-items-center">${element.firstName} ${element.lastName}</span>
+            <div class="flex align-items-center"></div>
+        </div>
+    `;
+}
+
+
+function openContacts() {
+    //focusUserSelectBox(true);
+    let assignBox = document.querySelector('.assign-to-select-box > span');
+    assignBox.innerHTML = "|";
+    let persons = document.querySelector('.select-box-contacts');
++   persons.classList.add('bg-white');
+    persons.innerHTML = "";
+    contacts.forEach((element, index) => {
+        persons.innerHTML += addUserItem(element, index);
+        //if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
+        //else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
+    });
+}
+
+
+function closeContacts() {
+    //focusUserSelectBox(false);
+    let assignBox = document.querySelector('.assign-to-select-box > span');
+    assignBox.innerHTML = "Select contacts to assign";
+    let persons = document.querySelector('.select-box-contacts');
+    persons.classList.remove('bg-white');
+    persons.innerHTML = "";
+    //setDetailedEditableCard(taskId);
+}
+
+function addContact() {
+    toggleContactList = !toggleContactList;
+    if (toggleContactList) {
+        openContacts();
+    }
+    else {
+        closeContacts();
+    }
 }
 
 
@@ -105,13 +179,13 @@ function removePriorityColor(element) {
     });
 }
 
-export function setPriorityColor(element, id) {
+export function setPriorityColor(element, task) {
     removePriorityColor(element);
 
-    switch (tasks[id].Priority) {
-        case 'Urgent': setBgColor(tasks[id].Priority.toLowerCase()); break;
-        case 'Medium': setBgColor(tasks[id].Priority.toLowerCase()); break;
-        case 'Low': setBgColor(tasks[id].Priority.toLowerCase()); break;
+    switch (task.Priority) {
+        case 'Urgent': setBgColor(task.Priority.toLowerCase()); break;
+        case 'Medium': setBgColor(task.Priority.toLowerCase()); break;
+        case 'Low': setBgColor(task.Priority.toLowerCase()); break;
     }
 }
 
@@ -151,7 +225,7 @@ function getInputForm() {
         <form id="task-form" class="task-form" onsubmit="addTask()">
             <div class="grid grid-rows-auto gap-32px">
                 <div class="grid grid-columns-3-1fr-1px-1fr gap-32px">
-                    <div class="grid grid-rows-auto gap-8px">
+                    <div class="part-1-form">
                         <div>
                             <!-- Titel -->
                             <span>Title</span>
@@ -163,12 +237,12 @@ function getInputForm() {
                         </div>  
                         <div class="grid grid-rows-2 gap-8px mg-right-8px mg-top-8px">
                             <span class="detailed-card-label">Assigned to:</span>
-                            <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px">
+                            <div class="add-task-card-assigned-to grid grid-rows-2" onclick="addContact()">
                                 <div class="assign-to-select-box p-right-8px clickable">
                                     <span class="mg-left-8px">Select contacts to assign</span>
                                     <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
                                 </div>
-                                <div class="add-task-card-persons grid grid-rows-auto auto-overflow-y set-height-128px"></div>
+                                <div class="select-box-contacts"></div>
                             </div>
                         </div>
                     </div>
@@ -240,3 +314,5 @@ function getInputForm() {
 window.loadAddTask = loadAddTask;
 window.addTask = addTask;
 window.setPriority = setPriority;
+window.addContact = addContact;
+window.addUser = addUser;
