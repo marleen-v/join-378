@@ -55,12 +55,14 @@ function addNewContactSection(index) {
 }
 
 /**
- * This function finds loged-in-User in contact-List and adds "(ich)" im Namen
+ * This function finds loged-in-User in contact-List and adds "(you)" im Namen
  */
 function findAndMarkActiveUser() {
+  if(sessionStorage.username) {
   const singleContactRef = document.querySelectorAll(".contact-name");
-  let activeUserIndex = contactList.findIndex((contact) => contact.email === "clara.peters@web.de");
-  singleContactRef[activeUserIndex].innerHTML += " (ich)";
+  let activeUserIndex = contactList.findIndex((contact) => contact.email === sessionStorage.username);
+  singleContactRef[activeUserIndex].innerHTML += " (you)";
+}
 }
  
 /**

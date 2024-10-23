@@ -316,6 +316,7 @@ main {
   width: 76px;
   gap:4px;
   padding:0;
+  border-radius:8px;
  }
 
  .nav-text{

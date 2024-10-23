@@ -21,7 +21,7 @@
   box-shadow: 4px 0 6px 0 rgb(0 0 0 / 0.08);   
   width: 456px;
   position: relative;
-  /* max-height: calc(100% - 96px);  */
+  max-height: calc(100% - 96px); 
 }
 
 .add-contact-container {
@@ -346,10 +346,10 @@ label>input {
   }
 
   .contacts-container{
+    max-height:100%;
     position: static;
     width:100%;
     max-width:100%;
-    
     
   }
 

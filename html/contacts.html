@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="shortcut icon"
-      href="./assets/icons/favicon.png"
+      href="../assets/icons/favicon.png"
       type="image/x-icon"
     />
 
@@ -78,7 +78,7 @@
           /></span>
           <span class="nav-text clickable">Board</span>
         </button>
-        <button class="nav-btn" onclick="openContacts()">
+        <button class="nav-btn active" onclick="openContacts()">
           <span class="nav-icon"
             ><img src="../assets/icons/contact.png" alt=""
           /></span>
@@ -111,7 +111,7 @@
           </div>
         </section>
         <section class="contact-info-container  flex-column" id="contactInfoSection">
-          <img class="back-arrow position-absolute d_none" src="../assets/icons/arrow-left.svg" alt="" onclick="closeContactInfoMobile()">
+          <img class="back-arrow position-absolute clickable d_none" src="../assets/icons/arrow-left.svg" alt="" onclick="closeContactInfoMobile()">
           <div class="contact-title flex align-items-center">
             <h1>Contacts</h1>
             <div class="vertical-line"></div>
