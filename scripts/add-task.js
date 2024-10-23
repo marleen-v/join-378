@@ -6,6 +6,7 @@ import { getCloseSVG } from './boards-overlay.js';
 async function loadAddTask() {
     //const htmlContent = await loadHTML('../html/add-task-main.html');
     document.querySelector('main').innerHTML = getInputForm();
+    setBgColor('medium');
     /*
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
