@@ -175,7 +175,7 @@ function pushSubtask(taskId) {
 function getSubtaskInput(taskId) {
     return /*html*/`
         <div class="subtasks-add-box subtask-input p-right-8px">
-            <div class="p-left-8px"><input id="add-new-subtask" type="text" placeholder="Add new task..."></div>
+            <div class="p-left-8px"><input id="add-new-subtask" class="add-new-subtask" type="text" placeholder="Add new task..."></div>
             <div onclick="cancelSubtask()" class="size-16px flex justify-content-center click-item clickable"><img src="../assets/icons/close.svg" alt=""></div>
             <div class="divider"></div>
             <div onclick="pushSubtask('${taskId}')" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>

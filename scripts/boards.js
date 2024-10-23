@@ -3,10 +3,6 @@ import { getPriority } from "./add-task.js";
 import { search } from "./boards-filter.js";
 import { openOverlay } from "./boards-overlay.js";
 
-const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
-const USERS_DIR = '/users';
-const CONTACTS_DIR = '/contacts';
-const TASKS_DIR = '/tasks';
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 export let tasks = [];
@@ -46,6 +42,10 @@ async function loadBoards() {
     activeUser = await loadActiveUser(ACTIVE_DIR);
     showData(tasks);
     getLogo();
+
+    searchId.addEventListener('input', function(e) {
+        clearHighlightedTasks();
+    });
 }
 
 /**
@@ -351,9 +351,7 @@ function clearHighlightedTasks() {
 }
 
 
-searchId.addEventListener('input', function(e) {
-    clearHighlightedTasks();
-});
+
 
 window.highlightColumn = highlightColumn;
 window.removeHighlightColumn = removeHighlightColumn;

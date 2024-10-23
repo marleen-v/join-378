@@ -286,6 +286,10 @@ main {
     font-weight: 400;
 }
 
+.add-new-subtask {
+    width: 100%;
+}
+
 .detailed-card-editable-container {
     margin: 0;
     height: 100%;
