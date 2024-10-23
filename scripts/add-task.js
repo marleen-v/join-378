@@ -208,11 +208,11 @@ function getInputForm() {
                     <div></div>
                     <div></div>
                     <div class="flex justify-content-flex-end">
-                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn mg-right-8px clickable">
+                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn-clear mg-right-8px clickable">
                             <span class="mg-right-8px set-font-icon-700">Clear</span>
-                            <div class="filter-color-to-white flex align-items-center">${getCloseSVG()}</div>
+                            <div class="flex align-items-center">${getCloseSVG()}</div>
                         </button>
-                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn clickable">
+                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn-add-task clickable">
                             <span class="mg-right-8px set-font-icon-700">Create Task</span>
                             <img class="flex align-items-center" src="../assets/icons/check.svg" alt="">
                         </button>

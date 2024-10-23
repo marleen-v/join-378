@@ -33,7 +33,7 @@ main {
     height: 100%;
 }
 
-.btn {
+.btn-add-task {
     height: 48px;
     color: #ffffff;
     background-color: #2A3647;
@@ -44,9 +44,28 @@ main {
     border: none;
 }
 
-.btn:hover {
+.btn-add-task:hover {
     background-color: #29abe2;
 }
+
+.btn-clear {
+    height: 48px;
+    color: #2A3647;
+    border-radius: 8px;
+    border-color: #2A3647 !important;
+    padding: 15px 20px;
+    font-weight: 700;
+    font-size: 21px;
+    border: 1px solid;
+}
+
+.btn-clear:hover {
+    border-color: #29abe2;
+    color: #29abe2;
+    filter: brightness(0) saturate(100%) invert(55%) sepia(91%) saturate(483%) hue-rotate(163deg) brightness(91%) contrast(95%);
+
+} 
+
 
 /* add Task Styles */
 .add-task {
