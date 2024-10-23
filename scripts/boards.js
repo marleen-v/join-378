@@ -85,8 +85,9 @@ export function getUserColor(firstName, lastName) {
 
 
 function getGroupUserInitials(element) {
+    let persons = (element.Persons.length > 9) ? ">9" : element.Persons.length + "P";;
     return /*html*/`
-        <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>${element.Persons.length}P</span></span> 
+        <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>${persons}</span></span> 
     `;
 }
 
