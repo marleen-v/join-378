@@ -42,9 +42,6 @@ body {
 
 body {
   font-family: "Inter";
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   display: grid;
   grid-template:  "nav head"
                   "nav main";
@@ -209,12 +206,16 @@ nav {
   background-color: #2a3647;
   padding-top: 64px;
   padding-bottom: 64px;
+<<<<<<< HEAD
  /*  width: 232px;
   position: sticky;
   top: 0;
   bottom: 0;
   left: 0;*/
   height: 100vh;  
+=======
+ height: 100vh;  
+>>>>>>> e9b8359765fe32d12cfbe4d1f891255c7df550a5
   z-index: 2000;
   color: #cdcdcd;
 }
