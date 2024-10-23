@@ -176,6 +176,7 @@ main {
 .assign-to-select-box {
     border: 1px solid;
     border-color: #D1D1D1;
+    background-color: white;
     border-radius: 8px;
     height: 32px;
     display: flex;
