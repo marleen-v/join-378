@@ -134,7 +134,8 @@ export function getPriority(priority) {
 }
 
 function setPriority(priority) {
-    removePriorityColor('add-task');
+    removePriorityColor('.task-form-container');
+    setBgColor(priority);
 }
 
 
