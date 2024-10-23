@@ -84,25 +84,46 @@ export function getUserColor(firstName, lastName) {
 }
 
 
+function getGroupUserInitials(element) {
+    return /*html*/`
+        <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>${element.Persons.length}P</span></span> 
+    `;
+}
+
+
+function getUser(person, initials, color, displayFullname, grid = false) {
+    let layout = "flex justify-content-center align-items-center set-width-height-42";
+    (grid === true) ? layout ="grid grid-columns-2-48px-1fr" : "flex justify-content-center align-items-center set-width-height-42";
+    return /*html*/`
+         ${(grid) ? '<div class="task-user-select ' + layout + '">' : ''}
+            <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${initials}</span></span> 
+            ${(displayFullname) ? '<span class="flex align-items-center">'+ person + '</span>' : ''}
+         ${(grid) ? '</div>' : '' }  
+    `;
+}
+
+
 /**
  * Parse user name to initials
  *
  * @param {*} currentCard
  * @param {*} element
  */
-export function setUserInitial(element, displayFullName = false) {    
+export function setUserInitial(element, displayFullName = false, grid = false) {   
     let personsHTML = "";
-    element.Persons.forEach(person => {
+    element.Persons.forEach((person, index) => {
         let splittedName = person.split(' ');
         let firstName = splittedName[0].charAt(0);
         let lastName = splittedName[1].charAt(0);
         let initial = firstName + lastName;
         let color = getUserColor(splittedName[0], splittedName[1]);        
-        personsHTML += /*html*/`
+        personsHTML += getUser(person, initial, color, displayFullName, grid);/* /*html*/ /*`
             <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${initial}</span></span> 
             ${(displayFullName)? "<span>" + person + "</span>" : ""}
-        `;
+        `;*/
+        //if(index > 0 && grid == false) document.querySelector('.task-user-select').classList.add('mg-left-minus-8px'); 
     });    
+    if(element.Persons.length > 4 && displayFullName == false) return getGroupUserInitials(element);
     return personsHTML;
 }
 

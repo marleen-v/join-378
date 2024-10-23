@@ -15,7 +15,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.input-edit-headline').value = tasks[id].Title;
     detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
-    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], false);
+    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
     setPriorityColor(".detailed-card", id);
 }
 
@@ -26,6 +26,13 @@ function selectPriority(taskId, priority) {
     document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
     setDetailedEditableCard(taskId);
 
+}
+
+function cancelEdit(taskId) {
+    let overlay = document.querySelector('.overlay');
+    overlay.innerHTML = getDetailedCard(taskId);
+    let id = parseTaskIdToNumberId(taskId);
+    setDetailedCard(id);
 }
 
 function closeEdit(taskId) {
@@ -192,7 +199,7 @@ export function getDetailedEditableCard(taskId) {
         <section class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div></div>
-                <div onclick="closeOverlay()"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
+                <div onclick="cancelEdit('${taskId}')"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
             </div>
             <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
                 <form id="task-edit-form" class="task-edit-form" onsubmit="closeEdit('${taskId}');return false;">
@@ -263,3 +270,4 @@ window.chooseContact = chooseContact;
 window.addSubtask = addSubtask;
 window.cancelSubtask = cancelSubtask;
 window.pushSubtask = pushSubtask;
+window.cancelEdit = cancelEdit;
