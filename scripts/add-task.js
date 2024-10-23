@@ -1,7 +1,8 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
-//import { tasks } from "./boards.js";
+import { tasks } from "./boards.js";
 import { getCloseSVG } from './boards-overlay.js';
+let priority = "medium";
 
 async function loadAddTask() {
     //const htmlContent = await loadHTML('../html/add-task-main.html');
@@ -132,6 +133,10 @@ export function getPriority(priority) {
     return svg;
 }
 
+function setPriority(priority) {
+    removePriorityColor('add-task');
+}
+
 
 function getInputForm() {
     return /*html*/`
@@ -176,15 +181,15 @@ function getInputForm() {
                         <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
                             <span class="flex detailed-card-label">Priority</span>
                             <div class="priority-buttons flex">
-                                <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch">
+                                <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="setPriority('urgent')">
                                     <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Urgent</span>    
                                     <div class="flex align-items-center set-height-100">${getPriority("Urgent")}</div>
                                 </button>
-                                <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel">
+                                <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="setPriority('medium')">
                                     <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Medium</span>    
                                     <div class="flex align-items-center set-height-100">${getPriority("Medium")}</div>
                                 </button>
-                                <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig">
+                                <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="setPriority('low')">
                                     <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Low</span>    
                                     <div class="flex align-items-center set-height-100">${getPriority("Low")}</div>
                                 </button>
@@ -227,86 +232,6 @@ function getInputForm() {
 }
 
 
-function getAddTaskTemplate() {
-    return /*html*/`
-        <section id="add-task" class="add-task">
-            <div class="add-task-head flex align-items-center">
-                <div class="add-task-headline">
-                    <h1>Add Task</h1>
-                </div>
-            </div>
-            <div class="add-task-main">
-                <form id="task-form" class="task-form" onsubmit="addTask()">
-                    <!-- Linker und rechter Bereich mit senkrechter Linie -->
-                    <div class="form-row">
-                        <!-- Linke Seite (Titel und Zuweisen an) -->
-                        <div class="left-side">
-                            <div>
-                                <!-- Titel -->
-                                <label class="task-label" for="title">Title</label>
-                                <input class="task-input" type="text" id="title" name="title" required>
-                            </div>
-                            <!-- Beschreibung -->
-                            <label class="task-label" for="description">Description</label>
-                            <textarea class="task-textarea" id="description" name="description" rows="4" placeholder="Enter a description" required></textarea>
-                            <div>
-                                <!-- Zuweisen an -->
-                                <label class="task-label" for="assigned-to">Assigned to</label>
-                                <select class="task-select" id="assigned-to" name="assigned_to" required>
-                                    <option value="" disabled selected>Select contacts to assign</option>
-                                    <option value="mitarbeiter1">Mitarbeiter 1</option>
-                                    <option value="mitarbeiter2">Mitarbeiter 2</option>
-                                    <option value="mitarbeiter3">Mitarbeiter 3</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Rechte Seite (Fälligkeitsdatum) mit vertikaler Trennung -->
-                        <div class="right-side divider-vertical">
-                            <div>
-                                <!-- Fälligkeitsdatum -->
-                                <label class="task-label" for="due-date">Due date</label>
-                                <input class="task-input" type="date" id="due-date" name="due_date" required>
-                            </div>
-
-                            <!-- Priorität als Buttons -->
-                            <label>Priority</label>
-                            <div class="priority-buttons">
-                                <button class="task-button clickable" type="button" class="priority-button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">Urgent</button>
-                                <button class="task-button clickable" type="button" class="priority-button active" id="medium" data-priority="mittel" onclick="selectPriority(this)">Medium</button>
-                                <button class="task-button clickable" type="button" class="priority-button" id="low" data-priority="niedrig" onclick="selectPriority(this)">Low</button>
-                            </div>
-
-                            <!-- Kategorie -->
-                            <label class="task-label" for="category">Category</label>
-                            <select class="task-select" id="category" name="category" required>
-                                <option value="" disabled selected>Select task category</option>
-                                <option value="entwicklung">Entwicklung</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="design">Design</option>
-                            </select>
-
-                            <!-- Subtasks -->
-                            <label class="task-label">Subtasks</label>
-                            <div id="subtasks-container">
-                                <div class="subtask-container">
-                                    <input class="task-input" type="text" name="subtasks[]" placeholder="Add new subtask">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" onclick="addSubtask()">Weitere Unteraufgabe hinzufügen</button>
-
-                    <!-- Absenden -->
-                    <button type="submit">Aufgabe erstellen</button>
-                </form>
-            </div>
-        </section>    
-    `;
-}
-
-
-
-
 window.loadAddTask = loadAddTask;
 window.addTask = addTask;
+window.setPriority = setPriority;

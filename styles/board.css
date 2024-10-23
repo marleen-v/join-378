@@ -1,6 +1,7 @@
 @import url(./assets.css);
 @import url(../style.css);
 @import url(../styles/contacts.css);
+@import url(../styles/addTask.css);
 
 html,
 body {
@@ -486,6 +487,7 @@ main {
     width: 16px;
     height: 16px;
 }
+
 
 @keyframes moveFromRightToCenter {
     from {
