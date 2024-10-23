@@ -1,0 +1,122 @@
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Inter, arial, sans-serif;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: auto;
+    height: 100%;
+    background-color: #f6f7f8;
+}
+
+
+/* add Task Styles */
+.add-task {
+    display: grid;
+    grid-template-rows: 64px 100px 1fr ;
+    grid-column: 1;
+    padding: 64px;
+    height: 100vh;
+}
+
+.add-task-card-category {
+    border-radius: 8px;
+    color: white;
+    background-color: #0038FF;
+    width: 144px;
+    height: 36px;
+    text-align: center;
+}
+
+.bg-color-turkey {
+    background-color: #1FD7C1;
+}
+
+.bg-color-blue {
+    background-color: #0038FF;
+}
+
+.add-task-card-headline {
+    font-weight: bold;
+}
+
+.add-task-right {
+    overflow: auto !important;
+    height: 100%;
+}
+
+
+.priority-buttons {
+    display: flex;
+    height: 56px;
+    width: 136px;
+
+}
+
+.task-form {
+    max-width: 800px;
+}
+
+.task-label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+.task-input,
+.task-textarea,
+.task-select,
+.task-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+}
+
+.task-button {
+    border: 1px solid #D1D1D1;
+    margin-right: 16px;
+    background-color: white;
+    height: 100%;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.form-row>div {
+    flex: 1;
+}
+
+.left-side,
+.right-side {
+    display: grid;
+    grid-row: 4;
+    grid-column: 1;
+    gap: 10px;
+}
+
+.left-side>div,
+.right-side>div {
+    flex: 1;
+}
+
+.divider-vertical {
+    border-left: 2px solid #ddd;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.subtask-container {
+    margin-bottom: 10px;
+}
