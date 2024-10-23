@@ -12,6 +12,9 @@
 
 }
 
+main {
+  height: 100% !important;
+}
 
 .content {
   max-height: 100vh;
