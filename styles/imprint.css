@@ -1,10 +1,15 @@
+main {
+  height: calc(100vh - 96px);
+  box-sizing: border-box;
+}
+
 .imprint-wrapper {
   margin-top: 20px;
   margin-left: 40px;
   border-collapse: collapse;
   display: block;
   overflow-y: auto;
-  max-height: calc(100% - 150px);
+  max-height: calc(100% - 96px);
 }
 
 h2, h3, div {

@@ -42,8 +42,8 @@
                 <!-- <img src="../assets/img/user-profil.png" alt="" /> -->
               </button>
               <div class="dropdown d_none" id="dropdown-menu">
-                <button class="dropdown-btn" onclick="openImprint()"><span>Legal Notice</span></button>
-                <button class="dropdown-btn" onclick="openPolicy()"><span>Privacy Policy</span></button>
+                <button class="dropdown-btn"><span>Legal Notice</span></button>
+                <button class="dropdown-btn"><span>Privacy Policy</span></button>
                 <button class="dropdown-btn" onclick="openLogin()"><span>Log out</span></button>
               </div>
             </div>
@@ -52,29 +52,38 @@
       </div>
     </header>
     <nav>
-      <a href="./login.html">
-      <img src="../assets/img/logo-weiss.png" alt="join-logo" class="main-logo"></a>
+      <img src="../assets/img/logo-weiss.png" alt="join-logo" class="main-logo">
       <div class="menu-bar">
         <button class="nav-btn active" onclick="openSummary()">
-          <span class="nav-icon"><img src="../assets/icons/summary.png" alt=""></span>
-          <span class="nav-text">Summary</span>
+          <span class="nav-icon"
+            ><img src="../assets/icons/summary.png" alt=""
+          /></span>
+          <span class="nav-text clickable">Summary</span>
         </button>
         <button class="nav-btn" onclick="openAddTask()">
-          <span class="nav-icon"><img src="../assets/icons/add-task.png" alt=""></span>
-          <span class="nav-text clickable">Add Task</span>
+          <span class="nav-icon"
+            ><img src="../assets/icons/add-task.png" alt=""
+          /></span>
+          <span class="nav-text clickable"
+            >Add Task</span
+          >
         </button>
         <button class="nav-btn" onclick="openBoards()">
-          <span class="nav-icon"><img src="../assets/icons/board.png" alt=""></span>
+          <span class="nav-icon"
+            ><img src="../assets/icons/board.png" alt=""
+          /></span>
           <span class="nav-text clickable">Board</span>
         </button>
         <button class="nav-btn" onclick="openContacts()">
-          <span class="nav-icon"><img src="../assets/icons/contact.png" alt=""></span>
-          <span class="nav-text">Contacts</span>
+          <span class="nav-icon"
+            ><img src="../assets/icons/contact.png" alt=""
+          /></span>
+          <span class="nav-text clickable">Contacts</span>
         </button>
       </div>
       <div class="data-protection">
-        <button class="data-policy" onclick="openPolicy()"><span class="clickable">Privacy Policy</span></button>
-        <button class="data-policy" onclick="openImprint()"><span class="clickable">Legal notice</span></button>
+        <button class="data-policy clickable" onclick="openPolicy()"><span>Privacy Policy</span></button>
+        <button class="data-policy clickable" onclick="openImprint()"><span>Legal notice</span></button>
       </div>
     </nav>
 
