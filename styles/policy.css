@@ -1,5 +1,8 @@
 main {
-  height: calc(100vh - 96px);
+  /* height: calc(100vh - 96px); */
+  width: 100%;
+  height: 100%;
+  text-wrap: pretty;
 }
 
 .policy-wrapper {
@@ -11,9 +14,8 @@ main {
   max-height: 760px;
 }
 
-h2, h3, h4, div {
+.mt-10 {
   margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 a {
