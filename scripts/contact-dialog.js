@@ -33,6 +33,9 @@ function openContactDialog() {
       dialog.classList.remove('runInAnimation');  
     }, 1000); 
   }
+
+
+
   
   /**
    * This function closes the dialog

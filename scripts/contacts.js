@@ -155,12 +155,21 @@ async function addNewContact() {
     phone: inputPhoneRef.value,
   });
   sortContactsByFirstName();
-  /* addContactColor(); */
   renderContactList();
   btnIndex = contactList.findIndex((contact) => contact.email === inputEmailRef.value);
   showContactInfo(btnIndex);
   closeContactDialog();
+  animateSuccessMessage();
   await putData(CONTACTS_DIR, contactList);
+}
+
+
+function animateSuccessMessage(){
+  const successNoteRef = document.getElementById('successNote');
+  successNoteRef.classList.remove('success-note-closed');
+  setTimeout(() => {
+    successNoteRef.classList.add('success-note-closed');
+  }, "1000");
 }
 
 /**

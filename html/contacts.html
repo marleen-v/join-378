@@ -102,14 +102,13 @@
             class="add-contact-container flex justify-content-center align-items-center"
           >
             <button
-              class="add-contact-btn flex justify-content-center align-items-center" id="addContactBtn" onclick="renderAddContactDialog()";
-            
-            >
+              class="add-contact-btn flex justify-content-center align-items-center" id="addContactBtn" onclick="renderAddContactDialog()";>
               <span>Add new contact</span
               ><span><img src="../assets/img/person_add.png" alt="" /></span>
             </button>
           </div>
         </section>
+
         <section class="contact-info-container  flex-column" id="contactInfoSection">
           <img class="back-arrow position-absolute clickable d_none" src="../assets/icons/arrow-left.svg" alt="" onclick="closeContactInfoMobile()">
           <div class="contact-title flex align-items-center">
@@ -117,12 +116,15 @@
             <div class="vertical-line"></div>
             <span>Better with a team</span>
           </div>
-          
-        
 
           <div id="single-contact"></div>
+        
         </section>
+        <div class="success-note position-absolute flex justify-content-center align-items-center success-note-closed" id="successNote">Contact successfully created </div>
       </div>
+
+      
+
     </main>
     <dialog class="align-items-center position-relative" id="contact-dialog">
      <img
