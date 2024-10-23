@@ -1,6 +1,6 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
-import { parseTaskIdToNumberId } from "./boards-edit.js";
-import { getCloseSVG } from './boards-overlay.js';
+import { parseTaskIdToNumberId, removePerson } from "./boards-edit.js";
+import { checkedBoxSVG, getCloseSVG, uncheckedBoxSVG } from './boards-overlay.js';
 let priority = "medium";
 let toggleContactList = false;
 let tasks = [];
@@ -35,10 +35,14 @@ function findPersons(data, searchString) {
     return false;
 }
 
-function addUser(index) {
-    addedUser.push(contacts[index].email);
-    console.log(addedUser);
-    
+function addUser(index) {    
+    if (!findPersons(addedUser, contacts[index].email)) {
+        addedUser.push(contacts[index].email);
+    }
+    else {
+        removePerson(addedUser, contacts[index].email);
+    }
+    openContacts();
 }
 
 
@@ -48,11 +52,14 @@ function addUserItem(element, index) {
     //let selectBox = isChecked(element, taskId);
     //let active = (getActiveUser(element)) ? " (you)" : "";
     //let selectBox = isChecked(element, taskId);
+    let selectBox = "";
+    if(findPersons(addedUser, element.email)) selectBox = checkedBoxSVG()
+    else selectBox = uncheckedBoxSVG();
     return /*html*/`
         <div class="task-user-select grid grid-columns-3-48px-1fr-48px" onclick="addUser(${index})">
             <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
             <span class="flex align-items-center">${element.firstName} ${element.lastName}</span>
-            <div class="flex align-items-center"></div>
+            <div class="flex align-items-center">${selectBox}</div>
         </div>
     `;
 }
@@ -237,12 +244,12 @@ function getInputForm() {
                         </div>  
                         <div class="grid grid-rows-2 gap-8px mg-right-8px mg-top-8px">
                             <span class="detailed-card-label">Assigned to:</span>
-                            <div class="add-task-card-assigned-to grid grid-rows-2" onclick="addContact()">
-                                <div class="assign-to-select-box p-right-8px clickable">
+                            <div class="add-task-card-assigned-to grid grid-rows-2" >
+                                <div class="assign-to-select-box p-right-8px clickable" onclick="addContact()">
                                     <span class="mg-left-8px">Select contacts to assign</span>
                                     <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
                                 </div>
-                                <div class="select-box-contacts"></div>
+                                <div class="select-box-contacts mg-top-minus-8px"></div>
                             </div>
                         </div>
                     </div>
