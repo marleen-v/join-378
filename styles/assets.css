@@ -24,7 +24,6 @@
 
 .align-items-center{
     align-items: center;
-  /*   height: 100%; --- hat mir meine Anordnung kaput gemacht, evtl eigene Klasse erstellen?*/ 
 }
 
 .flex-column {
@@ -37,6 +36,10 @@
 
 .clickable {
     cursor: pointer;
+}
+
+.active{
+    background-color: #091931;
 }
 
 .grid {
