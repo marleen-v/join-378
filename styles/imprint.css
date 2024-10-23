@@ -12,8 +12,8 @@ main {
   padding-right: 20px;
   border-collapse: collapse;
   display: block;
-  overflow-y: auto;
-  max-height: calc(100% - 120px);
+  /* overflow-y: auto; */
+  /* max-height: calc(100% - 100px); */
 }
 
 .mt-10 {
