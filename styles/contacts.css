@@ -264,6 +264,7 @@ label>input {
   height: 16px;
   width: 16px;
   align-self: center;
+  -webkit-user-drag: none;
 }
 .close-btn{
   top:60px;
