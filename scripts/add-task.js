@@ -1,11 +1,11 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
-import { tasks } from "./boards.js";
-
+//import { tasks } from "./boards.js";
+import { getCloseSVG } from './boards-overlay.js';
 
 async function loadAddTask() {
     //const htmlContent = await loadHTML('../html/add-task-main.html');
-    document.querySelector('.add-task').innerHTML = getAddTaskTemplate();
+    document.querySelector('main').innerHTML = getInputForm();
     /*
     if (htmlContent) {
         processHTML(htmlContent); // Den HTML-String an eine andere Funktion weiterleiten
@@ -14,7 +14,7 @@ async function loadAddTask() {
 
 function addTask() {
     console.log("Add");
-    
+
 }
 
 
@@ -78,14 +78,14 @@ function getLowSVG() {
 
 function setBgColor(element) {
     let div = document.querySelector(`#${element}`);
-    
+
     //div.classList.add('set-bg-orange');  
     //div.querySelector('svg').classList.add('filter-color-to-white'); 
     switch (element) {
         case 'urgent': div.classList.add('set-bg-red'); break;
-        case 'medium': div.classList.add('set-bg-orange'); break;  
+        case 'medium': div.classList.add('set-bg-orange'); break;
         case 'low': div.classList.add('set-bg-green'); break;
-    } 
+    }
     div.querySelector('svg').classList.add('filter-color-to-white');
 
 }
@@ -94,7 +94,7 @@ function setBgColor(element) {
 function removePriorityColor(element) {
     let detailedCard = document.querySelector(`${element}`);
     let buttons = detailedCard.querySelectorAll('.priority-buttons > button');
-    
+
     buttons.forEach(item => {
         item.classList.remove('set-bg-red');
         item.classList.remove('set-bg-orange');
@@ -104,8 +104,8 @@ function removePriorityColor(element) {
 }
 
 export function setPriorityColor(element, id) {
-    removePriorityColor(element);    
-    
+    removePriorityColor(element);
+
     switch (tasks[id].Priority) {
         case 'Urgent': setBgColor(tasks[id].Priority.toLowerCase()); break;
         case 'Medium': setBgColor(tasks[id].Priority.toLowerCase()); break;
@@ -122,7 +122,7 @@ export function setPriorityColor(element, id) {
  * @returns {string}
  */
 export function getPriority(priority) {
-    let svg = "";    
+    let svg = "";
     switch (priority) {
         case 'Urgent': svg = getUrgentSVG(); break;
         case 'Medium': svg = getMediumSVG(); break;
@@ -132,85 +132,175 @@ export function getPriority(priority) {
 }
 
 
+function getInputForm() {
+    return /*html*/`
+    <section id="add-task" class="add-task">
+        <div class="add-task-head flex align-items-center">
+            <div class="add-task-headline">
+                <h1>Add Task</h1>
+            </div>
+        </div>
+        <div class="task-form-container">
+        <form id="task-form" class="task-form" onsubmit="addTask()">
+            <div class="grid grid-rows-auto gap-64px">
+                <div class="grid grid-columns-3-1fr-1px-1fr gap-32px">
+                    <div class="grid grid-rows-auto gap-8px">
+                        <div>
+                            <!-- Titel -->
+                            <span>Title</span>
+                            <input class="task-input" type="text" id="title" name="title" required>
+                        </div>
+                        <div>
+                            <span>Description</span>
+                            <textarea class="task-textarea" id="description" name="description" rows="4" placeholder="Enter a description" required></textarea>
+                        </div>  
+                        <div class="grid grid-rows-2 gap-8px mg-right-8px mg-top-8px">
+                            <span class="detailed-card-label">Assigned to:</span>
+                            <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px">
+                                <div class="assign-to-select-box p-right-8px clickable">
+                                    <span class="mg-left-8px">Select contacts to assign</span>
+                                    <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
+                                </div>
+                                <div class="add-task-card-persons grid grid-rows-auto auto-overflow-y set-height-128px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="grid grid-rows-auto gap-8px">
+                        <div>
+                            <!-- Fälligkeitsdatum -->
+                            <span>Due date</span>
+                            <input class="task-input" type="date" id="due-date" name="due_date" required>
+                        </div>
+                        <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
+                            <span class="flex detailed-card-label">Priority</span>
+                            <div class="priority-buttons flex">
+                                <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch">
+                                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Urgent</span>    
+                                    <div class="flex align-items-center set-height-100">${getPriority("Urgent")}</div>
+                                </button>
+                                <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel">
+                                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Medium</span>    
+                                    <div class="flex align-items-center set-height-100">${getPriority("Medium")}</div>
+                                </button>
+                                <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig">
+                                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Low</span>    
+                                    <div class="flex align-items-center set-height-100">${getPriority("Low")}</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px mg-top-16px">
+                            <span class="detailed-card-label mg-top-8px">Category</span>
+                                <div class="assign-to-select-box p-right-8px clickable">
+                                    <span class="mg-left-8px">Select category</span>
+                                    <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
+                                </div>
+                                <div class="add-task-card-persons grid grid-rows-auto auto-overflow-y set-height-128px"></div>
+                            </div>
+                        <div class="grid grid-rows-2 gap-8px mg-right-8px">
+                            <span class="detailed-card-label mg-top-8px">Subtasks</span>
+                            <div class="detailed-task-card-subtasks flex">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-columns-3-1fr-1px-1fr">
+                    <div></div>
+                    <div></div>
+                    <div class="flex justify-content-flex-end">
+                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn mg-right-8px clickable">
+                            <span class="mg-right-8px set-font-icon-700">Clear</span>
+                            <div class="filter-color-to-white flex align-items-center">${getCloseSVG()}</div>
+                        </button>
+                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn clickable">
+                            <span class="mg-right-8px set-font-icon-700">Create Task</span>
+                            <img class="flex align-items-center" src="../assets/icons/check.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+</section>
+    `;
+}
+
+
 function getAddTaskTemplate() {
     return /*html*/`
-         <section id="add-task" class="add-task">
-      <div class="add-task-head">
-        <div class="add-task-headline">
-          <h1>Add Task</h1>
-        </div>
-      </div>
-      <div class="add-task-main">
-        <form id="task-form" class="task-form" onsubmit="addTask()">
-          <!-- Linker und rechter Bereich mit senkrechter Linie -->
-          <div class="form-row">
-            <!-- Linke Seite (Titel und Zuweisen an) -->
-            <div class="left-side">
-              <div>
-                <!-- Titel -->
-                <label class="task-label" for="title">Title</label>
-                <input class="task-input" type="text" id="title" name="title" required>
-              </div>
-              <!-- Beschreibung -->
-              <label class="task-label" for="description">Description</label>
-              <textarea class="task-textarea" id="description" name="description" rows="4"
-                placeholder="Enter a description" required></textarea>
-              <div>
-                <!-- Zuweisen an -->
-                <label class="task-label" for="assigned-to">Assigned to</label>
-                <select class="task-select" id="assigned-to" name="assigned_to" required>
-                  <option value="" disabled selected>Select contacts to assign</option>
-                  <option value="mitarbeiter1">Mitarbeiter 1</option>
-                  <option value="mitarbeiter2">Mitarbeiter 2</option>
-                  <option value="mitarbeiter3">Mitarbeiter 3</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Rechte Seite (Fälligkeitsdatum) mit vertikaler Trennung -->
-            <div class="right-side divider-vertical">
-              <div>
-                <!-- Fälligkeitsdatum -->
-                <label class="task-label" for="due-date">Due date</label>
-                <input class="task-input" type="date" id="due-date" name="due_date" required>
-              </div>
-
-              <!-- Priorität als Buttons -->
-              <label>Priority</label>
-              <div class="priority-buttons">
-                <button class="task-button clickable" type="button" class="priority-button" id="urgent"
-                  data-priority="hoch" onclick="selectPriority(this)">Urgent</button>
-                <button class="task-button clickable" type="button" class="priority-button active" id="medium"
-                  data-priority="mittel" onclick="selectPriority(this)">Medium</button>
-                <button class="task-button clickable" type="button" class="priority-button" id="low"
-                  data-priority="niedrig" onclick="selectPriority(this)">Low</button>
-              </div>
-
-              <!-- Kategorie -->
-              <label class="task-label" for="category">Category</label>
-              <select class="task-select" id="category" name="category" required>
-                <option value="" disabled selected>Select task category</option>
-                <option value="entwicklung">Entwicklung</option>
-                <option value="marketing">Marketing</option>
-                <option value="design">Design</option>
-              </select>
-
-              <!-- Subtasks -->
-              <label class="task-label">Subtasks</label>
-              <div id="subtasks-container">
-                <div class="subtask-container">
-                  <input class="task-input" type="text" name="subtasks[]" placeholder="Add new subtask">
+        <section id="add-task" class="add-task">
+            <div class="add-task-head flex align-items-center">
+                <div class="add-task-headline">
+                    <h1>Add Task</h1>
                 </div>
-              </div>
             </div>
-          </div>
-          <button type="button" onclick="addSubtask()">Weitere Unteraufgabe hinzufügen</button>
+            <div class="add-task-main">
+                <form id="task-form" class="task-form" onsubmit="addTask()">
+                    <!-- Linker und rechter Bereich mit senkrechter Linie -->
+                    <div class="form-row">
+                        <!-- Linke Seite (Titel und Zuweisen an) -->
+                        <div class="left-side">
+                            <div>
+                                <!-- Titel -->
+                                <label class="task-label" for="title">Title</label>
+                                <input class="task-input" type="text" id="title" name="title" required>
+                            </div>
+                            <!-- Beschreibung -->
+                            <label class="task-label" for="description">Description</label>
+                            <textarea class="task-textarea" id="description" name="description" rows="4" placeholder="Enter a description" required></textarea>
+                            <div>
+                                <!-- Zuweisen an -->
+                                <label class="task-label" for="assigned-to">Assigned to</label>
+                                <select class="task-select" id="assigned-to" name="assigned_to" required>
+                                    <option value="" disabled selected>Select contacts to assign</option>
+                                    <option value="mitarbeiter1">Mitarbeiter 1</option>
+                                    <option value="mitarbeiter2">Mitarbeiter 2</option>
+                                    <option value="mitarbeiter3">Mitarbeiter 3</option>
+                                </select>
+                            </div>
+                        </div>
 
-          <!-- Absenden -->
-          <button type="submit">Aufgabe erstellen</button>
-        </form>
-      </div>
-    </section>    
+                        <!-- Rechte Seite (Fälligkeitsdatum) mit vertikaler Trennung -->
+                        <div class="right-side divider-vertical">
+                            <div>
+                                <!-- Fälligkeitsdatum -->
+                                <label class="task-label" for="due-date">Due date</label>
+                                <input class="task-input" type="date" id="due-date" name="due_date" required>
+                            </div>
+
+                            <!-- Priorität als Buttons -->
+                            <label>Priority</label>
+                            <div class="priority-buttons">
+                                <button class="task-button clickable" type="button" class="priority-button" id="urgent" data-priority="hoch" onclick="selectPriority(this)">Urgent</button>
+                                <button class="task-button clickable" type="button" class="priority-button active" id="medium" data-priority="mittel" onclick="selectPriority(this)">Medium</button>
+                                <button class="task-button clickable" type="button" class="priority-button" id="low" data-priority="niedrig" onclick="selectPriority(this)">Low</button>
+                            </div>
+
+                            <!-- Kategorie -->
+                            <label class="task-label" for="category">Category</label>
+                            <select class="task-select" id="category" name="category" required>
+                                <option value="" disabled selected>Select task category</option>
+                                <option value="entwicklung">Entwicklung</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="design">Design</option>
+                            </select>
+
+                            <!-- Subtasks -->
+                            <label class="task-label">Subtasks</label>
+                            <div id="subtasks-container">
+                                <div class="subtask-container">
+                                    <input class="task-input" type="text" name="subtasks[]" placeholder="Add new subtask">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addSubtask()">Weitere Unteraufgabe hinzufügen</button>
+
+                    <!-- Absenden -->
+                    <button type="submit">Aufgabe erstellen</button>
+                </form>
+            </div>
+        </section>    
     `;
 }
 
