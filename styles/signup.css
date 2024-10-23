@@ -142,6 +142,7 @@ input:focus {
   position: absolute;
   top: 16px;
   right: 26px;
+  -webkit-user-drag: none;
 }
 
 .password-input-1 img:hover, .password-input-2 img:hover {
