@@ -10,6 +10,13 @@ let firstName;
 let lastName;
 let initials;
 
+// Header laden
+fetch('header.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+    });
+
 /**
  * This function loads the contactdata from firebase and renders the contact list
  */
