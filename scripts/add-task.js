@@ -149,7 +149,7 @@ function getInputForm() {
         </div>
         <div class="task-form-container">
         <form id="task-form" class="task-form" onsubmit="addTask()">
-            <div class="grid grid-rows-auto gap-64px">
+            <div class="grid grid-rows-auto gap-32px">
                 <div class="grid grid-columns-3-1fr-1px-1fr gap-32px">
                     <div class="grid grid-rows-auto gap-8px">
                         <div>
@@ -207,6 +207,10 @@ function getInputForm() {
                         <div class="grid grid-rows-2 gap-8px mg-right-8px">
                             <span class="detailed-card-label mg-top-8px">Subtasks</span>
                             <div class="detailed-task-card-subtasks flex">
+                                <div onclick="" class="subtasks-add-box p-right-8px clickable">
+                                    <span class="mg-left-8px">Add new subtask</span>
+                                    <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>

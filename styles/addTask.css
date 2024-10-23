@@ -85,6 +85,19 @@ main {
     text-align: center;
 }
 
+
+.subtasks-add-box {
+    border: 1px solid;
+    border-color: #D1D1D1;
+    border-radius: 8px;
+    height: 32px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
 .bg-color-turkey {
     background-color: #1FD7C1;
 }
