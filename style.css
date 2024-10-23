@@ -219,6 +219,7 @@ nav {
 main {
   grid-area: main;
   /*height: 100vh;*/
+  overflow-y: auto;
 }
 
 .menu-bar {
