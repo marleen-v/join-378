@@ -12,21 +12,30 @@
 
 }
 
-main {
-  height: 100% !important;
+body{
+  overflow:hidden;
 }
 
 .content {
-  max-height: 100vh;
+  max-height: 100%;
  
 }
+
 
 .contacts-container {
   background-color: #fff;
   box-shadow: 4px 0 6px 0 rgb(0 0 0 / 0.08);   
   width: 456px;
   position: relative;
+  
+
+}
+
+.contacts {
+  padding: 90px 24px 32px 24px;
+  width:440px;
   max-height: calc(100% - 96px); 
+  overflow-y: scroll; /* Show scrollbars */
 }
 
 .add-contact-container {
@@ -52,11 +61,7 @@ main {
   background-color: #29abe2;
 }
 
-.contacts {
-  padding: 90px 24px 32px 24px;
-  width:440px;
-  overflow-y: scroll; /* Show scrollbars */
-}
+
 
 .letter {
   width: 352px;
@@ -357,19 +362,19 @@ label>input {
  @media only screen and (max-width: 1200px) {
   main {
     position: relative;
-   
+    max-height: 100%;
+    overflow: hidden;
   
 
   }
 
   .content{
-    max-height:100%;
-    /* height:auto; */
+    max-height: 100%;
     overflow-x: hidden;
   }
 
   .contacts-container{
-    max-height:100%;
+    max-height: 100%;
     position: static;
     width:100%;
     max-width:100%;
@@ -381,6 +386,7 @@ label>input {
     max-width:100%;
     width:100%;
     overflow-x: hidden;
+    max-height: 100%;
   }
 
   .add-contact-container{
