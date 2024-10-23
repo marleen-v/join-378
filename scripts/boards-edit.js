@@ -15,7 +15,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.input-edit-headline').value = tasks[id].Title;
     detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
-    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], false);
+    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
     setPriorityColor(".detailed-card", id);
 }
 
@@ -25,13 +25,20 @@ function selectPriority(taskId, priority) {
     tasks[id].Priority = priority;
     document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
     setDetailedEditableCard(taskId);
-    
+
+}
+
+function cancelEdit(taskId) {
+    let overlay = document.querySelector('.overlay');
+    overlay.innerHTML = getDetailedCard(taskId);
+    let id = parseTaskIdToNumberId(taskId);
+    setDetailedCard(id);
 }
 
 function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     tasks[id].Title = document.querySelector('#input-edit-headline').value;
-    tasks[id].Description = document.querySelector('#textarea-edit-description').value;    
+    tasks[id].Description = document.querySelector('#textarea-edit-description').value;
     tasks[id].Date = document.querySelector('#due-date').value;
     putData(TASKS_DIR, tasks);
     document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
@@ -39,9 +46,9 @@ function closeEdit(taskId) {
 }
 
 
-function findPersons(data, searchString) {     
+function findPersons(data, searchString) {
     for (let index = 0; index < data.length; index++) {
-        if(data[index] === searchString) return true;
+        if (data[index] === searchString) return true;
     }
     return false;
 }
@@ -57,16 +64,16 @@ function removePerson(data, elementToRemove) {
 
 
 function isChecked(element, taskId) {
-    let id = parseTaskIdToNumberId(taskId); 
-    let person = element.firstName + " " + element.lastName;    
-    if(findPersons(tasks[id].Persons, person)) return checkedBoxSVG();
+    let id = parseTaskIdToNumberId(taskId);
+    let person = element.firstName + " " + element.lastName;
+    if (findPersons(tasks[id].Persons, person)) return checkedBoxSVG();
     return uncheckedBoxSVG();
 }
 
 function chooseContact(index, taskId) {
-    let id = parseTaskIdToNumberId(taskId); 
-    let person = contacts[index].firstName + " " + contacts[index].lastName; 
-    if(!findPersons(tasks[id].Persons, person)) {
+    let id = parseTaskIdToNumberId(taskId);
+    let person = contacts[index].firstName + " " + contacts[index].lastName;
+    if (!findPersons(tasks[id].Persons, person)) {
         tasks[id].Persons.push(person);
         openContactSelectBox(taskId);
     }
@@ -77,13 +84,13 @@ function chooseContact(index, taskId) {
 }
 
 function getActiveUser(element) {
-    if(element.email === activeUser.email) return true;
+    if (element.email === activeUser.email) return true;
     return false;
 }
 
 function addLinkedItem(element, index, taskId) {
-    let color = getUserColor(element.firstName, element.lastName); 
-    let id = parseTaskIdToNumberId(taskId); 
+    let color = getUserColor(element.firstName, element.lastName);
+    let id = parseTaskIdToNumberId(taskId);
     let selectBox = isChecked(element, taskId);
     let active = (getActiveUser(element)) ? " (you)" : "";
     return /*html*/`
@@ -98,10 +105,10 @@ function addLinkedItem(element, index, taskId) {
 
 function focusUserSelectBox(active) {
     let container = document.querySelector('.detailed-card-editable-container');
-    if(active) {
+    if (active) {
         container.classList.remove('auto-overflow-y');
         container.classList.add('hidden-overflow-y');
-        container.scrollTo(0,100);
+        container.scrollTo(0, 100);
     }
     else {
         container.classList.add('auto-overflow-y');
@@ -117,9 +124,9 @@ function openContactSelectBox(taskId) {
     let persons = document.querySelector('.add-task-card-persons');
     persons.classList.add('set-height-140px');
     persons.innerHTML = "";
-    contacts.forEach((element, index) => { 
+    contacts.forEach((element, index) => {
         persons.innerHTML += addLinkedItem(element, index, taskId);
-        if(getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
+        if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
         else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
     });
 }
@@ -138,9 +145,9 @@ function closeContactSelectBox(taskId) {
 
 function assignContact(taskId) {
     toggleContactList = !toggleContactList;
-    if(toggleContactList) {
+    if (toggleContactList) {
         openContactSelectBox(taskId);
-    } 
+    }
     else {
         closeContactSelectBox(taskId);
     }
@@ -158,9 +165,9 @@ function getSubtaskMask(taskId) {
 function pushSubtask(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     let input = document.querySelector('#add-new-subtask').value;
-    if(input == "") return;
-    if(tasks[id].Subtasks) tasks[id].Subtasks.push({"Description": input, "Done": false});   
-    else tasks[id]["Subtasks"] = [{"Description": input, "Done": false}];
+    if (input == "") return;
+    if (tasks[id].Subtasks) tasks[id].Subtasks.push({ "Description": input, "Done": false });
+    else tasks[id]["Subtasks"] = [{ "Description": input, "Done": false }];
     document.querySelector('.detailed-task-card-subtasks').innerHTML = getSubtaskMask(taskId);
 }
 
@@ -192,43 +199,42 @@ export function getDetailedEditableCard(taskId) {
         <section class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div></div>
-                <div onclick="closeOverlay()"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
+                <div onclick="cancelEdit('${taskId}')"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
             </div>
             <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
-            <div class="add-task-card-headline grid grid-rows-2 mg-right-8px gap-8px">
-                <span class="input-edit-label detailed-card-label">Title</span>
-                <input id="input-edit-headline" class="input-edit-headline input-border p-left-8px" type="text">
-            </div>
-            <div class="grid grid-rows-2 mg-right-8px gap-8px">
-                <span class="input-edit-label detailed-card-label">Description</span>
-                <textarea name="" id="textarea-edit-description" class="textarea-edit-description input-border p-left-8px p-right-8px set-height-100px p-top-8px"></textarea>
-            </div>
-            <div class="add-task-card-date grid grid-rows-2 gap-8px mg-right-8px">
-                <!-- Fälligkeitsdatum -->
-                <span class="input-edit-label detailed-card-label">Due date</span>
-                <input class="due-date p-left-8px p-right-8px input-border" type="date" id="due-date" name="due_date" required="">
-            </div>
-            <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
-                <span class="flex detailed-card-label">Priority</span>
-                <div class="priority-buttons flex">
+                <form id="task-edit-form" class="task-edit-form" onsubmit="closeEdit('${taskId}');return false;">
+                    <div class="add-task-card-headline grid grid-rows-2 mg-right-8px gap-8px">
+                        <span class="input-edit-label detailed-card-label">Title</span>
+                        <input id="input-edit-headline" class="input-edit-headline input-border p-left-8px" type="text" required>
+                    </div>
+                    <div class="grid grid-rows-2 mg-right-8px mg-top-8px">
+                        <span class="input-edit-label detailed-card-label">Description</span>
+                        <textarea name="" id="textarea-edit-description" class="textarea-edit-description input-border mg-top-8px p-left-8px p-right-8px set-height-100px p-top-8px" required></textarea>
+                    </div>
+                    <div class="add-task-card-date grid grid-rows-2 mg-top-8px mg-right-8px">
+                        <!-- Fälligkeitsdatum -->
+                        <span class="input-edit-label detailed-card-label">Due date</span>
+                        <input class="due-date p-left-8px p-right-8px mg-top-8px input-border" type="date" id="due-date" name="due_date" required>
+                    </div>
+                </form>
+                <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
+                    <span class="flex detailed-card-label">Priority</span>
+                    <div class="priority-buttons flex">
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="selectPriority('${taskId}', 'Urgent')">
-                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Urgent</span>    
-                    <div class="flex align-items-center set-height-100">${getPriority("Urgent")}</div>
+                        <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Urgent</span>    
+                        <div class="flex align-items-center set-height-100">${getPriority("Urgent")}</div>
                     </button>
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="selectPriority('${taskId}', 'Medium')">
-                        
                         <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Medium</span>    
                         <div class="flex align-items-center set-height-100">${getPriority("Medium")}</div>
                     </button>
                     <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="selectPriority('${taskId}', 'Low')">
-                        
                         <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Low</span>    
                         <div class="flex align-items-center set-height-100">${getPriority("Low")}</div>
                     </button>
                 </div>
-              
             </div>
-            <div class="grid grid-rows-2 gap-8px mg-right-8px">
+            <div class="grid grid-rows-2 gap-8px mg-right-8px mg-top-8px">
                 <span class="detailed-card-label">Assigned to:</span>
                 <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px">
                     <div class="assign-to-select-box p-right-8px clickable" onclick="assignContact('${taskId}')">
@@ -246,12 +252,12 @@ export function getDetailedEditableCard(taskId) {
             </div>
             </div>  
             <div class="add-task-card-bottom flex justify-content-flex-end align-items-center mg-right-8px">
-            <div class="flex">
-                <button class="flex justify-content-center align-items-center btn-ok clickable" onclick="closeEdit('${taskId}')">
-                    <span class="mg-right-8px">Ok</span>
-                    <img src="../assets/icons/check.svg" alt="">
-                </button>
-            </div>
+                <div class="flex">
+                    <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn-ok clickable">
+                        <span class="mg-right-8px">Ok</span>
+                        <img src="../assets/icons/check.svg" alt="">
+                    </button>
+                </div>
             </div>
         </section>  
     `;
@@ -264,3 +270,4 @@ window.chooseContact = chooseContact;
 window.addSubtask = addSubtask;
 window.cancelSubtask = cancelSubtask;
 window.pushSubtask = pushSubtask;
+window.cancelEdit = cancelEdit;

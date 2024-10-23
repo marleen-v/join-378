@@ -17,6 +17,7 @@ async function initContacts() {
   checkScreenSize();
   contactList = await loadData(CONTACTS_DIR);
   renderContactList();
+  getLogo();
 }
 
 /**

@@ -1,3 +1,7 @@
+/**
+ * returns summary with variables from tasks-JSON
+ * @returns HTML-Template 
+ */
 function getTemplateMainSummary(){
   return `
     <section class="summary-section">
@@ -49,6 +53,19 @@ function getTemplateMainSummary(){
         </div>
 
       </section>
+  `;
+}
+
+
+/**
+ * HTML-Template for Greeting
+ * @param {*} greetFormula contains greeting depending on daytime
+ * @returns HTML-Template
+ */
+function getGreetingTemplate(greetFormula){
+  return `
+    <p class="greeting-formula">${greetFormula},</p>
+    <p class="greeting-person">${currentUserFirstName}&nbsp;${currentUserLastName}</p>
   `;
 }
 

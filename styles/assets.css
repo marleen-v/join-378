@@ -51,6 +51,13 @@
     margin-top: 8px;
 }
 
+.mg-top-16px {
+    margin-top: 16px;
+}
+
+.mg-top-32px {
+    margin-top: 32px;
+}
 
 .mg-left-8px {
     margin-left: 8px;
@@ -88,6 +95,10 @@
     padding-right: 8px;
 }
 
+.mg-left-minus-8px {
+    margin-left: -8px;
+}
+
 .mg-right-left-8px {
     margin: 0 8px 0 8px;
 }
@@ -98,6 +109,10 @@
 
 .grid-rows-auto {
     grid-template-rows: auto !important;
+}
+
+.grid-columns-auto {
+    grid-template-columns: auto !important;
 }
 
 .set-width-height-42 {
@@ -119,6 +134,10 @@
 
 .set-height-140px {
     height: 140px;
+}
+
+.set-height-160px {
+    height: 160px;
 }
 
 .set-height-100 {

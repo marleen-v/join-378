@@ -77,3 +77,11 @@ function getRandomColor(){
   return contactColors[r];
 }
 
+
+/**
+ * Sets the Logo for Active User in Header
+ */
+async function getLogo(){
+    activeUser = await loadData(ACTIVE_DIR);
+    document.getElementById("userlogo").innerHTML = activeUser[0].initials;
+}

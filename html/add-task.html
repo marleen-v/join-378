@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body onload="getLogo()">
   <header>
     <div class="header-wrapper">
       <div class="title">Kanban Project Management Tool</div>
@@ -37,8 +37,8 @@
         </button>
         <div class="user-profil">
           <div class="dropdown-menu">
-            <button class="profil-img" onclick="openCloseDropdownMenu()">
-              <img src="../assets/img/user-profil.png" alt="" />
+            <button id="userlogo" class="profil-img" onclick="openCloseDropdownMenu()" style="color: blue;">
+              <!-- <img src="../assets/img/user-profil.png" alt="" /> -->
             </button>
             <div class="dropdown d_none" id="dropdown-menu">
               <button class="dropdown-btn"><span>Legal Notice</span></button>
