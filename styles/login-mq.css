@@ -54,7 +54,7 @@
     box-sizing: border-box;
     width: 364px;
     height: 48px;
-    padding: 0;
+    padding: 10px;
     margin-bottom: 24px;
   }
   .input-ctn input::placeholder {
