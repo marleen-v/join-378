@@ -1,3 +1,5 @@
+@import "https://unpkg.com/open-props";
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -189,11 +191,16 @@ dialog{
   position: relative;
   background-color: transparent;
   display:none;
+  overflow: hidden;
+  transition: opacity .5s;
+  animation: var(--animation-scale-down) forwards;
+  animation-timing-function: var(--ease-squish-3);
 
 }
 
 dialog[open]{
   display: flex;
+  animation: var(--animation-slide-in-left) forwards;
 }
 
 
@@ -339,7 +346,7 @@ label>input {
   animation-duration: 0.5s ease;
 }   
 
-/* .success-note{
+.success-note{
   height:74px; 
   width:326px; 
   background-color:#2A3647 ; 
@@ -356,7 +363,7 @@ label>input {
 
 .success-note-closed{
   transform: translateY(400px);
-}  */
+}  
 
 /*--------------------------- Responsive ------------------------*/
 
@@ -454,6 +461,10 @@ label>input {
       max-height: 750px;
       height:auto;
       background-color: #fff;
+     /*  max-inline-size: min(90vw, 60ch);
+  max-block-size: min(80vh, 100%);
+  max-block-size: min(80dvb, 100%); */
+  
     }
 
     .dialog-title{

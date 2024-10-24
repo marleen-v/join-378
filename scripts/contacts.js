@@ -169,7 +169,7 @@ function animateSuccessMessage(){
   successNoteRef.classList.remove('success-note-closed');
   setTimeout(() => {
     successNoteRef.classList.add('success-note-closed');
-  }, "1000");
+  }, "1500");
 }
 
 /**
