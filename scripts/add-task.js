@@ -1,10 +1,11 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
-import { parseTaskIdToNumberId, removePerson } from "./boards-edit.js";
+import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { checkedBoxSVG, getCloseSVG, uncheckedBoxSVG } from './boards-overlay.js';
 let priority = "medium";
-let toggleContactList = false, toggleCategory = false;
+let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
 let tasks = [];
 let contacts = [];
+let subtasks = [];
 let addedUser = [];
 let activeUser = [];
 let category = "";
@@ -32,14 +33,23 @@ function isChecked(element, taskId) {
 
 function findPersons(data, searchString) {
     for (let index = 0; index < data.length; index++) {
-        if (data[index] === searchString) return true;
+        if (data[index].email === searchString) return true;
     }
     return false;
 }
 
+function removePerson(data, elementToRemove) {
+    data.forEach((item, index) => {
+        if (item.email === elementToRemove) {
+            data.splice(index, 1);
+        }
+    });
+    return data;
+}
+
 function addUser(index) {    
     if (!findPersons(addedUser, contacts[index].email)) {
-        addedUser.push(contacts[index].email);
+        addedUser.push(contacts[index]);        
     }
     else {
         removePerson(addedUser, contacts[index].email);
@@ -218,9 +228,10 @@ export function getPriority(priority) {
     return svg;
 }
 
-function setPriority(priority) {
+function setPriority(prio) {
+    priority = prio;
     removePriorityColor('.task-form-container');
-    setBgColor(priority);
+    setBgColor(prio);
 }
 
 function addCategory(cat) {
@@ -258,6 +269,79 @@ function chooseCategory() {
 }
 
 
+function getSubtaskMask() {
+    return /*html*/`
+        <div onclick="addNewSubtask()" class="subtasks-add-box p-right-8px clickable">
+            <span class="mg-left-8px">Add new subtask</span>
+            <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
+        </div>
+    `;
+}
+
+
+function getSubtaskInput() {
+    return /*html*/`
+        <div class="subtasks-add-box subtask-input p-right-8px">
+            <div class="p-left-8px"><input id="add-new-subtask" class="add-new-subtask" type="text" placeholder="Add new task..."></div>
+            <div onclick="addNewSubtask()" class="size-16px flex justify-content-center click-item clickable"><img src="../assets/icons/close.svg" alt=""></div>
+            <div class="divider set-height-60"></div>
+            <div onclick="pushNewSubtask()" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
+        </div>
+    `;
+}
+
+function pushNewSubtask() {
+    let input = document.querySelector('#add-new-subtask').value;
+    let subtask =  { Description: input, Done: false };    
+    subtasks.push(subtask);        
+    console.log(subtasks);
+    
+}
+
+
+function addNewSubtask() {
+    toggleSubtask = !toggleSubtask;
+    let subtask = document.querySelector('.add-new-subtask-box');
+    subtask.innerHTML = (toggleSubtask) ? getSubtaskInput() : getSubtaskMask();
+    
+}
+
+function clearButton() {
+    subtasks = [];
+    addedUser = [];
+    category = "";
+    priority = "Medium";
+    loadAddTask();/*
+    document.querySelector('main').innerHTML = getInputForm();
+    setBgColor('medium');
+    getLogo();*/
+}
+
+
+function getTaskInfos() {
+    let persons = [];
+    addedUser.forEach(element => { persons.push(element.firstName + " " + element.lastName) });
+    return {
+        "id": tasks.length,
+        "Column": "To Do",
+        "Title": document.getElementById('title').value,
+        "Description": document.getElementById('description').value,
+        "Date": document.getElementById('due-date').value,
+        "Priority": priority,
+        "Category": category,
+        "Subtasks": subtasks,
+        "Persons": persons,
+      };      
+}
+
+
+function createNewTask() {   
+    tasks.push(getTaskInfos());    
+    putData(TASKS_DIR, tasks);
+    window.location = "../html/boards.html";  
+}
+
+
 function getInputForm() {
     return /*html*/`
     <section id="add-task" class="add-task">
@@ -267,7 +351,7 @@ function getInputForm() {
             </div>
         </div>
         <div class="task-form-container">
-        <form id="task-form" class="task-form" onsubmit="addTask()">
+        <form id="create-task-form" class="task-form" onsubmit="createNewTask(); return false;">
             <div class="grid grid-rows-auto gap-32px">
                 <div class="grid grid-columns-3-1fr-1px-1fr gap-32px">
                     <div class="part-1-form">
@@ -327,8 +411,8 @@ function getInputForm() {
                         </div>
                         <div class="add-new-subtask">
                             <span class="mg-top-8px">Subtasks</span>
-                            <div class="flex">
-                                <div onclick="" class="subtasks-add-box p-right-8px clickable">
+                            <div class="add-new-subtask-box flex">
+                                <div onclick="addNewSubtask()" class="subtasks-add-box p-right-8px clickable">
                                     <span class="mg-left-8px">Add new subtask</span>
                                     <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
                                 </div>
@@ -340,11 +424,11 @@ function getInputForm() {
                     <div></div>
                     <div></div>
                     <div class="flex justify-content-flex-end">
-                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn-clear mg-right-8px clickable">
+                        <button onclick="clearButton()" class="flex justify-content-center align-items-center btn-clear mg-right-8px clickable">
                             <span class="mg-right-8px set-font-icon-700">Clear</span>
                             <div class="flex align-items-center">${getCloseSVG()}</div>
                         </button>
-                        <button form="task-edit-form" type="submit" class="flex justify-content-center align-items-center btn-add-task clickable">
+                        <button form="create-task-form" type="submit" class="flex justify-content-center align-items-center btn-add-task clickable">
                             <span class="mg-right-8px set-font-icon-700">Create Task</span>
                             <img class="flex align-items-center" src="../assets/icons/check.svg" alt="">
                         </button>
@@ -357,11 +441,13 @@ function getInputForm() {
     `;
 }
 
-
+window.clearButton = clearButton;
 window.loadAddTask = loadAddTask;
-window.addTask = addTask;
+window.createNewTask = createNewTask;
 window.setPriority = setPriority;
 window.addContact = addContact;
 window.addUser = addUser;
 window.chooseCategory = chooseCategory;
 window.addCategory = addCategory;
+window.addNewSubtask = addNewSubtask;
+window.pushNewSubtask = pushNewSubtask;

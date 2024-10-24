@@ -53,7 +53,7 @@ function findPersons(data, searchString) {
     return false;
 }
 
-export function removePerson(data, elementToRemove) {
+function removePerson(data, elementToRemove) {
     data.forEach((item, index) => {
         if (item === elementToRemove) {
             data.splice(index, 1);

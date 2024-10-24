@@ -293,3 +293,35 @@ main {
 .selection:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
+
+
+.subtask-input {
+    display: grid;
+    grid-template-columns: 1fr 24px 1px 24px;
+    grid-template-rows: 1fr;
+}
+
+.subtask-input > div > input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.set-height-60 {
+    height: 60%;
+}
+
+.click-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+}
+
+.size-24px {
+    width: 24px;
+    height: 24px;
+}
+
+.size-16px {
+    width: 16px;
+    height: 16px;
+}
