@@ -352,7 +352,7 @@ function getInputForm() {
                     <div class="part-1-form">
                         <div>
                             <!-- Titel -->
-                            <span>Title</span>
+                            <span>Title<span class="required-star">*</span></span>
                             <input class="task-input" type="text" id="title" name="title" required>
                         </div>
                         <div>
@@ -374,7 +374,7 @@ function getInputForm() {
                     <div class="part-2-form">
                         <div>
                             <!-- Fälligkeitsdatum -->
-                            <span>Due date</span>
+                            <span>Due date<span class="required-star">*</span></span>
                             <input class="task-input" type="date" id="due-date" name="due_date" required>
                         </div>
                         <div class="select-priority">
@@ -416,7 +416,7 @@ function getInputForm() {
                     </div>
                 </div>
                 <div class="grid grid-columns-3-1fr-1px-1fr">
-                    <div></div>
+                    <div class="flex required-info"><span class="required-star">*</span><span>This Field is required</span></div>
                     <div></div>
                     <div class="flex justify-content-flex-end">
                         <button onclick="clearButton()" class="flex justify-content-center align-items-center btn-clear mg-right-8px clickable">

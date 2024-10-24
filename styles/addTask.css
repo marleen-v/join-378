@@ -325,3 +325,12 @@ main {
     width: 16px;
     height: 16px;
 }
+
+.required-star {
+    color: red;
+}
+
+.required-info {
+    font-weight: 400;
+    font-size: 16px;
+}
