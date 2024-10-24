@@ -43,6 +43,7 @@
     height: 78px;
   }
   .login-ctn {
+    box-sizing: border-box;
     width: 396px;
     height: 515px;
     padding: 16px 24px;
@@ -56,11 +57,21 @@
     left: 20px;
   }
   .input-ctn input {
+    box-sizing: border-box;
     width: 364px;
     height: 48px;
     /* margin-bottom: 32px; */
-    padding: 8px 24px;
+    /* padding: 8px 24px; */
+    padding: 0;
     margin-bottom: 24px;
+  }
+  .input-ctn input::placeholder {
+    font-size: 20px;
+    padding: 16px;
+  }
+  .input-ctn img {
+    top: 15px;
+    right: 24px
   }
   .login-guest-ctn {
     flex-direction: column;
@@ -71,6 +82,7 @@
     letter-spacing: 1.2px;
   }
   .login-btn, .guest-btn {
+    box-sizing: border-box;
     width: 180px;
     height: 51px;
   }
