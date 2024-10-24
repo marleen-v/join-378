@@ -1,6 +1,15 @@
 @media only screen and (max-width: 1200px){
+  .data-ctn {
+    position: relative;
+  }
   .greeting-ctn {
-    display: none;
+    position: fixed;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.5s ease;
   }
   .summary-section {
     margin-left: 0;

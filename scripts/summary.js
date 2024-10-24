@@ -5,20 +5,13 @@ async function initSummary(){
   tasksFromFirebase = await loadData(TASKS_DIR);
   displayHTML();
   getLogo();
-  // loadTasksData(TASKS_DIR);
+  if (document.referrer.includes("login.html") || document.referrer.includes("signup.html")){
+    showGreetingMobile();
+  }
+  else {
+    document.getElementById("greeting_ctn").style.display = "none";
+  }
 }
-
-
-/**
- * Loads the tasks from Firebase
- * @param {*} path - Path to the directory containing the tasks in Firebase
-async function loadTasksData(path=""){
-  let res = await fetch(FIREBASE_URL + path + ".json");
-  let resToJson = await res.json();
-  tasksFromFirebase = resToJson;
-  displayHTML();
-}
-*/
 
 
 /**
@@ -27,31 +20,7 @@ async function loadTasksData(path=""){
 function displayHTML(){
   showMainTemplate();
   loadActiveUser(ACTIVE_DIR);
-  //setUserLogo();
-  //activeUser = await loadData(ACTIVE_DIR);
-  //document.getElementById("userlogo").innerHTML = activeUser[0].initials;
 }
-
-
-/**
- * Loads Active User from Firebase
- * @param {*} path contains path to the active user in Firebase
- * @returns JSON from Firebase
-async function loadDataActive(path=""){
-  let res = await fetch(FIREBASE_URL + path + ".json");
-  let resToJson = await res.json();
-  return resToJson;
-}
-*/
-
-
-/**
- * Sets the User Logo in the Header
-async function setUserLogo(){
-  activeUser = await loadDataActive(ACTIVE_DIR);
-  document.getElementById("userlogo").innerHTML = activeUser[0].initials;
-}
-*/
 
 
 /**
@@ -179,7 +148,6 @@ function getDeadlineMonth(){
 }
 
 
-
 /**
  * Determines latest day and returns it
  * @returns latest latest day
@@ -215,3 +183,23 @@ function showGreetingDependingOnDaytime(){
   document.getElementById("greeting_ctn").innerHTML = getGreetingTemplate(formula);
 }
 
+
+/**
+ * Determines resolutions and display mobile greeting
+ */
+function showGreetingMobile(){
+  if (window.innerWidth <= 1200) {
+    let greetingRef = document.getElementById("greeting_ctn");
+    let headerRef = document.getElementById("header_main");
+    let dataRef = document.getElementById("object_data");
+    headerRef.classList.add("dnone");
+    dataRef.classList.add("dnone");
+
+    setTimeout(() => {
+      greetingRef.style.display = "none";
+      greetingRef.pointerEvents = "none";
+      headerRef.classList.remove("dnone");
+      dataRef.classList.remove("dnone");
+    }, 2000);
+  }
+}

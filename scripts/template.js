@@ -5,13 +5,13 @@
 function getTemplateMainSummary(){
   return `
     <section class="summary-section">
-        <div class="header-main">
+        <div class="header-main" id="header_main">
           <h1>Join 360</h1>
           <span>Key Metrics at a Glance</span>
         </div>
 
         <div class="data-ctn">
-          <div class="object-data">
+          <div class="object-data" id="object_data">
 
             <div class="todo-done-ctn">
               <div class="todo bgwhite-colblack-br30 w264h168" onclick="openBoards()">
