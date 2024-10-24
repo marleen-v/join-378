@@ -2,11 +2,12 @@ import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId, removePerson } from "./boards-edit.js";
 import { checkedBoxSVG, getCloseSVG, uncheckedBoxSVG } from './boards-overlay.js';
 let priority = "medium";
-let toggleContactList = false;
+let toggleContactList = false, toggleCategory = false;
 let tasks = [];
 let contacts = [];
 let addedUser = [];
 let activeUser = [];
+let category = "";
 
 async function loadAddTask() {
     tasks = await loadData(TASKS_DIR);
@@ -56,7 +57,7 @@ function addUserItem(element, index) {
     if(findPersons(addedUser, element.email)) selectBox = checkedBoxSVG()
     else selectBox = uncheckedBoxSVG();
     return /*html*/`
-        <div class="task-user-select grid grid-columns-3-48px-1fr-48px" onclick="addUser(${index})">
+        <div class="task-user-select grid grid-columns-3-48px-1fr-48px selection" onclick="addUser(${index})">
             <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
             <span class="flex align-items-center">${element.firstName} ${element.lastName}</span>
             <div class="flex align-items-center">${selectBox}</div>
@@ -71,6 +72,7 @@ function openContacts() {
     assignBox.innerHTML = "|";
     let persons = document.querySelector('.select-box-contacts');
 +   persons.classList.add('bg-white');
+    persons.classList.add('set-z-index-100');
     persons.innerHTML = "";
     contacts.forEach((element, index) => {
         persons.innerHTML += addUserItem(element, index);
@@ -86,6 +88,7 @@ function closeContacts() {
     assignBox.innerHTML = "Select contacts to assign";
     let persons = document.querySelector('.select-box-contacts');
     persons.classList.remove('bg-white');
+    persons.classList.remove('set-z-index-100');
     persons.innerHTML = "";
     //setDetailedEditableCard(taskId);
 }
@@ -219,6 +222,40 @@ function setPriority(priority) {
     setBgColor(priority);
 }
 
+function addCategory(cat) {
+    category = cat;
+    document.querySelector('.select-category-box > span').innerHTML = cat;
+    chooseCategory();
+}
+
+function getCategory() {
+    return /*html*/`
+        <div class="grid grid-rows-2">
+            <div class="mg-top-8px p-8px selection clickable" onclick="addCategory('User Story')">User Story</div>
+            <div class="p-8px selection clickable" onclick="addCategory('Technical Task')">Technical Task</div>  
+        </div> 
+    `;
+}
+
+function openCategory() {
+    let category = document.querySelector('.add-category');
+    category.classList.add('bg-white');
+    category.classList.add('set-z-index-100');
+}
+
+function closeCategory() {
+    let category = document.querySelector('.add-category');
+    category.classList.remove('bg-white');
+    category.classList.remove('set-z-index-100');
+}
+
+function chooseCategory() {
+    toggleCategory = !toggleCategory;
+    let category = document.querySelector('.add-category');
+    category.innerHTML = (toggleCategory) ? getCategory() : "";
+    (toggleCategory) ? openCategory() : closeCategory();
+}
+
 
 function getInputForm() {
     return /*html*/`
@@ -242,7 +279,7 @@ function getInputForm() {
                             <span>Description</span>
                             <textarea class="task-textarea" id="description" name="description" rows="4" placeholder="Enter a description" required></textarea>
                         </div>  
-                        <div class="grid grid-rows-2 gap-8px mg-right-8px mg-top-8px">
+                        <div class="select-contact">
                             <span class="detailed-card-label">Assigned to:</span>
                             <div class="add-task-card-assigned-to grid grid-rows-2" >
                                 <div class="assign-to-select-box p-right-8px clickable" onclick="addContact()">
@@ -254,13 +291,13 @@ function getInputForm() {
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="grid grid-rows-auto gap-8px">
+                    <div class="part-2-form">
                         <div>
                             <!-- Fälligkeitsdatum -->
                             <span>Due date</span>
                             <input class="task-input" type="date" id="due-date" name="due_date" required>
                         </div>
-                        <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
+                        <div class="select-priority">
                             <span class="flex detailed-card-label">Priority</span>
                             <div class="priority-buttons flex">
                                 <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="setPriority('urgent')">
@@ -277,17 +314,19 @@ function getInputForm() {
                                 </button>
                             </div>
                         </div>
-                        <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px mg-top-16px">
-                            <span class="detailed-card-label mg-top-8px">Category</span>
-                                <div class="assign-to-select-box p-right-8px clickable">
-                                    <span class="mg-left-8px">Select category</span>
-                                    <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
-                                </div>
-                                <div class="add-task-card-persons grid grid-rows-auto auto-overflow-y set-height-128px"></div>
+                        <div class="select-category">
+                            <span class="mg-top-8px">Category</span>
+
+                            <div class="select-category-box p-right-8px clickable" onclick="chooseCategory()">
+                                <span class="mg-left-8px">Select category</span>
+                                <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
                             </div>
-                        <div class="grid grid-rows-2 gap-8px mg-right-8px">
-                            <span class="detailed-card-label mg-top-8px">Subtasks</span>
-                            <div class="detailed-task-card-subtasks flex">
+                            
+                            <div class="add-category"></div>
+                        </div>
+                        <div class="add-new-subtask">
+                            <span class="mg-top-8px">Subtasks</span>
+                            <div class="flex">
                                 <div onclick="" class="subtasks-add-box p-right-8px clickable">
                                     <span class="mg-left-8px">Add new subtask</span>
                                     <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
@@ -323,3 +362,5 @@ window.addTask = addTask;
 window.setPriority = setPriority;
 window.addContact = addContact;
 window.addUser = addUser;
+window.chooseCategory = chooseCategory;
+window.addCategory = addCategory;

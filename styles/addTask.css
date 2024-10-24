@@ -27,7 +27,12 @@ main {
 
 .part-1-form {
     display: grid;
-    grid-template-rows: 80px 120px 32px 64px;
+    grid-template-rows: 80px 136px 32px 64px;
+}
+
+.part-2-form {
+    display: grid;
+    grid-template-rows: 80px 90px 90px 70px;
 }
 
 
@@ -232,4 +237,59 @@ main {
 
 .add-task-card-assigned-to > span {
     margin-right: -16px;
+}
+
+.select-contact {
+    display: grid;
+    grid-template-rows: 24px 32px;
+}
+
+.select-priority {
+    display: grid;
+    grid-template-rows: 20px 64px;
+}
+
+
+.select-category {
+    display: grid;
+    grid-template-rows: 32px 32px;
+}
+
+.add-new-subtask {
+    display: grid;
+    grid-template-rows: 32px 32px;
+}
+
+.add-category-select-box {
+    display: grid;
+    grid-template-rows: 32px 64px;
+}
+
+.add-category {
+    display: grid;
+    grid-template-rows: 32px 32px;
+    border-radius: 8px;
+    height: 80px;
+}
+
+.set-z-index-100 {
+    z-index: 100;
+}
+
+
+.select-category-box {
+    border: 1px solid;
+    border-color: #D1D1D1;
+    background-color: white;
+    border-radius: 8px;
+    height: 32px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.selection:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
