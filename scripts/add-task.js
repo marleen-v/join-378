@@ -90,6 +90,8 @@ function openContacts() {
         //if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
         //else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
     });
+    document.getElementById('contacts-toggle-img').style.transform = "rotate(180deg)";
+
 }
 
 
@@ -101,6 +103,7 @@ function closeContacts() {
     persons.classList.remove('bg-white');
     persons.classList.remove('set-z-index-100');
     persons.innerHTML = "";
+    document.getElementById('contacts-toggle-img').style.transform = "rotate(0deg)";
     //setDetailedEditableCard(taskId);
 }
 
@@ -253,12 +256,15 @@ function openCategory() {
     let category = document.querySelector('.add-category');
     category.classList.add('bg-white');
     category.classList.add('set-z-index-100');
+    document.getElementById('category-toggle-img').style.transform = "rotate(180deg)";
+
 }
 
 function closeCategory() {
     let category = document.querySelector('.add-category');
     category.classList.remove('bg-white');
     category.classList.remove('set-z-index-100');
+    document.getElementById('category-toggle-img').style.transform = "rotate(0deg)";
 }
 
 function chooseCategory() {
@@ -292,8 +298,11 @@ function getSubtaskInput() {
 
 function pushNewSubtask() {
     let input = document.querySelector('#add-new-subtask').value;
-    let subtask =  { Description: input, Done: false };    
-    subtasks.push(subtask);            
+    if(input !== "") {
+        let subtask =  { Description: input, Done: false };    
+        subtasks.push(subtask);  
+    } 
+    addNewSubtask();         
 }
 
 
@@ -364,7 +373,7 @@ function getInputForm() {
                             <div class="add-task-card-assigned-to grid grid-rows-2" >
                                 <div class="assign-to-select-box p-right-8px clickable" onclick="addContact()">
                                     <span class="mg-left-8px">Select contacts to assign</span>
-                                    <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
+                                    <img id="contacts-toggle-img" class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
                                 </div>
                                 <div class="select-box-contacts mg-top-minus-8px"></div>
                             </div>
@@ -400,7 +409,7 @@ function getInputForm() {
                             <div class="select-category-box p-right-8px clickable" onclick="chooseCategory()">
                                 <!--<span class="mg-left-8px">Select category</span>-->
                                 <input class="category-input" placeholder="Select category" type="text" id="category-input" name="category-input" required>
-                                <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
+                                <img id="category-toggle-img" class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
                             </div>
                             
                             <div class="add-category"></div>
