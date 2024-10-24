@@ -88,7 +88,6 @@
   </nav>
   <main>
     <section id="boards" class="boards">
-      <!--<div class="board-head"></div>-->
       <div class="board-head">
         <div class="board-headline">
           <h1>Board</h1>
@@ -98,13 +97,11 @@
               <div class="input-innerfield"><input id="boards-search" onkeyup="searchEntry()" class="board-search-input" placeholder="Find task..."></div>
               <div class="divider"></div>
               <button class="btn-task" type="submit">Search</button>
-
             </div>
-            
-            <!--<input id="boards-search" onkeyup="searchEntry()" class="board-search-input" type="search" placeholder="Find task...">
-            <button class="btn-task" type="submit">Search</button>-->
         </div>
-        <div class="btn-task-container"><button class="flex justify-content-center align-items-center btn-task clickable" onclick="openAddTask()">Add Task +</button></div>
+        <div class="btn-task-container">
+            <button class=" btn-add-task clickable" onclick="openAddTask()">Add Task +</button>
+        </div>
       </div>
       <div class="board-bar">
         <div class="board-to-do">
