@@ -1,6 +1,69 @@
 @media only screen and (max-width: 1000px){
-  
+  .logo {
+    top: 37px;
+    left: 38px;
+  }
+  .logo img {
+    width: 64px;
+    height: 78px;
+  }
+  .login-ctn {
+    box-sizing: border-box;
+    width: 396px;
+    height: 595px;
+  }
+  .leftarrow {
+    top: 44px;
+    left: 40px;
+  }
+  .signup-ctn {
+    box-sizing: border-box;
+    font-size: 47px;
+  }
+  .signup-ctn::after {
+    content: "";
+    width: 110px;
+    left: 140px;
+  }
+  .input-ctn {
+    gap: 24px;    
+  }
+  .input-ctn input {
+    box-sizing: border-box;
+    width: 364px;
+    height: 50px;
+    margin-bottom: 0;
+  }
+  .name-input, .email-input {
+    background-position-x: 320px;
+  }
+  .login-btn {
+    width: 180px;
+    height: 51px;
+    font-size: 16px;
+  }
+}
 
-
-
+@media only screen and (max-width: 400px){
+  .login-ctn {
+    width: 320px;
+  }
+  .leftarrow {
+    top: 44px;
+    left: 20px;
+  }
+  .signup-ctn {
+    font-size: 40px;
+  }
+  .signup-ctn::after {
+    content: "";
+    width: 96px;
+    left: 110px;
+  }
+  .input-ctn input {
+    width: 300px;
+  }
+  .name-input, .email-input {
+    background-position-x: 256px;
+  }
 }
