@@ -357,7 +357,7 @@ function getInputForm() {
                         </div>
                         <div>
                             <span>Description</span>
-                            <textarea class="task-textarea" id="description" name="description" rows="4" placeholder="Enter a description" required></textarea>
+                            <textarea class="task-textarea" id="description" name="description" rows="4" placeholder="Enter a description"></textarea>
                         </div>  
                         <div class="select-contact">
                             <span class="detailed-card-label">Assigned to:</span>
