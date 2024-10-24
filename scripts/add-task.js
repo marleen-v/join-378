@@ -236,7 +236,7 @@ function setPriority(prio) {
 
 function addCategory(cat) {
     category = cat;
-    document.querySelector('.select-category-box > span').innerHTML = cat;
+    document.querySelector('#category-input').value = cat;
     chooseCategory();
 }
 
@@ -395,10 +395,11 @@ function getInputForm() {
                             </div>
                         </div>
                         <div class="select-category">
-                            <span class="mg-top-8px">Category</span>
+                            <span class="mg-top-8px">Category<span class="required-star">*</span></span>
 
                             <div class="select-category-box p-right-8px clickable" onclick="chooseCategory()">
-                                <span class="mg-left-8px">Select category</span>
+                                <!--<span class="mg-left-8px">Select category</span>-->
+                                <input class="category-input" placeholder="Select category" type="text" id="category-input" name="category-input" required>
                                 <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
                             </div>
                             
