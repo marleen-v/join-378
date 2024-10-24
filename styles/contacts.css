@@ -153,16 +153,17 @@ main{
   height: 59px;
 }
 
-/* .single-contact{
+.single-contact{
+ 
   transition: all 250ms ease-in-out;
   -webkit-transition: all 250ms ease-in-out;
   -moz-transition: all 250ms ease-in-out;
-  }
+}
 
-  .single-contact-info-closed{
-    transform: translateY(100px);
-  }
- */
+.single-contact-closed{
+  transform: translateX(1200px);
+} 
+
 
 .single-contact-large {
   gap: 54px;

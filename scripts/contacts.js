@@ -83,6 +83,18 @@ function sortContactsByFirstName() {
  * @param {*} index
  */
 function showContactInfo(index) {
+  checkIfMobileSize();
+  currentContact = contactList[index];
+  singleContactRef.innerHTML = "";
+  singleContactRef.innerHTML = getContactInfoTemplate(index);
+  toggleActiveBtnColor(index);
+  singleContactRef.classList.remove('single-contact-closed'); //animation
+}
+
+/**
+ * This function checks if ScreenSize is small when a contact is clicked and shows mobile elements
+ */
+function checkIfMobileSize() {
   if(window.innerWidth < 1200){
     addContactBtn.classList.add("d_none");
     addContactBtn.classList.remove("flex")
@@ -90,10 +102,6 @@ function showContactInfo(index) {
     editBtnMobile.classList.add("flex"); 
     contactInfoRef.classList.remove("d_none");
   } 
-  currentContact = contactList[index];
-  singleContactRef.innerHTML = "";
-  singleContactRef.innerHTML = getContactInfoTemplate(index);
-  toggleActiveBtnColor(index);
 }
 
 /**
@@ -120,6 +128,9 @@ function closeContactInfo() {
   singleContactRef.innerHTML = "";
 }
 
+/**
+ * This function animates the edit-menu when contact-info is shown on mobile
+ */
 function toggleEditMenu() {
   const editContainer = document.querySelectorAll(".icon-container ")[0];
   editContainer.classList.remove("icon-container-closed");
@@ -186,7 +197,9 @@ async function addNewContact() {
   await putData(CONTACTS_DIR, contactList);
 }
 
-
+/**
+ * This function animates the success message if a new contact was made
+ */
 function animateSuccessMessage(){
   const successNoteRef = document.getElementById('successNote');
   successNoteRef.classList.remove('success-note-closed');
