@@ -13,13 +13,12 @@
     box-sizing: border-box;
     width: 223px;
     height: 104px;
-    margin-top: 20px;
+    margin-top: 40px;
     flex-direction: column;
     justify-content: flex-start;
-    /* border-bottom: 3px solid #29ABE2; */
     text-wrap: nowrap;
     gap: 8px;
-    margin-right: 340px;
+    margin-right: 180px;
   }
   h1 {
     font-size: 47px;
@@ -39,9 +38,102 @@
     bottom: 0;
     left: 8px;
   }
+  .todo-done-ctn {
+    gap: 24px;
+  }
+  .tasks-ctn {
+    gap: 24px;
+  }
+  .w264h168 {
+    box-sizing: border-box;
+    width: 186px;
+    height: 110px;
+    gap: 10px;
+  }
+  .w560h168 {
+    box-sizing: border-box;
+    width: 396px;
+    height: 110px;
+  }
+  .w168h168 {
+    box-sizing: border-box;
+    width: 116px;
+    height: 116px;
+  }
+  .font64colblackw600 {
+    font-size: 47px;
+  }
+  .color2A {
+    font-size: 14px;
+  }
+  .circle69 {
+    width: 40px;
+    height: 40px;
+  }
+  .circle69 img {
+    height: 17px;
+  }
+  .urgent-left-side {
+    gap: 10px;
+  }
+  .urgent-data {
+    padding-right: 20px;
+  }
+  .date-ctn {
+    margin: 0;
+    padding: 0;
+    gap: 0;
+  }
+  .circle-urgent {
+    width: 40px;
+    height: 40px;
+  }
+  .circle-urgent img {
+    height: 17px;
+  }
+}
 
 
-  .data-ctn {
-    
+@media only screen and (max-width: 400px){
+  .header-main {
+    margin-right: 100px;
+  }
+  .todo-done-ctn {
+    gap: 10px;
+  }
+  .tasks-ctn {
+    gap: 10px;
+  }
+  .w264h168 {
+    width: 154px;
+    gap: 10px;
+  }
+  .w560h168 {
+    width: 320px;
+  }
+  .w168h168 {
+    width: 98px;
+  }
+  .font64colblackw600 {
+    font-size: 32px;
+  }
+  .color2A {
+    font-size: 14px;
+  }
+  .circle69 {
+    width: 40px;
+    height: 40px;
+  }
+  .circle69 img {
+    height: 17px;
+  }
+  .date-ctn {
+    font-size: 16px;
+  }
+  .font21w700 {
+    font-size: 16px;
+  }
+  .circle-urgent {
+    width: 40px;
   }
 }
