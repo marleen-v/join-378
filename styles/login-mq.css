@@ -3,13 +3,13 @@
     width: calc(100px * 0.8);
     height: calc(122px * 0.8);
   }
-  .signup-ctn p {
+  /* .signup-ctn p {
     font-size: calc(20px * 0.8);
   }
   .signup-ctn button {
     width: calc(91px * 0.8);
     height: calc(49px * 0.8)
-  }
+  } */
 }
 
 @media only screen and (max-width: 1200px){
@@ -19,6 +19,7 @@
   }
   .login-text {
     font-size: calc(61px * 0.8);
+    padding-top: 20px;
   }
   .login-text:after {
     width: calc(150px * 0.8);
@@ -111,5 +112,60 @@
     padding-right: 15px;
     letter-spacing: 1.2px;
     /* padding: 15px 16px; */
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  * {
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .logo-small {
+    top: 37px;
+    left: 40px;
+    width: 52px;
+    height: 66px;
+  }
+  .login-ctn {
+    width: 320px;
+    padding: 8px 12px;
+  }
+  .login-text {
+    font-size: 32px;
+    padding-top: 16px;
+  }
+  .login-text:after {
+    width: 50px;
+    left: 18px;
+  }
+  .input-ctn input {
+    box-sizing: border-box;
+    width: 280px;
+    height: 48px;
+    margin-bottom: 24px;
+  }
+  .input-ctn input::placeholder {
+    font-size: 18px;
+    padding: 12px;
+  }
+  .content-ctn {
+    gap: 28px;
+  }
+  .checkbox-ctn input {
+    margin-left: 24px;
+  }
+  .signup-ctn p {
+    font-size: 16px;
+    text-wrap: nowrap;
+    margin-right: 28px;
+  }
+  .signup-ctn button {
+    width: 90px;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    letter-spacing: 1.2px; 
   }
 }
