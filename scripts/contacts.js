@@ -1,6 +1,8 @@
 const contactListRef = document.getElementById("contact-container");
 const singleContactRef = document.getElementById("single-contact");
 const contactInfoRef = document.getElementById("contactInfoSection");
+const addContactBtn = document.getElementById("addContactBtn");
+const editBtnMobile = document.getElementById("editBtnMobile")
 
 
 let contactList = [];
@@ -81,7 +83,16 @@ function sortContactsByFirstName() {
  * @param {*} index
  */
 function showContactInfo(index) {
-  contactInfoRef.classList.remove("d_none"); // necessary for mobile
+  if(window.innerWidth < 1200){
+    addContactBtn.classList.add("d_none");
+    addContactBtn.classList.remove("flex")
+    editBtnMobile.classList.remove("d_none");
+    editBtnMobile.classList.add("flex") // necessary for mobile
+    contactInfoRef.classList.remove("d_none"); // necessary for mobile
+  } else{
+    contactInfoRef.classList.remove("d_none"); // necessary for mobile
+  }
+  
   currentContact = contactList[index];
   singleContactRef.innerHTML = "";
   singleContactRef.innerHTML = getContactInfoTemplate(index);
@@ -112,8 +123,20 @@ function closeContactInfo() {
   singleContactRef.innerHTML = "";
 }
 
+function toggleEditMenu() {
+  const editContainer = document.querySelectorAll(".icon-container ")[0];
+  editContainer.classList.remove("icon-container-closed");
+ 
+}
+
 function closeContactInfoMobile(){
+  const contactBtns = document.querySelectorAll(".single-contact-btn");
   contactInfoRef.classList.add("d_none");
+  editBtnMobile.classList.add("d_none");
+  editBtnMobile.classList.remove("flex");
+  addContactBtn.classList.remove("d_none");
+  contactBtns.forEach((button) => button.classList.remove("single-contact-btn-active"));
+  // prüfen, ob contact markiert, dann markierung rausnehmen
 }
 
   /**
@@ -122,6 +145,7 @@ function closeContactInfoMobile(){
   function checkScreenSize() {
     if (window.innerWidth < 1200) {
       contactInfoRef.classList.add('d_none');
+      editBtnMobile.classList.add("d_none");
       document.getElementById("close").classList.add("filter-color-to-white")
     } else {
       contactInfoRef.classList.remove('d_none');
@@ -131,6 +155,8 @@ function closeContactInfoMobile(){
 
   // Monitors screen size changes
   window.addEventListener('resize', checkScreenSize);
+
+
 
 
 function assignContactData() {

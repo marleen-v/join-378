@@ -1,4 +1,4 @@
-@import "https://unpkg.com/open-props";
+
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -63,6 +63,9 @@ body{
   background-color: #29abe2;
 }
 
+.edit-btn-mobile{
+  display:flex;
+}
 
 
 .letter {
@@ -129,6 +132,11 @@ body{
  
 }
 
+.info-icon{
+  height:24px;
+  width:24px;
+}
+
 .contact-title {
   gap: 30px;
 }
@@ -192,15 +200,15 @@ dialog{
   background-color: transparent;
   display:none;
   overflow: hidden;
-  transition: opacity .5s;
+/*   transition: opacity .5s;
   animation: var(--animation-scale-down) forwards;
-  animation-timing-function: var(--ease-squish-3);
+  animation-timing-function: var(--ease-squish-3); */
 
 }
 
 dialog[open]{
   display: flex;
-  animation: var(--animation-slide-in-left) forwards;
+  /* animation: var(--animation-slide-in-left) forwards; */
 }
 
 
@@ -336,7 +344,7 @@ label>input {
   filter: invert(51%) sepia(0%) saturate(2329%) hue-rotate(52deg) brightness(129%) contrast(102%);
 }
 
-.runInAnimation {
+/* .runInAnimation {
   animation-name: moveFromRightToCenter;
   animation-duration: 0.5s ease;
 }
@@ -344,7 +352,7 @@ label>input {
 .runOutAnimation {
   animation-name: moveFromCenterToRight;
   animation-duration: 0.5s ease;
-}   
+}    */
 
 .success-note{
   height:74px; 
@@ -454,6 +462,33 @@ label>input {
       right: 40px;
       top: 40px;
     }
+
+    .icon-container{
+      flex-direction: column;
+      gap:0;
+      padding:10px;
+      background-color: #fff;
+      border-radius: 20px;
+      border-bottom-right-radius: 0;
+      position:absolute;
+      bottom: 20px;
+      right: 20px;
+      z-index:2000;
+      box-shadow: 0px 4px 4px 0px #00000040;
+  
+    transition: all 250ms ease-in-out;
+    -webkit-transition: all 250ms ease-in-out;
+    -moz-transition: all 250ms ease-in-out;
+  }
+  
+  .icon-container-closed{
+    transform: translateX(200px);
+  }  
+
+    .contact-icon-btn{
+      padding:8px;
+    }
+
 
     dialog{
       flex-direction: column;

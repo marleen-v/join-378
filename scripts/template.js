@@ -107,13 +107,13 @@ function getContactInfoTemplate(index) {
                 </div>
                 <div class="name-email flex flex-column">
                   <div class="contact-name-large">${currentContact.firstName} ${currentContact.lastName}</div>
-                  <div class="icon-container flex">
+                  <div class="icon-container flex icon-container-closed">
                     <button class="contact-icon-btn flex align-items-center" onclick="renderEditContactDialog(${index})">
-                      <img src="../assets/img/edit.svg" alt="" />
+                      <img src="../assets/img/edit.svg" alt="" class="info-icon"/>
                       <span>Edit</span>
                     </button>
                     <button class="contact-icon-btn flex align-items-center" onclick="deleteContact(${index})">
-                      <img src="../assets/img/delete.svg" alt="" />
+                      <img src="../assets/img/delete.svg" alt="" class="info-icon"/>
                       <span>Delete</span>
                     </button>
                   </div>
