@@ -87,12 +87,9 @@ function showContactInfo(index) {
     addContactBtn.classList.add("d_none");
     addContactBtn.classList.remove("flex")
     editBtnMobile.classList.remove("d_none");
-    editBtnMobile.classList.add("flex") // necessary for mobile
-    contactInfoRef.classList.remove("d_none"); // necessary for mobile
-  } else{
-    contactInfoRef.classList.remove("d_none"); // necessary for mobile
-  }
-  
+    editBtnMobile.classList.add("flex"); 
+    contactInfoRef.classList.remove("d_none");
+  } 
   currentContact = contactList[index];
   singleContactRef.innerHTML = "";
   singleContactRef.innerHTML = getContactInfoTemplate(index);
@@ -135,8 +132,8 @@ function closeContactInfoMobile(){
   editBtnMobile.classList.add("d_none");
   editBtnMobile.classList.remove("flex");
   addContactBtn.classList.remove("d_none");
+  addContactBtn.classList.add("flex");
   contactBtns.forEach((button) => button.classList.remove("single-contact-btn-active"));
-  // prüfen, ob contact markiert, dann markierung rausnehmen
 }
 
   /**

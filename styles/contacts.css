@@ -523,6 +523,10 @@ label>input {
       display:none;
     }
 
+    .btn-container{
+      justify-content: center;
+    }
+
     .close-btn {
       filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1000%) contrast(100%);
       top:24px;
