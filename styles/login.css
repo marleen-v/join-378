@@ -164,6 +164,7 @@ button {
   position: absolute;
   top: 24px;
   right: 20px;
+  -webkit-user-drag: none;
 }
 
 input::placeholder {

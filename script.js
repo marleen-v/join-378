@@ -85,3 +85,15 @@ async function getLogo(){
     activeUser = await loadData(ACTIVE_DIR);
     document.getElementById("userlogo").innerHTML = activeUser[0].initials;
 }
+
+
+/**
+ * Checks origin of forwarding and hides menu-bar
+ */
+function checkOrigin(){
+    if (document.referrer.includes("login.html") || document.referrer.includes("signup.html")){
+      document.querySelector(".menu-bar").style.display = "none";
+      document.body.style.pointerEvents = "none";
+      document.querySelector("main").style.pointerEvents = "auto";
+    }
+}

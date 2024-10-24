@@ -14,6 +14,7 @@ async function loadAddTask() {
     contacts = await loadData(CONTACTS_DIR);
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
+    getLogo();
 }
 
 function addTask() {

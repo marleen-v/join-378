@@ -1,0 +1,17 @@
+@media only screen and (max-width: 1300px){
+  .logo-small {
+    width: 80px;
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 1200px){
+  .logo-small {
+    width: 60px;
+    height: 80px;
+  }
+  .login-ctn {
+    width: 400px;
+    height: 300px;
+  }
+}
