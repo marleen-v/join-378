@@ -302,7 +302,7 @@ function pushNewSubtask() {
         let subtask =  { Description: input, Done: false };    
         subtasks.push(subtask);  
     } 
-    addNewSubtask();         
+    document.querySelector('.add-new-subtask-box').innerHTML = getSubtaskMask();    
 }
 
 
@@ -340,9 +340,12 @@ function getTaskInfos() {
 
 
 function createNewTask() {   
-    tasks.push(getTaskInfos());    
+    tasks.push(getTaskInfos());            
     putData(TASKS_DIR, tasks);
-    window.location = "../html/boards.html";  
+    setTimeout(() => {
+        window.location = "../html/boards.html";  
+    }, "1000");
+    
 }
 
 

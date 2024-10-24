@@ -147,9 +147,11 @@ function assignContact(taskId) {
     toggleContactList = !toggleContactList;
     if (toggleContactList) {
         openContactSelectBox(taskId);
+        document.getElementById('assign-to-toggle-icon').style.transform = "rotate(180deg)";
     }
     else {
         closeContactSelectBox(taskId);
+        document.getElementById('assign-to-toggle-icon').style.transform = "rotate(0deg)";
     }
 }
 
@@ -239,7 +241,7 @@ export function getDetailedEditableCard(taskId) {
                 <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px">
                     <div class="assign-to-select-box p-right-8px clickable" onclick="assignContact('${taskId}')">
                         <span class="mg-left-8px">Select contacts to assign</span>
-                        <img class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
+                        <img id="assign-to-toggle-icon" class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
                     </div>
                     <div class="add-task-card-persons grid grid-rows-auto auto-overflow-y set-height-128px"></div>
                 </div>
