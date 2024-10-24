@@ -1,17 +1,80 @@
 @media only screen and (max-width: 1300px){
   .logo-small {
-    width: 80px;
-    height: 100px;
+    width: calc(100px * 0.8);
+    height: calc(122px * 0.8);
+  }
+  .signup-ctn p {
+    font-size: calc(20px * 0.8);
+  }
+  .signup-ctn button {
+    width: calc(91px * 0.8);
+    height: calc(49px * 0.8)
   }
 }
 
 @media only screen and (max-width: 1200px){
+  .login-ctn {
+    width: calc(652px * 0.8);
+    height: calc(493px * 0.8);
+  }
+  .login-text {
+    font-size: calc(61px * 0.8);
+  }
+  .login-text:after {
+    width: calc(150px * 0.8);
+  }
+  .input-ctn input {
+    width: calc(422px * 0.8);
+    height: calc(48px * 0.8);
+  }
+  .login-btn {
+    font-size: calc(21px * 0.8);
+  }
+  .guest-btn {
+    font-size: calc(21px * 0.8);
+  }
+}
+
+@media only screen and (max-width: 1000px){
   .logo-small {
-    width: 60px;
-    height: 80px;
+    top: 37px;
+    left: 77px;
+    width: 64px;
+    height: 78px;
   }
   .login-ctn {
-    width: 400px;
-    height: 300px;
+    width: 396px;
+    height: 515px;
+    padding: 16px 24px;
+  }
+  .login-text {
+    font-size: 47px;
+    padding-top: 32px;
+  }
+  .login-text:after {
+    width: 80px;
+    left: 20px;
+  }
+  .input-ctn input {
+    width: 364px;
+    height: 48px;
+    /* margin-bottom: 32px; */
+    padding: 8px 24px;
+  }
+  .login-guest-ctn {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .login-btn, .guest-btn {
+    width: 180px;
+    height: 51px;
+  }
+  .content-ctn {
+    flex-direction: column;
+    gap: 35px;
+  }
+  .signup-ctn {
+    position: static;
   }
 }
