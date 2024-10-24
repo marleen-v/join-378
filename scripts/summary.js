@@ -9,7 +9,6 @@ async function initSummary(){
 }
 
 
-
 /**
  * Loads the tasks from Firebase
  * @param {*} path - Path to the directory containing the tasks in Firebase
@@ -63,6 +62,10 @@ function showMainTemplate(){
 }
 
 
+/**
+ * Gets the number of urgent tasks
+ * @returns the number of urgent tasks
+ */
 function getNumberUrgentTasks(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
@@ -74,6 +77,10 @@ function getNumberUrgentTasks(){
 }
 
 
+/**
+ * Gets the number of to-do tasks
+ * @returns the number of to-do tasks
+ */
 function getNumberToDoTasks(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
@@ -85,6 +92,10 @@ function getNumberToDoTasks(){
 }
 
 
+/**
+ * Gets the number of done tasks
+ * @returns the number of done tasks
+ */
 function getNumberDoneTasks(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
@@ -96,6 +107,10 @@ function getNumberDoneTasks(){
 }
 
 
+/**
+ * Gets the number of in-progress tasks
+ * @returns the number of in-progress tasks
+ */
 function getNumberTasksInProgress(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
@@ -107,6 +122,10 @@ function getNumberTasksInProgress(){
 }
 
 
+/**
+ * Gets the number of awaiting tasks
+ * @returns the number of awaiting tasks
+ */
 function getNumberTasksAwaitingFeedback(){
   let counter = 0;  
   for(let i = 0; i < tasksFromFirebase.length; i++){
@@ -118,11 +137,19 @@ function getNumberTasksAwaitingFeedback(){
 }
 
 
+/**
+ * Gets the number of tasks
+ * @returns the number tasks
+ */
 function getTasksInBoard(){
   return tasksFromFirebase.length;
 }
 
 
+/**
+ * Determines the nearest date for the deadline
+ * @returns the nearest date by sorting the array
+ */
 function getNearestDate(){
   let dateArr = [];
   for (let i = 0; i < tasksFromFirebase.length; i++) {
@@ -162,6 +189,10 @@ function getDeadlineDay(){
 }
 
 
+/**
+ * Determines the active user and shows the greeting
+ * @param {*} path to "directory" in firebase
+ */
 async function loadActiveUser(path=""){
   let res = await fetch(FIREBASE_URL + path + ".json");
   activeUser = await res.json();

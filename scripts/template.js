@@ -14,17 +14,17 @@ function getTemplateMainSummary(){
           <div class="object-data">
 
             <div class="todo-done-ctn">
-              <div class="todo bgwhite-colblack-br30 w264h168">
+              <div class="todo bgwhite-colblack-br30 w264h168" onclick="openBoards()">
                 <div class="circle69"><img src="../assets/icons/edit.png" alt=""></div>
                 <div><p class="font64colblackw600">${getNumberToDoTasks()}</p><p class="color2A">To-Do</p></div>
               </div>
-              <div class="done bgwhite-colblack-br30 w264h168">
+              <div class="done bgwhite-colblack-br30 w264h168" onclick="openBoards()">
                 <div class="circle69"><img src="../assets/icons/Vector@2x.png" alt=""></div>
                 <div><p class="font64colblackw600" id="done_tasks">${getNumberDoneTasks()}</p><p class="color2A">Done</p></div>
               </div>
             </div>
 
-            <div class="urgent-ctn bgwhite-colblack-br30 w560h168">
+            <div class="urgent-ctn bgwhite-colblack-br30 w560h168" onclick="openBoards()">
               <div class="urgent-left-side">
                 <div class="circle-urgent"><img src="../assets/icons/Prio alta.png" alt=""></div>
               
@@ -41,9 +41,9 @@ function getTemplateMainSummary(){
             </div>
 
             <div class="tasks-ctn">
-              <div class="board bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">${getTasksInBoard()}</p><p class="color2A">Tasks in Board</p></div>
-              <div class="progress bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">${getNumberTasksInProgress()}</p><p class="color2A">Tasks in Progress</p></div>
-              <div class="feedback bgwhite-colblack-br30 w168h168"><p class="font64colblackw600">${getNumberTasksAwaitingFeedback()}</p><p class="color2A">Awaiting Feedback</p></div>
+              <div class="board bgwhite-colblack-br30 w168h168" onclick="openBoards()"><p class="font64colblackw600">${getTasksInBoard()}</p><p class="color2A">Tasks in Board</p></div>
+              <div class="progress bgwhite-colblack-br30 w168h168" onclick="openBoards()"><p class="font64colblackw600">${getNumberTasksInProgress()}</p><p class="color2A">Tasks in Progress</p></div>
+              <div class="feedback bgwhite-colblack-br30 w168h168" onclick="openBoards()"><p class="font64colblackw600">${getNumberTasksAwaitingFeedback()}</p><p class="color2A">Awaiting Feedback</p></div>
             </div>
             
           </div>
