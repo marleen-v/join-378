@@ -293,9 +293,7 @@ function getSubtaskInput() {
 function pushNewSubtask() {
     let input = document.querySelector('#add-new-subtask').value;
     let subtask =  { Description: input, Done: false };    
-    subtasks.push(subtask);        
-    console.log(subtasks);
-    
+    subtasks.push(subtask);            
 }
 
 
@@ -311,10 +309,7 @@ function clearButton() {
     addedUser = [];
     category = "";
     priority = "Medium";
-    loadAddTask();/*
-    document.querySelector('main').innerHTML = getInputForm();
-    setBgColor('medium');
-    getLogo();*/
+    loadAddTask();
 }
 
 
