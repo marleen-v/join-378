@@ -1,18 +1,23 @@
 
-let dropDownOpen;
+// This is used to open and close the dropdown-menu
 
-/**
- * This function is used to open and close the dropdown-menu
- *
- * 
- */
-function openCloseDropdownMenu(){
-const dropdownRef = document.getElementById("dropdown-menu");
- if (dropDownOpen) {
-    dropdownRef.classList.add("d_none");
-    dropDownOpen = false;
-  } else if (!dropDownOpen) {
-    dropdownRef.classList.remove("d_none");
-    dropDownOpen = true;
-  }
-}
+document.addEventListener("DOMContentLoaded", function () {
+  const dropdownButton = document.querySelector(".user-profil");
+  console.log(dropdownButton)
+  const dropdownMenu = document.getElementById("dropdown-menu");
+
+  // Toggle the dropdown menu on button click
+  dropdownButton.addEventListener('click', function (event) {
+      dropdownMenu.classList.toggle('d_none');
+      event.stopPropagation(); // Prevent event from bubbling up to body
+  });
+
+  // Close the dropdown menu when clicking anywhere else on the body
+  document.body.addEventListener('click', function () {
+      if (!dropdownMenu.classList.contains('d_none')) {
+          dropdownMenu.classList.add('d_none');
+      }
+  });
+
+});
+

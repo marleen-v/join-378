@@ -62,9 +62,9 @@ function addNewContactSection(index) {
  */
 function findAndMarkActiveUser() {
   if(sessionStorage.username) {
-  const singleContactRef = document.querySelectorAll(".contact-name");
-  let activeUserIndex = contactList.findIndex((contact) => contact.email === sessionStorage.username);
-  singleContactRef[activeUserIndex].innerHTML += " (you)";
+  const contactNameRef = document.querySelectorAll(".contact-name");
+  let activeUserIndex = contactList.findIndex((contact) => contact.email == sessionStorage.username);
+  contactNameRef[activeUserIndex].innerHTML += " (you)";
 }
 }
  
@@ -134,7 +134,7 @@ function closeContactInfo() {
 function toggleEditMenu() {
   const editContainer = document.querySelectorAll(".icon-container ")[0];
   editContainer.classList.remove("icon-container-closed");
- 
+
 }
 
 function closeContactInfoMobile(){
