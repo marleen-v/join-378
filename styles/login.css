@@ -19,7 +19,6 @@ body {
   align-items: center;
   background-color: #F6F7F8;
   position: relative;
-  /* overflow: hidden; */
 }
 
 button {
@@ -99,7 +98,6 @@ button {
   background-color: #2A3647;
   width: 91px;
   height: 49px;
-  /* padding: 15px 16px; */
   border-radius: 8px;
   border: none;
   box-sizing: content-box;
