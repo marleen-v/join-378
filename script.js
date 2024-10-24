@@ -12,47 +12,83 @@ let currentUserFirstName = "";
 let currentUserLastName = "";
 
 
+/**
+ * Opens summary page on startup
+ */
 function init() {
     openSummary();
 }
 
+
+/**
+ * Opens help page
+ */
 function openHelp() {
     window.location = "../html/help.html";
 }
 
+
+/**
+ * Opens login page
+ */
 function openLogin() {
     window.location = "../html/login.html";
 }
 
+
+/**
+ * Opens summary page
+ */
 function openSummary() {
     window.location = "../html/summary.html";
 }
 
+
+/**
+ * Opens board page
+ */
 function openBoards() {
     window.location = "../html/boards.html";
 }
 
 
+/**
+ * Opens add task page
+ */
 function openAddTask() {
     window.location = "../html/add-task.html";
 }
 
 
+/**
+ * Opens contacts page
+ */
 function openContacts() {
     window.location = "../html/contacts.html";
 }
 
 
+/**
+ * Opens policy page
+ */
 function openPolicy() {
     window.location = "../html/policy.html";
 }
 
 
+/**
+ * Opens imprint page
+ */
 function openImprint() {
     window.location = "../html/impressum.html";
 }
 
 
+/**
+ * Loads data from firebase
+ * @param {string} path directory in firebase
+ * @returns 
+ */
 async function loadData(path=""){
     let res = await fetch(FIREBASE_URL + path + ".json");
     let resToJson = await res.json();
@@ -60,6 +96,11 @@ async function loadData(path=""){
 }
 
 
+/**
+ * Puts user data to firebase
+ * @param {string} path directory in firebase
+ * @param {object} data object the needs to be stored
+ */
 async function putData(path="", data={}){
     let res = await fetch(FIREBASE_URL + path + ".json",
     {
@@ -72,6 +113,10 @@ async function putData(path="", data={}){
 }
 
 
+/**
+ * Determines random color from color array
+ * @returns color for user icon
+ */
 function getRandomColor(){
   let r = Math.floor(Math.random() * 8);
   return contactColors[r];

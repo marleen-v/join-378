@@ -1,6 +1,7 @@
 let emailInputRef = document.getElementById("emailInput");
 let passwordInputRef = document.getElementById("passwordInput");
 let chkboxRef = document.getElementById("login_checkbox");
+const fileArray = ["summary.html", "boards.html", "add-task.html", "contacts.html", "help.html", "policy.html", "impressum.html"];
 
 
 /**
@@ -9,12 +10,13 @@ let chkboxRef = document.getElementById("login_checkbox");
 async function initLogin(){
   dataFromFirebase = await loadData(USERS_DIR);
   activeUser = await loadActiveUser(ACTIVE_DIR);
-  if (document.referrer.includes("summary.html")){
-    logoutPopup();
+  for (let i = 0; i < fileArray.length; i++) {
+    if (document.referrer.includes(fileArray[i])){
+      logoutPopup();
+    }  
   }
   loadCheckboxStatus();
 }
-
 
 
 /**
@@ -154,7 +156,7 @@ function resetActiveUser(){
 
 
 /**
- * 
+ * Loads the checkbox status for remember me function
  */
 function loadCheckboxStatus(){
   if (localStorage.checkbox && localStorage.checkbox !== "") {
@@ -167,6 +169,9 @@ function loadCheckboxStatus(){
 }
 
 
+/**
+ * Stores the checkbox status in local storage
+ */
 function rememberMeCheck(){
   if (chkboxRef.checked && emailInputRef.value !== "") {
     localStorage.username = emailInputRef.value;
@@ -178,11 +183,18 @@ function rememberMeCheck(){
 }
 
 
+/**
+ * Saves the username, normally the email address, to session storage
+ * @param {string} value username
+ */
 function saveActiveUserToSessionStorage(value){
   sessionStorage.username = value;
 }
 
 
+/**
+ * Exports functions for further use
+ */
 window.initLogin = initLogin;
 window.guestLogin = guestLogin;
 window.togglePasswordIcon = togglePasswordIcon;

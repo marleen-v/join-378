@@ -59,7 +59,7 @@ function getTemplateMainSummary(){
 
 /**
  * HTML-Template for Greeting
- * @param {*} greetFormula contains greeting depending on daytime
+ * @param {string} greetFormula contains greeting depending on daytime
  * @returns HTML-Template
  */
 function getGreetingTemplate(greetFormula){

@@ -6,6 +6,9 @@ let passwordInputConfirmRef = document.getElementById("passwordInputConfirm");
 let contactsUser = [];
 
 
+/**
+ * Fills the variables with data from firebase on init
+ */
 async function initSignup(){
   dataFromFirebase = await loadData(USERS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
@@ -13,11 +16,19 @@ async function initSignup(){
 }
 
 
+/**
+ * Executes the signup process
+ */
 function signUpUser(){
   addUser();
 }
 
 
+/**
+ * Puts data to firebase
+ * @param {string} path directory in firebase
+ * @param {object} data object-data
+ */
 async function putData(path="", data={}){
   let res = await fetch(FIREBASE_URL + path + ".json",
   {
@@ -31,6 +42,10 @@ async function putData(path="", data={}){
 }
 
 
+/**
+ * Checks if both passwords are identical
+ * @returns boolean
+ */
 function checkCorrectPassword(){
   if(passwordInputRef.value === passwordInputConfirmRef.value){
     return true;
@@ -40,12 +55,20 @@ function checkCorrectPassword(){
 }
 
 
+/**
+ * Returns number of spaces within a string
+ * @param {string} str string that needs to be checked
+ * @returns 
+ */
 function checkCountSpaces(str){
   let count = (str.split(" ").length - 1);
   return count;
 }
 
 
+/**
+ * Resets all values to default
+ */
 function resetValues(){
   emailInputRef.value = '';
   nameInputRef.value = '';
@@ -56,6 +79,10 @@ function resetValues(){
 }
 
 
+/**
+ * Display error message depending on input string
+ * @param {string} str string that represents the error message
+ */
 function showErrorMessage(str){
   let errorRef = document.getElementById('error_message');
   let errorStr = 'Error';
@@ -69,6 +96,9 @@ function showErrorMessage(str){
 }
 
 
+/**
+ * Shows successful signup and forwards to summary
+ */
 function signupSuccess(){
   openPopup();
   resetValues();
@@ -79,6 +109,10 @@ function signupSuccess(){
 }
 
 
+/**
+ * Checks if email already exists
+ * @returns boolean
+ */
 function emailNotExists(){
   let emailCheck = true;
   for(let i = 0; i < contactsUser.length; i++){
@@ -91,6 +125,9 @@ function emailNotExists(){
 }
 
 
+/**
+ * Adds user to firebase after checking everything
+ */
 function addUser(){
   let spaces = checkCountSpaces(nameInputRef.value);
   if((checkCorrectPassword()) && (emailNotExists()) && (spaces === 1)){
@@ -108,6 +145,11 @@ function addUser(){
 }
 
 
+/**
+ * Pushes all user data to firebase
+ * @param {string} first first name of the user
+ * @param {string} last last name of the user
+ */
 function pushEverythingNecessaryToFireBase(first, last){
   dataFromFirebase.push({
     "email": emailInputRef.value,
@@ -133,6 +175,9 @@ function pushEverythingNecessaryToFireBase(first, last){
 }
 
 
+/**
+ * Enables or disables the signup button
+ */
 function enableButtonAfterChecked(){
   let checkRef = document.getElementById("checkbox");
   let buttonRef = document.getElementById("btn");
@@ -144,6 +189,10 @@ function enableButtonAfterChecked(){
 }
 
 
+/**
+ * Toggles the password icon
+ * @param {number} pwdIdx password-index
+ */
 function togglePasswordIcon(pwdIdx){
   document.getElementById("hidepwd" + pwdIdx).classList.toggle("dnone");
   document.getElementById("showpwd" + pwdIdx).classList.toggle("dnone");
@@ -161,12 +210,16 @@ function togglePasswordIcon(pwdIdx){
 }
 
 
+/**
+ * Opens popup
+ */
 function openPopup(){
   let popup = document.getElementById("popupsuccess");
   popup.classList.add("open-popup");
 }
 
 
+/** Saves active user to session storage */
 function saveActiveUserToSessionStorage(value){
   sessionStorage.username = value;
 }
