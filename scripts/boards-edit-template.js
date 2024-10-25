@@ -66,19 +66,19 @@ export function getDetailedEditableCard(taskId) {
                 <div onclick="cancelEdit('${taskId}')"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
             </div>
             <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
-                <form id="task-edit-form" class="task-edit-form" onsubmit="closeEdit('${taskId}');return false;">
+                <form id="task-edit-form" class="task-edit-form" onchange="closeEdit('${taskId}');return false;">
                     <div class="add-task-card-headline grid grid-rows-2 mg-right-8px gap-8px">
                         <span class="input-edit-label detailed-card-label">Title</span>
                         <input id="input-edit-headline" onkeyup="getFormData()" class="input-edit-headline input-border p-left-8px" type="text" required>
                     </div>
                     <div class="grid grid-rows-2 mg-right-8px mg-top-8px">
                         <span class="input-edit-label detailed-card-label">Description</span>
-                        <textarea name="" id="textarea-edit-description" onkeyup="getFormData()" class="textarea-edit-description input-border mg-top-8px p-left-8px p-right-8px set-height-100px p-top-8px"></textarea>
+                        <textarea name="" id="textarea-edit-description" onchange="getFormData()" class="textarea-edit-description input-border mg-top-8px p-left-8px p-right-8px set-height-100px p-top-8px"></textarea>
                     </div>
                     <div class="add-task-card-date grid grid-rows-2 mg-top-8px mg-right-8px">
                         <!-- Fälligkeitsdatum -->
                         <span class="input-edit-label detailed-card-label">Due date</span>
-                        <input class="due-date p-left-8px p-right-8px mg-top-8px input-border" onkeyup="getFormData()" type="date" id="due-date" name="due_date" required>
+                        <input class="due-date p-left-8px p-right-8px mg-top-8px input-border" onchange="getFormData()" type="date" id="due-date" name="due_date" required>
                     </div>
                 </form>
                 <div class="add-task-card-priority grid grid-rows-2 gap-8px align-items-center justify-content-flex-start mg-right-8px">
