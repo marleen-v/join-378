@@ -27,17 +27,23 @@ let emailExists;
  */
 function openContactDialog() {
   dialog.showModal();
+  dialog.classList.remove('show');
+  dialog.classList.add('bg');
 }
 
 /**
  * This function closes the dialog
  */
 function closeContactDialog() {
-  dialog.close();
-  contactForm.reset();
+  dialog.classList.add('show');
+  dialog.classList.remove('bg');
+        setTimeout(() => {dialog.close();
+ contactForm.reset();
   dialogColor.classList.remove(currentContact.color);
   errorMessage.classList.add("d_none");
   cancelBtn.classList.add("flex"); //was removed if add-dialog was opened beforehand (on mobile)
+        }, 500); // Close dialog after animation completes
+ 
 }
 
 /**

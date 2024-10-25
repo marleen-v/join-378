@@ -31,7 +31,7 @@
     <title>Join</title>
   </head>
 
-  <body onload="initContacts()" onclick="closeDropdownMenu()">
+  <body onload="initContacts()">
     <header>
       <div class="header-wrapper">
         <div class="title">Kanban Project Management Tool</div>
@@ -95,24 +95,25 @@
       <div class="content flex">
         <section class="contacts-container flex flex-column align-items-center">
           <div
+          class="add-contact-container flex justify-content-center align-items-center"
+        >
+          <button
+            class="add-contact-btn flex justify-content-center align-items-center" id="addContactBtn" onclick="renderAddContactDialog()";>
+            <span>Add new contact</span
+            ><span><img src="../assets/img/person_add.png" alt="" /></span>
+          </button>
+
+          <button
+            class="edit-btn-mobile d_none add-contact-btn justify-content-center align-items-center" id="editBtnMobile" onclick="toggleEditMenu()";>
+            <span>Add new contact</span
+            ><span><img src="../assets/icons/dots.svg" alt="" /></span>
+          </button>
+        </div>
+          <div
             class="contacts flex flex-column align-items-center"
             id="contact-container"
           ></div>
-          <div
-            class="add-contact-container flex justify-content-center align-items-center"
-          >
-            <button
-              class="add-contact-btn flex justify-content-center align-items-center" id="addContactBtn" onclick="renderAddContactDialog()";>
-              <span>Add new contact</span
-              ><span><img src="../assets/img/person_add.png" alt="" /></span>
-            </button>
 
-            <button
-              class="edit-btn-mobile d_none add-contact-btn justify-content-center align-items-center" id="editBtnMobile" onclick="toggleEditMenu()";>
-              <span>Add new contact</span
-              ><span><img src="../assets/icons/dots.svg" alt="" /></span>
-            </button>
-          </div>
         </section>
 
         <section class="contact-info-container  flex-column" id="contactInfoSection">
@@ -131,7 +132,8 @@
       <div class="success-note position-absolute flex justify-content-center align-items-center success-note-closed" id="successNote">Contact successfully created </div>
 
     </main>
-    <dialog class="align-items-center position-relative" id="contact-dialog">
+    <dialog  id="contact-dialog" class="show">
+      <div class="dialog-content">
      <img
         src="../assets/img/logo-weiss.png"
         class="join-logo"
@@ -214,7 +216,7 @@
       </form>
         
       </div>   
-      
+    </div>
     </dialog>
   </body>
 </html>
