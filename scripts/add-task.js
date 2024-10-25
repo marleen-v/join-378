@@ -318,14 +318,19 @@ function getSubtaskInput() {
     `;
 }
 
-function getDisplaySubtaskMask(element) {
+function removeSubtask(index) {
+    subtasks.splice(index, 1);
+    displaySubtasks();
+}
+
+function getDisplaySubtaskMask(element, index) {
     return /*html*/`
         <div class="added-subtasks-item">
             <li class="p-left-8px">${element.Description}</li>
             <div class="display-subtasks-mask">
-                <div class="flex justify-content-center">${editSVG()}</div>
+                <div onclick="" class="flex justify-content-center">${editSVG()}</div>
                 <div class="divider"></div>
-                <div class="flex justify-content-center">${trashSVG()}</div>
+                <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
             </div>
         </div> 
     `;
@@ -338,8 +343,8 @@ function displaySubtasks() {
     
     if(subtasks.length < 1) subtaskDisplay.innerHTML = "";
     else {
-        subtasks.forEach(element => {
-            subtaskDisplay.innerHTML += getDisplaySubtaskMask(element);
+        subtasks.forEach((element, index) => {
+            subtaskDisplay.innerHTML += getDisplaySubtaskMask(element, index);
         });
     }
 }
@@ -409,3 +414,4 @@ window.chooseCategory = chooseCategory;
 window.addCategory = addCategory;
 window.addNewSubtask = addNewSubtask;
 window.pushNewSubtask = pushNewSubtask;
+window.removeSubtask = removeSubtask;
