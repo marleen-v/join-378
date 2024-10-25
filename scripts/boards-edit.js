@@ -25,9 +25,11 @@ export function setDetailedEditableCard(taskId) {
 
 function selectPriority(taskId, priority) {
     let id = parseTaskIdToNumberId(taskId);
+    let formData = getFormData();
 
     tasks[id].Priority = priority;
     document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
+    updateFormData(formData);
     setDetailedEditableCard(taskId);
 
 }
@@ -39,11 +41,26 @@ function cancelEdit(taskId) {
     setDetailedCard(id);
 }
 
+function updateFormData(formData) {
+    document.querySelector('#input-edit-headline').value = formData[0];
+    document.querySelector('#textarea-edit-description').value = formData[1];
+    document.querySelector('#due-date').value = formData[2];
+}
+
+function getFormData() {
+    let formData = [];
+    formData.push(document.querySelector('#input-edit-headline').value);
+    formData.push(document.querySelector('#textarea-edit-description').value);
+    formData.push(document.querySelector('#due-date').value);
+    return formData;
+}
+
 function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
-    tasks[id].Title = document.querySelector('#input-edit-headline').value;
-    tasks[id].Description = document.querySelector('#textarea-edit-description').value;
-    tasks[id].Date = document.querySelector('#due-date').value;
+    let formData = getFormData();
+    tasks[id].Title = formData[0];
+    tasks[id].Description = formData[1];
+    tasks[id].Date = formData[2];
     putData(TASKS_DIR, tasks);
     document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
     setDetailedCard(id);

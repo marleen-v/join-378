@@ -136,8 +136,6 @@ function addContact() {
 }
 
 
-
-
 function setBgColor(element) {
     let div = document.querySelector(`#${element}`);
 
@@ -180,9 +178,7 @@ export function setPriorityColor(element, task) {
  * @param {*} element
  * @returns {string}
  */
-export function getPriority(priority) {
-    console.log(priority);
-    
+export function getPriority(priority) {    
     let svg = "";
     switch (priority) {
         case 'Urgent' || 'urgent': svg = getUrgentSVG(); break;

@@ -144,9 +144,7 @@ function setCardElements(element, index) {
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     setSubtasks(currentCard, element);    
-    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);
-    console.log(getPriority(element.Priority));
-    
+    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);    
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element.Priority);//getPriority(element);
 }
 
@@ -157,24 +155,6 @@ export function calculateDoneSubtasks(element) {
     return done;
 }
 
-/**
- * Get progress bar with bootstrap and show if exists subtasks
- *
- * @param {*} element
- * @returns {string}
- */
-/*
-function getProgressBar(element) {
-    let done = calculateDoneSubtasks(element);
-    let procent = (done / element.Subtasks.length) * 100;
-    
-    return /*html*//*`
-        <div class="progressbar-container">
-            <div class="progressbar" style="width: ${procent}%"></div>
-        </div>
-        <span class="flex align-items-center">${done}/${element.Subtasks.length} Subtasks</span>
-    `
-}*/
 
 /**
  * Set subtasks if are exist if not then not shown
@@ -257,29 +237,6 @@ function getEmptyColumn() {
     `;
 }
 
-
-/**
- * Get html structure of task card
- *
- * @param {*} taskId
- * @param {*} element
- * @returns {string}
- */
-/*
-function getTaskCard(id, taskId) {    
-    return /*html*//*`
-        <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card clickable" draggable="true" ondragstart="startDragging('${taskId}')">
-            <div class="flex align-items-center add-task-card-top"><div class="flex align-items-center justify-content-center add-task-card-category"></div></div>
-            <div class="add-task-card-headline"></div>
-            <div class="add-task-card-description"></div>
-            <div class="add-task-card-subtasks grid grid-columns-2-1fr-100px align-items-center"></div>
-            <div class="add-task-card-bottom grid grid-columns-2">
-                <div class="add-task-card-assigned-to flex"></div>
-                <div class="add-task-card-priority flex align-items-center justify-content-flex-end"></div>
-            </div>
-        </section>  
-    `/*;
-}*/
 
 function highlightColumn(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
