@@ -395,7 +395,8 @@ main {
     grid-template-columns: 1fr 64px;
 }
 
-.added-subtasks-item > div {
+
+.hide-added-subtasks-item-children> div {
     display: none;
 }
 
@@ -404,8 +405,15 @@ main {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-.added-subtasks-item:hover > div {
+.hide-added-subtasks-item-children:hover > div {
     display: grid;
+}
+
+.input-subtask {
+    border: none;
+    background-color: transparent;
+    width: 94%;
+    outline: #0038FF;
 }
 
 

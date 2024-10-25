@@ -323,12 +323,34 @@ function removeSubtask(index) {
     displaySubtasks();
 }
 
+function saveSubtaskEdit(index) {
+    let subtaskInput = document.getElementById(`added-subtask-input${index}`).value;
+    if(subtaskInput !== "")
+        subtasks[index].Description = subtaskInput;
+    displaySubtasks();
+}
+
+function editSubtask(element,index) {
+    let edit = document.querySelector(`.added-subtask${index}`);
+    edit.classList.remove('hide-added-subtasks-item-children');
+    edit.innerHTML = /*html*/`
+        <li class="p-left-8px"><input class="input-subtask" id="added-subtask-input${index}" type="text" placeholder="${element}"></li>  
+        <div class="display-subtasks-mask">
+            <div onclick="saveSubtaskEdit(${index})" class="flex justify-content-center">
+                <img class="filter-color-to-black" src="../assets/icons/check.svg" alt="">
+            </div>
+            <div class="divider"></div>
+            <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
+        </div>
+    `;
+}
+
 function getDisplaySubtaskMask(element, index) {
     return /*html*/`
-        <div class="added-subtasks-item">
+        <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
             <li class="p-left-8px">${element.Description}</li>
             <div class="display-subtasks-mask">
-                <div onclick="" class="flex justify-content-center">${editSVG()}</div>
+                <div onclick="editSubtask('${element.Description}',${index})" class="flex justify-content-center">${editSVG()}</div>
                 <div class="divider"></div>
                 <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
             </div>
@@ -415,3 +437,5 @@ window.addCategory = addCategory;
 window.addNewSubtask = addNewSubtask;
 window.pushNewSubtask = pushNewSubtask;
 window.removeSubtask = removeSubtask;
+window.editSubtask = editSubtask;
+window.saveSubtaskEdit = saveSubtaskEdit;
