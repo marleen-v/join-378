@@ -257,7 +257,7 @@ main {
 
 .add-new-subtask {
     display: grid;
-    grid-template-rows: 32px 32px;
+    grid-template-rows: 32px 32px 128px;
 }
 
 .add-category-select-box {
@@ -377,6 +377,11 @@ main {
 .display-assigned-user {
     display: flex;
     overflow-x: auto;
+}
+
+.added-subtasks {
+    overflow-y: auto;
+    height: 64px;
 }
 
 @media only screen and (max-width: 1024px) {

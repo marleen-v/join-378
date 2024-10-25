@@ -25,7 +25,7 @@ export function getInputForm() {
         </div>
         <div class="task-form-container">
         <form id="create-task-form" class="task-form" onsubmit="createNewTask(); return false;">
-            <div class="grid grid-rows-auto gap-32px">
+            <div class="grid grid-rows-auto gap-64px">
                 <div class="add-task-form">
                     <div class="part-1-form">
                         <div>
@@ -92,6 +92,7 @@ export function getInputForm() {
                                     <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
                                 </div>
                             </div>
+                            <div class="added-subtasks"></div>
                         </div>
                     </div>
                 </div>

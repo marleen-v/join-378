@@ -318,11 +318,27 @@ function getSubtaskInput() {
     `;
 }
 
+function displaySubtasks() {
+    let subtaskDisplay = document.querySelector('.added-subtasks');
+    subtaskDisplay.innerHTML = "";
+    console.log(subtasks);
+    
+    if(subtasks.length < 1) subtaskDisplay.innerHTML = "";
+    else {
+        subtasks.forEach(element => {
+            subtaskDisplay.innerHTML += /*html*/`
+                <li>${element.Description}</li>  
+            `;
+        });
+    }
+}
+
 function pushNewSubtask() {
     let input = document.querySelector('#add-new-subtask').value;
     if(input !== "") {
         let subtask =  { Description: input, Done: false };    
         subtasks.push(subtask);  
+        displaySubtasks();
     } 
     document.querySelector('.add-new-subtask-box').innerHTML = getSubtaskMask();    
 }
