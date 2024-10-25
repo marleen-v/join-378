@@ -1,6 +1,8 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { checkedBoxSVG, getCloseSVG, uncheckedBoxSVG } from './boards-overlay.js';
+import { getInputForm } from './add-task-template.js';
+
 let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
 let tasks = [];
@@ -10,9 +12,17 @@ let addedUser = [];
 let activeUser = [];
 let category = "";
 
+export async function loadActiveUser(path=""){
+    let res = await fetch(FIREBASE_URL + path + ".json");
+    activeUser = await res.json();
+    return activeUser;
+}
+
 async function loadAddTask() {
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
+    activeUser = await loadActiveUser(ACTIVE_DIR);
+    
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
     getLogo();
@@ -47,9 +57,24 @@ function removePerson(data, elementToRemove) {
     return data;
 }
 
+function getUserIcon(element) {
+    return /*html*/`
+        <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
+  
+    `;
+}
+
+function displayAddedUser() {
+    document.querySelector('.display-assigned-user').innerHTML = "";
+    addedUser.forEach(element => {
+        document.querySelector('.display-assigned-user').innerHTML += getUserIcon(element);
+    });
+}
+
 function addUser(index) {    
     if (!findPersons(addedUser, contacts[index].email)) {
-        addedUser.push(contacts[index]);        
+        addedUser.push(contacts[index]); 
+        displayAddedUser();
     }
     else {
         removePerson(addedUser, contacts[index].email);
@@ -59,11 +84,6 @@ function addUser(index) {
 
 
 function addUserItem(element, index) {
-    //let color = getUserColor(element.firstName, element.lastName);
-    //let id = parseTaskIdToNumberId(taskId);
-    //let selectBox = isChecked(element, taskId);
-    //let active = (getActiveUser(element)) ? " (you)" : "";
-    //let selectBox = isChecked(element, taskId);
     let selectBox = "";
     if(findPersons(addedUser, element.email)) selectBox = checkedBoxSVG()
     else selectBox = uncheckedBoxSVG();
@@ -76,9 +96,13 @@ function addUserItem(element, index) {
     `;
 }
 
+function getActiveUser(element) {
+    if(element.email == activeUser.email) return true;
+    return false;
+}
+
 
 function openContacts() {
-    //focusUserSelectBox(true);
     let assignBox = document.querySelector('.assign-to-select-box > span');
     assignBox.innerHTML = "|";
     let persons = document.querySelector('.select-box-contacts');
@@ -87,8 +111,8 @@ function openContacts() {
     persons.innerHTML = "";
     contacts.forEach((element, index) => {
         persons.innerHTML += addUserItem(element, index);
-        //if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
-        //else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
+        if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
+        else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
     });
     document.getElementById('contacts-toggle-img').style.transform = "rotate(180deg)";
 
@@ -96,7 +120,6 @@ function openContacts() {
 
 
 function closeContacts() {
-    //focusUserSelectBox(false);
     let assignBox = document.querySelector('.assign-to-select-box > span');
     assignBox.innerHTML = "Select contacts to assign";
     let persons = document.querySelector('.select-box-contacts');
@@ -104,7 +127,6 @@ function closeContacts() {
     persons.classList.remove('set-z-index-100');
     persons.innerHTML = "";
     document.getElementById('contacts-toggle-img').style.transform = "rotate(0deg)";
-    //setDetailedEditableCard(taskId);
 }
 
 function addContact() {
@@ -349,105 +371,6 @@ function createNewTask() {
 }
 
 
-function getInputForm() {
-    return /*html*/`
-    <section id="add-task" class="add-task">
-        <div class="add-task-head flex align-items-center">
-            <div class="add-task-headline">
-                <h1>Add Task</h1>
-            </div>
-        </div>
-        <div class="task-form-container">
-        <form id="create-task-form" class="task-form" onsubmit="createNewTask(); return false;">
-            <div class="grid grid-rows-auto gap-32px">
-                <div class="add-task-form">
-                    <div class="part-1-form">
-                        <div>
-                            <!-- Titel -->
-                            <span>Title<span class="required-star">*</span></span>
-                            <input class="task-input" type="text" id="title" name="title" required>
-                        </div>
-                        <div>
-                            <span>Description</span>
-                            <textarea class="task-textarea" id="description" name="description" rows="4" placeholder="Enter a description"></textarea>
-                        </div>  
-                        <div class="select-contact">
-                            <span class="detailed-card-label">Assigned to:</span>
-                            <div class="add-task-card-assigned-to grid grid-rows-2" >
-                                <div class="assign-to-select-box p-right-8px clickable" onclick="addContact()">
-                                    <span class="mg-left-8px">Select contacts to assign</span>
-                                    <img id="contacts-toggle-img" class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
-                                </div>
-                                <div class="select-box-contacts mg-top-minus-8px"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="part-2-form">
-                        <div>
-                            <!-- Fälligkeitsdatum -->
-                            <span>Due date<span class="required-star">*</span></span>
-                            <input class="task-input" type="date" id="due-date" name="due_date" required>
-                        </div>
-                        <div class="select-priority">
-                            <span class="flex detailed-card-label">Priority</span>
-                            <div class="priority-buttons flex">
-                                <button class="task-button grid grid-columns-2 clickable" type="button" id="urgent" data-priority="hoch" onclick="setPriority('urgent')">
-                                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Urgent</span>    
-                                    <div class="flex align-items-center set-height-100">${getPriority("Urgent")}</div>
-                                </button>
-                                <button class="task-button grid grid-columns-2 clickable" type="button" id="medium" data-priority="mittel" onclick="setPriority('medium')">
-                                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Medium</span>    
-                                    <div class="flex align-items-center set-height-100">${getPriority("Medium")}</div>
-                                </button>
-                                <button class="task-button grid grid-columns-2 clickable" type="button" id="low" data-priority="niedrig" onclick="setPriority('low')">
-                                    <span class="flex align-items-center set-height-100 justify-content-center set-width-84px">Low</span>    
-                                    <div class="flex align-items-center set-height-100">${getPriority("Low")}</div>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="select-category">
-                            <span class="mg-top-8px">Category<span class="required-star">*</span></span>
-
-                            <div class="select-category-box p-right-8px clickable" onclick="chooseCategory()">
-                                <!--<span class="mg-left-8px">Select category</span>-->
-                                <input class="category-input" placeholder="Select category" type="text" id="category-input" name="category-input" required>
-                                <img id="category-toggle-img" class="click-item size-16px" src="../assets/icons/arrow_drop_downaa.svg" alt="">
-                            </div>
-                            
-                            <div class="add-category"></div>
-                        </div>
-                        <div class="add-new-subtask">
-                            <span class="mg-top-8px">Subtasks</span>
-                            <div class="add-new-subtask-box flex">
-                                <div onclick="addNewSubtask()" class="subtasks-add-box p-right-8px clickable">
-                                    <span class="mg-left-8px">Add new subtask</span>
-                                    <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="add-task-form-bottom">
-                    <div class="flex required-info"><span class="required-star">*</span><span>This Field is required</span></div>
-                    <div></div>
-                    <div class="flex justify-content-flex-end">
-                        <button onclick="clearButton()" class="flex justify-content-center align-items-center btn-clear mg-right-8px clickable">
-                            <span class="mg-right-8px set-font-icon-700">Clear</span>
-                            <div class="flex align-items-center">${getCloseSVG()}</div>
-                        </button>
-                        <button form="create-task-form" type="submit" class="flex justify-content-center align-items-center btn-add-task clickable">
-                            <span class="mg-right-8px set-font-icon-700">Create Task</span>
-                            <img class="flex align-items-center" src="../assets/icons/check.svg" alt="">
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-</div>
-</section>
-    `;
-}
 
 window.clearButton = clearButton;
 window.loadAddTask = loadAddTask;

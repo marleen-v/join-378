@@ -241,7 +241,7 @@ main {
 
 .select-contact {
     display: grid;
-    grid-template-rows: 24px 32px;
+    grid-template-rows: 24px 32px 50px;
 }
 
 .select-priority {
@@ -371,6 +371,12 @@ main {
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
     grid-template-rows: auto;
+}
+
+
+.display-assigned-user {
+    display: flex;
+    overflow-x: auto;
 }
 
 @media only screen and (max-width: 1024px) {
