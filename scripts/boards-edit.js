@@ -4,6 +4,7 @@ import { tasks, setUserInitial, contacts, activeUser } from "./boards.js";
 import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSubtaskInput, addLinkedItem } from './boards-edit-template.js';
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
+import { putData } from "./module.js";
 let toggleContactList = false;
 let formData = [];
 
@@ -14,11 +15,14 @@ export function parseTaskIdToNumberId(taskId) {
 
 export function setDetailedEditableCard(taskId) {
     let id = parseTaskIdToNumberId(taskId);
-
     let detailedCard = document.querySelector('.detailed-card');
-    detailedCard.querySelector('.input-edit-headline').value = tasks[id].Title;
-    detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
-    detailedCard.querySelector('.due-date').value = tasks[id].Date;
+    
+    if(formData.length < 1) {
+        detailedCard.querySelector('.input-edit-headline').value = tasks[id].Title;
+        detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
+        detailedCard.querySelector('.due-date').value = tasks[id].Date;
+    }
+    else updateFormData();
     detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
     setPriorityColor(".detailed-card", tasks[id]);
     if(tasks[id].Subtasks != null) displayCardSubtasks(tasks[id].Subtasks, id);
@@ -39,7 +43,7 @@ function cancelEdit(taskId) {
     setDetailedCard(id);
 }
 
-function updateFormData(formData) {
+function updateFormData() {
     document.querySelector('#input-edit-headline').value = formData[0];
     document.querySelector('#textarea-edit-description').value = formData[1];
     document.querySelector('#due-date').value = formData[2];
@@ -52,9 +56,14 @@ function getFormData() {
     formData.push(document.querySelector('#due-date').value);    
 }
 
+function isDateValid(dateStr) {
+    return !isNaN(new Date(dateStr));
+  }
+
+
 function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
-    let formData = getFormData();
+    getFormData();
     tasks[id].Title = formData[0];
     tasks[id].Description = formData[1];
     tasks[id].Date = formData[2];
@@ -155,8 +164,9 @@ function assignContact(taskId) {
     }
     else {
         closeContactSelectBox(taskId);
-        document.getElementById('assign-to-toggle-icon').style.transform = "rotate(0deg)";
+        document.getElementById('assign-to-toggle-icon').style.transform = "rotate(0deg)";        
     }
+
 }
 
 export function getSubtaskMask(taskId) {

@@ -66,10 +66,10 @@ export function getDetailedEditableCard(taskId) {
                 <div onclick="cancelEdit('${taskId}')"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
             </div>
             <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
-                <form id="task-edit-form" class="task-edit-form" onchange="closeEdit('${taskId}');return false;">
+                <form id="task-edit-form" class="task-edit-form" onsubmit="closeEdit('${taskId}');return false;">
                     <div class="add-task-card-headline grid grid-rows-2 mg-right-8px gap-8px">
                         <span class="input-edit-label detailed-card-label">Title</span>
-                        <input id="input-edit-headline" onkeyup="getFormData()" class="input-edit-headline input-border p-left-8px" type="text" required>
+                        <input id="input-edit-headline" onchange="getFormData()" class="input-edit-headline input-border p-left-8px" type="text" required>
                     </div>
                     <div class="grid grid-rows-2 mg-right-8px mg-top-8px">
                         <span class="input-edit-label detailed-card-label">Description</span>

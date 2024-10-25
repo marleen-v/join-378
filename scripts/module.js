@@ -17,3 +17,20 @@ export async function loadActiveUser(path=""){
     let res = await fetch(FIREBASE_URL + path + ".json");
     return await res.json();;
   }
+
+
+  /**
+ * Puts user data to firebase
+ * @param {string} path directory in firebase
+ * @param {object} data object the needs to be stored
+ */
+export async function putData(path="", data={}){
+    let res = await fetch(FIREBASE_URL + path + ".json",
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    });
+}
