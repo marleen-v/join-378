@@ -110,11 +110,28 @@
 
 @media only screen and (max-width: 550px) {
   * {
-    overflow: hidden;
+    /* overflow-x: hidden; */
+  }
+  .input-ctn input::placeholder {
+    font-size: 18px;
+    padding: 12px;
+  }
+  .content-ctn {
+    /* gap: 14px; */
+  }
+  .checkbox-ctn input {
+    margin-left: 24px;
   }
   .signup-ctn p {
-    font-size: 18px;
-    margin-right: 24px;
+    font-size: 16px;
+    text-wrap: nowrap;
+    margin-right: 28px;
+  }
+  .signup-ctn button {
+    width: 90px;
+    height: 40px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
   }
 }
 
