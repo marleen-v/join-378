@@ -87,7 +87,7 @@ function openImprint() {
 /**
  * Loads data from firebase
  * @param {string} path directory in firebase
- * @returns 
+ * @returns JSON with loaded data
  */
 async function loadData(path=""){
     let res = await fetch(FIREBASE_URL + path + ".json");

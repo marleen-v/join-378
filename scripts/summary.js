@@ -18,8 +18,8 @@ async function initSummary(){
  * Loads the template for main and sets the User Logo
  */
 function displayHTML(){
-  showMainTemplate();
   loadActiveUser(ACTIVE_DIR);
+  showMainTemplate();
 }
 
 
