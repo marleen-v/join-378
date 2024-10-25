@@ -1,5 +1,5 @@
-import { getDisplaySubtaskMask, getPriority, setPriorityColor, displaySubtasks } from "./add-task.js";
-import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard, uncheckedBoxSVG, checkedBoxSVG } from "./boards-overlay.js";
+import { getPriority, setPriorityColor, displaySubtasks } from "./add-task.js";
+import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard, uncheckedBoxSVG, checkedBoxSVG, editSVG, trashSVG } from "./boards-overlay.js";
 import { tasks, setUserInitial, contacts, getUserColor, activeUser } from "./boards.js";
 let toggleContactList = false;
 
@@ -17,7 +17,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
     detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
     setPriorityColor(".detailed-card", tasks[id]);
-    if(tasks[id].Subtasks != null) displayCardSubtasks(tasks[id].Subtasks, id, 'boards');
+    if(tasks[id].Subtasks != null) displayCardSubtasks(tasks[id].Subtasks, id);
 }
 
 function selectPriority(taskId, priority) {
@@ -197,12 +197,56 @@ function addSubtask(taskId) {
     container.innerHTML = getSubtaskInput(taskId);
 }
 
-export function displayCardSubtasks(subtasks, id, location) {
+
+function removeCardSubtask(taskId,index) {           
+    tasks[taskId].Subtasks.splice(index, 1);
+    putData(TASKS_DIR, tasks);
+    displayCardSubtasks(tasks[taskId].Subtasks, taskId);
+}
+
+function saveSubtaskCardEdit(taskId, index) {
+    let subtaskInput = document.getElementById(`added-subtask-input${index}`).value;
+    if(tasks[taskId].Subtasks == null) tasksArray[taskId].Subtasks = [{Description: subtaskInput, Done: false }];
+    else if(subtaskInput !== "") tasks[taskId].Subtasks[index].Description = subtaskInput;
+    putData(TASKS_DIR, tasks);
+    displayCardSubtasks(tasks[taskId].Subtasks, taskId);
+}
+
+function editCardSubtask(element, taskId,index) {
+    let edit = document.querySelector(`.added-subtask${index}`);
+    edit.classList.remove('hide-added-subtasks-item-children');
+    edit.innerHTML = /*html*/`
+        <li class="p-left-8px"><input class="input-subtask" id="added-subtask-input${index}" type="text" placeholder="${element}"></li>  
+        <div class="display-subtasks-mask">
+            <div onclick="saveSubtaskCardEdit(${taskId},${index})" class="flex justify-content-center">
+                <img class="filter-color-to-black" src="../assets/icons/check.svg" alt="">
+            </div>
+            <div class="divider"></div>
+            <div onclick="removeCardSubtask(${taskId}, ${index})" class="flex justify-content-center">${trashSVG()}</div>
+        </div>
+    `;
+}
+
+function getDisplaySubtaskMask(element, taskId, index) {
+    return /*html*/`
+        <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
+            <li class="p-left-8px">${element.Description}</li>
+            <div class="display-subtasks-mask">
+                <div onclick="editCardSubtask('${element.Description}',${taskId},${index})" class="flex justify-content-center">${editSVG()}</div>
+                <div class="divider"></div>
+                <div onclick="removeCardSubtask(${taskId},${index})" class="flex justify-content-center">${trashSVG()}</div>
+            </div>
+        </div> 
+    `;
+}
+
+
+function displayCardSubtasks(subtasks, id) {
     let subtaskDisplay = document.querySelector('.added-subtasks');
     subtaskDisplay.innerHTML = "";
     
     subtasks.forEach((element, index) => {
-        subtaskDisplay.innerHTML += getDisplaySubtaskMask(location, element, id, index);
+        subtaskDisplay.innerHTML += getDisplaySubtaskMask(element, id, index);
     });
 }
 
@@ -286,3 +330,6 @@ window.cancelSubtask = cancelSubtask;
 window.pushSubtask = pushSubtask;
 window.cancelEdit = cancelEdit;
 window.displayCardSubtasks = displayCardSubtasks;
+window.saveSubtaskCardEdit = saveSubtaskCardEdit;
+window.removeCardSubtask = removeCardSubtask;
+window. editCardSubtask = editCardSubtask;
