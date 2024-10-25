@@ -631,6 +631,8 @@ main {
         padding: 0 16px 0 16px;
     }
 
+
+
     .board-bar {
         display: none;
     }
@@ -670,6 +672,19 @@ main {
         display: flex;
         overflow: auto;
         width: calc(100% - 16px);
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .boards {
+        display: grid;
+        grid-template-rows: 412px 0px 1fr;
+    }
+
+    .board-head {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 232px 40px 40px 1fr;
     }
 }
 
