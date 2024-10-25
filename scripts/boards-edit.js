@@ -5,6 +5,7 @@ import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSub
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 let toggleContactList = false;
+let formData = [];
 
 export function parseTaskIdToNumberId(taskId) {
     let splitId = taskId.split('taskId');
@@ -25,13 +26,10 @@ export function setDetailedEditableCard(taskId) {
 
 function selectPriority(taskId, priority) {
     let id = parseTaskIdToNumberId(taskId);
-    let formData = getFormData();
-
     tasks[id].Priority = priority;
     document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
-    updateFormData(formData);
     setDetailedEditableCard(taskId);
-
+    updateFormData(formData);
 }
 
 function cancelEdit(taskId) {
@@ -48,11 +46,10 @@ function updateFormData(formData) {
 }
 
 function getFormData() {
-    let formData = [];
+    formData = [];
     formData.push(document.querySelector('#input-edit-headline').value);
     formData.push(document.querySelector('#textarea-edit-description').value);
-    formData.push(document.querySelector('#due-date').value);
-    return formData;
+    formData.push(document.querySelector('#due-date').value);    
 }
 
 function closeEdit(taskId) {
@@ -230,3 +227,4 @@ window.displayCardSubtasks = displayCardSubtasks;
 window.saveSubtaskCardEdit = saveSubtaskCardEdit;
 window.removeCardSubtask = removeCardSubtask;
 window. editCardSubtask = editCardSubtask;
+window.getFormData = getFormData;
