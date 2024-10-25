@@ -3,6 +3,7 @@ import { getPriority } from "./add-task.js";
 import { search } from "./boards-filter.js";
 import { openOverlay } from "./boards-overlay.js";
 
+
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 export let tasks = [];
@@ -40,7 +41,7 @@ async function loadBoards() {
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
-    
+
     showData(tasks);
     getLogo();
 
@@ -179,7 +180,7 @@ function getProgressBar(element) {
  * @param {*} element
  */
 function setSubtasks(currentCard, element) {
-    if(element.Subtasks == null) currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
+    if(element.Subtasks == null || element.Subtasks.length < 1) currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
     else currentCard.querySelector('.add-task-card-subtasks').innerHTML = getProgressBar(element); //element.Subtasks.length + " Subtasks";
 }
 

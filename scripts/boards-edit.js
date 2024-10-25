@@ -1,4 +1,4 @@
-import { getPriority, setPriorityColor } from "./add-task.js";
+import { getDisplaySubtaskMask, getPriority, setPriorityColor, displaySubtasks } from "./add-task.js";
 import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard, uncheckedBoxSVG, checkedBoxSVG } from "./boards-overlay.js";
 import { tasks, setUserInitial, contacts, getUserColor, activeUser } from "./boards.js";
 let toggleContactList = false;
@@ -17,6 +17,7 @@ export function setDetailedEditableCard(taskId) {
     detailedCard.querySelector('.due-date').value = tasks[id].Date;
     detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
     setPriorityColor(".detailed-card", tasks[id]);
+    if(tasks[id].Subtasks != null) displayCardSubtasks(tasks[id].Subtasks, id, 'boards');
 }
 
 function selectPriority(taskId, priority) {
@@ -167,10 +168,11 @@ function getSubtaskMask(taskId) {
 function pushSubtask(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     let input = document.querySelector('#add-new-subtask').value;
-    if (input == "") return;
+    if (input == "") { cancelSubtask(); return; }
     if (tasks[id].Subtasks) tasks[id].Subtasks.push({ "Description": input, "Done": false });
     else tasks[id]["Subtasks"] = [{ "Description": input, "Done": false }];
     document.querySelector('.detailed-task-card-subtasks').innerHTML = getSubtaskMask(taskId);
+    displayCardSubtasks(tasks[id].Subtasks, id, 'boards');
 }
 
 
@@ -193,6 +195,15 @@ function cancelSubtask() {
 function addSubtask(taskId) {
     let container = document.querySelector('.detailed-task-card-subtasks');
     container.innerHTML = getSubtaskInput(taskId);
+}
+
+export function displayCardSubtasks(subtasks, id, location) {
+    let subtaskDisplay = document.querySelector('.added-subtasks');
+    subtaskDisplay.innerHTML = "";
+    
+    subtasks.forEach((element, index) => {
+        subtaskDisplay.innerHTML += getDisplaySubtaskMask(location, element, id, index);
+    });
 }
 
 
@@ -246,11 +257,12 @@ export function getDetailedEditableCard(taskId) {
                     <div class="add-task-card-persons grid grid-rows-auto auto-overflow-y set-height-128px"></div>
                 </div>
             </div>
-            <div class="grid grid-rows-2 gap-8px mg-right-8px">
+            <div class="add-new-subtask">
                 <span class="detailed-card-label mg-top-8px">Subtasks</span>
                 <div class="detailed-task-card-subtasks flex">
                     ${getSubtaskMask(taskId)}
                 </div>
+                <div class="added-subtasks"></div>
             </div>
             </div>  
             <div class="add-task-card-bottom flex justify-content-flex-end align-items-center mg-right-8px">
@@ -273,3 +285,4 @@ window.addSubtask = addSubtask;
 window.cancelSubtask = cancelSubtask;
 window.pushSubtask = pushSubtask;
 window.cancelEdit = cancelEdit;
+window.displayCardSubtasks = displayCardSubtasks;

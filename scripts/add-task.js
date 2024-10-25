@@ -1,11 +1,11 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
-import { parseTaskIdToNumberId } from "./boards-edit.js";
+import {  displayCardSubtasks, parseTaskIdToNumberId } from "./boards-edit.js";
 import { checkedBoxSVG, editSVG, getCloseSVG, trashSVG, uncheckedBoxSVG } from './boards-overlay.js';
 import { getInputForm } from './add-task-template.js';
+import { tasks } from "./boards.js";
 
 let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
-let tasks = [];
 let contacts = [];
 let subtasks = [];
 let addedUser = [];
@@ -19,10 +19,9 @@ export async function loadActiveUser(path=""){
 }
 
 async function loadAddTask() {
-    tasks = await loadData(TASKS_DIR);
+    //tasksArray = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
-    
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
     getLogo();
@@ -318,55 +317,68 @@ function getSubtaskInput() {
     `;
 }
 
-function removeSubtask(index) {
-    subtasks.splice(index, 1);
-    displaySubtasks();
+function removeSubtask(location, taskId,index) {
+    if(location == "add-task") {
+        subtasks.splice(index, 1);
+        displaySubtasks(location, taskId);
+    }
+    else {                
+        tasks[taskId].Subtasks.splice(index, 1);
+        putData(TASKS_DIR, tasks);
+        displayCardSubtasks(tasks[taskId].Subtasks, taskId, 'boards');
+    }
 }
 
-function saveSubtaskEdit(index) {
+function saveSubtaskEdit(location, taskId, index) {
     let subtaskInput = document.getElementById(`added-subtask-input${index}`).value;
-    if(subtaskInput !== "")
-        subtasks[index].Description = subtaskInput;
-    displaySubtasks();
+    if(location == "add-task") {
+        if(subtaskInput !== "") subtasks[index].Description = subtaskInput;
+        displaySubtasks(location, taskId);
+    }
+    else {
+        if(tasks[taskId].Subtasks == null) tasksArray[taskId].Subtasks = [{Description: subtaskInput, Done: false }];
+        else if(subtaskInput !== "") tasks[taskId].Subtasks[index].Description = subtaskInput;
+        putData(TASKS_DIR, tasks);
+        displayCardSubtasks(tasks[taskId].Subtasks, taskId, 'boards');
+    }
 }
 
-function editSubtask(element,index) {
+function editSubtask(location,element, taskId,index) {
     let edit = document.querySelector(`.added-subtask${index}`);
     edit.classList.remove('hide-added-subtasks-item-children');
     edit.innerHTML = /*html*/`
         <li class="p-left-8px"><input class="input-subtask" id="added-subtask-input${index}" type="text" placeholder="${element}"></li>  
         <div class="display-subtasks-mask">
-            <div onclick="saveSubtaskEdit(${index})" class="flex justify-content-center">
+            <div onclick="saveSubtaskEdit('${location}', ${taskId},${index})" class="flex justify-content-center">
                 <img class="filter-color-to-black" src="../assets/icons/check.svg" alt="">
             </div>
             <div class="divider"></div>
-            <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
+            <div onclick="removeSubtask('${location}',${taskId},${index})" class="flex justify-content-center">${trashSVG()}</div>
         </div>
     `;
 }
 
-function getDisplaySubtaskMask(element, index) {
+export function getDisplaySubtaskMask(location, element, taskId, index) {
     return /*html*/`
         <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
             <li class="p-left-8px">${element.Description}</li>
             <div class="display-subtasks-mask">
-                <div onclick="editSubtask('${element.Description}',${index})" class="flex justify-content-center">${editSVG()}</div>
+                <div onclick="editSubtask('${location}','${element.Description}',${taskId},${index})" class="flex justify-content-center">${editSVG()}</div>
                 <div class="divider"></div>
-                <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
+                <div onclick="removeSubtask('${location}', ${taskId},${index})" class="flex justify-content-center">${trashSVG()}</div>
             </div>
         </div> 
     `;
 }
 
-function displaySubtasks() {
+export function displaySubtasks(location, taskId) {
     let subtaskDisplay = document.querySelector('.added-subtasks');
     subtaskDisplay.innerHTML = "";
-    console.log(subtasks);
     
     if(subtasks.length < 1) subtaskDisplay.innerHTML = "";
     else {
         subtasks.forEach((element, index) => {
-            subtaskDisplay.innerHTML += getDisplaySubtaskMask(element, index);
+            subtaskDisplay.innerHTML += getDisplaySubtaskMask(location, element, taskId, index); 
         });
     }
 }
@@ -376,7 +388,7 @@ function pushNewSubtask() {
     if(input !== "") {
         let subtask =  { Description: input, Done: false };    
         subtasks.push(subtask);  
-        displaySubtasks();
+        displaySubtasks('add-task', -1);
     } 
     document.querySelector('.add-new-subtask-box').innerHTML = getSubtaskMask();    
 }

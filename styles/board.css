@@ -557,6 +557,52 @@ main {
 }
 
 
+.add-new-subtask {
+    display: grid;
+    grid-template-rows: 32px 32px 128px;
+}
+
+.display-subtasks-mask {
+    display: grid;
+    grid-template-columns: 32px 1px 32px;
+    justify-content: center;
+}
+
+
+.added-subtasks {
+    overflow-y: auto;
+    height: 64px;
+    width: 100%;
+}
+
+.added-subtasks-item {
+    display: grid;
+    grid-template-columns: 1fr 64px;
+    overflow: hidden;
+}
+
+
+.hide-added-subtasks-item-children> div {
+    display: none;
+}
+
+.added-subtasks-item:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.hide-added-subtasks-item-children:hover > div {
+    display: grid;
+}
+
+.input-subtask {
+    border: none;
+    background-color: transparent;
+    width: 94%;
+    outline: #0038FF;
+}
+
+
 @keyframes moveFromRightToCenter {
     from {
         left: 100%;
