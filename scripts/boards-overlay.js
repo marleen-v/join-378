@@ -165,7 +165,7 @@ export function closeOverlay() {
     }, "300");
 }
 
-function editSVG() {
+export function editSVG() {
     return /*html*/`
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_239190_2307" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -178,7 +178,7 @@ function editSVG() {
     `;
 }
 
-function trashSVG() {
+export function trashSVG() {
     return /*html*/`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_239190_2301" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

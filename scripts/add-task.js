@@ -1,6 +1,6 @@
 import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
-import { checkedBoxSVG, getCloseSVG, uncheckedBoxSVG } from './boards-overlay.js';
+import { checkedBoxSVG, editSVG, getCloseSVG, trashSVG, uncheckedBoxSVG } from './boards-overlay.js';
 import { getInputForm } from './add-task-template.js';
 
 let priority = "medium";
@@ -318,6 +318,19 @@ function getSubtaskInput() {
     `;
 }
 
+function getDisplaySubtaskMask(element) {
+    return /*html*/`
+        <div class="added-subtasks-item">
+            <li class="p-left-8px">${element.Description}</li>
+            <div class="display-subtasks-mask">
+                <div class="flex justify-content-center">${editSVG()}</div>
+                <div class="divider"></div>
+                <div class="flex justify-content-center">${trashSVG()}</div>
+            </div>
+        </div> 
+    `;
+}
+
 function displaySubtasks() {
     let subtaskDisplay = document.querySelector('.added-subtasks');
     subtaskDisplay.innerHTML = "";
@@ -326,9 +339,7 @@ function displaySubtasks() {
     if(subtasks.length < 1) subtaskDisplay.innerHTML = "";
     else {
         subtasks.forEach(element => {
-            subtaskDisplay.innerHTML += /*html*/`
-                <li>${element.Description}</li>  
-            `;
+            subtaskDisplay.innerHTML += getDisplaySubtaskMask(element);
         });
     }
 }

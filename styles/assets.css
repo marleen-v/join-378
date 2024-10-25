@@ -210,6 +210,10 @@
     grid-template-columns: 1fr 100px !important;
 }
 
+.grid-columns-2-1fr-64px {
+    grid-template-columns: 1fr 64px !important;
+}
+
 .grid-columns-3-48px-1fr-48px {
     grid-template-columns: 48px 1fr  48px !important;
 }

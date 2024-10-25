@@ -373,6 +373,11 @@ main {
     grid-template-rows: auto;
 }
 
+.display-subtasks-mask {
+    display: grid;
+    grid-template-columns: 32px 1px 32px;
+    justify-content: center;
+}
 
 .display-assigned-user {
     display: flex;
@@ -382,7 +387,27 @@ main {
 .added-subtasks {
     overflow-y: auto;
     height: 64px;
+    width: 100%;
 }
+
+.added-subtasks-item {
+    display: grid;
+    grid-template-columns: 1fr 64px;
+}
+
+.added-subtasks-item > div {
+    display: none;
+}
+
+.added-subtasks-item:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.added-subtasks-item:hover > div {
+    display: grid;
+}
+
 
 @media only screen and (max-width: 1024px) {
     .add-task {
