@@ -71,13 +71,7 @@ function removePerson(data, elementToRemove) {
     });
     return data;
 }
-/*
-function getUserIcon(element) {
-    return /*html*//*`
-        <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
-  
-    `;
-}*/
+
 
 function displayAddedUser() {
     document.querySelector('.display-assigned-user').innerHTML = "";
@@ -96,20 +90,7 @@ function addUser(index) {
     }
     openContacts();
 }
-/*
 
-function addUserItem(element, index) {
-    let selectBox = "";
-    if(findPersons(addedUser, element.email)) selectBox = checkedBoxSVG()
-    else selectBox = uncheckedBoxSVG();
-    return /*html*//*`
-        <div class="task-user-select grid grid-columns-3-48px-1fr-48px selection" onclick="addUser(${index})">
-            <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
-            <span class="flex align-items-center">${element.firstName} ${element.lastName}</span>
-            <div class="flex align-items-center">${selectBox}</div>
-        </div>
-    `;
-}*/
 
 function getActiveUser(element) {
     if(element.email == activeUser.email) return true;
@@ -160,8 +141,6 @@ function addContact() {
 function setBgColor(element) {
     let div = document.querySelector(`#${element}`);
 
-    //div.classList.add('set-bg-orange');  
-    //div.querySelector('svg').classList.add('filter-color-to-white'); 
     switch (element) {
         case 'urgent': div.classList.add('set-bg-red'); break;
         case 'medium': div.classList.add('set-bg-orange'); break;
@@ -226,15 +205,6 @@ function addCategory(cat) {
     chooseCategory();
 }
 
-/*
-function getCategory() {
-    return /*html*//*`
-        <div class="grid grid-rows-2">
-            <div class="mg-top-8px p-8px selection clickable" onclick="addCategory('User Story')">User Story</div>
-            <div class="p-8px selection clickable" onclick="addCategory('Technical Task')">Technical Task</div>  
-        </div> 
-    `;
-}*/
 
 function openCategory() {
     let category = document.querySelector('.add-category');
@@ -258,27 +228,6 @@ function chooseCategory() {
     (toggleCategory) ? openCategory() : closeCategory();
 }
 
-/*
-function getSubtaskMask() {
-    return /*html*//*`
-        <div onclick="addNewSubtask()" class="subtasks-add-box p-right-8px clickable">
-            <span class="mg-left-8px">Add new subtask</span>
-            <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
-        </div>
-    `;
-}*/
-
-/*
-function getSubtaskInput() {
-    return /*html*//*`
-        <div class="subtasks-add-box subtask-input p-right-8px">
-            <div class="p-left-8px"><input id="add-new-subtask" class="add-new-subtask" type="text" placeholder="Add new task..."></div>
-            <div onclick="addNewSubtask()" class="size-16px flex justify-content-center click-item clickable"><img src="../assets/icons/close.svg" alt=""></div>
-            <div class="divider set-height-60"></div>
-            <div onclick="pushNewSubtask()" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
-        </div>
-    `;
-}*/
 
 function removeSubtask(index) {
     subtasks.splice(index, 1);
@@ -291,34 +240,6 @@ function saveSubtaskEdit(index) {
     displaySubtasks();
 }
 
-/*
-function editSubtask(element,index) {
-    let edit = document.querySelector(`.added-subtask${index}`);
-    edit.classList.remove('hide-added-subtasks-item-children');
-    edit.innerHTML = /*html*//*`
-        <li class="p-left-8px"><input class="input-subtask" id="added-subtask-input${index}" type="text" placeholder="${element}"></li>  
-        <div class="display-subtasks-mask">
-            <div onclick="saveSubtaskEdit(${index})" class="flex justify-content-center">
-                <img class="filter-color-to-black" src="../assets/icons/check.svg" alt="">
-            </div>
-            <div class="divider"></div>
-            <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
-        </div>
-    `;
-}
-
-export function getDisplaySubtaskMask(element, index) {
-    return /*html*//*`
-        <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
-            <li class="p-left-8px">${element.Description}</li>
-            <div class="display-subtasks-mask">
-                <div onclick="editSubtask('${element.Description}', ${index})" class="flex justify-content-center">${editSVG()}</div>
-                <div class="divider"></div>
-                <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
-            </div>
-        </div> 
-    `;
-}*/
 
 export function displaySubtasks() {
     let subtaskDisplay = document.querySelector('.added-subtasks');
@@ -376,17 +297,13 @@ function getTaskInfos() {
 }
 
 
-function createNewTask() {   
-    console.log(tasks);
-    
+function createNewTask() {       
     tasks.push(getTaskInfos());            
     putData(TASKS_DIR, tasks);
-    //window.location = "../html/boards.html";
     
     setTimeout(() => {
         window.location = "../html/boards.html";  
     }, "300");
-    
 }
 
 
