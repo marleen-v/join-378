@@ -2,6 +2,8 @@ import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { getPriority } from "./add-task.js";
 import { search } from "./boards-filter.js";
 import { openOverlay } from "./boards-overlay.js";
+import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
+import { loadActiveUser, loadData } from "./module.js";
 
 
 let currentDraggedElement;
@@ -15,7 +17,7 @@ export function updateTasks(list) {
     tasks = list;
 }
 
-
+/*
 async function loadData(path = "") {
     let res = await fetch(FIREBASE_URL + path + ".json");
     let resToJson = await res.json();
@@ -25,9 +27,7 @@ async function loadData(path = "") {
 async function loadActiveUser(path=""){
     let res = await fetch(FIREBASE_URL + path + ".json");
     return await res.json();;
-    //currentUserFirstName = activeUser[0].firstName;
-    //currentUserLastName = activeUser[0].lastName;
-  }
+  }*/
 
 
 /**
@@ -37,10 +37,10 @@ async function loadActiveUser(path=""){
  * @returns {*}
  */
 async function loadBoards() {
-    //const htmlContent = await loadHTML('../html/boards-main.html');
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
+    
 
     showData(tasks);
     getLogo();
@@ -85,25 +85,25 @@ export function getUserColor(firstName, lastName) {
     return color;
 }
 
-
+/*
 function getGroupUserInitials(element) {
     let persons = (element.Persons.length > 9) ? ">9" : element.Persons.length + "P";;
-    return /*html*/`
+    return /*html*//*`
         <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>${persons}</span></span> 
     `;
-}
+}*/
 
-
+/*
 function getUser(person, initials, color, displayFullname, grid = false) {
     let layout = "flex justify-content-center align-items-center set-width-height-42";
     (grid === true) ? layout ="grid grid-columns-2-48px-1fr" : "flex justify-content-center align-items-center set-width-height-42";
-    return /*html*/`
+    return /*html*//*`
          ${(grid) ? '<div class="task-user-select ' + layout + '">' : ''}
             <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${initials}</span></span> 
             ${(displayFullname) ? '<span class="flex align-items-center">'+ person + '</span>' : ''}
          ${(grid) ? '</div>' : '' }  
     `;
-}
+}*/
 
 
 /**
@@ -145,6 +145,8 @@ function setCardElements(element, index) {
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     setSubtasks(currentCard, element);    
     currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);
+    console.log(getPriority(element.Priority));
+    
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element.Priority);//getPriority(element);
 }
 
@@ -161,17 +163,18 @@ export function calculateDoneSubtasks(element) {
  * @param {*} element
  * @returns {string}
  */
+/*
 function getProgressBar(element) {
     let done = calculateDoneSubtasks(element);
     let procent = (done / element.Subtasks.length) * 100;
     
-    return /*html*/`
+    return /*html*//*`
         <div class="progressbar-container">
             <div class="progressbar" style="width: ${procent}%"></div>
         </div>
         <span class="flex align-items-center">${done}/${element.Subtasks.length} Subtasks</span>
     `
-}
+}*/
 
 /**
  * Set subtasks if are exist if not then not shown
@@ -262,8 +265,9 @@ function getEmptyColumn() {
  * @param {*} element
  * @returns {string}
  */
+/*
 function getTaskCard(id, taskId) {    
-    return /*html*/`
+    return /*html*//*`
         <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card clickable" draggable="true" ondragstart="startDragging('${taskId}')">
             <div class="flex align-items-center add-task-card-top"><div class="flex align-items-center justify-content-center add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
@@ -274,8 +278,8 @@ function getTaskCard(id, taskId) {
                 <div class="add-task-card-priority flex align-items-center justify-content-flex-end"></div>
             </div>
         </section>  
-    `;
-}
+    `/*;
+}*/
 
 function highlightColumn(id) {
     document.getElementById(id).classList.add('drag-area-highlight');

@@ -1,6 +1,9 @@
-import { getPriority, setPriorityColor, displaySubtasks } from "./add-task.js";
-import { getCloseSVG, closeOverlay, getDetailedCard, setDetailedCard, uncheckedBoxSVG, checkedBoxSVG, editSVG, trashSVG } from "./boards-overlay.js";
-import { tasks, setUserInitial, contacts, getUserColor, activeUser } from "./boards.js";
+import { setPriorityColor } from "./add-task.js";
+import { setDetailedCard } from "./boards-overlay.js";
+import { tasks, setUserInitial, contacts, activeUser } from "./boards.js";
+import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSubtaskInput, addLinkedItem } from './boards-edit-template.js';
+import { getDetailedCard } from "./boards-overlay-template.js";
+import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 let toggleContactList = false;
 
 export function parseTaskIdToNumberId(taskId) {
@@ -64,7 +67,7 @@ function removePerson(data, elementToRemove) {
 }
 
 
-function isChecked(element, taskId) {
+export function isChecked(element, taskId) {
     let id = parseTaskIdToNumberId(taskId);
     let person = element.firstName + " " + element.lastName;
     if (findPersons(tasks[id].Persons, person)) return checkedBoxSVG();
@@ -84,24 +87,24 @@ function chooseContact(index, taskId) {
     }
 }
 
-function getActiveUser(element) {
+export function getActiveUser(element) {
     if (element.email === activeUser.email) return true;
     return false;
 }
 
+/*
 function addLinkedItem(element, index, taskId) {
     let color = getUserColor(element.firstName, element.lastName);
-    let id = parseTaskIdToNumberId(taskId);
     let selectBox = isChecked(element, taskId);
     let active = (getActiveUser(element)) ? " (you)" : "";
-    return /*html*/`
+    return /*html*//*`
         <div class="task-user-select grid grid-columns-3-48px-1fr-48px clickable" onclick="chooseContact(${index}, '${taskId}')">
             <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
             <span class="flex align-items-center">${element.firstName} ${element.lastName}${active}</span>
             <div class="flex align-items-center">${selectBox}</div>
         </div>
     `;
-}
+}*/
 
 
 function focusUserSelectBox(active) {
@@ -156,7 +159,7 @@ function assignContact(taskId) {
     }
 }
 
-function getSubtaskMask(taskId) {
+export function getSubtaskMask(taskId) {
     return /*html*/`
         <div onclick="addSubtask('${taskId}')" class="subtasks-add-box p-right-8px clickable">
             <span class="mg-left-8px">Add new subtask</span>
@@ -175,9 +178,9 @@ function pushSubtask(taskId) {
     displayCardSubtasks(tasks[id].Subtasks, id, 'boards');
 }
 
-
+/*
 function getSubtaskInput(taskId) {
-    return /*html*/`
+    return /*html*//*`
         <div class="subtasks-add-box subtask-input p-right-8px">
             <div class="p-left-8px"><input id="add-new-subtask" class="add-new-subtask" type="text" placeholder="Add new task..."></div>
             <div onclick="cancelSubtask()" class="size-16px flex justify-content-center click-item clickable"><img src="../assets/icons/close.svg" alt=""></div>
@@ -185,7 +188,7 @@ function getSubtaskInput(taskId) {
             <div onclick="pushSubtask('${taskId}')" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
         </div>
     `;
-}
+}*/
 
 function cancelSubtask() {
     let container = document.querySelector('.detailed-task-card-subtasks');
@@ -212,10 +215,11 @@ function saveSubtaskCardEdit(taskId, index) {
     displayCardSubtasks(tasks[taskId].Subtasks, taskId);
 }
 
+/*
 function editCardSubtask(element, taskId,index) {
     let edit = document.querySelector(`.added-subtask${index}`);
     edit.classList.remove('hide-added-subtasks-item-children');
-    edit.innerHTML = /*html*/`
+    edit.innerHTML = /*html*//*`
         <li class="p-left-8px"><input class="input-subtask" id="added-subtask-input${index}" type="text" placeholder="${element}"></li>  
         <div class="display-subtasks-mask">
             <div onclick="saveSubtaskCardEdit(${taskId},${index})" class="flex justify-content-center">
@@ -228,7 +232,7 @@ function editCardSubtask(element, taskId,index) {
 }
 
 function getDisplaySubtaskMask(element, taskId, index) {
-    return /*html*/`
+    return /*html*//*`
         <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
             <li class="p-left-8px">${element.Description}</li>
             <div class="display-subtasks-mask">
@@ -238,7 +242,7 @@ function getDisplaySubtaskMask(element, taskId, index) {
             </div>
         </div> 
     `;
-}
+}*/
 
 
 function displayCardSubtasks(subtasks, id) {
@@ -250,9 +254,9 @@ function displayCardSubtasks(subtasks, id) {
     });
 }
 
-
+/*
 export function getDetailedEditableCard(taskId) {
-    return /*html*/`
+    return /*html*//*`
         <section class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div></div>
@@ -319,7 +323,7 @@ export function getDetailedEditableCard(taskId) {
             </div>
         </section>  
     `;
-}
+}*/
 
 window.selectPriority = selectPriority;
 window.closeEdit = closeEdit;

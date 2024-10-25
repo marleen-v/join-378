@@ -1,7 +1,9 @@
 import { getPriority } from "./add-task.js";
-import { getDetailedEditableCard, parseTaskIdToNumberId, setDetailedEditableCard } from "./boards-edit.js";
+import { parseTaskIdToNumberId, setDetailedEditableCard } from "./boards-edit.js";
 import { setBgColor, setUserInitial, tasks, calculateDoneSubtasks, showData } from "./boards.js";
-let totalTasks = [], doneTasks = [];
+import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
+import { getDetailedEditableCard } from "./boards-edit-template.js";
+import { getDetailedCard } from "./boards-overlay-template.js";
 
 
 function setOpacity() {
@@ -101,9 +103,9 @@ export function openOverlay(id) {
     setOpacity();
 }
 
-
+/*
 export function getDetailedCard(taskId) {
-    return /*html*/`
+    return /*html*//*`
         <section class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div class="flex justify-content-center align-items-center add-task-card-category"></div>
@@ -136,7 +138,7 @@ export function getDetailedCard(taskId) {
 
 
 export function getCloseSVG() {
-    return /*html*/`
+    return /*html*//*`
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_239190_2246" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
                 <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
@@ -146,7 +148,7 @@ export function getCloseSVG() {
             </g>
         </svg>
     `;
-}
+}*/
 
 
 
@@ -165,8 +167,9 @@ export function closeOverlay() {
     }, "300");
 }
 
+/*
 export function editSVG() {
-    return /*html*/`
+    return /*html*//*`
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_239190_2307" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                 <rect width="24" height="24" fill="#D9D9D9"/>
@@ -179,7 +182,7 @@ export function editSVG() {
 }
 
 export function trashSVG() {
-    return /*html*/`
+    return /*html*//*`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_239190_2301" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                 <rect width="24" height="24" fill="#D9D9D9"/>
@@ -192,7 +195,7 @@ export function trashSVG() {
 }
 
 export function uncheckedBoxSVG() {
-    return /*html*/`
+    return /*html*//*`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="4" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
         </svg>
@@ -200,13 +203,13 @@ export function uncheckedBoxSVG() {
 }
 
 export function checkedBoxSVG() {
-    return /*html*/`
+    return /*html*//*`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 11V17C20 18.6569 18.6569 20 17 20H7C5.34315 20 4 18.6569 4 17V7C4 5.34315 5.34315 4 7 4H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
             <path d="M8 12L12 16L20 4.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     `;
-}
+}*/
 
 
 window.closeOverlay = closeOverlay;

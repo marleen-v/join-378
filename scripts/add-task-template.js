@@ -1,21 +1,74 @@
+import { getCloseSVG } from './svg-template.js';
 import { getPriority } from './add-task.js';
-import { getCloseSVG } from './boards-overlay.js';
+import { editSVG, trashSVG } from './svg-template.js';
 
-/**
- * Generate a SVG for low Icon
- *
- * @returns {string}
- */
-function getLowSVG() {
+
+export function getSubtaskMask() {
     return /*html*/`
-        <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.2485 9.50589C10.0139 9.5063 9.7854 9.43145 9.59655 9.29238L0.693448 2.72264C0.57761 2.63708 0.47977 2.52957 0.405515 2.40623C0.33126 2.28289 0.282043 2.14614 0.260675 2.00379C0.217521 1.71631 0.290421 1.42347 0.463337 1.1897C0.636253 0.955928 0.895022 0.800371 1.18272 0.757248C1.47041 0.714126 1.76347 0.786972 1.99741 0.95976L10.2485 7.04224L18.4997 0.95976C18.6155 0.874204 18.7471 0.812285 18.8869 0.777538C19.0266 0.742791 19.1719 0.735896 19.3144 0.757248C19.4568 0.7786 19.5937 0.82778 19.7171 0.901981C19.8405 0.976181 19.9481 1.07395 20.0337 1.1897C20.1194 1.30545 20.1813 1.43692 20.2161 1.57661C20.2509 1.71629 20.2578 1.86145 20.2364 2.00379C20.215 2.14614 20.1658 2.28289 20.0916 2.40623C20.0173 2.52957 19.9195 2.63708 19.8036 2.72264L10.9005 9.29238C10.7117 9.43145 10.4831 9.5063 10.2485 9.50589Z" fill="#7AE229"/>
-            <path d="M10.2485 15.2544C10.0139 15.2548 9.7854 15.18 9.59655 15.0409L0.693448 8.47117C0.459502 8.29839 0.30383 8.03981 0.260675 7.75233C0.217521 7.46485 0.290421 7.17201 0.463337 6.93824C0.636253 6.70446 0.895021 6.54891 1.18272 6.50578C1.47041 6.46266 1.76347 6.53551 1.99741 6.7083L10.2485 12.7908L18.4997 6.7083C18.7336 6.53551 19.0267 6.46266 19.3144 6.50578C19.602 6.54891 19.8608 6.70446 20.0337 6.93824C20.2066 7.17201 20.2795 7.46485 20.2364 7.75233C20.1932 8.03981 20.0376 8.29839 19.8036 8.47117L10.9005 15.0409C10.7117 15.18 10.4831 15.2548 10.2485 15.2544Z" fill="#7AE229"/>
-        </svg>
+        <div onclick="addNewSubtask()" class="subtasks-add-box p-right-8px clickable">
+            <span class="mg-left-8px">Add new subtask</span>
+            <img class="click-item size-16px" src="../assets/icons/subtasks_plus.svg" alt="">
+        </div>
     `;
 }
 
-export function getInputForm() {
+export function getUserIcon(element) {
+    return /*html*/`
+        <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
+  
+    `;
+}
+
+export function getSubtaskInput() {
+    return /*html*/`
+        <div class="subtasks-add-box subtask-input p-right-8px">
+            <div class="p-left-8px"><input id="add-new-subtask" class="add-new-subtask" type="text" placeholder="Add new task..."></div>
+            <div onclick="addNewSubtask()" class="size-16px flex justify-content-center click-item clickable"><img src="../assets/icons/close.svg" alt=""></div>
+            <div class="divider set-height-60"></div>
+            <div onclick="pushNewSubtask()" class="size-16px flex justify-content-center click-item mg-left-8px clickable"><img class="filter-color-to-black" src="../assets/icons/check.svg" alt=""></div>
+        </div>
+    `;
+}
+
+
+export function getCategory() {
+    return /*html*/`
+        <div class="grid grid-rows-2">
+            <div class="mg-top-8px p-8px selection clickable" onclick="addCategory('User Story')">User Story</div>
+            <div class="p-8px selection clickable" onclick="addCategory('Technical Task')">Technical Task</div>  
+        </div> 
+    `;
+}
+
+export function editSubtask(element,index) {
+    let edit = document.querySelector(`.added-subtask${index}`);
+    edit.classList.remove('hide-added-subtasks-item-children');
+    edit.innerHTML = /*html*/`
+        <li class="p-left-8px"><input class="input-subtask" id="added-subtask-input${index}" type="text" placeholder="${element}"></li>  
+        <div class="display-subtasks-mask">
+            <div onclick="saveSubtaskEdit(${index})" class="flex justify-content-center">
+                <img class="filter-color-to-black" src="../assets/icons/check.svg" alt="">
+            </div>
+            <div class="divider"></div>
+            <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
+        </div>
+    `;
+}
+
+export function getDisplaySubtaskMask(element, index) {
+    return /*html*/`
+        <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
+            <li class="p-left-8px">${element.Description}</li>
+            <div class="display-subtasks-mask">
+                <div onclick="editSubtask('${element.Description}', ${index})" class="flex justify-content-center">${editSVG()}</div>
+                <div class="divider"></div>
+                <div onclick="removeSubtask(${index})" class="flex justify-content-center">${trashSVG()}</div>
+            </div>
+        </div> 
+    `;
+}
+
+export function getInputForm() {  
     return /*html*/`
     <section id="add-task" class="add-task">
         <div class="add-task-head flex align-items-center">
