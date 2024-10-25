@@ -286,7 +286,7 @@ function getTaskInfos() {
         "Description": document.getElementById('description').value,
         "Date": document.getElementById('due-date').value,
         "Priority": priority.charAt(0).toUpperCase() + priority.slice(1),
-        "Category": category,
+        "Category": document.getElementById('category-input').value,
         "Subtasks": subtasks,
         "Persons": persons,
       };      
