@@ -123,9 +123,33 @@
         </div>
       </div>
       <div class="board-main">
+        <div class="to-do-title d_none">
+          <div class="board-to-do">
+            <div>To Do</div>
+            <div class="add-btn clickable" onclick="openAddTask()"><span>+</span></div>
+          </div>
+        </div>
         <div id="to-do" class="board-main-to-do" ondrop="moveTo('To Do'); removeHighlightColumn('to-do')" ondragover="allowDrop(event); highlightColumn('to-do')" ondragleave="removeHighlightColumn('to-do')"></div>
+        <div class="in-progress-title d_none">
+          <div class="board-In-progress">
+            <div>In Progress</div>
+            <div class="add-btn clickable" onclick="openAddTask()"><span>+</span></div>
+          </div>
+        </div>
         <div id="in-progress" class="board-main-in-progress" ondrop="moveTo('In Progress'); removeHighlightColumn('in-progress')" ondragover="allowDrop(event); highlightColumn('in-progress')" ondragleave="removeHighlightColumn('in-progress')"></div>
+        <div class="await-feedback d_none">
+          <div class="board-feedback">
+            <div>Await feedback</div>
+            <div class="add-btn clickable" onclick="openAddTask()"><span>+</span></div>
+          </div>
+        </div>
         <div id="await-feedback" class="board-main-await-feedback" ondrop="moveTo('Await Feedback'); removeHighlightColumn('await-feedback')" ondragover="allowDrop(event); highlightColumn('await-feedback')" ondragleave="removeHighlightColumn('await-feedback')"></div>
+        <div class="done-title d_none">
+          <div class="board-done">
+            <div>Done</div>
+            <div class="add-btn clickable" onclick="openAddTask()"><span>+</span></div>
+          </div>
+        </div>
         <div id="done" class="board-main-done" ondrop="moveTo('Done'); removeHighlightColumn('done')" ondragover="allowDrop(event); highlightColumn('done')" ondragleave="removeHighlightColumn('done')"></div>
       </div>
     </section>

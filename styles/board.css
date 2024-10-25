@@ -316,8 +316,8 @@ main {
     border: 2px solid #FFFFFF;
     padding: 16px;
     margin: 8px 2px 8px 2px;
-    width: 252px;
-    height: 263px;
+    min-width: 252px;
+    min-height: 263px;
     gap: 16px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
@@ -622,28 +622,57 @@ main {
     }
 }
 
-@media screen and (max-width: 1730px) {
-    /*
-    .board-head {
-        display: grid;
-        grid-template-columns: 400px 200px 200px;
-    }
-
-    .header-wrapper {
-        display: grid;
-        grid-template-columns: calc(100% - 64px) 128px;
+@media only screen and (max-width: 1180px) {
+    main {
+        overflow-y: auto !important;
     }
 
     .boards {
-        display: grid;
-        grid-template-columns: 200px;    
+        padding: 0 16px 0 16px;
     }
 
     .board-bar {
+        display: none;
+    }
+
+    .board-main {
         display: grid;
-        grid-template-columns: repeat(4, auto);
-    }*/
+        grid-template-rows: 32px 300px 32px 300px 32px 300px 32px 300px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .board-main > div {
+        display: flex;
+        overflow: auto;
+        width: calc(100vw - 40px);
+    }
+
+    .board-main-to-do {
+        display: flex;
+        overflow: auto;
+        width: calc(100% - 16px);
+    }
+
+    .board-main-in-progress {
+        display: flex;
+        overflow: auto;
+        width: calc(100% - 16px);
+    }
+
+    .board-main-await-feedback {
+        display: flex;
+        overflow: auto;
+        width: calc(100% - 16px);
+    }
+
+    .board-main-done {
+        display: flex;
+        overflow: auto;
+        width: calc(100% - 16px);
+    }
 }
+
 
 @font-face {
     font-family: Inter;
