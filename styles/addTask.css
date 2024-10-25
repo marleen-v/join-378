@@ -375,7 +375,7 @@ main {
 
 @media only screen and (max-width: 1024px) {
     .add-task {
-        padding: 0 16px 64px 16px;
+        padding: 0 16px 0 16px;
     }
 
     .part-1-form {
@@ -385,6 +385,7 @@ main {
 
     .task-form-container {
         width: 100%;
+        padding-bottom: 64px;
     }
 
     .add-task-form {
