@@ -360,7 +360,7 @@ function getInputForm() {
         <div class="task-form-container">
         <form id="create-task-form" class="task-form" onsubmit="createNewTask(); return false;">
             <div class="grid grid-rows-auto gap-32px">
-                <div class="grid grid-columns-3-1fr-1px-1fr gap-32px">
+                <div class="add-task-form">
                     <div class="part-1-form">
                         <div>
                             <!-- Titel -->
@@ -428,7 +428,7 @@ function getInputForm() {
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-columns-3-1fr-1px-1fr">
+                <div class="add-task-form-bottom">
                     <div class="flex required-info"><span class="required-star">*</span><span>This Field is required</span></div>
                     <div></div>
                     <div class="flex justify-content-flex-end">

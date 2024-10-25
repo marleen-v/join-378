@@ -358,3 +358,64 @@ main {
     opacity: 1;
     color: black;
 }
+
+
+.add-task-form {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    grid-template-rows: auto;
+    gap: 32px;
+}
+
+.add-task-form-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    grid-template-rows: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+    .add-task {
+        padding: 0 16px 64px 16px;
+    }
+
+    .part-1-form {
+        display: grid;
+        grid-template-rows: 80px 136px 32px 64px;
+    }
+
+    .task-form-container {
+        width: 100%;
+    }
+
+    .add-task-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1px 1fr;
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 720px) {
+    .add-task-form-bottom {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: auto;
+        gap: 8px;
+    }
+
+    .part-2-form {
+        display: grid;
+        grid-template-rows: 80px 220px 90px 70px;
+    }
+
+    .select-priority {
+        display: grid;
+        grid-template-rows: 24px 220px;
+    }
+
+    .priority-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+}
