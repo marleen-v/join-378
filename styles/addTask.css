@@ -40,7 +40,7 @@ main {
     display: grid;
     grid-auto-rows: auto;
     overflow-y: auto;
-    height: 84px;
+    height: 170px;
     border-radius: 8px;
 }
 
