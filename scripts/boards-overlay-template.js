@@ -1,6 +1,13 @@
 import { trashSVG, editSVG, getCloseSVG } from "./svg-template.js";
 
 
+/**
+ * Template to show task card in detail
+ *
+ * @export
+ * @param {*} taskId
+ * @returns {string}
+ */
 export function getDetailedCard(taskId) {
     return /*html*/`
         <section class="detailed-card grid-rows-auto">

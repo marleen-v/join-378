@@ -2,6 +2,7 @@ import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask } from './add-task-template.js';
 import { getUrgentSVG, getMediumSVG, getLowSVG, checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
+import { loadActiveUser } from "./module.js";
 
 let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
@@ -13,12 +14,13 @@ let category = "";
 let tasks = [];
 
 
-export async function loadActiveUser(path=""){
-    let res = await fetch(FIREBASE_URL + path + ".json");
-    activeUser = await res.json();
-    return activeUser;
-}
-
+/**
+ * Load function which load data from firebase and display add task
+ * form to screen
+ *
+ * @async
+ * @returns {*}
+ */
 async function loadAddTask() {
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
@@ -28,19 +30,15 @@ async function loadAddTask() {
     getLogo();
 }
 
-function addTask() {
-    console.log("Add");
 
-}
-
-function isChecked(element, taskId) {
-    let id = parseTaskIdToNumberId(taskId);
-    let person = element.firstName + " " + element.lastName;
-    if (findPersons(tasks[id].Persons, person)) return checkedBoxSVG();
-    return uncheckedBoxSVG();
-}
-
-
+/**
+ * Function which search contacts to find contact right contact informations
+ *
+ * @export
+ * @param {*} data
+ * @param {*} searchString
+ * @returns {boolean}
+ */
 export function findPersons(data, searchString) {
     for (let index = 0; index < data.length; index++) {
         if (data[index].email === searchString) return true;
@@ -49,6 +47,14 @@ export function findPersons(data, searchString) {
 }
 
 
+/**
+ * Function which return a template to display user informations
+ * just display initials in a circle
+ *
+ * @param {*} element
+ * @param {*} index
+ * @returns {string}
+ */
 function addUserItem(element, index) {
     let selectBox = "";
     if(findPersons(addedUser, element.email)) selectBox = checkedBoxSVG()
@@ -63,6 +69,13 @@ function addUserItem(element, index) {
 }
 
 
+/**
+ * Function which remove unchecked user when checked box is clicked
+ *
+ * @param {*} data
+ * @param {*} elementToRemove
+ * @returns {*}
+ */
 function removePerson(data, elementToRemove) {
     data.forEach((item, index) => {
         if (item.email === elementToRemove) {
@@ -73,6 +86,7 @@ function removePerson(data, elementToRemove) {
 }
 
 
+/** Function which display all added user informations */
 function displayAddedUser() {
     document.querySelector('.display-assigned-user').innerHTML = "";
     addedUser.forEach(element => {
@@ -80,24 +94,36 @@ function displayAddedUser() {
     });
 }
 
+/**
+ * Function which add user into a list and call displayAddedUser for displaying
+ *
+ * @param {*} index
+ */
 function addUser(index) {    
     if (!findPersons(addedUser, contacts[index].email)) {
         addedUser.push(contacts[index]); 
-        displayAddedUser();
     }
     else {
         removePerson(addedUser, contacts[index].email);
     }
+    displayAddedUser();
     openContacts();
 }
 
 
+/**
+ * Help function to compare active user to show which user is active
+ *
+ * @param {*} element
+ * @returns {boolean}
+ */
 function getActiveUser(element) {
     if(element.email == activeUser.email) return true;
     return false;
 }
 
 
+/** Function which generate all contacts in a contact select box for adding user */
 function openContacts() {
     let assignBox = document.querySelector('.assign-to-select-box > span');
     assignBox.innerHTML = "|";
@@ -115,6 +141,7 @@ function openContacts() {
 }
 
 
+/** Function which close contact select box */
 function closeContacts() {
     let assignBox = document.querySelector('.assign-to-select-box > span');
     assignBox.innerHTML = "Select contacts to assign";
@@ -125,6 +152,7 @@ function closeContacts() {
     document.getElementById('contacts-toggle-img').style.transform = "rotate(0deg)";
 }
 
+/** Function which open and close contact select box */
 function addContact() {
     toggleContactList = !toggleContactList;
     if (toggleContactList) {
@@ -136,6 +164,11 @@ function addContact() {
 }
 
 
+/**
+ * Function which set user contact background color of initals circle
+ *
+ * @param {*} element
+ */
 function setBgColor(element) {
     let div = document.querySelector(`#${element}`);
 
@@ -149,6 +182,11 @@ function setBgColor(element) {
 }
 
 
+/**
+ * Function which remove all priority button colors
+ *
+ * @param {*} element
+ */
 function removePriorityColor(element) {
     let detailedCard = document.querySelector(`${element}`);
     let buttons = detailedCard.querySelectorAll('.priority-buttons > button');
@@ -161,6 +199,16 @@ function removePriorityColor(element) {
     });
 }
 
+/**
+ * Function which set clicked button with current selected color
+ * Urgent: red
+ * Medium: orange
+ * Low: green
+ *
+ * @export
+ * @param {*} element
+ * @param {*} task
+ */
 export function setPriorityColor(element, task) {
     removePriorityColor(element);
 
@@ -189,12 +237,23 @@ export function getPriority(priority) {
 }
 
 
+/**
+ * Function to set priority
+ *
+ * @param {*} prio
+ */
 function setPriority(prio) {
     priority = prio;
     removePriorityColor('.task-form-container');
     setBgColor(prio);
 }
 
+/**
+ * Function to add task category
+ * Categories are: User Story | Technical Task
+ *
+ * @param {*} cat
+ */
 function addCategory(cat) {
     category = cat;
     document.querySelector('#category-input').value = cat;
@@ -202,6 +261,7 @@ function addCategory(cat) {
 }
 
 
+/** Function to open category select box and to rotate select triangle */
 function openCategory() {
     let category = document.querySelector('.add-category');
     category.classList.add('bg-white');
@@ -210,6 +270,7 @@ function openCategory() {
 
 }
 
+/** Function to close category select box and restore select triangle */
 function closeCategory() {
     let category = document.querySelector('.add-category');
     category.classList.remove('bg-white');
@@ -217,6 +278,8 @@ function closeCategory() {
     document.getElementById('category-toggle-img').style.transform = "rotate(0deg)";
 }
 
+
+/** Toggle help function to open or close category select box */
 function chooseCategory() {
     toggleCategory = !toggleCategory;
     let category = document.querySelector('.add-category');
@@ -225,11 +288,21 @@ function chooseCategory() {
 }
 
 
+/**
+ * Function to remove added subtasks
+ *
+ * @param {*} index
+ */
 function removeSubtask(index) {
     subtasks.splice(index, 1);
     displaySubtasks();
 }
 
+/**
+ * Function to save added subtasks
+ *
+ * @param {*} index
+ */
 function saveSubtaskEdit(index) {
     let subtaskInput = document.getElementById(`added-subtask-input${index}`).value;
     if(subtaskInput !== "") subtasks[index].Description = subtaskInput;
@@ -237,7 +310,12 @@ function saveSubtaskEdit(index) {
 }
 
 
-export function displaySubtasks() {
+/**
+ * Function to display added subtasks
+ *
+ * @export
+ */
+function displaySubtasks() {
     let subtaskDisplay = document.querySelector('.added-subtasks');
     subtaskDisplay.innerHTML = "";
     
@@ -249,6 +327,9 @@ export function displaySubtasks() {
     }
 }
 
+/** Function which push added subtasks into a temporary list and 
+ * to show added subtasks
+ */
 function pushNewSubtask() {
     let input = document.querySelector('#add-new-subtask').value;
     if(input !== "") {
@@ -260,6 +341,7 @@ function pushNewSubtask() {
 }
 
 
+/** Toggle Function which open or close subtask input field */
 function addNewSubtask() {
     toggleSubtask = !toggleSubtask;
     let subtask = document.querySelector('.add-new-subtask-box');
@@ -267,6 +349,7 @@ function addNewSubtask() {
     
 }
 
+/** Clear button which clear all inputs in add task form */
 function clearButton() {
     subtasks = [];
     addedUser = [];
@@ -276,6 +359,11 @@ function clearButton() {
 }
 
 
+/**
+ * Function which collect all input values into JSON format and return JSON data
+ *
+ * @returns {{ id: any; Column: string; Title: any; Description: any; Date: any; Priority: any; Category: any; Subtasks: {}; Persons: {}; }}
+ */
 function getTaskInfos() {
     let persons = [];
     addedUser.forEach(element => { persons.push(element.firstName + " " + element.lastName) });
@@ -293,6 +381,7 @@ function getTaskInfos() {
 }
 
 
+/** Function which put all data into firebase and call board */
 function createNewTask() {       
     tasks.push(getTaskInfos());            
     putData(TASKS_DIR, tasks);

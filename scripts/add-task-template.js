@@ -3,6 +3,12 @@ import { getPriority } from './add-task.js';
 import { editSVG, trashSVG } from './svg-template.js';
 
 
+/**
+ * Template for subtask without input field
+ *
+ * @export
+ * @returns {string}
+ */
 export function getSubtaskMask() {
     return /*html*/`
         <div onclick="addNewSubtask()" class="subtasks-add-box p-right-8px clickable">
@@ -12,6 +18,13 @@ export function getSubtaskMask() {
     `;
 }
 
+/**
+ * Template which return user icon
+ *
+ * @export
+ * @param {*} element
+ * @returns {string}
+ */
 export function getUserIcon(element) {
     return /*html*/`
         <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
@@ -19,6 +32,12 @@ export function getUserIcon(element) {
     `;
 }
 
+/**
+ * Template which return subtask with input field
+ *
+ * @export
+ * @returns {string}
+ */
 export function getSubtaskInput() {
     return /*html*/`
         <div class="subtasks-add-box subtask-input p-right-8px">
@@ -31,6 +50,12 @@ export function getSubtaskInput() {
 }
 
 
+/**
+ * Template which return select box for selecting category
+ *
+ * @export
+ * @returns {string}
+ */
 export function getCategory() {
     return /*html*/`
         <div class="grid grid-rows-2">
@@ -40,6 +65,13 @@ export function getCategory() {
     `;
 }
 
+/**
+ * Template for editing added subtask -> with input field
+ *
+ * @export
+ * @param {*} element
+ * @param {*} index
+ */
 export function editSubtask(element,index) {
     let edit = document.querySelector(`.added-subtask${index}`);
     edit.classList.remove('hide-added-subtasks-item-children');
@@ -55,6 +87,14 @@ export function editSubtask(element,index) {
     `;
 }
 
+/**
+ * Template for editing added subtask -> without input field
+ *
+ * @export
+ * @param {*} element
+ * @param {*} index
+ * @returns {string}
+ */
 export function getDisplaySubtaskMask(element, index) {
     return /*html*/`
         <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
@@ -68,6 +108,13 @@ export function getDisplaySubtaskMask(element, index) {
     `;
 }
 
+/**
+ * Template which return add task html body -> form displayed into a grid
+ * in large screen left and right side in small screen grid displayed in rows
+ *
+ * @export
+ * @returns {string}
+ */
 export function getInputForm() {  
     return /*html*/`
     <section id="add-task" class="add-task">

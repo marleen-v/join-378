@@ -4,6 +4,15 @@ import { editSVG, getCloseSVG, trashSVG } from "./svg-template.js";
 import { getUserColor } from "./boards.js";
 
 
+/**
+ * Template for user informations -> contact select box
+ *
+ * @export
+ * @param {*} element
+ * @param {*} index
+ * @param {*} taskId
+ * @returns {string}
+ */
 export function addLinkedItem(element, index, taskId) {
     let color = getUserColor(element.firstName, element.lastName);
     let selectBox = isChecked(element, taskId);
@@ -17,6 +26,14 @@ export function addLinkedItem(element, index, taskId) {
     `;
 }
 
+/**
+ * Template for editable subtask -> with input field
+ *
+ * @export
+ * @param {*} element
+ * @param {*} taskId
+ * @param {*} index
+ */
 export function editCardSubtask(element, taskId,index) {
     let edit = document.querySelector(`.added-subtask${index}`);
     edit.classList.remove('hide-added-subtasks-item-children');
@@ -32,6 +49,15 @@ export function editCardSubtask(element, taskId,index) {
     `;
 }
 
+/**
+ * Template for editable subtask -> without input field
+ *
+ * @export
+ * @param {*} element
+ * @param {*} taskId
+ * @param {*} index
+ * @returns {string}
+ */
 export function getDisplaySubtaskMask(element, taskId, index) {
     return /*html*/`
         <div class="added-subtasks-item hide-added-subtasks-item-children added-subtask${index}">
@@ -46,6 +72,13 @@ export function getDisplaySubtaskMask(element, taskId, index) {
 }
 
 
+/**
+ * Template for subtask input
+ *
+ * @export
+ * @param {*} taskId
+ * @returns {string}
+ */
 export function getSubtaskInput(taskId) {
     return /*html*/`
         <div class="subtasks-add-box subtask-input p-right-8px">
@@ -58,6 +91,13 @@ export function getSubtaskInput(taskId) {
 }
 
 
+/**
+ * Template for editable task card with all form informations
+ *
+ * @export
+ * @param {*} taskId
+ * @returns {string}
+ */
 export function getDetailedEditableCard(taskId) {
     return /*html*/`
         <section class="detailed-card grid-rows-auto">

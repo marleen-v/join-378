@@ -21,6 +21,13 @@ export function getTaskCard(id, taskId) {
 }
 
 
+/**
+ * Template which returns user initials displayed in circle
+ *
+ * @export
+ * @param {*} element
+ * @returns {string}
+ */
 export function getGroupUserInitials(element) {
     let persons = (element.Persons.length > 9) ? ">9" : element.Persons.length + "P";;
     return /*html*/`
@@ -29,6 +36,17 @@ export function getGroupUserInitials(element) {
 }
 
 
+/**
+ * Template which returns user mask
+ *
+ * @export
+ * @param {*} person
+ * @param {*} initials
+ * @param {*} color
+ * @param {*} displayFullname
+ * @param {boolean} [grid=false]
+ * @returns {string}
+ */
 export function getUser(person, initials, color, displayFullname, grid = false) {
     let layout = "flex justify-content-center align-items-center set-width-height-42";
     (grid === true) ? layout ="grid grid-columns-2-48px-1fr" : "flex justify-content-center align-items-center set-width-height-42";
@@ -41,11 +59,19 @@ export function getUser(person, initials, color, displayFullname, grid = false) 
 }
 
 
+/**
+ * Function which calculate progress bar values
+ *
+ * @param {*} element
+ * @returns {number}
+ */
 function calculateDoneSubtasks(element) {
     let done = 0;
     element.Subtasks.forEach(element => { (element.Done == true) ? done+=1 : done+=0 });
     return done;
 }
+
+
 /**
  * Get progress bar with bootstrap and show if exists subtasks
  *

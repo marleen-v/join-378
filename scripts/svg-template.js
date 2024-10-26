@@ -57,6 +57,12 @@ export function getLowSVG() {
 }
 
 
+/**
+ * Template which return close SVG
+ *
+ * @export
+ * @returns {string}
+ */
 export function getCloseSVG() {
     return /*html*/`
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,6 +77,12 @@ export function getCloseSVG() {
 }
 
 
+/**
+ * Template which return edit SVG
+ *
+ * @export
+ * @returns {string}
+ */
 export function editSVG() {
     return /*html*/`
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +97,12 @@ export function editSVG() {
 }
 
 
+/**
+ * Template which return trash SVG
+ *
+ * @export
+ * @returns {string}
+ */
 export function trashSVG() {
     return /*html*/`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,6 +117,12 @@ export function trashSVG() {
 }
 
 
+/**
+ * Template which return unchecked box SVG
+ *
+ * @export
+ * @returns {string}
+ */
 export function uncheckedBoxSVG() {
     return /*html*/`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,6 +131,12 @@ export function uncheckedBoxSVG() {
     `;
 }
 
+/**
+ * Template which return checked box SVG
+ *
+ * @export
+ * @returns {string}
+ */
 export function checkedBoxSVG() {
     return /*html*/`
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

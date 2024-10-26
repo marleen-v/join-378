@@ -6,16 +6,24 @@ import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
 
 
+/** Set transparency background color on overlay */
 function setOpacity() {
     document.querySelector('.overlay').classList.add('trans-dark-bg-p-50');
 }
 
 
+/** Unset transparency background color on overlay */
 function unsetOpacity() {
     document.querySelector('.overlay').classList.remove('trans-dark-bg-p-50');
 }
 
 
+/**
+ * Function to set date format
+ *
+ * @param {*} card
+ * @param {*} id
+ */
 function setDate(card, id) {
     const date = new Date(tasks[id].Date);
     const formatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -24,6 +32,11 @@ function setDate(card, id) {
 }
 
 
+/**
+ * Function to display overlay
+ *
+ * @returns {*}
+ */
 function getOverlay() {
     let overlay = document.querySelector('.overlay');
     overlay.classList.remove('d_none');
@@ -33,6 +46,12 @@ function getOverlay() {
 }
 
 
+/**
+ * Function for check and uncheck subtasks on overlayed task card
+ *
+ * @param {*} taskId
+ * @param {*} index
+ */
 function checkDone(taskId, index) {
     let id = parseTaskIdToNumberId(taskId);
     tasks[id].Subtasks[index].Done = !tasks[id].Subtasks[index].Done;
@@ -42,6 +61,12 @@ function checkDone(taskId, index) {
 }
 
 
+/**
+ * Function for displaying checked or unchecked subtasks on overlayed task card
+ *
+ * @param {*} detailedCard
+ * @param {*} id
+ */
 function setSubtasks(detailedCard, id) {
     if(tasks[id].Subtasks == null) return;
     tasks[id].Subtasks.forEach((element, index) => {
@@ -57,6 +82,12 @@ function setSubtasks(detailedCard, id) {
 }
 
 
+/**
+ * Function to set all task card information on overlayed task card
+ *
+ * @export
+ * @param {*} id
+ */
 export function setDetailedCard(id) {
     let detailedCard = document.querySelector('.detailed-card');
     detailedCard.querySelector('.add-task-card-category').innerHTML = tasks[id].Category;
@@ -72,6 +103,12 @@ export function setDetailedCard(id) {
 }
 
 
+/**
+ * Function to call edit function for changing task card informations
+ * Button edit
+ *
+ * @param {*} taskId
+ */
 function editTask(taskId) {
     let overlay = document.querySelector('.overlay');
     overlay.innerHTML = getDetailedEditableCard(taskId);
@@ -79,6 +116,12 @@ function editTask(taskId) {
 }
 
 
+/**
+ * Function for delete current displayed task card on overlay
+ * Button delete
+ *
+ * @param {*} taskId
+ */
 function deleteTask(taskId) {    
     for (let i = 0; i < tasks.length; i++) {
         let task = "taskId" + i;
@@ -93,6 +136,13 @@ function deleteTask(taskId) {
 }
 
 
+/**
+ * Function to open overlay, which shows choosen task card in detail
+ * and start animation which move card into screen
+ *
+ * @export
+ * @param {*} id
+ */
 export function openOverlay(id) {
     let overlay = getOverlay();
     overlay.innerHTML = getDetailedCard('taskId' + id);
@@ -104,6 +154,12 @@ export function openOverlay(id) {
 }
 
 
+/**
+ * Function which close overlay whith delay because animation
+ * let card move out of screen
+ *
+ * @export
+ */
 export function closeOverlay() {
     let detailedCard = document.querySelector('.detailed-card');
     detailedCard.classList.add('runOutAnimation');
