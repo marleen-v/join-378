@@ -38,7 +38,7 @@ function closeContactDialog() {
   dialog.classList.add('show');
   dialog.classList.remove('bg');
         setTimeout(() => {dialog.close();
- contactForm.reset();
+  contactForm.reset();
   dialogColor.classList.remove(currentContact.color);
   errorMessage.classList.add("d_none");
   cancelBtn.classList.add("flex"); //was removed if add-dialog was opened beforehand (on mobile)

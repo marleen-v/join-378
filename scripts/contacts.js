@@ -8,6 +8,9 @@ const editBtnMobile = document.getElementById("editBtnMobile")
 let contactList = [];
 let currentContact = [];
 
+let userList = [];
+let userIndex;
+
 let firstName;
 let lastName;
 let initials;
@@ -19,7 +22,9 @@ async function initContacts() {
   checkScreenSize();
   contactList = await loadData(CONTACTS_DIR);
   renderContactList();
+ /*  findAndMarkActiveUser(); */
   getLogo();
+  userList = await loadData(USERS_DIR);
 }
 
 /**
@@ -34,7 +39,7 @@ function renderContactList() {
     addNewContactSection(index);
     contactListRef.innerHTML += getContactHTML(contact, index);
   }
-  findAndMarkActiveUser()
+  
 }
 
 /**
@@ -242,12 +247,31 @@ function addContactColor() {
  * @param {Number} index
  */
 async function deleteContact(index) {
+  checkIfContactUser();
+  deleteUser();
   contactList.splice(index, 1);
   renderContactList();
   closeContactInfo();
   closeContactDialog();
   await putData(CONTACTS_DIR, contactList);
+  await putData(USERS_DIR, userList);
 }
+
+/**
+ * This function checks if the currentConatct is a User, if it is, then it deletes it from the userList
+ */
+async function checkIfContactUser() {
+  //if 
+  userIndex = userList.findIndex((user) => user.email === currentContact.email);
+  console.log(userIndex);
+}
+
+function deleteUser() {
+  if (userIndex != -1){
+    userList.splice(userIndex, 1); // if contact is also a user, user gets deleted
+  } 
+}
+
 
 /**
  * This function updates a contact info, after it was edited
@@ -266,14 +290,27 @@ async function updateContactInfo(index) {
     phone: inputPhoneRef.value,
   };
 
+  checkIfContactUser();
+  updateUserInfo(index);
   sortContactsByFirstName();
   renderContactList();
   btnIndex = contactList.findIndex((contact) => contact.email === inputEmailRef.value);
   showContactInfo(btnIndex);
   closeContactDialog();
   await putData(CONTACTS_DIR, contactList);
+  await putData(USERS_DIR, userList);
   
 }
 
-
+/**
+ * This function checks if the currentConatct is a User, if it is, then it updates then user information
+ */
+async function updateUserInfo(index) {
+  // if contact is also a user, user gets edited
+  if (userIndex != -1){
+  userList[userIndex].email = contactList[index].email;
+  userList[userIndex].firstName = contactList[index].firstName;
+  userList[userIndex].lastName = contactList[index].lastName;    
+  } 
+}
 
