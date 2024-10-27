@@ -138,6 +138,8 @@ async function getLogo(){
 function checkOrigin(){
     if (document.referrer.includes("login.html") || document.referrer.includes("signup.html")){
       document.querySelector(".menu-bar").style.display = "none";
+      document.querySelector(".data-protection").style.display = "none";
+      document.querySelector(".header-right").style.display = "none";
       document.body.style.pointerEvents = "none";
       document.querySelector("main").style.pointerEvents = "auto";
     }

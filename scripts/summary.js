@@ -185,7 +185,7 @@ function showGreetingDependingOnDaytime(){
 
 
 /**
- * Determines resolutions and display mobile greeting
+ * Determines resolutions and displays mobile greeting
  */
 function showGreetingMobile(){
   if (window.innerWidth <= 1200) {
