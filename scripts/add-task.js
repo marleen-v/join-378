@@ -341,12 +341,19 @@ function pushNewSubtask() {
 }
 
 
+/** Event listener which add new subtask when user type in and pressed enter key */
+function pushNewSubtaskOnPressedEnter() {
+    if(document.getElementById('add-new-subtask') &&  document.getElementById('add-new-subtask').value !== "") 
+        document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushNewSubtask(); });
+}
+
+
 /** Toggle Function which open or close subtask input field */
 function addNewSubtask() {
     toggleSubtask = !toggleSubtask;
     let subtask = document.querySelector('.add-new-subtask-box');
     subtask.innerHTML = (toggleSubtask) ? getSubtaskInput() : getSubtaskMask();
-    if(document.getElementById('add-new-subtask')) document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushNewSubtask(); });
+    pushNewSubtaskOnPressedEnter();
 }
 
 /** Clear button which clear all inputs in add task form */
