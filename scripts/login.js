@@ -62,7 +62,8 @@ function checkUserPassword(){
         {
           "firstName": dataFromFirebase[i].firstName,
           "lastName": dataFromFirebase[i].lastName,
-          "initials": dataFromFirebase[i].initials
+          "initials": dataFromFirebase[i].initials,
+          "email": dataFromFirebase[i].email
         }];
       putData(ACTIVE_DIR, activeUser);
       saveActiveUserToSessionStorage(emailInputRef.value);
@@ -86,7 +87,8 @@ async function guestLogin(){
   {
     "firstName": "Guest",
     "lastName": "",
-    "initials": "GG"
+    "initials": "GG",
+    "email": "guest@guest.de"
   }];
   saveActiveUserToSessionStorage('Guest');
   await putData(ACTIVE_DIR, activeUser);
@@ -149,7 +151,8 @@ async function resetActiveUser(){
     {
       "firstName": "",
       "lastName": "",
-      "initials": ""
+      "initials": "",
+      "email": ""
     }];
   await putData(ACTIVE_DIR, activeUser);
 }

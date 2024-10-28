@@ -2,7 +2,7 @@
  * Initializes the page by loading and displaying all tasks
  */
 async function initSummary(){
-  tasksFromFirebase = await loadData(TASKS_DIR);
+  tasksFromFirebase = await loadData('/tasks_test');
   displayHTML();
   getLogo();
   if (document.referrer.includes("login.html") || document.referrer.includes("signup.html")){
@@ -36,7 +36,8 @@ function showMainTemplate(){
  * @returns the number of urgent tasks
  */
 function getNumberUrgentTasks(){
-  let counter = 0;  
+  let counter = 0;
+  if(tasksFromFirebase.length == null){return 0;}
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Priority === 'Urgent'){
       counter++;
@@ -51,7 +52,8 @@ function getNumberUrgentTasks(){
  * @returns the number of to-do tasks
  */
 function getNumberToDoTasks(){
-  let counter = 0;  
+  let counter = 0;
+  if(tasksFromFirebase.length == null){return 0;}
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'To Do'){
       counter++;
@@ -66,7 +68,8 @@ function getNumberToDoTasks(){
  * @returns the number of done tasks
  */
 function getNumberDoneTasks(){
-  let counter = 0;  
+  let counter = 0;
+  if(tasksFromFirebase.length == null){return 0;}
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'Done'){
       counter++;
@@ -81,7 +84,8 @@ function getNumberDoneTasks(){
  * @returns the number of in-progress tasks
  */
 function getNumberTasksInProgress(){
-  let counter = 0;  
+  let counter = 0;
+  if(tasksFromFirebase.length == null){return 0;}
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'In Progress'){
       counter++;
@@ -96,7 +100,8 @@ function getNumberTasksInProgress(){
  * @returns the number of awaiting tasks
  */
 function getNumberTasksAwaitingFeedback(){
-  let counter = 0;  
+  let counter = 0;
+  if(tasksFromFirebase.length == null){return 0;}
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'Await Feedback'){
       counter++;
@@ -111,6 +116,7 @@ function getNumberTasksAwaitingFeedback(){
  * @returns the number tasks
  */
 function getTasksInBoard(){
+  if(tasksFromFirebase.length == null){return 0;}
   return tasksFromFirebase.length;
 }
 
@@ -120,6 +126,7 @@ function getTasksInBoard(){
  * @returns the nearest date by sorting the array
  */
 function getNearestDate(){
+  if(tasksFromFirebase.length == null){return 0;}
   let dateArr = [];
   for (let i = 0; i < tasksFromFirebase.length; i++) {
     dateArr.push(tasksFromFirebase[i].Date);
