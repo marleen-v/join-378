@@ -154,6 +154,7 @@ function pushEverythingNecessaryToFireBase(first, last){
   dataFromFirebase.push({
     "email": emailInputRef.value,
     "firstName": first,
+    "initials": first[0] + last[0],
     "lastName": last,
     "password": passwordInputRef.value
   });
