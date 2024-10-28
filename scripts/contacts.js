@@ -34,7 +34,7 @@ function renderContactList() {
     addNewContactSection(index);
     contactListRef.innerHTML += getContactHTML(contact, index);
   }
-  findAndMarkActiveUser()
+  findAndMarkActiveUser();
 }
 
 /**
@@ -61,7 +61,7 @@ function addNewContactSection(index) {
  * This function finds loged-in-User in contact-List and adds "(you)" im Namen
  */
 function findAndMarkActiveUser() {
-  if(sessionStorage.username) {
+  if(sessionStorage.username && sessionStorage.username != 'Guest') {
   const contactNameRef = document.querySelectorAll(".contact-name");
   let activeUserIndex = contactList.findIndex((contact) => contact.email == sessionStorage.username);
   contactNameRef[activeUserIndex].innerHTML += " (you)";

@@ -118,7 +118,7 @@ async function putData(path="", data={}){
  * @returns color for user icon
  */
 function getRandomColor(){
-  let r = Math.floor(Math.random() * 8);
+  let r = Math.floor(Math.random() * contactColors.length);
   return contactColors[r];
 }
 
