@@ -192,6 +192,7 @@ function showGreetingMobile(){
     let greetingRef = document.getElementById("greeting_ctn");
     let headerRef = document.getElementById("header_main");
     let dataRef = document.getElementById("object_data");
+    greetingRef.style.display = "flex";
     headerRef.classList.add("dnone");
     dataRef.classList.add("dnone");
 
@@ -203,3 +204,17 @@ function showGreetingMobile(){
     }, 2000);
   }
 }
+
+
+/**
+ * Listens if window is resized and displays greeting if window is larger than 1200px
+ * 
+ */
+window.addEventListener('resize', function(event) {
+  let greetingRef = document.getElementById("greeting_ctn");
+  if(window.innerWidth > 1200) {
+    greetingRef.style.display = "flex";
+  } else {
+    greetingRef.style.display = "none";
+  }
+}, true);
