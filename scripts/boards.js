@@ -1,6 +1,9 @@
-import { getPriority } from "./add-task.js";
+import { getInputForm } from "./add-task-template.js";
+import { getPriority, setPriority } from "./add-task.js";
+import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { search } from "./boards-filter.js";
-import { openOverlay } from "./boards-overlay.js";
+import { getAddTaskToOverlay } from "./boards-overlay-template.js";
+import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
 import { loadActiveUser, loadData } from "./module.js";
 let currentDraggedElement;
@@ -8,6 +11,9 @@ let searchId = document.getElementById('boards-search');
 export let tasks = [];
 export let contacts = [];
 export let activeUser = [];
+let moving = null;
+let currentTask = 0;
+let addToColumn = "";
 
 
 export function updateTasks(list) {
@@ -25,8 +31,7 @@ async function loadBoards() {
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
-    
-
+        
     showData(tasks);
     getLogo();
 
@@ -78,6 +83,7 @@ export function getUserColor(firstName, lastName) {
  * @param {*} element
  */
 export function setUserInitial(element, displayFullName = false, grid = false) {   
+    if(element.Persons == null) return "";
     let personsHTML = "";
     element.Persons.forEach((person, index) => {
         let splittedName = person.split(' ');
@@ -287,6 +293,24 @@ function clearHighlightedTasks() {
         tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
 
+function openAddTaskOverlay(column) {
+    switch (column) {
+        case 'to-do': addToColumn = "To Do";  break;
+        case 'in-progress': addToColumn = "In Progress"; break;
+        case 'await-feedback': addToColumn = "Await Feedback"; break;
+        case 'done': addToColumn = "Done"; break;
+    }
+    let overflow = getOverlay();
+    overflow.innerHTML = getAddTaskToOverlay();
+    setOpacity();
+    runInOverlayAnimation('.add-new-task-to-column');
+    let card = document.querySelector('.add-new-task-to-column-container');
+    card.innerHTML = getInputForm();
+    card.querySelector('.add-task').classList.add('add-task-to-column');
+    card.querySelector('#create-task-form').setAttribute('onsubmit', `createNewTask('${addToColumn}'); return false;`);
+    setPriority('medium');
+}
+
 
 window.highlightColumn = highlightColumn;
 window.removeHighlightColumn = removeHighlightColumn;
@@ -296,3 +320,4 @@ window.moveTo = moveTo;
 window.loadBoards = loadBoards;
 window.refresh = refresh;
 window.openOverlay = openOverlay;
+window.openAddTaskOverlay = openAddTaskOverlay;

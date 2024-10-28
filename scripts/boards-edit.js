@@ -1,12 +1,13 @@
-import { setPriorityColor } from "./add-task.js";
+import { getContacts, highlightActiveUser, setPriorityColor } from "./add-task.js";
 import { setDetailedCard } from "./boards-overlay.js";
-import { tasks, setUserInitial, contacts, activeUser } from "./boards.js";
+import { tasks, setUserInitial, activeUser } from "./boards.js";
 import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSubtaskInput, addLinkedItem } from './boards-edit-template.js';
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { putData } from "./module.js";
 let toggleContactList = false;
 let formData = [];
+let contacts = [];
 
 /**
  * Help Function to generate string ID into numbered id
@@ -111,6 +112,7 @@ function closeEdit(taskId) {
  * @returns {boolean}
  */
 function findPersons(data, searchString) {
+    if(data == null) return false;
     for (let index = 0; index < data.length; index++) {
         if (data[index] === searchString) return true;
     }
@@ -159,7 +161,8 @@ function chooseContact(index, taskId) {
     let id = parseTaskIdToNumberId(taskId);
     let person = contacts[index].firstName + " " + contacts[index].lastName;
     if (!findPersons(tasks[id].Persons, person)) {
-        tasks[id].Persons.push(person);
+        if(tasks[id].Persons == null) tasks[id]['Persons'] = [person];
+        else tasks[id].Persons.push(person);
         openContactSelectBox(taskId);
     }
     else {
@@ -212,11 +215,15 @@ function openContactSelectBox(taskId) {
     assignBox.innerHTML = "|";
     let persons = document.querySelector('.add-task-card-persons');
     persons.classList.add('set-height-140px');
+    console.log(contacts);
+    
     persons.innerHTML = "";
     contacts.forEach((element, index) => {
         persons.innerHTML += addLinkedItem(element, index, taskId);
-        if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
-        else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
+        if(getActiveUser(element)) {
+            highlightActiveUser(true);
+            document.querySelector(`.username${index}`).innerHTML = `${element.firstName} ${element.lastName} (you)`;
+        }
     });
 }
 
@@ -242,9 +249,10 @@ function closeContactSelectBox(taskId) {
  *
  * @param {*} taskId
  */
-function assignContact(taskId) {
+async function assignContact(taskId) {
     toggleContactList = !toggleContactList;
     if (toggleContactList) {
+        contacts = await getContacts();
         openContactSelectBox(taskId);
         document.getElementById('assign-to-toggle-icon').style.transform = "rotate(180deg)";
     }

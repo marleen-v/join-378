@@ -7,13 +7,13 @@ import { getDetailedCard } from "./boards-overlay-template.js";
 
 
 /** Set transparency background color on overlay */
-function setOpacity() {
+export function setOpacity() {
     document.querySelector('.overlay').classList.add('trans-dark-bg-p-50');
 }
 
 
 /** Unset transparency background color on overlay */
-function unsetOpacity() {
+export function unsetOpacity() {
     document.querySelector('.overlay').classList.remove('trans-dark-bg-p-50');
 }
 
@@ -37,7 +37,7 @@ function setDate(card, id) {
  *
  * @returns {*}
  */
-function getOverlay() {
+export function getOverlay() {
     let overlay = document.querySelector('.overlay');
     overlay.classList.remove('d_none');
     overlay.classList.remove('z-index-minus-1');
@@ -131,10 +131,29 @@ function deleteTask(taskId) {
     }
     tasks.forEach((element, index) => { element.id = index });
     putData(TASKS_DIR, tasks);
-    closeOverlay();
+    closeOverlay('.detailed-card');
     showData(tasks);
 }
 
+
+export function runInOverlayAnimation(wrapper) {
+    document.querySelector(wrapper).classList.remove('runOutAnimation');
+    document.querySelector(wrapper).classList.add('runInAnimation');
+}
+
+
+export function runOutOverlayAnimation(wrapper) {
+    document.querySelector(wrapper).classList.add('runOutAnimation');
+    document.querySelector(wrapper).classList.remove('runInAnimation');
+    setTimeout(() => {
+        let overlay = document.querySelector('.overlay');
+        overlay.classList.add('d_none');
+        overlay.classList.remove('z-index-2000');
+        overlay.classList.add('z-index-minus-1');
+        unsetOpacity();
+        showData(tasks);
+    }, "300");
+}
 
 /**
  * Function to open overlay, which shows choosen task card in detail
@@ -146,9 +165,7 @@ function deleteTask(taskId) {
 export function openOverlay(id) {
     let overlay = getOverlay();
     overlay.innerHTML = getDetailedCard('taskId' + id);
-    let detailedCard = document.querySelector('.detailed-card');
-    detailedCard.classList.remove('runOutAnimation');
-    detailedCard.classList.add('runInAnimation');
+    runInOverlayAnimation('.detailed-card');
     setDetailedCard(id);
     setOpacity();
 }
@@ -160,18 +177,8 @@ export function openOverlay(id) {
  *
  * @export
  */
-export function closeOverlay() {
-    let detailedCard = document.querySelector('.detailed-card');
-    detailedCard.classList.add('runOutAnimation');
-    detailedCard.classList.remove('runInAnimation');
-    setTimeout(() => {
-        let overlay = document.querySelector('.overlay');
-        overlay.classList.add('d_none');
-        overlay.classList.remove('z-index-2000');
-        overlay.classList.add('z-index-minus-1');
-        unsetOpacity();
-        showData(tasks);
-    }, "300");
+export function closeOverlay(wrapper) {
+    runOutOverlayAnimation(wrapper);
 }
 
 
