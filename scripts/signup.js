@@ -159,10 +159,10 @@ function pushEverythingNecessaryToFireBase(first, last){
   });
   activeUser = [
     {
+      "email": emailInputRef.value,
       "firstName": first,
       "lastName": last,
-      "initials": first[0] + last[0],
-      "email": emailInputRef.value
+      "initials": first[0] + last[0]
     }];
   contactsUser.push({
       "color": getRandomColor(),
@@ -216,10 +216,4 @@ function togglePasswordIcon(pwdIdx){
 function openPopup(){
   let popup = document.getElementById("popupsuccess");
   popup.classList.add("open-popup");
-}
-
-
-/** Saves active user to session storage */
-function saveActiveUserToSessionStorage(value){
-  sessionStorage.username = value;
 }

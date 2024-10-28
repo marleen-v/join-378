@@ -1,4 +1,7 @@
 @media only screen and (max-width: 1200px){
+  main {
+    overflow-y: auto;
+  }
   .data-ctn {
     position: relative;
   }

@@ -116,6 +116,9 @@
 }
 
 @media only screen and (max-width: 400px){
+  .content-ctn {
+    overflow-y: auto;
+  }
   .logo-small {
     top: 37px;
     left: 40px;
@@ -165,5 +168,11 @@
   .logout-popup {
     font-size: 16px;
     padding: 10px 10px;
+  }
+}
+
+@media only screen and (max-width: 400px) and (max-height: 700px){
+  .legal-ctn {
+    bottom: 10px;
   }
 }

@@ -2,6 +2,7 @@
  * Initializes the page by loading and displaying all tasks
  */
 async function initSummary(){
+  //tasksFromFirebase = await loadData('/tasks_test');
   tasksFromFirebase = await loadData(TASKS_DIR);
   displayHTML();
   getLogo();
@@ -36,7 +37,8 @@ function showMainTemplate(){
  * @returns the number of urgent tasks
  */
 function getNumberUrgentTasks(){
-  let counter = 0;  
+  if(objectIsEmpty(tasksFromFirebase)){return 0};
+  let counter = 0;
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Priority === 'Urgent'){
       counter++;
@@ -51,7 +53,8 @@ function getNumberUrgentTasks(){
  * @returns the number of to-do tasks
  */
 function getNumberToDoTasks(){
-  let counter = 0;  
+  if(objectIsEmpty(tasksFromFirebase)){return 0};
+  let counter = 0;
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'To Do'){
       counter++;
@@ -66,7 +69,8 @@ function getNumberToDoTasks(){
  * @returns the number of done tasks
  */
 function getNumberDoneTasks(){
-  let counter = 0;  
+  if(objectIsEmpty(tasksFromFirebase)){return 0};
+  let counter = 0;
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'Done'){
       counter++;
@@ -81,7 +85,8 @@ function getNumberDoneTasks(){
  * @returns the number of in-progress tasks
  */
 function getNumberTasksInProgress(){
-  let counter = 0;  
+  if(objectIsEmpty(tasksFromFirebase)){return 0};
+  let counter = 0;
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'In Progress'){
       counter++;
@@ -96,7 +101,8 @@ function getNumberTasksInProgress(){
  * @returns the number of awaiting tasks
  */
 function getNumberTasksAwaitingFeedback(){
-  let counter = 0;  
+  if(objectIsEmpty(tasksFromFirebase)){return 0};
+  let counter = 0;
   for(let i = 0; i < tasksFromFirebase.length; i++){
     if(tasksFromFirebase[i].Column === 'Await Feedback'){
       counter++;
@@ -111,6 +117,7 @@ function getNumberTasksAwaitingFeedback(){
  * @returns the number tasks
  */
 function getTasksInBoard(){
+  if(objectIsEmpty(tasksFromFirebase)){return 0};
   return tasksFromFirebase.length;
 }
 
@@ -121,6 +128,7 @@ function getTasksInBoard(){
  */
 function getNearestDate(){
   let dateArr = [];
+  if(objectIsEmpty(tasksFromFirebase)){return '1970-01-01';};
   for (let i = 0; i < tasksFromFirebase.length; i++) {
     dateArr.push(tasksFromFirebase[i].Date);
   }
@@ -134,6 +142,7 @@ function getNearestDate(){
  * @returns latest latest year
  */
 function getDeadlineYear(){
+  if(objectIsEmpty(tasksFromFirebase)){return '1970'};
   return getNearestDate().split('-')[0];
 }
 
@@ -144,6 +153,7 @@ function getDeadlineYear(){
  */
 function getDeadlineMonth(){
   const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  if(objectIsEmpty(tasksFromFirebase)){return 'January'};
   return month[getNearestDate().split('-')[1] - 1];
 }
 
@@ -153,6 +163,7 @@ function getDeadlineMonth(){
  * @returns latest latest day
  */
 function getDeadlineDay(){
+  if(objectIsEmpty(tasksFromFirebase)){return '1'};
   return getNearestDate().split('-')[2];
 }
 
@@ -203,6 +214,16 @@ function showGreetingMobile(){
       dataRef.classList.remove("dnone");
     }, 2000);
   }
+}
+
+
+/**
+ * Checks if object is empty
+ * @param {object} obj object that needs to be checked
+ * @returns true if object is empty
+ */
+function objectIsEmpty(obj){
+  return obj === null;
 }
 
 

@@ -114,6 +114,15 @@ async function putData(path="", data={}){
 
 
 /**
+ * Saves the username, normally the email address, to session storage
+ * @param {string} value username
+ */
+function saveActiveUserToSessionStorage(value){
+    sessionStorage.username = value;
+}  
+
+
+/**
  * Determines random color from color array
  * @returns color for user icon
  */

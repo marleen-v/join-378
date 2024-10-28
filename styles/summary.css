@@ -1,6 +1,5 @@
 main {
   width: 100%;
-  /*height: 100%;*/
   overflow: hidden;
 }
 
@@ -8,12 +7,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
   align-items: flex-start;
   width: 100%;
-  /*height: 100%;*/
   margin-left: 120px;
-  /* border: 1px solid black; */
 }
 
 .header-main {
@@ -21,8 +17,6 @@ main {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 30px;
-  /* border: 1px solid black; */
-  /* padding-right: 200px; */
 }
 
 h1 {
