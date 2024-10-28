@@ -343,7 +343,7 @@ function pushNewSubtask() {
 
 /** Event listener which add new subtask when user type in and pressed enter key */
 function pushNewSubtaskOnPressedEnter() {
-    if(document.getElementById('add-new-subtask') &&  document.getElementById('add-new-subtask').value !== "") 
+    if(document.getElementById('add-new-subtask')) 
         document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushNewSubtask(); });
 }
 
