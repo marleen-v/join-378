@@ -676,6 +676,13 @@ main {
 }
 
 @media only screen and (max-width: 770px) {
+    .detailed-card {
+        overflow-y: auto;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0%;
+    }
+    
     .boards {
         display: grid;
         grid-template-rows: 412px 0px 1fr;
@@ -685,6 +692,16 @@ main {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 232px 40px 40px 1fr;
+    }
+}
+
+
+@media only screen and (orientation: landscape) { 
+    .detailed-card {
+        overflow-y: auto;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0%;
     }
 }
 
