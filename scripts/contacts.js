@@ -22,7 +22,7 @@ async function initContacts() {
   checkScreenSize();
   contactList = await loadData(CONTACTS_DIR);
   renderContactList();
- /*  findAndMarkActiveUser(); */
+ findAndMarkActiveUser(); 
   getLogo();
   userList = await loadData(USERS_DIR);
 }
