@@ -81,7 +81,7 @@ function checkUserPassword(){
 /**
  * Forwards to summary as a guest user and sets active user
  */
-function guestLogin(){
+async function guestLogin(){
   activeUser = [
   {
     "firstName": "Guest",
@@ -89,7 +89,7 @@ function guestLogin(){
     "initials": "GG"
   }];
   saveActiveUserToSessionStorage('Guest');
-  putData(ACTIVE_DIR, activeUser);
+  await putData(ACTIVE_DIR, activeUser);
   window.location.href = "./summary.html";
 }
 
@@ -144,14 +144,14 @@ function logoutPopup(){
 /**
  * Resets the active user to empty string
  */
-function resetActiveUser(){
+async function resetActiveUser(){
   activeUser = [
     {
       "firstName": "",
       "lastName": "",
       "initials": ""
     }];
-  putData(ACTIVE_DIR, activeUser);
+  await putData(ACTIVE_DIR, activeUser);
 }
 
 

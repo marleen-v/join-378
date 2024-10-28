@@ -99,12 +99,12 @@ function showErrorMessage(str){
 /**
  * Shows successful signup and forwards to summary
  */
-function signupSuccess(){
+async function signupSuccess(){
   openPopup();
   resetValues();
-  putData(ACTIVE_DIR, activeUser);
-  putData(USERS_DIR, dataFromFirebase);
-  putData(CONTACTS_DIR, contactsUser);
+  await putData(ACTIVE_DIR, activeUser);
+  await putData(USERS_DIR, dataFromFirebase);
+  await putData(CONTACTS_DIR, contactsUser);
   setTimeout(function(){window.location.href = "./summary.html"}, 2500);
 }
 
