@@ -117,7 +117,6 @@ function emailNotExists(){
   let emailCheck = true;
   for(let i = 0; i < contactsUser.length; i++){
     if(emailInputRef.value == contactsUser[i].email){
-      console.log(contactsUser[i].email);
       emailCheck = false;
     }
   }
