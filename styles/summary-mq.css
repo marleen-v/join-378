@@ -1,4 +1,7 @@
 @media only screen and (max-width: 1200px){
+  main {
+    overflow-y: auto;
+  }
   .data-ctn {
     position: relative;
   }
@@ -105,10 +108,6 @@
 
 
 @media only screen and (max-width: 400px){
-  .summary-section {
-    height: 100%;
-    scroll-behavior: auto;
-  }
   .header-main {
     margin-right: 100px;
   }
