@@ -690,6 +690,14 @@ main {
 
     .board-head {
         display: grid;
+        grid-template-columns: 260px 260px;
+        grid-template-rows: 232px 40px 40px 1fr;
+    }
+}
+
+@media only screen and (max-width: 645px)  {
+    .board-head {
+        display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 232px 40px 40px 1fr;
     }
