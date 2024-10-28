@@ -184,15 +184,6 @@ function rememberMeCheck(){
 
 
 /**
- * Saves the username, normally the email address, to session storage
- * @param {string} value username
- */
-function saveActiveUserToSessionStorage(value){
-  sessionStorage.username = value;
-}
-
-
-/**
  * Exports functions for further use
  */
 window.initLogin = initLogin;

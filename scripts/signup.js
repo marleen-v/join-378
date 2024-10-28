@@ -217,9 +217,3 @@ function openPopup(){
   let popup = document.getElementById("popupsuccess");
   popup.classList.add("open-popup");
 }
-
-
-/** Saves active user to session storage */
-function saveActiveUserToSessionStorage(value){
-  sessionStorage.username = value;
-}
