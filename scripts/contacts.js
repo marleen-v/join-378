@@ -217,7 +217,7 @@ function animateSuccessMessage(){
  * This function returns the initials of the name of a contact
  *
  * @param {*} initials
- * @returns
+ * @returns initials of contact
  */
 function findInitials() {
   if (lastName !== undefined) {

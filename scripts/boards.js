@@ -1,9 +1,8 @@
-import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { getPriority } from "./add-task.js";
 import { search } from "./boards-filter.js";
 import { openOverlay } from "./boards-overlay.js";
-
-
+import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
+import { loadActiveUser, loadData } from "./module.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 export let tasks = [];
@@ -16,20 +15,6 @@ export function updateTasks(list) {
 }
 
 
-async function loadData(path = "") {
-    let res = await fetch(FIREBASE_URL + path + ".json");
-    let resToJson = await res.json();
-    return resToJson;
-}
-
-async function loadActiveUser(path=""){
-    let res = await fetch(FIREBASE_URL + path + ".json");
-    return await res.json();;
-    //currentUserFirstName = activeUser[0].firstName;
-    //currentUserLastName = activeUser[0].lastName;
-  }
-
-
 /**
  * Load board and store all data for board from firebase strorage
  *
@@ -37,10 +22,10 @@ async function loadActiveUser(path=""){
  * @returns {*}
  */
 async function loadBoards() {
-    //const htmlContent = await loadHTML('../html/boards-main.html');
     tasks = await loadData(TASKS_DIR);
     contacts = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
+    
 
     showData(tasks);
     getLogo();
@@ -86,26 +71,6 @@ export function getUserColor(firstName, lastName) {
 }
 
 
-function getGroupUserInitials(element) {
-    let persons = (element.Persons.length > 9) ? ">9" : element.Persons.length + "P";;
-    return /*html*/`
-        <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>${persons}</span></span> 
-    `;
-}
-
-
-function getUser(person, initials, color, displayFullname, grid = false) {
-    let layout = "flex justify-content-center align-items-center set-width-height-42";
-    (grid === true) ? layout ="grid grid-columns-2-48px-1fr" : "flex justify-content-center align-items-center set-width-height-42";
-    return /*html*/`
-         ${(grid) ? '<div class="task-user-select ' + layout + '">' : ''}
-            <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${initials}</span></span> 
-            ${(displayFullname) ? '<span class="flex align-items-center">'+ person + '</span>' : ''}
-         ${(grid) ? '</div>' : '' }  
-    `;
-}
-
-
 /**
  * Parse user name to initials
  *
@@ -120,11 +85,7 @@ export function setUserInitial(element, displayFullName = false, grid = false) {
         let lastName = splittedName[1].charAt(0);
         let initial = firstName + lastName;
         let color = getUserColor(splittedName[0], splittedName[1]);        
-        personsHTML += getUser(person, initial, color, displayFullName, grid);/* /*html*/ /*`
-            <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${initial}</span></span> 
-            ${(displayFullName)? "<span>" + person + "</span>" : ""}
-        `;*/
-        //if(index > 0 && grid == false) document.querySelector('.task-user-select').classList.add('mg-left-minus-8px'); 
+        personsHTML += getUser(person, initial, color, displayFullName, grid);
     });    
     if(element.Persons.length > 4 && displayFullName == false) return getGroupUserInitials(element);
     return personsHTML;
@@ -144,34 +105,25 @@ function setCardElements(element, index) {
     currentCard.querySelector('.add-task-card-headline').innerHTML = element.Title;
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     setSubtasks(currentCard, element);    
-    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);
+    currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);    
     currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element.Priority);//getPriority(element);
 }
 
 
+/**
+ * Help function to calculate progressbar it iterate through subtask literal and add 
+ * all done registered subtasks
+ *
+ * @export
+ * @param {*} element
+ * @returns {number}
+ */
 export function calculateDoneSubtasks(element) {
     let done = 0;
     element.Subtasks.forEach(element => { (element.Done == true) ? done+=1 : done+=0 });
     return done;
 }
 
-/**
- * Get progress bar with bootstrap and show if exists subtasks
- *
- * @param {*} element
- * @returns {string}
- */
-function getProgressBar(element) {
-    let done = calculateDoneSubtasks(element);
-    let procent = (done / element.Subtasks.length) * 100;
-    
-    return /*html*/`
-        <div class="progressbar-container">
-            <div class="progressbar" style="width: ${procent}%"></div>
-        </div>
-        <span class="flex align-items-center">${done}/${element.Subtasks.length} Subtasks</span>
-    `
-}
 
 /**
  * Set subtasks if are exist if not then not shown
@@ -203,6 +155,12 @@ export function setCard(element, index, column) {
 }
 
 
+/**
+ * Function which check all colums and if it empty then display -> No tasks to do into each column
+ * To Do    |   In Progress     | Await Feedback      |     Done
+ *
+ * @export
+ */
 export function checkEmptyColumns() {        
     if(!search(tasks, "Column", "To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
     if(!search(tasks, "Column", "In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
@@ -211,6 +169,7 @@ export function checkEmptyColumns() {
 }
 
 
+/** Function which clear all colums */
 function clearColumns() {
     document.querySelector(`.board-main-to-do`).innerHTML = "";
     document.querySelector(`.board-main-in-progress`).innerHTML = "";
@@ -219,7 +178,8 @@ function clearColumns() {
 }
 
 /** 
- * Show all data to board it exists 4 columns | To Do | In Progress | Await Feedback | Done
+ * Show all data to board it exists 4 columns 
+ * To Do    |   In Progress     |   Await Feedback  |   Done
 */
 export function showData(array) {
     clearColumns();    
@@ -246,6 +206,11 @@ function startDragging(id) {
 }
 
 
+/**
+ * Template which return -> No tasks to do into each column
+ *
+ * @returns {string}
+ */
 function getEmptyColumn() {
     return /*html*/`
         <section class="flex justify-content-center align-items-center emptyColumn">
@@ -256,31 +221,19 @@ function getEmptyColumn() {
 
 
 /**
- * Get html structure of task card
+ * Function which highlight column on drag over with background color
  *
- * @param {*} taskId
- * @param {*} element
- * @returns {string}
+ * @param {*} id
  */
-function getTaskCard(id, taskId) {    
-    return /*html*/`
-        <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card clickable" draggable="true" ondragstart="startDragging('${taskId}')">
-            <div class="flex align-items-center add-task-card-top"><div class="flex align-items-center justify-content-center add-task-card-category"></div></div>
-            <div class="add-task-card-headline"></div>
-            <div class="add-task-card-description"></div>
-            <div class="add-task-card-subtasks grid grid-columns-2-1fr-100px align-items-center"></div>
-            <div class="add-task-card-bottom grid grid-columns-2">
-                <div class="add-task-card-assigned-to flex"></div>
-                <div class="add-task-card-priority flex align-items-center justify-content-flex-end"></div>
-            </div>
-        </section>  
-    `;
-}
-
 function highlightColumn(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
 
+/**
+ * Function which remove highlighted column on drag leave
+ *
+ * @param {*} id
+ */
 function removeHighlightColumn(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
@@ -328,32 +281,11 @@ function allowDrop(ev) {
 }
 
 
-/**
- * Put the changed data to firebase
- *
- * @async
- * @param {string} [path=""]
- * @param {{}} [data={}]
- * @returns {unknown}
- */
-async function putBoardData(path = "", data = {}) {
-    let res = await fetch(FIREBASE_URL + path + ".json",
-        {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        });
-    return await res.json();
-}
-
+/** Clear all highlighted columns */
 function clearHighlightedTasks() {
     if(searchId.value == "") 
         tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
-
-
 
 
 window.highlightColumn = highlightColumn;
@@ -364,4 +296,3 @@ window.moveTo = moveTo;
 window.loadBoards = loadBoards;
 window.refresh = refresh;
 window.openOverlay = openOverlay;
-

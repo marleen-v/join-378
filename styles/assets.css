@@ -6,6 +6,12 @@
     display: flex;
 }
 
+.set-bg-dark-blue {
+    background-color: #2A3647;
+    color: white;
+}
+
+
 .justify-content-between{
     justify-content: space-between;
 }

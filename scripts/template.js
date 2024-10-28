@@ -74,7 +74,7 @@ function getGreetingTemplate(greetFormula){
  * This function returns the html for the rendering of each contact
  *
  * @param {Array} contact - this is a single contact info
- * @returns
+ * @returns HTML-Template for contact
  */
 function getContactHTML(contact, index) {
   return `
@@ -93,7 +93,7 @@ function getContactHTML(contact, index) {
 /**
  * This function returns the html-template for the contact-info of a clicked contact 
  * 
- * @returns 
+ * @returns HTML-Template for contact info
  */
 function getContactInfoTemplate(index) {
   return `
@@ -143,7 +143,7 @@ function getContactInfoTemplate(index) {
  * This function returns the html-template of a new Letter-Section in the conatctlist
  * 
  * @param {String} firstLetter 
- * @returns 
+ * @returns HTML-Template for first letter
  */
 function getNewSectionHTML(firstLetter) {
   return `

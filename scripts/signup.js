@@ -58,7 +58,7 @@ function checkCorrectPassword(){
 /**
  * Returns number of spaces within a string
  * @param {string} str string that needs to be checked
- * @returns 
+ * @returns number of spaces in string
  */
 function checkCountSpaces(str){
   let count = (str.split(" ").length - 1);
