@@ -346,7 +346,7 @@ function addNewSubtask() {
     toggleSubtask = !toggleSubtask;
     let subtask = document.querySelector('.add-new-subtask-box');
     subtask.innerHTML = (toggleSubtask) ? getSubtaskInput() : getSubtaskMask();
-    
+    if(document.getElementById('add-new-subtask')) document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushNewSubtask(); });
 }
 
 /** Clear button which clear all inputs in add task form */
