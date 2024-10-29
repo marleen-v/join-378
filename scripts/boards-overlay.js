@@ -1,6 +1,6 @@
 import { getPriority } from "./add-task.js";
 import { parseTaskIdToNumberId, setDetailedEditableCard } from "./boards-edit.js";
-import { setBgColor, setUserInitial, calculateDoneSubtasks, showData } from "./boards.js";
+import { setBgColor, setUserInitial, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";

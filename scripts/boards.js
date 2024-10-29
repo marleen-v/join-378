@@ -1,6 +1,5 @@
 import { getInputForm } from "./add-task-template.js";
 import { getPriority, setPriority } from "./add-task.js";
-import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { search } from "./boards-filter.js";
 import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
@@ -8,17 +7,7 @@ import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./bo
 import { loadActiveUser, loadData } from "./module.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
-//export let tasks = [];
-//export let contacts = [];
-//export let activeUser = [];
-let moving = null;
-let currentTask = 0;
 let addToColumn = "";
-
-
-export function updateTasks(list) {
-    tasks = list;
-}
 
 
 /**

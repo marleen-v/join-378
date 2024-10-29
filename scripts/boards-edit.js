@@ -1,4 +1,4 @@
-import { getContacts, highlightActiveUser, setPriorityColor } from "./add-task.js";
+import { highlightActiveUser, setPriorityColor } from "./add-task.js";
 import { setDetailedCard } from "./boards-overlay.js";
 import { setUserInitial } from "./boards.js";
 import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSubtaskInput, addLinkedItem } from './boards-edit-template.js';
@@ -194,7 +194,7 @@ function focusUserSelectBox(active) {
     if (active) {
         container.classList.remove('auto-overflow-y');
         container.classList.add('hidden-overflow-y');
-        container.scrollTo(0, 100);
+        container.scrollTo(0, 600);
     }
     else {
         container.classList.add('auto-overflow-y');
