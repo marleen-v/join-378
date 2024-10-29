@@ -3,6 +3,10 @@ main {
   overflow: hidden;
 }
 
+.lock-landscape {
+  display: none;
+}
+
 .summary-section {
   display: flex;
   flex-direction: column;

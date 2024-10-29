@@ -176,3 +176,13 @@
     bottom: 10px;
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 932px) and (orientation: landscape)
+{
+  .lock-landscape {
+    display: block !important;
+  }
+  .content-ctn {
+    display: none !important;
+  }
+}
