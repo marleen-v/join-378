@@ -8,7 +8,7 @@
     "Priority": "Medium",
     "Category": "Technical Task",
     "Subtasks": [],
-    "Persons": ["Julia Weber"]
+    "Persons": ["julia.klein@example.com"]
   },
   {
     "id": 1,
@@ -23,7 +23,7 @@
                   {"Description": "CSS Dateien angelegt", "Done": false },
                   {"Description": "Javascript Dateien angelegt", "Done": false }
                 ],
-    "Persons": ["Max Schneider"]
+    "Persons": ["max.schneider@gmx.de"]
   },
   {
     "id": 2,
@@ -34,7 +34,7 @@
     "Priority": "Urgent",
     "Category": "Technical Task",
     "Subtasks": [],
-    "Persons": ["Max Schneider", "Mia Koch"]
+    "Persons": ["max.schneider@gmx.de", "mia.koch@gmx.de"]
   },
   {
     "id": 3,
@@ -45,7 +45,7 @@
     "Priority": "Medium",
     "Category": "Technical Task",
     "Subtasks": [],
-    "Persons": ["Paul Kaiser", "Sophia Schmidt", "Mia Koch"]
+    "Persons": ["nico.frank@yahoo.com", "andre@gmbh.de", "mia.koch@gmx.de"]
   },
   {
     "id": 4,
@@ -56,7 +56,7 @@
     "Priority": "Low",
     "Category": "User Story",
     "Subtasks": [],
-    "Persons": ["Sophia Schmidt", "Mia Koch"]
+    "Persons": ["andre@gmbh.de", "mia.koch@gmx.de"]
   },
   {
     "id": 5,
@@ -67,7 +67,7 @@
     "Priority": "Medium",
     "Category": "User Story",
     "Subtasks": [],
-    "Persons": ["Emma Hofmann", "Sophia Schmidt", "Mia Koch"]
+    "Persons": ["hannah.zimmer@web.de", "nico.frank@yahoo.com", "mia.koch@gmx.de"]
   },
   {
     "id": 6,
@@ -78,7 +78,7 @@
     "Priority": "Urgent",
     "Category": "User Story",
     "Subtasks": [],
-    "Persons": ["Julia Weber"]
+    "Persons": ["anna.mueller@example.com"]
   },
   {
     "id": 7,
@@ -89,7 +89,7 @@
     "Priority": "Low",
     "Category": "User Story",
     "Subtasks": [],
-    "Persons": ["Tim Bauer", "Hannah Zimmer"]
+    "Persons": ["jonas.wolf@yahoo.com", "hannah.zimmer@web.de"]
   },
   {
     "id": 8,
@@ -100,7 +100,7 @@
     "Priority": "Medium",
     "Category": "User Story",
     "Subtasks": [],
-    "Persons": ["Lukas Fischer", "Max Schneider"]
+    "Persons": ["lukas.fischer@outlook.com", "max.schneider@gmx.de"]
   },
   {
     "id": 9,
@@ -111,6 +111,6 @@
     "Priority": "Urgent",
     "Category": "User Story",
     "Subtasks": [],
-    "Persons": ["Lukas Fischer", "Sophia Schmidt"]
+    "Persons": ["lukas.fischer@outlook.com", "anna.mueller@example.com"]
   }
 ]
