@@ -286,10 +286,10 @@ function pushSubtask(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     let input = document.querySelector('#add-new-subtask').value;
     if (input == "") { cancelSubtask(); return; }
-    if (tasksFromFirebase[id].Subtasks) tasks[id].Subtasks.push({ "Description": input, "Done": false });
+    if (tasksFromFirebase[id].Subtasks) tasksFromFirebase[id].Subtasks.push({ "Description": input, "Done": false });
     else tasksFromFirebase[id]["Subtasks"] = [{ "Description": input, "Done": false }];
     document.querySelector('.detailed-task-card-subtasks').innerHTML = getSubtaskMask(taskId);
-    displayCardSubtasks(tasks[id].Subtasks, id, 'boards');
+    displayCardSubtasks(tasksFromFirebase[id].Subtasks, id, 'boards');
 }
 
 

@@ -6,10 +6,8 @@ import { loadActiveUser, loadData } from "./module.js";
 
 let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
-let contacts = [];
 let subtasks = [];
 let addedUser = [];
-let activeUser = [];
 let category = "";
 let tasks = [];
 
@@ -27,8 +25,8 @@ export async function getContacts() {
  * @returns {*}
  */
 async function loadAddTask() {
-    tasks = await loadData(TASKS_DIR);
-    contacts = await loadData(CONTACTS_DIR);
+    tasksFromFirebase = await loadData(TASKS_DIR);
+    contactsFromFirebase = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
@@ -155,7 +153,7 @@ function openContacts() {
     persons.classList.add('set-z-index-100');
     persons.innerHTML = "";
     
-    contacts.forEach((element, index) => {
+    contactsFromFirebase.forEach((element, index) => {
         persons.innerHTML += addUserItem(element, index);
         if(getActiveUser(element)) {
             highlightActiveUser(true);
@@ -180,7 +178,7 @@ function closeContacts() {
 
 /** Function which open and close contact select box */
 async function addContact() {
-    contacts = await loadData(CONTACTS_DIR);
+    contactsFromFirebase = await loadData(CONTACTS_DIR);
     toggleContactList = !toggleContactList;
     if (toggleContactList) {
         openContacts();
@@ -424,9 +422,9 @@ function getTaskInfos(column) {
 async function createNewTask(column) {      
     console.log(column + " " + tasks);
     
-    tasks = await loadData(TASKS_DIR); 
-    tasks.push(getTaskInfos(column));            
-    putData(TASKS_DIR, tasks);
+    tasksFromFirebase = await loadData(TASKS_DIR); 
+    tasksFromFirebase.push(getTaskInfos(column));            
+    putData(TASKS_DIR, tasksFromFirebase);
     
     setTimeout(() => {
         window.location = "../html/boards.html";  
