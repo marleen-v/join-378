@@ -2,6 +2,10 @@ main {
   max-width: 1920px;
 }
 
+.lock-landscape {
+  display: none;
+}
+
 .help-wrapper {
   margin-top: 20px;
   padding-left: 40px;
@@ -20,4 +24,24 @@ h1, h3 {
 
 a {
   color: blueviolet;
+}
+
+
+/* Media Queries */
+@media screen and (min-width: 320px) and (max-width: 932px) and (orientation: landscape)
+{
+  .lock-landscape {
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+  }
+  .content-ctn {
+    display: none !important;
+  }
+  header, nav, main {
+    display: none !important;
+  }
 }
