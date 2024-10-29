@@ -103,6 +103,10 @@
     height: 100px !important;
 }
 
+.set-height-64px {
+    height: 64px !important;
+}
+
 .p-top-8px {
     padding-top: 8px;
 }

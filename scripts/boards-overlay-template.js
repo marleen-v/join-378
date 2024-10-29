@@ -20,7 +20,7 @@ export function getDetailedCard(taskId) {
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description mg-top-16px"></div>
             <div class="add-task-card-date mg-top-16px"></div>
-            <div class="add-task-card-priority flex align-items-center justify-content-flex-start mg-top-16px"></div>
+            <div class="add-task-card-priority flex align-items-center justify-content-flex-start mg-top-16px set-height-64px"></div>
             <div class="mg-top-16px">
                 Assigned to:
                 <div class="add-task-card-assigned-to">

@@ -293,6 +293,11 @@ function clearHighlightedTasks() {
         tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
 
+/**
+ * Function which show add task on overlay and add task to chosen column
+ *
+ * @param {*} column
+ */
 function openAddTaskOverlay(column) {
     switch (column) {
         case 'to-do': addToColumn = "To Do";  break;

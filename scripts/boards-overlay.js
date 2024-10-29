@@ -122,7 +122,7 @@ function editTask(taskId) {
  *
  * @param {*} taskId
  */
-function deleteTask(taskId) {    
+async function deleteTask(taskId) {    
     for (let i = 0; i < tasks.length; i++) {
         let task = "taskId" + i;
         if (task === taskId) {
@@ -131,6 +131,7 @@ function deleteTask(taskId) {
     }
     tasks.forEach((element, index) => { element.id = index });
     putData(TASKS_DIR, tasks);
+    tasks = await loadData(TASKS_DIR);
     closeOverlay('.detailed-card');
     showData(tasks);
 }

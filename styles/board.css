@@ -725,17 +725,7 @@ main {
     }
 }
 
-/*
 
-@media only screen and (max-height: 800px) {
-    .add-new-task-to-column {
-        height: 700px;
-    }
-
-
-
-
-}*/
 .add-task-card-priority {
     height: 84px;
 }
