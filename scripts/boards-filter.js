@@ -1,4 +1,4 @@
-import { setCard, checkEmptyColumns, updateTasks, showData } from "./boards.js";
+import { showData } from "./boards.js";
 export let searchList = [];
 export let sortedList = [];
 

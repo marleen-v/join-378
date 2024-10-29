@@ -1,5 +1,3 @@
-import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
-import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask } from './add-task-template.js';
 import { getUrgentSVG, getMediumSVG, getLowSVG, checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { loadActiveUser, loadData } from "./module.js";
@@ -8,13 +6,7 @@ let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
 let subtasks = [];
 let addedUser = [];
-let category = "";
 let tasks = [];
-
-export async function getContacts() {
-    contacts = await loadData(CONTACTS_DIR);
-    return contacts;
-}
 
 
 /**
