@@ -124,7 +124,7 @@ export function getInputForm() {
             </div>
         </div>
         <div class="task-form-container">
-        <form id="create-task-form" class="task-form" onsubmit="createNewTask(); return false;">
+        <form id="create-task-form" class="task-form" onsubmit="createNewTask('To Do'); return false;">
             <div class="grid grid-rows-auto gap-64px">
                 <div class="add-task-form">
                     <div class="part-1-form">

@@ -416,10 +416,18 @@ main {
     outline: #0038FF;
 }
 
-
 @media only screen and (max-width: 1024px) {
     .add-task {
-        padding: 0 16px 0 16px;
+            padding: 0 16px 0 16px;
+    }
+}
+
+
+@media only screen and (max-width: 980px) {
+    .add-task {
+        display: grid;
+        grid-template-rows: 128px 1fr;
+        margin-top: 40px;
     }
 
     .part-1-form {
@@ -437,6 +445,39 @@ main {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1px 1fr;
         width: 100%;
+    }
+
+    .select-box-contacts {
+        height: 84px;
+    }
+}
+
+
+@media only screen and (orientation: portrait)
+and (max-width: 1024px) {
+    
+    .add-task {
+        padding: 0 16px 0 16px;
+        margin-top: 0px;
+    }
+
+    .part-1-form {
+        display: grid;
+        grid-template-rows: 80px 136px 32px 64px;
+        gap: 0px;
+    }
+
+    .task-form-container {
+        width: 100%;
+        padding-bottom: 64px;
+    }
+
+    .add-task-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1px 1fr;
+        width: 100%;
+        gap: 0px;
     }
 
 }
@@ -466,6 +507,7 @@ main {
     .priority-buttons {
         display: flex;
         flex-direction: column;
+        margin-top: -200px;
     }
 }
 

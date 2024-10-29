@@ -2,16 +2,19 @@ import { loadHTML, processHTML } from "../scripts/parseHTMLtoString.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask } from './add-task-template.js';
 import { getUrgentSVG, getMediumSVG, getLowSVG, checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
-import { loadActiveUser } from "./module.js";
+import { loadActiveUser, loadData } from "./module.js";
 
 let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
-let contacts = [];
 let subtasks = [];
 let addedUser = [];
-let activeUser = [];
 let category = "";
 let tasks = [];
+
+export async function getContacts() {
+    contacts = await loadData(CONTACTS_DIR);
+    return contacts;
+}
 
 
 /**
@@ -22,8 +25,8 @@ let tasks = [];
  * @returns {*}
  */
 async function loadAddTask() {
-    tasks = await loadData(TASKS_DIR);
-    contacts = await loadData(CONTACTS_DIR);
+    tasksFromFirebase = await loadData(TASKS_DIR);
+    contactsFromFirebase = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
@@ -62,7 +65,7 @@ function addUserItem(element, index) {
     return /*html*/`
         <div class="task-user-select grid grid-columns-3-48px-1fr-48px selection" onclick="addUser(${index})">
             <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
-            <span class="flex align-items-center">${element.firstName} ${element.lastName}</span>
+            <span class="username${index} flex align-items-center">${element.firstName} ${element.lastName}</span>
             <div class="flex align-items-center">${selectBox}</div>
         </div>
     `;
@@ -117,9 +120,27 @@ function addUser(index) {
  * @param {*} element
  * @returns {boolean}
  */
-function getActiveUser(element) {
-    if(element.email == activeUser.email) return true;
+export function getActiveUser(element) {    
+    if(element.email === activeUser.email) return true;
     return false;
+}
+
+
+/**
+ * Function which highlight active user
+ *
+ * @export
+ * @param {*} element
+ */
+export function highlightActiveUser(highlight = false) {
+    if (highlight)  { 
+        document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
+        document.querySelector('.task-user-select > div > svg').classList.add('filter-color-to-white');
+    }
+    else {
+        document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
+        document.querySelector('.task-user-select > div > svg').classList.remove('filter-color-to-white');
+    }
 }
 
 
@@ -131,10 +152,13 @@ function openContacts() {
 +   persons.classList.add('bg-white');
     persons.classList.add('set-z-index-100');
     persons.innerHTML = "";
-    contacts.forEach((element, index) => {
+    
+    contactsFromFirebase.forEach((element, index) => {
         persons.innerHTML += addUserItem(element, index);
-        if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
-        else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
+        if(getActiveUser(element)) {
+            highlightActiveUser(true);
+            document.querySelector(`.username${index}`).innerHTML = `${element.firstName} ${element.lastName} (you)`;
+        }
     });
     document.getElementById('contacts-toggle-img').style.transform = "rotate(180deg)";
 
@@ -153,7 +177,8 @@ function closeContacts() {
 }
 
 /** Function which open and close contact select box */
-function addContact() {
+async function addContact() {
+    contactsFromFirebase = await loadData(CONTACTS_DIR);
     toggleContactList = !toggleContactList;
     if (toggleContactList) {
         openContacts();
@@ -242,7 +267,7 @@ export function getPriority(priority) {
  *
  * @param {*} prio
  */
-function setPriority(prio) {
+export function setPriority(prio) {
     priority = prio;
     removePriorityColor('.task-form-container');
     setBgColor(prio);
@@ -358,11 +383,16 @@ function addNewSubtask() {
 
 /** Clear button which clear all inputs in add task form */
 function clearButton() {
+    document.getElementById('title').value = "";
+    document.getElementById('description').value = "";
+    document.getElementById('due-date').value = "";
+    document.getElementById('category-input').value = "";
+    document.querySelector('.display-assigned-user').innerHTML = "";
+    document.querySelector('.added-subtasks-item').innerHTML = "";
     subtasks = [];
     addedUser = [];
-    category = "";
-    priority = "Medium";
-    loadAddTask();
+    category = "Medium";
+    setPriority("medium");
 }
 
 
@@ -371,12 +401,12 @@ function clearButton() {
  *
  * @returns {{ id: any; Column: string; Title: any; Description: any; Date: any; Priority: any; Category: any; Subtasks: {}; Persons: {}; }}
  */
-function getTaskInfos() {
+function getTaskInfos(column) {
     let persons = [];
     addedUser.forEach(element => { persons.push(element.firstName + " " + element.lastName) });
     return {
         "id": tasks.length,
-        "Column": "To Do",
+        "Column": column,
         "Title": document.getElementById('title').value,
         "Description": document.getElementById('description').value,
         "Date": document.getElementById('due-date').value,
@@ -389,9 +419,12 @@ function getTaskInfos() {
 
 
 /** Function which put all data into firebase and call board */
-function createNewTask() {       
-    tasks.push(getTaskInfos());            
-    putData(TASKS_DIR, tasks);
+async function createNewTask(column) {      
+    console.log(column + " " + tasks);
+    
+    tasksFromFirebase = await loadData(TASKS_DIR); 
+    tasksFromFirebase.push(getTaskInfos(column));            
+    putData(TASKS_DIR, tasksFromFirebase);
     
     setTimeout(() => {
         window.location = "../html/boards.html";  

@@ -1,4 +1,4 @@
-import { setCard, checkEmptyColumns, tasks, updateTasks, showData } from "./boards.js";
+import { setCard, checkEmptyColumns, updateTasks, showData } from "./boards.js";
 export let searchList = [];
 export let sortedList = [];
 
@@ -122,12 +122,12 @@ function mergeArraysWithoutDuplicates(oldArray, newArray) {
  * @param {*} result
  */
 function highlightResults(result) {    
-    if(result.length > 0 && result.length != tasks.length)  {
-        tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = '#E7E7E7'; });
+    if(result.length > 0 && result.length != tasksFromFirebase.length)  {
+        tasksFromFirebase.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = '#E7E7E7'; });
         result.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
         return;
     }    
-    tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
+    tasksFromFirebase.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
 
 
@@ -139,8 +139,8 @@ function highlightResults(result) {
  */
 function orderTasks(input) {
     const searchString = input.value;
-    const result = filterByNestedKeyAndArray(tasks, searchString);
-    sortedList = mergeArraysWithoutDuplicates(tasks, result);
+    const result = filterByNestedKeyAndArray(tasksFromFirebase, searchString);
+    sortedList = mergeArraysWithoutDuplicates(tasksFromFirebase, result);
     showData(sortedList);
     highlightResults(result);
 }

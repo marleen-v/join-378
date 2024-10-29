@@ -1,6 +1,6 @@
-import { setPriorityColor } from "./add-task.js";
+import { getContacts, highlightActiveUser, setPriorityColor } from "./add-task.js";
 import { setDetailedCard } from "./boards-overlay.js";
-import { tasks, setUserInitial, contacts, activeUser } from "./boards.js";
+import { setUserInitial } from "./boards.js";
 import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSubtaskInput, addLinkedItem } from './boards-edit-template.js';
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
@@ -31,14 +31,14 @@ export function setDetailedEditableCard(taskId) {
     let detailedCard = document.querySelector('.detailed-card');
     
     if(formData.length < 1) {
-        detailedCard.querySelector('.input-edit-headline').value = tasks[id].Title;
-        detailedCard.querySelector('.textarea-edit-description').innerHTML = tasks[id].Description;
-        detailedCard.querySelector('.due-date').value = tasks[id].Date;
+        detailedCard.querySelector('.input-edit-headline').value = tasksFromFirebase[id].Title;
+        detailedCard.querySelector('.textarea-edit-description').innerHTML = tasksFromFirebase[id].Description;
+        detailedCard.querySelector('.due-date').value = tasksFromFirebase[id].Date;
     }
     else updateFormData();
-    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
-    setPriorityColor(".detailed-card", tasks[id]);
-    if(tasks[id].Subtasks != null) displayCardSubtasks(tasks[id].Subtasks, id);
+    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasksFromFirebase[id], true, true);
+    setPriorityColor(".detailed-card", tasksFromFirebase[id]);
+    if(tasksFromFirebase[id].Subtasks != null) displayCardSubtasks(tasksFromFirebase[id].Subtasks, id);
 }
 
 /**
@@ -50,7 +50,7 @@ export function setDetailedEditableCard(taskId) {
  */
 function selectPriority(taskId, priority) {
     let id = parseTaskIdToNumberId(taskId);
-    tasks[id].Priority = priority;
+    tasksFromFirebase[id].Priority = priority;
     document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
     setDetailedEditableCard(taskId);
     updateFormData(formData);
@@ -94,10 +94,10 @@ function getFormData() {
 function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     getFormData();
-    tasks[id].Title = formData[0];
-    tasks[id].Description = formData[1];
-    tasks[id].Date = formData[2];
-    putData(TASKS_DIR, tasks);
+    tasksFromFirebase[id].Title = formData[0];
+    tasksFromFirebase[id].Description = formData[1];
+    tasksFromFirebase[id].Date = formData[2];
+    putData(TASKS_DIR, tasksFromFirebase);
     document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
     setDetailedCard(id);
 }
@@ -111,6 +111,7 @@ function closeEdit(taskId) {
  * @returns {boolean}
  */
 function findPersons(data, searchString) {
+    if(data == null) return false;
     for (let index = 0; index < data.length; index++) {
         if (data[index] === searchString) return true;
     }
@@ -145,7 +146,7 @@ function removePerson(data, elementToRemove) {
 export function isChecked(element, taskId) {
     let id = parseTaskIdToNumberId(taskId);
     let person = element.firstName + " " + element.lastName;
-    if (findPersons(tasks[id].Persons, person)) return checkedBoxSVG();
+    if (findPersons(tasksFromFirebase[id].Persons, person)) return checkedBoxSVG();
     return uncheckedBoxSVG();
 }
 
@@ -157,13 +158,14 @@ export function isChecked(element, taskId) {
  */
 function chooseContact(index, taskId) {
     let id = parseTaskIdToNumberId(taskId);
-    let person = contacts[index].firstName + " " + contacts[index].lastName;
-    if (!findPersons(tasks[id].Persons, person)) {
-        tasks[id].Persons.push(person);
+    let person = contactsFromFirebase[index].firstName + " " + contactsFromFirebase[index].lastName;
+    if (!findPersons(tasksFromFirebase[id].Persons, person)) {
+        if(tasksFromFirebase[id].Persons == null) tasksFromFirebase[id]['Persons'] = [person];
+        else tasksFromFirebase[id].Persons.push(person);
         openContactSelectBox(taskId);
     }
     else {
-        removePerson(tasks[id].Persons, person);
+        removePerson(tasksFromFirebase[id].Persons, person);
         openContactSelectBox(taskId);
     }
 }
@@ -212,11 +214,14 @@ function openContactSelectBox(taskId) {
     assignBox.innerHTML = "|";
     let persons = document.querySelector('.add-task-card-persons');
     persons.classList.add('set-height-140px');
+    
     persons.innerHTML = "";
-    contacts.forEach((element, index) => {
+    contactsFromFirebase.forEach((element, index) => {
         persons.innerHTML += addLinkedItem(element, index, taskId);
-        if (getActiveUser(element)) document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
-        else document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
+        if(getActiveUser(element)) {
+            highlightActiveUser(true);
+            document.querySelector(`.username${index}`).innerHTML = `${element.firstName} ${element.lastName} (you)`;
+        }
     });
 }
 
@@ -242,9 +247,10 @@ function closeContactSelectBox(taskId) {
  *
  * @param {*} taskId
  */
-function assignContact(taskId) {
+async function assignContact(taskId) {
     toggleContactList = !toggleContactList;
     if (toggleContactList) {
+        contactsFromFirebase = await loadData(CONTACTS_DIR);
         openContactSelectBox(taskId);
         document.getElementById('assign-to-toggle-icon').style.transform = "rotate(180deg)";
     }
@@ -280,10 +286,10 @@ function pushSubtask(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     let input = document.querySelector('#add-new-subtask').value;
     if (input == "") { cancelSubtask(); return; }
-    if (tasks[id].Subtasks) tasks[id].Subtasks.push({ "Description": input, "Done": false });
-    else tasks[id]["Subtasks"] = [{ "Description": input, "Done": false }];
+    if (tasksFromFirebase[id].Subtasks) tasksFromFirebase[id].Subtasks.push({ "Description": input, "Done": false });
+    else tasksFromFirebase[id]["Subtasks"] = [{ "Description": input, "Done": false }];
     document.querySelector('.detailed-task-card-subtasks').innerHTML = getSubtaskMask(taskId);
-    displayCardSubtasks(tasks[id].Subtasks, id, 'boards');
+    displayCardSubtasks(tasksFromFirebase[id].Subtasks, id, 'boards');
 }
 
 
@@ -311,9 +317,9 @@ function addSubtask(taskId) {
  * @param {*} index
  */
 function removeCardSubtask(taskId,index) {           
-    tasks[taskId].Subtasks.splice(index, 1);
-    putData(TASKS_DIR, tasks);
-    displayCardSubtasks(tasks[taskId].Subtasks, taskId);
+    tasksFromFirebase[taskId].Subtasks.splice(index, 1);
+    putData(TASKS_DIR, tasksFromFirebase);
+    displayCardSubtasks(tasksFromFirebase[taskId].Subtasks, taskId);
 }
 
 /**
@@ -324,10 +330,10 @@ function removeCardSubtask(taskId,index) {
  */
 function saveSubtaskCardEdit(taskId, index) {
     let subtaskInput = document.getElementById(`added-subtask-input${index}`).value;
-    if(tasks[taskId].Subtasks == null) tasksArray[taskId].Subtasks = [{Description: subtaskInput, Done: false }];
-    else if(subtaskInput !== "") tasks[taskId].Subtasks[index].Description = subtaskInput;
-    putData(TASKS_DIR, tasks);
-    displayCardSubtasks(tasks[taskId].Subtasks, taskId);
+    if(tasksFromFirebase[taskId].Subtasks == null) tasksArray[taskId].Subtasks = [{Description: subtaskInput, Done: false }];
+    else if(subtaskInput !== "") tasksFromFirebase[taskId].Subtasks[index].Description = subtaskInput;
+    putData(TASKS_DIR, tasksFromFirebase);
+    displayCardSubtasks(tasksFromFirebase[taskId].Subtasks, taskId);
 }
 
 

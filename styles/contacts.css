@@ -106,6 +106,7 @@ main {
 
 .name-email {
   gap: 5px;
+  text-align: left;
 }
 
 .contact-name {
