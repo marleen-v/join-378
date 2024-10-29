@@ -1,10 +1,11 @@
 main {
   width: 100%;
   text-wrap: pretty;
+  max-width: 1920px;
 }
 
 .imprint-wrapper {
-  margin-top: 20px;
+  padding-top: 20px;
   margin-left: 40px;
   padding-right: 20px;
   border-collapse: collapse;

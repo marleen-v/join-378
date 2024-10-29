@@ -13,6 +13,7 @@ async function initSignup(){
   dataFromFirebase = await loadData(USERS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
   contactsUser = await loadData(CONTACTS_DIR);
+  checkScreenOrientation();
 }
 
 
@@ -28,7 +29,6 @@ function signUpUser(){
  * Puts data to firebase
  * @param {string} path directory in firebase
  * @param {object} data object-data
- */
 async function putData(path="", data={}){
   let res = await fetch(FIREBASE_URL + path + ".json",
   {
@@ -40,6 +40,7 @@ async function putData(path="", data={}){
   });
   let resToJson = await res.json();
 }
+*/
 
 
 /**
@@ -132,7 +133,6 @@ function addUser(){
   if((checkCorrectPassword()) && (emailNotExists()) && (spaces === 1)){
     let firstName = nameInputRef.value.split(' ')[0];
     let lastName = nameInputRef.value.split(' ')[1];
-    saveActiveUserToSessionStorage(emailInputRef.value);
     pushEverythingNecessaryToFireBase(firstName, lastName);
     signupSuccess();
   } else {

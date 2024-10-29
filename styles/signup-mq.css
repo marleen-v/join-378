@@ -73,3 +73,18 @@
     background-position-x: 256px;
   }
 }
+
+@media only screen and (max-width: 400px) and (max-height: 700px){
+  .logo {
+    top: 48px;
+    left: 286px;
+    z-index: 1;
+  }
+  .logo img {
+    width: 52px;
+    height: 66px;
+  }
+  .legal-ctn {
+    bottom: 0;
+  }
+}

@@ -145,3 +145,16 @@ function checkOrigin(){
       document.querySelector("main").style.pointerEvents = "auto";
     }
 }
+
+
+/**
+* Checks available screen orientation and sets it to 'portrait'
+*/
+async function checkScreenOrientation(){
+  try {
+    await screen.orientation.lock('portrait');
+    console.log('Screen orientation locked');
+  } catch(error) {
+    console.error(error);
+  }
+}

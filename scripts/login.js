@@ -9,25 +9,26 @@ const fileArray = ["summary.html", "boards.html", "add-task.html", "contacts.htm
  */
 async function initLogin(){
   dataFromFirebase = await loadData(USERS_DIR);
-  activeUser = await loadActiveUser(ACTIVE_DIR);
+  activeUser = await loadData(ACTIVE_DIR);
   for (let i = 0; i < fileArray.length; i++) {
     if (document.referrer.includes(fileArray[i])){
       logoutPopup();
     }  
   }
   loadCheckboxStatus();
+  checkScreenOrientation();
 }
 
 
 /**
  * Loads active user
  * @param {string} path to activeUser directory
- */
 export async function loadActiveUser(path=""){
   let res = await fetch(FIREBASE_URL + path + ".json");
   let resToJson = await res.json();
   activeUser = resToJson;
 }
+*/
 
 
 /**
@@ -66,7 +67,6 @@ function checkUserPassword(){
           "email": dataFromFirebase[i].email
         }];
       putData(ACTIVE_DIR, activeUser);
-      saveActiveUserToSessionStorage(emailInputRef.value);
       rememberMeCheck();
       window.location.href = './summary.html';
     }
@@ -90,7 +90,6 @@ async function guestLogin(){
     "initials": "GG",
     "email": "guest@guest.de"
   }];
-  saveActiveUserToSessionStorage('Guest');
   await putData(ACTIVE_DIR, activeUser);
   window.location.href = "./summary.html";
 }
@@ -194,4 +193,3 @@ window.guestLogin = guestLogin;
 window.togglePasswordIcon = togglePasswordIcon;
 window.showData = showData;
 window.checkUserPassword = checkUserPassword;
-window.saveActiveUserToSessionStorage = saveActiveUserToSessionStorage;
