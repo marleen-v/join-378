@@ -154,6 +154,7 @@ main {
     padding: 15px 20px;
     font-weight: 700;
     font-size: 21px;
+    font-family: 'Inter';
     border: none;
 }
 
@@ -181,6 +182,7 @@ main {
     font-weight: 700;
     font-size: 21px;
     border: none;
+    font-family: 'Inter';
 }
 
 .btn-add-task:hover {

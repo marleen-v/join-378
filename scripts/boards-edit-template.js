@@ -20,7 +20,7 @@ export function addLinkedItem(element, index, taskId) {
     return /*html*/`
         <div class="task-user-select grid grid-columns-3-48px-1fr-48px clickable" onclick="chooseContact(${index}, '${taskId}')">
             <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
-            <span class="flex align-items-center">${element.firstName} ${element.lastName}${active}</span>
+            <span class="username${index} flex align-items-center">${element.firstName} ${element.lastName}${active}</span>
             <div class="flex align-items-center">${selectBox}</div>
         </div>
     `;
