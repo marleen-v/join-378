@@ -4,11 +4,12 @@ import { tasks } from './boards.js';
 let moving = null;
 let currentTask = 0;
 
-function pickup(event, id) {
+export function pickup(event, id) {
     currentTask = parseTaskIdToNumberId(id);
     if(window.screen.width > 700) return;
     currentDraggedElement = id;
     moving = event.target;
+    document.getElementById(id).classList.add('draggable');
     
 
     moving.style.height = moving.clientHeight;
@@ -22,7 +23,7 @@ function pickup(event, id) {
 
 
 
-function move(event) {
+export function move(event) {
     if(window.screen.width > 700) return;
     if (moving) {        
         if (event.clientX) {
@@ -44,8 +45,10 @@ function move(event) {
 }
 
 
-function drop(event) {
+export function drop(event, id) {
     if(window.screen.width > 700) return;
+    document.getElementById(id).classList.remove('draggable');
+
     let column = "";
     if (moving) {
 

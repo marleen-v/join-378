@@ -1,6 +1,6 @@
 import { getPriority } from "./add-task.js";
 import { parseTaskIdToNumberId, setDetailedEditableCard } from "./boards-edit.js";
-import { setBgColor, setUserInitial, tasks, calculateDoneSubtasks, showData } from "./boards.js";
+import { setBgColor, setUserInitial, calculateDoneSubtasks, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
@@ -25,7 +25,7 @@ export function unsetOpacity() {
  * @param {*} id
  */
 function setDate(card, id) {
-    const date = new Date(tasks[id].Date);
+    const date = new Date(tasksFromFirebase[id].Date);
     const formatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const formattedDate = formatter.format(date);
     card.querySelector('.add-task-card-date').innerHTML = "Due date: " + formattedDate;
@@ -55,7 +55,7 @@ export function getOverlay() {
 function checkDone(taskId, index) {
     let id = parseTaskIdToNumberId(taskId);
     tasks[id].Subtasks[index].Done = !tasks[id].Subtasks[index].Done;
-    putData(TASKS_DIR, tasks);
+    putData(TASKS_DIR, tasksFromFirebase);
     document.querySelector('.overlay').innerHTML = getDetailedCard('taskId' + id);
     setDetailedCard(id);
 }
@@ -68,8 +68,8 @@ function checkDone(taskId, index) {
  * @param {*} id
  */
 function setSubtasks(detailedCard, id) {
-    if(tasks[id].Subtasks == null) return;
-    tasks[id].Subtasks.forEach((element, index) => {
+    if(tasksFromFirebase[id].Subtasks == null) return;
+    tasksFromFirebase[id].Subtasks.forEach((element, index) => {
         if(element !== "") { 
             if(element.Done == true) detailedCard.querySelector('.add-task-card-subtasks').innerHTML += /*html*/`
                 <div onclick="checkDone('taskId${id}', ${index})" class="grid grid-columns-2-32px-1fr align-items-center"><div class="clickable">${checkedBoxSVG()}</div><div class="flex align-items-center">${element.Description}</div></div>
@@ -90,13 +90,13 @@ function setSubtasks(detailedCard, id) {
  */
 export function setDetailedCard(id) {
     let detailedCard = document.querySelector('.detailed-card');
-    detailedCard.querySelector('.add-task-card-category').innerHTML = tasks[id].Category;
-    setBgColor(detailedCard, tasks[id]);
-    detailedCard.querySelector('.add-task-card-headline').innerHTML = tasks[id].Title;
-    detailedCard.querySelector('.add-task-card-description').innerHTML = tasks[id].Description;
+    detailedCard.querySelector('.add-task-card-category').innerHTML = tasksFromFirebase[id].Category;
+    setBgColor(detailedCard, tasksFromFirebase[id]);
+    detailedCard.querySelector('.add-task-card-headline').innerHTML = tasksFromFirebase[id].Title;
+    detailedCard.querySelector('.add-task-card-description').innerHTML = tasksFromFirebase[id].Description;
     setDate(detailedCard, id);
-    detailedCard.querySelector('.add-task-card-priority').innerHTML = `<div class="mg-right-8px">Priority:</div><div class="mg-right-8px">${tasks[id].Priority}</div><div class="flex align-items-center">${getPriority(tasks[id].Priority)}</div>`;
-    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasks[id], true, true);
+    detailedCard.querySelector('.add-task-card-priority').innerHTML = `<div class="mg-right-8px">Priority:</div><div class="mg-right-8px">${tasksFromFirebase[id].Priority}</div><div class="flex align-items-center">${getPriority(tasksFromFirebase[id].Priority)}</div>`;
+    detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasksFromFirebase[id], true, true);
     let userIcons = detailedCard.querySelectorAll('.circle');
     userIcons.forEach(element => { element.style.width = "42px"});
     setSubtasks(detailedCard, id);
@@ -129,11 +129,11 @@ async function deleteTask(taskId) {
             tasks.splice(i, 1);
         }
     }
-    tasks.forEach((element, index) => { element.id = index });
-    putData(TASKS_DIR, tasks);
-    tasks = await loadData(TASKS_DIR);
+    tasksFromFirebase.forEach((element, index) => { element.id = index });
+    putData(TASKS_DIR, tasksFromFirebase);
+    tasksFromFirebase = await loadData(TASKS_DIR);
     closeOverlay('.detailed-card');
-    showData(tasks);
+    showData(tasksFromFirebase);
 }
 
 
@@ -152,7 +152,7 @@ export function runOutOverlayAnimation(wrapper) {
         overlay.classList.remove('z-index-2000');
         overlay.classList.add('z-index-minus-1');
         unsetOpacity();
-        showData(tasks);
+        showData(tasksFromFirebase);
     }, "300");
 }
 

@@ -705,6 +705,11 @@ main {
     gap: 16px;
 }
 
+.draggable {
+    position: absolute;
+    touch-action: none;
+}
+
 
 @keyframes moveFromRightToCenter {
     from {
@@ -755,10 +760,7 @@ and (max-width: 1024px) {
         grid-template-rows: 1fr 1fr 1fr 1fr;
     }
 
-    .add-task-card-priority-edit {
-        height: 280px;
-        margin-top: -40px;
-    }
+
 
 }
 
@@ -902,6 +904,14 @@ and (max-width: 1024px) {
 
     .board-main {
         margin-top: 40px;
+    }
+}
+
+@media only screen and (orientation: portrait)
+and (min-device-width: 350px) {
+    .add-task-card-priority-edit {
+        height: 280px;
+        margin-top: -40px;
     }
 }
 

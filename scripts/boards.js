@@ -8,9 +8,9 @@ import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./bo
 import { loadActiveUser, loadData } from "./module.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
-export let tasks = [];
-export let contacts = [];
-export let activeUser = [];
+//export let tasks = [];
+//export let contacts = [];
+//export let activeUser = [];
 let moving = null;
 let currentTask = 0;
 let addToColumn = "";
@@ -28,11 +28,11 @@ export function updateTasks(list) {
  * @returns {*}
  */
 async function loadBoards() {
-    tasks = await loadData(TASKS_DIR);
-    contacts = await loadData(CONTACTS_DIR);
+    tasksFromFirebase = await loadData(TASKS_DIR);
+    contactsFromFirebase = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
         
-    showData(tasks);
+    showData(tasksFromFirebase);
     getLogo();
 
     searchId.addEventListener('input', function(e) {
@@ -67,7 +67,7 @@ export function setBgColor(currentCard, element) {
  */
 export function getUserColor(firstName, lastName) {
     let color = "";
-    contacts.forEach(element => {
+    contactsFromFirebase.forEach(element => {
         if (element.firstName == firstName || element.lastName == lastName) {
             color = element.color;
         }
@@ -168,10 +168,10 @@ export function setCard(element, index, column) {
  * @export
  */
 export function checkEmptyColumns() {        
-    if(!search(tasks, "Column", "To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
-    if(!search(tasks, "Column", "In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
-    if(!search(tasks, "Column", "Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();
-    if(!search(tasks, "Column", "Done")) document.querySelector(`.board-main-done`).innerHTML = getEmptyColumn();
+    if(!search(tasksFromFirebase, "Column", "To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
+    if(!search(tasksFromFirebase, "Column", "In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
+    if(!search(tasksFromFirebase, "Column", "Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();
+    if(!search(tasksFromFirebase, "Column", "Done")) document.querySelector(`.board-main-done`).innerHTML = getEmptyColumn();
 }
 
 
