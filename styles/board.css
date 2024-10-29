@@ -755,6 +755,11 @@ and (max-width: 1024px) {
         grid-template-rows: 1fr 1fr 1fr 1fr;
     }
 
+    .add-task-card-priority-edit {
+        height: 280px;
+        margin-top: -40px;
+    }
+
 }
 
 @media only screen and (max-width: 1180px) {
