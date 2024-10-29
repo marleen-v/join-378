@@ -24,6 +24,7 @@ async function initContacts() {
   checkScreenSize();
   contactList = await loadData(CONTACTS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
+  tasksFromFirebase = await loadData(TASKS_DIR);
   renderContactList();
   getLogo();
   userList = await loadData(USERS_DIR);
@@ -42,7 +43,7 @@ function renderContactList() {
     addNewContactSection(index);
     contactListRef.innerHTML += getContactHTML(contact, index);
   }
-  markActiveUser();
+  /* markActiveUser(); */
   
 }
 
@@ -257,12 +258,26 @@ function addContactColor() {
 async function deleteContact(index) {
   checkIfContactUser();
   deleteUser();
+  updateTaskList();
   contactList.splice(index, 1);
   renderContactList();
   closeContactInfo();
   closeContactDialog();
   await putData(CONTACTS_DIR, contactList);
   await putData(USERS_DIR, userList);
+  await putData(TASKS_DIR, tasksFromFirebase);
+}
+
+
+function updateTaskList() {
+  //check if email(person) is in any task
+  tasksFromFirebase.forEach(task => {
+    const index = task.Persons.indexOf(currentContact.email);
+    if (index !== -1) {
+      task.Persons.splice(index, 1); 
+    }
+  });
+  console.log(tasksFromFirebase)
 }
 
 /**
@@ -325,6 +340,7 @@ async function updateContactInfo(index) {
   closeContactDialog();
   await putData(CONTACTS_DIR, contactList);
   await putData(USERS_DIR, userList);
+  await putData(TASKS_DIR, tasksFromFirebase);
 }
 
 /**
