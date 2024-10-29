@@ -4,7 +4,7 @@ import { search } from "./boards-filter.js";
 import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
-import { loadActiveUser, loadData } from "./module.js";
+import { getPerson, loadActiveUser, loadData } from "./module.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 let addToColumn = "";
@@ -74,13 +74,17 @@ export function getUserColor(firstName, lastName) {
 export function setUserInitial(element, displayFullName = false, grid = false) {   
     if(element.Persons == null) return "";
     let personsHTML = "";
-    element.Persons.forEach((person) => {
+    element.Persons.forEach((person) => {        
+        let p = getPerson(contactsFromFirebase, person);
+        if(p != "") {        
+        /*
         let splittedName = person.split(' ');
         let firstName = splittedName[0].charAt(0);
-        let lastName = splittedName[1].charAt(0);
-        let initial = firstName + lastName;
-        let color = getUserColor(splittedName[0], splittedName[1]);        
-        personsHTML += getUser(person, initial, color, displayFullName, grid);
+        let lastName = splittedName[1].charAt(0);*/
+            let initial = p.firstName.charAt(0) + p.lastName.charAt(0);
+            let color = p.color;//getUserColor(splittedName[0], splittedName[1]);        
+            personsHTML += getUser(person, initial, color, displayFullName, grid);
+        }
     });    
     if(element.Persons.length > 4 && displayFullName == false) return getGroupUserInitials(element);
     return personsHTML;

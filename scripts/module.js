@@ -33,3 +33,11 @@ export async function putData(path="", data={}){
       body: JSON.stringify(data)
     });
 }
+
+
+export function getPerson(contacts, searchString) {
+    for (let index = 0; index < contacts.length; index++) {
+        if (contacts[index].email === searchString) return contacts[index];        
+    }
+    return "";
+}

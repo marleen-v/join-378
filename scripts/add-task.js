@@ -36,7 +36,10 @@ async function loadAddTask() {
  * @returns {boolean}
  */
 export function findPersons(data, searchString) {
+    
     for (let index = 0; index < data.length; index++) {
+        console.log(data[index] + " " + searchString);
+        
         if (data[index].email === searchString) return true;
     }
     return false;

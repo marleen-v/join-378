@@ -1,3 +1,5 @@
+import { getPerson } from "./module.js";
+
 /**
  * Get html structure of task card
  *
@@ -48,12 +50,14 @@ export function getGroupUserInitials(element) {
  * @returns {string}
  */
 export function getUser(person, initials, color, displayFullname, grid = false) {
+    let p = getPerson(contactsFromFirebase, person);
+    let fullname = p.firstName + " " + p.lastName;    
     let layout = "flex justify-content-center align-items-center set-width-height-42";
     (grid === true) ? layout ="grid grid-columns-2-48px-1fr" : "flex justify-content-center align-items-center set-width-height-42";
     return /*html*/`
          ${(grid) ? '<div class="task-user-select ' + layout + '">' : ''}
             <span class="circle ${color} flex justify-content-center align-items-center set-width-height-42"><span>${initials}</span></span> 
-            ${(displayFullname) ? '<span class="flex align-items-center">'+ person + '</span>' : ''}
+            ${(displayFullname) ? '<span class="flex align-items-center">'+ fullname + '</span>' : ''}
          ${(grid) ? '</div>' : '' }  
     `;
 }
