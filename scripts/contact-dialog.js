@@ -43,7 +43,6 @@ function closeContactDialog() {
   errorMessage.classList.add("d_none");
   cancelBtn.classList.add("flex"); //was removed if add-dialog was opened beforehand (on mobile)
         }, 500); // Close dialog after animation completes
- 
 }
 
 /**
@@ -62,6 +61,7 @@ function checkForm() {
   }
 }
 
+// validates input fields
 inputNameRef.addEventListener("input", checkForm);
 inputEmailRef.addEventListener("input", checkForm);
 inputPhoneRef.addEventListener("input", checkForm);
@@ -93,33 +93,27 @@ function checkContactEmail() {
 function renderAddContactDialog() {
   dialogTitle.innerHTML = "Add Contact";
   dialogSubline.innerHTML = "Tasks are better with a team!";
-  dialogInitials.innerHTML =
-    '<img src="../assets/icons/person.svg" alt="" class="circle-icon" />';
+  dialogInitials.innerHTML ='<img src="../assets/icons/person.svg" alt="" class="circle-icon" />';
   cancelBtnTitle.innerHTML = "Cancel";
   submitBtnTitle.innerHTML = "Create Contact";
-  /* dialogColor.classList.add("neutralColor"); */
-  cancelBtn.onclick = function () {
-    closeContactDialog();
-  };
+  cancelBtn.onclick = function () {closeContactDialog()};
+  fillOnsubmitAddForm();
+  submitBtn.classList.add("inactiv-btn");
+  checkIcon.classList.add("inactive-color");
+  if (window.innerWidth < 1200) { cancelBtn.classList.add("d_none"); cancelBtn.classList.remove("flex")}
+  openContactDialog();
+}
+
+function  fillOnsubmitAddForm(){
   contactForm.onsubmit = function () {
     if (!emailExists) {
       addNewContact();
       errorMessage.classList.add("d_none");
     } else {
-      return false;
+    return false;
     }
   };
-
-  submitBtn.classList.add("inactiv-btn");
-  checkIcon.classList.add("inactive-color");
-
-  if (window.innerWidth < 1200) {
-    cancelBtn.classList.add("d_none");
-    cancelBtn.classList.remove("flex");
-  }
-
-  openContactDialog();
-}
+};
 
 /**
  * This function renders the dialog to edit a chosen contact
@@ -133,11 +127,35 @@ function renderEditContactDialog(index) {
   submitBtnTitle.innerHTML = "Save";
   dialogColor.classList.add(currentContact.color);
   dialogInitials.innerHTML = currentContact.initials;
+  fillCancelBtnOnclick(index);
+  fillOnsubmitEditForm(index);
+  fillInputFields(index);
+  submitBtn.classList.remove("inactiv-btn");
+  checkIcon.classList.remove("inactive-color");
+  openContactDialog();
+}
+
+/**
+ * This function fills input fields with current contact information
+ *
+ * @param {Number} index
+ */
+function fillInputFields(index) {
+  inputNameRef.value =
+  contactList[index].firstName + " " + contactList[index].lastName;
+  inputEmailRef.value = contactList[index].email;
+  inputPhoneRef.value = contactList[index].phone;
+}
+
+function fillCancelBtnOnclick(index) {
   cancelBtn.onclick = function () {
     deleteContact(index);
     dialogColor.classList.remove(currentContact.color);
     errorMessage.classList.add("d_none");
   };
+}
+
+function fillOnsubmitEditForm(index) {
   contactForm.onsubmit = function () {
     if (!emailExists) {
       updateContactInfo(index);
@@ -147,23 +165,4 @@ function renderEditContactDialog(index) {
       return false;
     }
   };
-
-  fillInputFields(index);
-
-  submitBtn.classList.remove("inactiv-btn");
-  checkIcon.classList.remove("inactive-color");
-
-  openContactDialog();
-}
-
-/**
- * This function fills in
- *
- * @param {Number} index
- */
-function fillInputFields(index) {
-  inputNameRef.value =
-    contactList[index].firstName + " " + contactList[index].lastName;
-  inputEmailRef.value = contactList[index].email;
-  inputPhoneRef.value = contactList[index].phone;
 }
