@@ -177,7 +177,7 @@ function clearColumns() {
  * To Do    |   In Progress     |   Await Feedback  |   Done
 */
 export function showData(array) {
-    clearColumns();    
+    clearColumns();  
     if(array !== null) {
         array.forEach((element, index) => {          
             if (element.Column === "To Do") setCard(element, index, "to-do");
@@ -258,7 +258,7 @@ function moveTo(column) {
 /** 
  * Refresh the changed board if an element is dropped
 */
-function refresh() {
+export function refresh() {
     document.querySelector('.board-main-to-do').innerHTML = "";
     document.querySelector('.board-main-in-progress').innerHTML = "";
     document.querySelector('.board-main-await-feedback').innerHTML = "";

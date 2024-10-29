@@ -272,7 +272,6 @@ export function setPriority(prio) {
  * @param {*} cat
  */
 function addCategory(cat) {
-    category = cat;
     document.querySelector('#category-input').value = cat;
     chooseCategory();
 }
@@ -383,7 +382,6 @@ function clearButton() {
     document.querySelector('.added-subtasks-item').innerHTML = "";
     subtasks = [];
     addedUser = [];
-    category = "Medium";
     setPriority("medium");
 }
 
@@ -397,7 +395,7 @@ function getTaskInfos(column) {
     let persons = [];
     addedUser.forEach(element => { persons.push(element.firstName + " " + element.lastName) });
     return {
-        "id": tasks.length,
+        "id": tasksFromFirebase.length,
         "Column": column,
         "Title": document.getElementById('title').value,
         "Description": document.getElementById('description').value,

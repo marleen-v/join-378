@@ -1,6 +1,6 @@
 import { getPriority } from "./add-task.js";
 import { parseTaskIdToNumberId, setDetailedEditableCard } from "./boards-edit.js";
-import { setBgColor, setUserInitial, showData } from "./boards.js";
+import { refresh, setBgColor, setUserInitial, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
@@ -122,18 +122,19 @@ function editTask(taskId) {
  *
  * @param {*} taskId
  */
-async function deleteTask(taskId) {    
-    for (let i = 0; i < tasksFromFirebase.length; i++) {
+function deleteTask(taskId) {    
+    let tasks = tasksFromFirebase;
+    for (let i = 0; i < tasks.length; i++) {
         let task = "taskId" + i;
         if (task === taskId) {
-            tasksFromFirebase.splice(i, 1);
+            tasks.splice(i, 1);
         }
     }
-    tasksFromFirebase.forEach((element, index) => { element.id = index });
-    putData(TASKS_DIR, tasksFromFirebase);
-    tasksFromFirebase = await loadData(TASKS_DIR);
+    tasks.forEach((element, index) => { element.id = index });
+    putData(TASKS_DIR, tasks);
+    //tasksFromFirebase = await loadData(TASKS_DIR);
     closeOverlay('.detailed-card');
-    showData(tasksFromFirebase);
+    showData(tasks);
 }
 
 

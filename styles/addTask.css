@@ -507,7 +507,6 @@ and (max-width: 1024px) {
     .priority-buttons {
         display: flex;
         flex-direction: column;
-        margin-top: -200px;
     }
 }
 
