@@ -82,6 +82,11 @@
     margin-top: 32px;
 }
 
+.mg-top-minus-40px {
+    margin-top: -40px;
+}
+
+
 .mg-left-8px {
     margin-left: 8px;
 }
@@ -97,6 +102,10 @@
 
 .set-width-440px {
     width: 440px;
+}
+
+.set-height-280px {
+    height: 280px !important;
 }
 
 .set-height-100px {

@@ -726,10 +726,6 @@ main {
 }
 
 
-.add-task-card-priority {
-    height: 84px;
-}
-
 @media only screen and (orientation: portrait)
 and (max-width: 1024px) {
     .add-new-task-to-column {
@@ -757,11 +753,6 @@ and (max-width: 1024px) {
     .detailed-card-editable-container {
         display: grid;
         grid-template-rows: 1fr 1fr 1fr 1fr;
-    }
-
-    .add-task-card-priority {
-        height: 280px;
-        margin-top: -40px;
     }
 
 }
