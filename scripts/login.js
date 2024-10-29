@@ -21,6 +21,23 @@ async function initLogin(){
 
 
 /**
+* Checks available screen orientation and sets it to 'portrait'
+*/
+async function checkScreenOrientation(){
+  if(window.matchMedia("(orientation: landscape)").matches){
+    try {
+      await screen.orientation.lock('portrait');
+      console.log('Screen orientation locked');
+    } catch(error) {
+      console.error(error);
+    }
+  }
+  console.log("Portrait: " + window.matchMedia("(orientation: portrait)").matches);
+  console.log("Landscape: " + window.matchMedia("(orientation: landscape)").matches);
+}
+
+
+/**
  * Loads active user
  * @param {string} path to activeUser directory
 export async function loadActiveUser(path=""){

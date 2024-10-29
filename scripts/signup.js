@@ -18,6 +18,19 @@ async function initSignup(){
 
 
 /**
+* Checks available screen orientation and sets it to 'portrait'
+*/
+async function checkScreenOrientation(){
+  try {
+    await screen.orientation.lock('portrait');
+    console.log('Screen orientation locked');
+  } catch(error) {
+    //console.error(error);
+  }
+}
+
+
+/**
  * Executes the signup process
  */
 function signUpUser(){
