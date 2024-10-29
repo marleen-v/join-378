@@ -25,7 +25,6 @@ async function initContacts() {
   contactList = await loadData(CONTACTS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
   renderContactList();
-  findAndMarkActiveUser();  
   getLogo();
   userList = await loadData(USERS_DIR);
   
@@ -43,6 +42,7 @@ function renderContactList() {
     addNewContactSection(index);
     contactListRef.innerHTML += getContactHTML(contact, index);
   }
+  markActiveUser();
   
 }
 
@@ -69,7 +69,7 @@ function addNewContactSection(index) {
 /**
  * This function finds loged-in-User in contact-List and adds "(you)" im Namen
  */
-function findAndMarkActiveUser() {
+function markActiveUser() {
   if(activeUser[0].email !== "guest@guest.de" && activeUser[0].email !== "") {
   const contactNameRef = document.querySelectorAll(".contact-name");
   activeUserIndex = contactList.findIndex((contact) => contact.email == activeUser[0].email);
@@ -146,6 +146,9 @@ function toggleEditMenu() {
 
 }
 
+/**
+ * This function closes the Contact Info on small screens
+ */
 function closeContactInfoMobile(){
   const contactBtns = document.querySelectorAll(".single-contact-btn");
   contactInfoRef.classList.add("d_none");
@@ -174,8 +177,9 @@ function closeContactInfoMobile(){
   window.addEventListener('resize', checkScreenSize);
 
 
-
-
+/**
+ * This function assigns input values to contact variables
+ */
 function assignContactData() {
   firstName = inputNameRef.value.split(" ")[0];
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
@@ -267,9 +271,11 @@ async function deleteContact(index) {
 async function checkIfContactUser() {
   //if 
   userIndex = userList.findIndex((user) => user.email === currentContact.email);
-  console.log(userIndex);
 }
 
+/**
+ * This function deletes a user
+ */
 function deleteUser() {
   if (userIndex != -1){
     userList.splice(userIndex, 1); // if contact is also a user, user gets deleted
@@ -293,14 +299,12 @@ async function checkIfOpenedContactIsActiveUser(index){
   }
 }
 
-
 /**
  * This function updates a contact info, after it was edited
  *
  * @param {Number} index
  */
 async function updateContactInfo(index) {
-  
   assignContactData();
 
   contactList[index] = {
@@ -321,8 +325,6 @@ async function updateContactInfo(index) {
   closeContactDialog();
   await putData(CONTACTS_DIR, contactList);
   await putData(USERS_DIR, userList);
-  
-  
 }
 
 /**
