@@ -11,6 +11,8 @@ let currentContact = [];
 let userList = [];
 let userIndex;
 
+let activeUserIndex;
+
 let firstName;
 let lastName;
 let initials;
@@ -68,9 +70,9 @@ function addNewContactSection(index) {
  * This function finds loged-in-User in contact-List and adds "(you)" im Namen
  */
 function findAndMarkActiveUser() {
-  if(activeUser[0].email !== "guest@guest.de") {
+  if(activeUser[0].email !== "guest@guest.de" && activeUser[0].email !== "") {
   const contactNameRef = document.querySelectorAll(".contact-name");
-  let activeUserIndex = contactList.findIndex((contact) => contact.email == activeUser[0].email);
+  activeUserIndex = contactList.findIndex((contact) => contact.email == activeUser[0].email);
   contactNameRef[activeUserIndex].innerHTML += " (you)";
 }
 }
@@ -274,6 +276,23 @@ function deleteUser() {
   } 
 }
 
+/**
+ * This function checks if the opened contact is the current active user, if it is, the info of active-user will also be changed
+ * @param {*} index 
+ */
+async function checkIfOpenedContactIsActiveUser(index){
+  if(index == activeUserIndex){
+    activeUser[0] = {
+    email: inputEmailRef.value,
+    firstName: firstName,
+    initials: initials,
+    lastName: lastName
+    };
+
+    await putData(ACTIVE_DIR, activeUser);
+  }
+}
+
 
 /**
  * This function updates a contact info, after it was edited
@@ -281,6 +300,7 @@ function deleteUser() {
  * @param {Number} index
  */
 async function updateContactInfo(index) {
+  
   assignContactData();
 
   contactList[index] = {
@@ -291,7 +311,7 @@ async function updateContactInfo(index) {
     lastName: lastName,
     phone: inputPhoneRef.value,
   };
-
+  checkIfOpenedContactIsActiveUser(index);
   checkIfContactUser();
   updateUserInfo(index);
   sortContactsByFirstName();
@@ -301,6 +321,7 @@ async function updateContactInfo(index) {
   closeContactDialog();
   await putData(CONTACTS_DIR, contactList);
   await putData(USERS_DIR, userList);
+  
   
 }
 
