@@ -316,7 +316,9 @@ main {
     border: 2px solid #FFFFFF;
     padding: 16px;
     margin: 8px 2px 8px 2px;
+    min-width: 252px;
     max-width: 252px;
+    min-height: 263px;
     max-height: 263px;
     gap: 16px;
     background-color: white;
@@ -723,6 +725,8 @@ main {
     }
 }
 
+/*
+
 @media only screen and (max-height: 800px) {
     .add-new-task-to-column {
         height: 700px;
@@ -731,9 +735,10 @@ main {
 
 
 
-}
+}*/
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (orientation: portrait)
+and (max-width: 1024px) {
     .add-new-task-to-column {
         padding: 32px 16px 0 16px;
         height: 100vh;
@@ -750,8 +755,8 @@ main {
     .add-task-to-column  {
         display: grid;
         grid-template-rows: 78px 1fr;
-        height: 600px;
-        width: 100%;
+        height: calc(100vh - 48px);
+        width: calc(100vw - 8px);
         overflow-y: auto;
         gap: 16px;
     }
@@ -847,13 +852,13 @@ main {
     
     .boards {
         display: grid;
-        grid-template-rows: 412px 0px 1fr;
+        grid-template-rows: 112px 0px 1fr;
     }
 
     .board-head {
         display: grid;
-        grid-template-columns: 260px 260px;
-        grid-template-rows: 232px 40px 40px 1fr;
+        grid-template-columns: 160px 300px 160px;
+        grid-template-rows: 128px;
     }
 
     .add-task-form-bottom {
@@ -874,11 +879,29 @@ main {
     }
 }
 
+@media only screen and (max-width: 720px) { 
+    .boards {
+        display: grid;
+        grid-template-rows: 212px 0px 1fr;
+    }
+
+    .board-head {
+        display: grid;
+        grid-template-columns: 200px 300px;
+        grid-template-rows: 128px 48px;
+    }
+}
+
 @media only screen and (max-width: 645px)  {
     .board-head {
         display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 232px 40px 40px 1fr;
+        grid-template-columns: 300px;
+        grid-template-rows: 48px 48px 48px 1fr;
+        margin-top: 40px;
+    }
+
+    .board-main {
+        margin-top: 40px;
     }
 }
 
@@ -886,6 +909,27 @@ main {
 @media only screen and (orientation: landscape)
 and (min-device-width: 319px) 
 and (max-device-width: 980px) { 
+    .add-new-task-to-column {
+        padding: 32px 16px 0 16px;
+        height: 100vh;
+        width: 100%;
+        overflow-y: hidden;
+        box-shadow: none;
+        border-radius: 0%;
+    }
+
+    .add-new-task-to-column-container {
+        overflow-y: auto;
+    }
+
+    .add-task-to-column  {
+        display: grid;
+        grid-template-rows: 78px 1fr;
+        height: calc(100vh - 48px);
+        width: calc(100vw - 8px);
+        overflow-y: auto;
+        gap: 16px;
+    }
     .detailed-card {
         overflow-y: auto;
         width: 100%;
