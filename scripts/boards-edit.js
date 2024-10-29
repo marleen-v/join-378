@@ -27,7 +27,7 @@ export function parseTaskIdToNumberId(taskId) {
  * @param {*} taskId
  */
 export function setDetailedEditableCard(taskId) {
-    let id = parseTaskIdToNumberId(taskId);
+    let id = parseTaskIdToNumberId(taskId);    
     let detailedCard = document.querySelector('.detailed-card');
     
     if(formData.length < 1) {
