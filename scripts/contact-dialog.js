@@ -130,9 +130,22 @@ function renderEditContactDialog(index) {
   fillCancelBtnOnclick(index);
   fillOnsubmitEditForm(index);
   fillInputFields(index);
+  saveIndexesIfEmailInTask(); // if email of contact gets changed, indexes of persons email in tasks need to be saved. So email can get updated in all task in case contact information changes
   submitBtn.classList.remove("inactiv-btn");
   checkIcon.classList.remove("inactive-color");
   openContactDialog();
+}
+
+/**
+ * This function saves the index/es of task/s in which the currentContact is in, as well as the exact position (indexPerson) within the task
+ */
+function saveIndexesIfEmailInTask() {
+  tasksFromFirebase.forEach((task, index) => {
+    const personIndex = task.Persons.indexOf(currentContact.email);
+    if (personIndex !== -1) {
+      taskIndexes.push({"taskIndex": index, "personIndex": personIndex }); 
+    }
+  });
 }
 
 /**

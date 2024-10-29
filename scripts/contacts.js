@@ -11,6 +11,8 @@ let currentContact = [];
 let userList = [];
 let userIndex;
 
+let taskIndexes = [];  // contains all indexes of tasks in which there are people whose email has been changed
+
 let activeUserIndex;
 
 let firstName;
@@ -43,8 +45,7 @@ function renderContactList() {
     addNewContactSection(index);
     contactListRef.innerHTML += getContactHTML(contact, index);
   }
-  /* markActiveUser(); */
-  
+  markActiveUser();
 }
 
 /**
@@ -71,11 +72,11 @@ function addNewContactSection(index) {
  * This function finds loged-in-User in contact-List and adds "(you)" im Namen
  */
 function markActiveUser() {
-  if(activeUser[0].email !== "guest@guest.de" && activeUser[0].email !== "") {
+  if(activeUser[0].email !== "guest@guest.de" && activeUser[0].email !== "" && activeUser[0].email == undefined) {
   const contactNameRef = document.querySelectorAll(".contact-name");
   activeUserIndex = contactList.findIndex((contact) => contact.email == activeUser[0].email);
   contactNameRef[activeUserIndex].innerHTML += " (you)";
-}
+  }
 }
  
 /**
@@ -270,7 +271,6 @@ async function deleteContact(index) {
 
 
 function updateTaskList() {
-  //check if email(person) is in any task
   tasksFromFirebase.forEach(task => {
     const index = task.Persons.indexOf(currentContact.email);
     if (index !== -1) {
@@ -279,6 +279,7 @@ function updateTaskList() {
   });
   console.log(tasksFromFirebase)
 }
+
 
 /**
  * This function checks if the currentConatct is a User, if it is, then it deletes it from the userList
@@ -321,6 +322,7 @@ async function checkIfOpenedContactIsActiveUser(index){
  */
 async function updateContactInfo(index) {
   assignContactData();
+  updateEmailInTasks();
 
   contactList[index] = {
     color: currentContact.color,
@@ -341,6 +343,19 @@ async function updateContactInfo(index) {
   await putData(CONTACTS_DIR, contactList);
   await putData(USERS_DIR, userList);
   await putData(TASKS_DIR, tasksFromFirebase);
+}
+
+/**
+ * This function updates the email adress in all tasks the contact is assigned to
+ */
+function updateEmailInTasks() {
+  taskIndexes.forEach((changedEmail) => {
+    if(taskIndexes != []){
+    console.log(changedEmail.taskIndex);
+    tasksFromFirebase[changedEmail.taskIndex].Persons[changedEmail.personIndex] = inputEmailRef.value;
+    }
+  });
+  console.log(tasksFromFirebase);
 }
 
 /**
