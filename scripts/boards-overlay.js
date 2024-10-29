@@ -54,7 +54,7 @@ export function getOverlay() {
  */
 function checkDone(taskId, index) {
     let id = parseTaskIdToNumberId(taskId);
-    tasks[id].Subtasks[index].Done = !tasks[id].Subtasks[index].Done;
+    tasksFromFirebase[id].Subtasks[index].Done = !tasksFromFirebase[id].Subtasks[index].Done;
     putData(TASKS_DIR, tasksFromFirebase);
     document.querySelector('.overlay').innerHTML = getDetailedCard('taskId' + id);
     setDetailedCard(id);
@@ -123,10 +123,10 @@ function editTask(taskId) {
  * @param {*} taskId
  */
 async function deleteTask(taskId) {    
-    for (let i = 0; i < tasks.length; i++) {
+    for (let i = 0; i < tasksFromFirebase.length; i++) {
         let task = "taskId" + i;
         if (task === taskId) {
-            tasks.splice(i, 1);
+            tasksFromFirebase.splice(i, 1);
         }
     }
     tasksFromFirebase.forEach((element, index) => { element.id = index });

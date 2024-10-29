@@ -53,7 +53,8 @@ function selectPriority(taskId, priority) {
     tasksFromFirebase[id].Priority = priority;
     document.querySelector('.overlay').innerHTML = getDetailedEditableCard(taskId);
     setDetailedEditableCard(taskId);
-    updateFormData(formData);
+    getFormData();
+    updateFormData();
 }
 
 /**

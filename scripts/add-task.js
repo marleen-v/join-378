@@ -95,11 +95,11 @@ function displayAddedUser() {
  * @param {*} index
  */
 function addUser(index) {    
-    if (!findPersons(addedUser, contacts[index].email)) {
-        addedUser.push(contacts[index]); 
+    if (!findPersons(addedUser, contactsFromFirebase[index].email)) {
+        addedUser.push(contactsFromFirebase[index]); 
     }
     else {
-        removePerson(addedUser, contacts[index].email);
+        removePerson(addedUser, contactsFromFirebase[index].email);
     }
     displayAddedUser();
     openContacts();
@@ -411,9 +411,7 @@ function getTaskInfos(column) {
 
 
 /** Function which put all data into firebase and call board */
-async function createNewTask(column) {      
-    console.log(column + " " + tasks);
-    
+async function createNewTask(column) {          
     tasksFromFirebase = await loadData(TASKS_DIR); 
     tasksFromFirebase.push(getTaskInfos(column));            
     putData(TASKS_DIR, tasksFromFirebase);

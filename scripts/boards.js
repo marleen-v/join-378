@@ -74,7 +74,7 @@ export function getUserColor(firstName, lastName) {
 export function setUserInitial(element, displayFullName = false, grid = false) {   
     if(element.Persons == null) return "";
     let personsHTML = "";
-    element.Persons.forEach((person, index) => {
+    element.Persons.forEach((person) => {
         let splittedName = person.split(' ');
         let firstName = splittedName[0].charAt(0);
         let lastName = splittedName[1].charAt(0);
@@ -243,14 +243,14 @@ function moveTo(column) {
     let currentCard = document.getElementById(currentDraggedElement);    
     currentCard.querySelector('.add-task-card-headline');
 
-    tasks.forEach((element, id) => {
+    tasksFromFirebase.forEach((element, id) => {
         const task = 'taskId' + id;
         if (task === currentDraggedElement) {
             element.Column = column;
         }
         
     });
-    putData(TASKS_DIR, tasks);
+    putData(TASKS_DIR, tasksFromFirebase);
     refresh();
 }
 
@@ -263,7 +263,7 @@ function refresh() {
     document.querySelector('.board-main-in-progress').innerHTML = "";
     document.querySelector('.board-main-await-feedback').innerHTML = "";
     document.querySelector('.board-main-done').innerHTML = "";
-    showData(tasks);
+    showData(tasksFromFirebase);
 }
 
 /**
@@ -279,7 +279,7 @@ function allowDrop(ev) {
 /** Clear all highlighted columns */
 function clearHighlightedTasks() {
     if(searchId.value == "") 
-        tasks.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
+        tasksFromFirebase.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
 
 /**
