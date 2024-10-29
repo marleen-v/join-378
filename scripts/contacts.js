@@ -21,10 +21,12 @@ let initials;
 async function initContacts() {
   checkScreenSize();
   contactList = await loadData(CONTACTS_DIR);
+  activeUser = await loadData(ACTIVE_DIR);
   renderContactList();
- findAndMarkActiveUser(); 
+  findAndMarkActiveUser();  
   getLogo();
   userList = await loadData(USERS_DIR);
+  
 }
 
 /**
@@ -66,9 +68,9 @@ function addNewContactSection(index) {
  * This function finds loged-in-User in contact-List and adds "(you)" im Namen
  */
 function findAndMarkActiveUser() {
-  if(sessionStorage.username) {
+  if(activeUser[0].email !== "guest@guest.de") {
   const contactNameRef = document.querySelectorAll(".contact-name");
-  let activeUserIndex = contactList.findIndex((contact) => contact.email == sessionStorage.username);
+  let activeUserIndex = contactList.findIndex((contact) => contact.email == activeUser[0].email);
   contactNameRef[activeUserIndex].innerHTML += " (you)";
 }
 }
