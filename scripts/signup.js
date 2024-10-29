@@ -13,20 +13,6 @@ async function initSignup(){
   dataFromFirebase = await loadData(USERS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
   contactsUser = await loadData(CONTACTS_DIR);
-  checkScreenOrientation();
-}
-
-
-/**
-* Checks available screen orientation and sets it to 'portrait'
-*/
-async function checkScreenOrientation(){
-  try {
-    await screen.orientation.lock('portrait');
-    console.log('Screen orientation locked');
-  } catch(error) {
-    //console.error(error);
-  }
 }
 
 

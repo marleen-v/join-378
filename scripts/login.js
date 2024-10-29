@@ -16,13 +16,11 @@ async function initLogin(){
     }  
   }
   loadCheckboxStatus();
-  checkScreenOrientation();
+  //checkScreenOrientation();
 }
 
 
-/**
-* Checks available screen orientation and sets it to 'portrait'
-*/
+/*
 async function checkScreenOrientation(){
   if(window.matchMedia("(orientation: landscape)").matches){
     try {
@@ -35,6 +33,18 @@ async function checkScreenOrientation(){
   console.log("Portrait: " + window.matchMedia("(orientation: portrait)").matches);
   console.log("Landscape: " + window.matchMedia("(orientation: landscape)").matches);
 }
+
+async function preventLandscapeMode(){
+  return await screen.orientation.lock('portrait');
+}
+
+window.matchMedia("(orientation: landscape)").addEventListener("change", event => {
+  const portrait = event.matches;
+  if(!portrait){
+    preventLandscapeMode();
+  }
+});
+*/
 
 
 /**
