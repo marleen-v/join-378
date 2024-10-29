@@ -308,6 +308,7 @@ function cancelSubtask() {
 function addSubtask(taskId) {
     let container = document.querySelector('.detailed-task-card-subtasks');
     container.innerHTML = getSubtaskInput(taskId);
+    document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushSubtask(taskId); });
 }
 
 
