@@ -138,7 +138,7 @@ export function getDetailedEditableCard(taskId) {
                     </button>
                 </div>
             </div>
-            <div class="grid grid-rows-2 gap-8px mg-right-8px mg-top-8px">
+            <div class="add-task-assign-to-container grid grid-rows-2 gap-8px mg-right-8px mg-top-8px">
                 <span class="detailed-card-label">Assigned to:</span>
                 <div class="add-task-card-assigned-to grid grid-rows-2 gap-8px">
                     <div class="assign-to-select-box p-right-8px clickable" onclick="assignContact('${taskId}')">

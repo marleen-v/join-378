@@ -912,8 +912,11 @@ and (max-width: 1024px) {
 @media only screen and (orientation: portrait)
 and (min-device-width: 350px) {
     .add-task-card-priority-edit {
-        height: 280px;
-        margin-top: -40px;
+        height: 100px;
+    }
+
+    .add-task-assign-to-container {
+        margin-top: 128px !important;
     }
 }
 
