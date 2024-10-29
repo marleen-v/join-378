@@ -283,7 +283,6 @@ function openCategory() {
     category.classList.add('bg-white');
     category.classList.add('set-z-index-100');
     document.getElementById('category-toggle-img').style.transform = "rotate(180deg)";
-
 }
 
 /** Function to close category select box and restore select triangle */
@@ -379,7 +378,7 @@ function clearButton() {
     document.getElementById('due-date').value = "";
     document.getElementById('category-input').value = "";
     document.querySelector('.display-assigned-user').innerHTML = "";
-    document.querySelector('.added-subtasks-item').innerHTML = "";
+    if(document.querySelector('.added-subtasks-item')) document.querySelector('.added-subtasks-item').innerHTML = "";
     subtasks = [];
     addedUser = [];
     setPriority("medium");
