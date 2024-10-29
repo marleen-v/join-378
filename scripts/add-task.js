@@ -20,6 +20,8 @@ async function loadAddTask() {
     tasksFromFirebase = await loadData(TASKS_DIR);
     contactsFromFirebase = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
+    console.log(activeUser);
+    
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
     getLogo();
@@ -112,8 +114,8 @@ function addUser(index) {
  * @param {*} element
  * @returns {boolean}
  */
-export function getActiveUser(element) {    
-    if(element.email === activeUser.email) return true;
+export function getActiveUser(element) {   
+    if(element.email === activeUser[0].email) return true;
     return false;
 }
 
@@ -124,14 +126,15 @@ export function getActiveUser(element) {
  * @export
  * @param {*} element
  */
-export function highlightActiveUser(highlight = false) {
+export function highlightActiveUser(user, highlight) {    
+    let parent =  document.querySelector(user).parentNode;
     if (highlight)  { 
-        document.querySelector('.task-user-select').classList.add('set-bg-dark-blue');
-        document.querySelector('.task-user-select > div > svg').classList.add('filter-color-to-white');
+        parent.classList.add('set-bg-dark-blue');
+        parent.querySelector('div > svg').classList.add('filter-color-to-white');
     }
     else {
-        document.querySelector('.task-user-select').classList.remove('set-bg-dark-blue');
-        document.querySelector('.task-user-select > div > svg').classList.remove('filter-color-to-white');
+        parent.classList.remove('set-bg-dark-blue');
+        parent.querySelector('div > svg').classList.remove('filter-color-to-white');
     }
 }
 
@@ -148,9 +151,10 @@ function openContacts() {
     contactsFromFirebase.forEach((element, index) => {
         persons.innerHTML += addUserItem(element, index);
         if(getActiveUser(element)) {
-            highlightActiveUser(true);
+            highlightActiveUser(`.username${index}`, true);
             document.querySelector(`.username${index}`).innerHTML = `${element.firstName} ${element.lastName} (you)`;
         }
+        else highlightActiveUser(`.username${index}`, false);
     });
     document.getElementById('contacts-toggle-img').style.transform = "rotate(180deg)";
 

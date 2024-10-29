@@ -179,7 +179,7 @@ function chooseContact(index, taskId) {
  * @returns {boolean}
  */
 export function getActiveUser(element) {
-    if (element.email === activeUser.email) return true;
+    if (element.email === activeUser[0].email) return true;
     return false;
 }
 
@@ -220,9 +220,10 @@ function openContactSelectBox(taskId) {
     contactsFromFirebase.forEach((element, index) => {
         persons.innerHTML += addLinkedItem(element, index, taskId);
         if(getActiveUser(element)) {
-            highlightActiveUser(true);
+            highlightActiveUser(`.username${index}`, true);
             document.querySelector(`.username${index}`).innerHTML = `${element.firstName} ${element.lastName} (you)`;
         }
+        else highlightActiveUser(`.username${index}`, false);
     });
 }
 
