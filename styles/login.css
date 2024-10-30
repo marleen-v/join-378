@@ -120,17 +120,15 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 652px;
-  height: 493px;
   border-radius: 30px;
   background-color: #ffffff;
-  padding: 48px 115px 48px 115px;
+  padding: 48px 115px;
   box-shadow: 0 0 14px 3px rgb(0 0 0 / 0.04);
 }
 
 .login-text {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 40px;
   font-size: 61px;
   color: #000000;
   font-weight: 700;
@@ -152,7 +150,8 @@ button {
 .input-ctn {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  gap:32px;
+  margin-bottom:45px;
 }
 
 .email-input-ctn, .password-input-ctn {
@@ -165,9 +164,13 @@ button {
 
 .input-ctn img {
   position: absolute;
-  top: 24px;
+  top: 16px;
   right: 20px;
   -webkit-user-drag: none;
+}
+
+.email-input-ctn img{
+  top: 20px;
 }
 
 input::placeholder {
@@ -178,11 +181,9 @@ input::placeholder {
 
 .input-ctn input {
   width: 422px;
-  height: 48px;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
   padding: 12px 21px;
-  margin-bottom: 32px;
   font-size: 24px;
 }
 
@@ -234,7 +235,6 @@ input:focus {
 
 .login-guest-ctn {
   display: flex;
-  margin-bottom: 35px;
   justify-content: center;
   gap: 35px;
   padding-top: 35px;
@@ -250,6 +250,10 @@ input:focus {
   border: none;
 }
 
+.login-btn:hover{
+  background-color: #29ABE2;
+}
+
 .guest-btn {
   background-color: #ffffff;
   color: #2A3647;
@@ -259,6 +263,11 @@ input:focus {
   font-weight: 700;
   font-size: 21px;
   text-align: center;
+}
+
+.guest-btn:hover {
+  color: #29ABE2;
+  border: 1px solid #29ABE2;
 }
 
 .logout-popup {
@@ -293,8 +302,8 @@ input:focus {
   color: #29ABE2;
 }
 
-button:hover {
-  transform: scale(1.05);
+.signup-btn:hover {
+  background-color: #29ABE2;
 }
 
 .dnone {
