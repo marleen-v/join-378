@@ -134,6 +134,7 @@ function deleteTask(taskId) {
     putData(TASKS_DIR, tasks);
     //tasksFromFirebase = await loadData(TASKS_DIR);
     closeOverlay('.detailed-card');
+    if(tasks.length == 0) tasks = null;
     showData(tasks);
 }
 

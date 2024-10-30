@@ -1,5 +1,6 @@
 import { getInputForm } from "./add-task-template.js";
 import { getPriority, setPriority } from "./add-task.js";
+import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { search } from "./boards-filter.js";
 import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
@@ -8,6 +9,7 @@ import { getPerson, loadActiveUser, loadData } from "./module.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 let addToColumn = "";
+let touches = [];
 
 
 /**
@@ -77,12 +79,8 @@ export function setUserInitial(element, displayFullName = false, grid = false) {
     element.Persons.forEach((person) => {        
         let p = getPerson(contactsFromFirebase, person);
         if(p != "") {        
-        /*
-        let splittedName = person.split(' ');
-        let firstName = splittedName[0].charAt(0);
-        let lastName = splittedName[1].charAt(0);*/
             let initial = p.firstName.charAt(0) + p.lastName.charAt(0);
-            let color = p.color;//getUserColor(splittedName[0], splittedName[1]);        
+            let color = p.color;       
             personsHTML += getUser(person, initial, color, displayFullName, grid);
         }
     });    
@@ -105,7 +103,7 @@ function setCardElements(element, index) {
     currentCard.querySelector('.add-task-card-description').innerHTML = element.Description.slice(0, 34) + '...';
     setSubtasks(currentCard, element);    
     currentCard.querySelector('.add-task-card-assigned-to').innerHTML = setUserInitial(element);    
-    currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element.Priority);//getPriority(element);
+    currentCard.querySelector('.add-task-card-priority').innerHTML = getPriority(element.Priority);
 }
 
 
@@ -201,7 +199,7 @@ export function showData(array) {
  */
 function startDragging(id) {
     if(!id) return;
-    currentDraggedElement = id;
+    currentDraggedElement = id;    
 }
 
 
@@ -243,19 +241,22 @@ function removeHighlightColumn(id) {
  * @param {*} column
  */
 function moveTo(column) {
+    let id = parseTaskIdToNumberId(currentDraggedElement);
+    tasksFromFirebase[id].Column = column;
     document.getElementById('boards-search').value = "";
-    let currentCard = document.getElementById(currentDraggedElement);    
-    currentCard.querySelector('.add-task-card-headline');
-
-    tasksFromFirebase.forEach((element, id) => {
-        const task = 'taskId' + id;
-        if (task === currentDraggedElement) {
-            element.Column = column;
-        }
-        
-    });
     putData(TASKS_DIR, tasksFromFirebase);
     refresh();
+}
+
+
+/**
+ * Get function for current dragged element needed by touch
+ *
+ * @export
+ * @returns {*}
+ */
+export function getCurrentDraggedElement() {
+    return currentDraggedElement;
 }
 
 
