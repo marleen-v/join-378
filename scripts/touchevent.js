@@ -4,9 +4,12 @@ import { parseTaskIdToNumberId } from "./boards-edit.js";
 let container = document.getElementById("board-main");
 export let touchmove = false;
 let targetDiv = null;
-let draggedElement = null;
-let offsetX = 0, offsetY = 0;
 
+/**
+ * Function to load event listener
+ *
+ * @export
+ */
 export function handleTouchEventListener() {
     columnTouchmoveEventListener();
     columnTouchendEventListener()
