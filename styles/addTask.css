@@ -161,10 +161,6 @@ main {
 
 }
 
-.task-form {
-    /*max-width: 800px;*/
-}
-
 .task-label {
     font-weight: bold;
     margin-top: 10px;
@@ -184,6 +180,12 @@ main {
     border: 1px solid #D1D1D1;
     font-family: 'Inter';
     font-weight: 400;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: #d1d1d1;
+    font-family: "Inter";
     font-size: 16px;
 }
 
@@ -505,9 +507,7 @@ and (max-width: 1024px) {
         grid-template-rows: 24px 220px;
     }
 
-    .divider {
-        margin-top: -80px;
-    }
+ 
 }
 
 

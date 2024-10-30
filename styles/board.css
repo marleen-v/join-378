@@ -303,8 +303,8 @@ main {
     border-radius: 8px;
     border: 2px solid rgb(42,53,71);
     height: 24px;
-    align-items: center;
 }
+
 
 .add-btn:hover {
     color: #29abe2;
@@ -449,10 +449,7 @@ main {
     color: #A8A8A8;
 }
 
-.add-task-card-bottom {
-    /*display: flex;
-    justify-content: flex-end;*/
-}
+
 
 .task-user-select {
     padding: 2px 0 2px 8px;

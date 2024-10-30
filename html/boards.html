@@ -96,47 +96,47 @@
       <div class="board-bar">
         <div class="board-to-do">
           <div>To Do</div>
-          <div class="add-btn clickable" onclick="openAddTaskOverlay('to-do')"><span>+</span></div>
+          <div class="add-btn clickable" onclick="openAddTaskOverlay('to-do')"><img src="..\assets\icons\plus.svg" alt=""></div>
         </div>
         <div class="board-In-progress">
           <div>In Progress</div>
-          <div class="add-btn clickable" onclick="openAddTaskOverlay('in-progress')"><span>+</span></div>
+          <div class="add-btn clickable" onclick="openAddTaskOverlay('in-progress')"><img src="..\assets\icons\plus.svg" alt=""></div>
         </div>
         <div class="board-feedback">
           <div>Await feedback</div>
-          <div class="add-btn clickable" onclick="openAddTaskOverlay('await-feedback')"><span>+</span></div>
+          <div class="add-btn clickable" onclick="openAddTaskOverlay('await-feedback')"><img src="..\assets\icons\plus.svg" alt=""></div>
         </div>
         <div class="board-done">
           <div>Done</div>
-          <div class="add-btn clickable" onclick="openAddTaskOverlay('done')"><span>+</span></div>
+          <div class="add-btn clickable" onclick="openAddTaskOverlay('done')"><img src="..\assets\icons\plus.svg" alt=""></div>
         </div>
       </div>
       <div id="board-main" class="board-main">
         <div class="to-do-title d_none">
           <div class="board-to-do">
             <div>To Do</div>
-            <div class="add-btn clickable" onclick="openAddTaskOverlay('to-do')"><span>+</span></div>
+            <div class="add-btn clickable" onclick="openAddTaskOverlay('to-do')"><img src="..\assets\icons\plus.svg" alt=""></div>
           </div>
         </div>
         <div id="to-do" class="board-main-to-do column" ondrop="moveTo('To Do'); removeHighlightColumn('to-do')" ondragover="allowDrop(event); highlightColumn('to-do')" ondragleave="removeHighlightColumn('to-do')"></div>
         <div class="in-progress-title d_none">
           <div class="board-In-progress">
             <div>In Progress</div>
-            <div class="add-btn clickable" onclick="openAddTaskOverlay('in-progress')"><span>+</span></div>
+            <div class="add-btn clickable" onclick="openAddTaskOverlay('in-progress')"><img src="..\assets\icons\plus.svg" alt=""></div>
           </div>
         </div>
         <div id="in-progress" class="board-main-in-progress column" ondrop="moveTo('In Progress'); removeHighlightColumn('in-progress')" ondragover="allowDrop(event); highlightColumn('in-progress')" ondragleave="removeHighlightColumn('in-progress')"></div>
         <div class="await-feedback d_none">
           <div class="board-feedback">
             <div>Await feedback</div>
-            <div class="add-btn clickable" onclick="openAddTaskOverlay('await-feedback')"><span>+</span></div>
+            <div class="add-btn clickable" onclick="openAddTaskOverlay('await-feedback')"><img src="..\assets\icons\plus.svg" alt=""></div>
           </div>
         </div>
         <div id="await-feedback" class="board-main-await-feedback column" ondrop="moveTo('Await Feedback'); removeHighlightColumn('await-feedback')"  ondragover="allowDrop(event); highlightColumn('await-feedback')" ondragleave="removeHighlightColumn('await-feedback')"></div>
         <div class="done-title d_none">
           <div class="board-done">
             <div>Done</div>
-            <div class="add-btn clickable" onclick="penAddTaskOverlay('done')"><span>+</span></div>
+            <div class="add-btn clickable" onclick="penAddTaskOverlay('done')"><img src="..\assets\icons\plus.svg" alt=""></div>
           </div>
         </div>
         <div id="done" class="board-main-done column" ondrop="moveTo('Done'); removeHighlightColumn('done')" ondragover="allowDrop(event); highlightColumn('done')" ondragleave="removeHighlightColumn('done')"></div>
