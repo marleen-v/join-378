@@ -5,11 +5,11 @@ import { search } from "./boards-filter.js";
 import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
-import { getPerson, loadActiveUser, loadData, touchmove } from "./module.js";
+import { getPerson, loadActiveUser, loadData } from "./module.js";
+import { handleTouchEventListener } from "./touchevent.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 let addToColumn = "";
-let touches = [];
 
 
 /**
@@ -25,6 +25,7 @@ async function loadBoards() {
         
     showData(tasksFromFirebase);
     getLogo();
+    handleTouchEventListener();
 
     searchId.addEventListener('input', function(e) {
         clearHighlightedTasks();

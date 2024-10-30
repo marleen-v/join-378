@@ -1,77 +1,71 @@
-import { parseTaskIdToNumberId } from './boards-edit';
-import { tasks } from './boards.js';
+import { getCurrentDraggedElement } from "./boards.js";
+import { parseTaskIdToNumberId } from "./boards-edit.js";
 
-let moving = null;
-let currentTask = 0;
+let container = document.getElementById("board-main");
+export let touchmove = false;
+let targetDiv = null;
+let draggedElement = null;
+let offsetX = 0, offsetY = 0;
 
-export function pickup(event, id) {
-    currentTask = parseTaskIdToNumberId(id);
-    if(window.screen.width > 700) return;
-    currentDraggedElement = id;
-    moving = event.target;
-    document.getElementById(id).classList.add('draggable');
-    
-
-    moving.style.height = moving.clientHeight;
-    moving.style.width = moving.clientWidth;
-    moving.style.position = 'fixed';
-    moving.style.zIndex = '-10';
+export function handleTouchEventListener() {
+    columnTouchmoveEventListener();
+    columnTouchendEventListener()
 }
 
 
+/** Touch listener -> touch move */
+function columnTouchmoveEventListener() {
+    container.addEventListener("touchmove", function (event) {
+        event.preventDefault();
+        touchmove = true;
+        let touch = event.touches[0], x = touch.clientX, y = touch.clientY;
+        let innerDivs = document.getElementsByClassName("column");
+        targetDiv = null;
 
-
-
-
-export function move(event) {
-    if(window.screen.width > 700) return;
-    if (moving) {        
-        if (event.clientX) {
-            // mousemove
-            moving.style.left = event.clientX - moving.clientWidth / 2;
-            moving.style.top = event.clientY - moving.clientHeight / 2;
-            moving.offsetX = event.offsetX;
-            moving.offsetY = event.offsetY;
-            console.log(moving.offsetX);
-            
-
-        } else {
-            // touchmove - assuming a single touchpoint
-            moving.style.left = event.changedTouches[0].clientX - moving.clientWidth / 2;
-            moving.style.top = event.changedTouches[0].clientY - moving.clientHeight / 2;
-
-        }
-    }
-}
-
-
-export function drop(event, id) {
-    if(window.screen.width > 700) return;
-    document.getElementById(id).classList.remove('draggable');
-
-    let column = "";
-    if (moving) {
-
-        switch (event.currentTarget.getAttribute('id')) {
-            case 'to-do': column = 'To Do'; break;
-            case 'in-progress': column = 'In Progress'; break;
-            case 'await-feedback': column = 'Await Feedback'; break;
-            case 'done': column = 'Done'; break;
-        }
-
-        tasks.forEach((element, id) => {
-            const task = 'taskId' + id;
-            if (task === currentTask) {
-                element.Column = column;
+        for (let div of innerDivs) {
+            let rect = div.getBoundingClientRect();
+            if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                targetDiv = div; // set target div
+                highlightColumn(targetDiv.id);
+                break;
             }
-            
-        });
-        //putData(TASKS_DIR, tasks);
-        refresh();
-    }
+            removeHighlightColumn(div.id);
+        }
+    }, false);
 }
 
 
-window.pickup = pickup;
-window.move = move;
+/** Touch listener for touch end */
+function columnTouchendEventListener() {
+    container.addEventListener("touchend", function (event) {
+        touchmove = false;
+        if (targetDiv) {
+            drop(targetDiv.id);
+            removeHighlightColumn(targetDiv.id);
+        }
+        targetDiv = null; // Reset
+    }, false);
+}
+
+
+/**
+ * Function to drop task into column by touch
+ *
+ * @param {*} column
+ */
+function drop(column) {
+    document.getElementById('boards-search').value = "";
+    let id = parseTaskIdToNumberId(getCurrentDraggedElement());
+
+    switch (column) {
+        case 'to-do': column = 'To Do'; break; g
+        case 'in-progress': column = 'In Progress'; break;
+        case 'await-feedback': column = 'Await Feedback'; break;
+        case 'done': column = 'Done'; break;
+    }
+    tasksFromFirebase[id].Column = column;
+    putData(TASKS_DIR, tasksFromFirebase);
+    refresh();
+}
+
 window.drop = drop;
