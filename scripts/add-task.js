@@ -97,9 +97,7 @@ function displayAddedUser() {
  */
 function addUser(index) {    
     if (!findPersons(addedUser, contactsFromFirebase[index].email)) {
-        addedUser.push(contactsFromFirebase[index]); 
-        console.log(addedUser);
-        
+        addedUser.push(contactsFromFirebase[index]);         
     }
     else {
         removePerson(addedUser, contactsFromFirebase[index].email);

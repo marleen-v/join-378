@@ -131,7 +131,7 @@ export function getInputForm() {
                         <div>
                             <!-- Titel -->
                             <span>Title<span class="required-star">*</span></span>
-                            <input class="task-input" type="text" id="title" name="title" required>
+                            <input class="task-input" type="text" id="title" name="title" placeholder="Enter a title" required>
                         </div>
                         <div>
                             <span>Description</span>
