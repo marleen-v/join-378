@@ -85,7 +85,7 @@ h1 {
 }
 
 /* Colors fors contacts */
-.orange {
+/* .orange {
   background-color:#FF7A00;
 }
 .violet {
@@ -108,7 +108,67 @@ h1 {
 }
 .red {
   background-color:#FF4646;
+} */
+
+.orange {
+  background-color:#FF7A00;
 }
+
+.pink{
+  background-color:#FF5EB3;
+}
+
+.purple {
+  background-color:#6E52FF;
+}
+
+.violet {
+  background-color:#9327FF;
+}
+.turquoise {
+  background-color:#00BEE8;
+}
+.green {
+  background-color:#1FD7C1;
+}
+
+.bright-red {
+  background-color: #FF745E;
+}
+
+.bright-orange {
+  background-color: #FFA35E;
+}
+
+.pink-2{
+  background-color:#FC71FF;
+}
+
+.yellow {
+  background-color:#FFC701;
+}
+
+.blue {
+  background-color:#0038FF;
+}
+
+.bright-green{
+  background-color: #C3FF2B;
+}
+
+.yellow-2 {
+  background-color:#FFE62B;
+}
+
+.red {
+  background-color:#FF4646;
+} 
+
+.orange-yellow {
+  background-color:#FFBB2B;
+}
+
+
 
 /* ------------------------------------Header-------------------------------------------- */
 
