@@ -186,7 +186,7 @@
   }
   
   
-  @media only screen and (orientation: landscape) {
+/*   @media only screen and (orientation: landscape) {
     header, main, dialog, nav {
         display: none;
     }
@@ -205,4 +205,4 @@
     body::before {
         content: "Bitte Gerät ins Hochformat drehen.";
     }
-  }
+  } */

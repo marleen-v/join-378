@@ -346,7 +346,7 @@ main {
 
 }
 
-@media only screen and (orientation: landscape) {
+/* @media only screen and (orientation: landscape) {
   body, nav, main, header {
       display: none ;
   }
@@ -358,6 +358,7 @@ main {
       justify-content: center;
       align-items: center;
       height: 100vh;
+      font-family: "Inter";
       font-size: 20px;
       color: red;
   }
@@ -365,4 +366,4 @@ main {
   body::before {
       content: "Bitte Gerät ins Hochformat drehen.";
   }
-}
+} */
