@@ -213,6 +213,10 @@ a {
   cursor: auto;
 }
 
+.login-btn:hover:enabled {
+  background-color: #29ABE2;
+}
+
 .signup-popup {
   position: absolute;
   bottom: -200px;

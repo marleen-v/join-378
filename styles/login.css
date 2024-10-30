@@ -5,6 +5,36 @@
   font-style: normal;
 }
 
+@font-face {
+	font-family: 'fontello';
+	src: url('../fonts/fontello/fontello.eot?0000');
+	src: url('../fonts/fontello/fontello.eot?0000#iefix') format('embedded-opentype'),
+	     url('../fonts/fontello/fontello.woff2?0000') format('woff2'),
+	     url('../fonts/fontello/fontello.woff?0000') format('woff'),
+	     url('../fonts/fontello/fontello.ttf?0000') format('truetype'),
+	     url('../fonts/fontello/fontello.svg?0000#fontello') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+input[type="password"] {
+	font-family: "fontello";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
+	letter-spacing: 4px;
+}
+
+input[type="password"]::placeholder {
+  font-family: 'Inter';
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
 * {
   font-family: 'Inter', sans-serif;
   border: unset;  
