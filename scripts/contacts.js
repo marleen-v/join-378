@@ -11,7 +11,7 @@ let currentContact = [];
 let userList = [];
 let userIndex;
 
-let taskIndexes = [];  // contains all indexes of tasks in which there are people whose email has been changed
+let taskIndexes = [];  // contains all indexes of tasks in which the current user is assigned to
 
 let activeUserIndex;
 

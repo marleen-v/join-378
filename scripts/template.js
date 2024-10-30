@@ -101,7 +101,7 @@ function getContactInfoTemplate(index) {
     
               <div class="single-contact-large flex align-items-center">
                 <div
-                  class="circle ${currentContact.color} circle-large flex justify-content-center align-items-center"
+                  class="circle ${currentContact.color} circle-large circle-info flex justify-content-center align-items-center"
                 >
                   <span>${currentContact.initials}</span>
                 </div>
