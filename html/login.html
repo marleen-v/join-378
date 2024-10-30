@@ -29,7 +29,7 @@
 
     <div class="login-ctn">
       <p class="login-text">Log in</p>
-      <form onsubmit="checkUserPassword();return false;">
+      <form onsubmit="checkUserPassword();return false;" class="position-relative">
         <div class="input-ctn">
           <div class="email-input-ctn">
             <input autocomplete="username" id="emailInput" class="email-input" type="email" placeholder="Email" required>
@@ -40,9 +40,10 @@
             <img id="hidepwd" onclick="togglePasswordIcon()" src="../assets/img/lock.png" alt="Lock-Icon">
             <img id="showpwd" onclick="togglePasswordIcon()" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
           </div>
+          
         </div>
-
-        <div id="error_message"></div>
+        <div id="error_message" class="position-absolute"></div>
+        
 
         <div class="checkbox-ctn">
           <input type="checkbox" id="login_checkbox">
