@@ -17,24 +17,6 @@
 	font-style: normal;
 }
 
-input[type="password"] {
-	font-family: "fontello";
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
-	letter-spacing: 4px;
-}
-
-input[type="password"]::placeholder {
-  font-family: 'Inter';
-  letter-spacing: 0;
-  text-shadow: none;
-}
-
 * {
   font-family: 'Inter', sans-serif;
   border: unset;  
@@ -208,6 +190,24 @@ input::placeholder {
   font-size: 20px;
   font-weight: 400;
   color: #D1D1D1;
+}
+
+input[type="password"] {
+	font-family: "fontello";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
+	letter-spacing: 4px;
+}
+
+input[type="password"]::placeholder {
+  font-family: 'Inter';
+  letter-spacing: 0;
+  text-shadow: none;
 }
 
 .input-ctn input {
