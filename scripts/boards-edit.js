@@ -146,8 +146,7 @@ function removePerson(data, elementToRemove) {
  */
 export function isChecked(element, taskId) {
     let id = parseTaskIdToNumberId(taskId);
-    let person = element.firstName + " " + element.lastName;
-    if (findPersons(tasksFromFirebase[id].Persons, person)) return checkedBoxSVG();
+    if (findPersons(tasksFromFirebase[id].Persons, element.email)) return checkedBoxSVG();
     return uncheckedBoxSVG();
 }
 
@@ -159,14 +158,13 @@ export function isChecked(element, taskId) {
  */
 function chooseContact(index, taskId) {
     let id = parseTaskIdToNumberId(taskId);
-    let person = contactsFromFirebase[index].firstName + " " + contactsFromFirebase[index].lastName;
-    if (!findPersons(tasksFromFirebase[id].Persons, person)) {
-        if(tasksFromFirebase[id].Persons == null) tasksFromFirebase[id]['Persons'] = [person];
-        else tasksFromFirebase[id].Persons.push(person);
+    if (!findPersons(tasksFromFirebase[id].Persons, contactsFromFirebase[index].email)) {
+        if(tasksFromFirebase[id].Persons == null) tasksFromFirebase[id]['Persons'] = [contactsFromFirebase[index].email];
+        else tasksFromFirebase[id].Persons.push(contactsFromFirebase[index].email);
         openContactSelectBox(taskId);
     }
     else {
-        removePerson(tasksFromFirebase[id].Persons, person);
+        removePerson(tasksFromFirebase[id].Persons, contactsFromFirebase[index].email);
         openContactSelectBox(taskId);
     }
 }

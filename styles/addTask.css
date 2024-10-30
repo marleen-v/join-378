@@ -494,6 +494,7 @@ and (max-width: 1024px) {
     .part-2-form {
         display: grid;
         grid-template-rows: 80px 220px 90px 70px;
+        margin-top: -50px;
     }
 
     .select-priority {
@@ -501,6 +502,9 @@ and (max-width: 1024px) {
         grid-template-rows: 24px 220px;
     }
 
+    .divider {
+        margin-top: -80px;
+    }
 }
 
 

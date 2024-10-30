@@ -36,10 +36,7 @@ async function loadAddTask() {
  * @returns {boolean}
  */
 export function findPersons(data, searchString) {
-    
-    for (let index = 0; index < data.length; index++) {
-        console.log(data[index] + " " + searchString);
-        
+    for (let index = 0; index < data.length; index++) {        
         if (data[index].email === searchString) return true;
     }
     return false;
@@ -101,6 +98,8 @@ function displayAddedUser() {
 function addUser(index) {    
     if (!findPersons(addedUser, contactsFromFirebase[index].email)) {
         addedUser.push(contactsFromFirebase[index]); 
+        console.log(addedUser);
+        
     }
     else {
         removePerson(addedUser, contactsFromFirebase[index].email);
@@ -398,7 +397,7 @@ function clearButton() {
  */
 function getTaskInfos(column) {
     let persons = [];
-    addedUser.forEach(element => { persons.push(element.firstName + " " + element.lastName) });
+    addedUser.forEach(element => { persons.push(element.email)});
     return {
         "id": tasksFromFirebase.length,
         "Column": column,
