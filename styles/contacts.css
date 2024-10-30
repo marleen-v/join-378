@@ -569,3 +569,25 @@ label > input {
     padding: 24px 0 0 0;
   }
 }
+
+
+@media only screen and (orientation: landscape) {
+  body {
+      display: none;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 20px;
+      color: red;
+  }
+  
+  body::before {
+      content: "Bitte Gerät ins Hochformat drehen.";
+  }
+}
