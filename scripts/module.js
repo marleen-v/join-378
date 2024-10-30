@@ -7,7 +7,10 @@ export const USERS_DIR = '/users';
 export const CONTACTS_DIR = '/contacts';
 export const TASKS_DIR = '/tasks';
 let container = document.getElementById("board-main");
+export let touchmove = false;
 let targetDiv = null;
+let draggedElement = null;
+let offsetX = 0, offsetY = 0;
 
 /**
  * Function for load data from firebase
@@ -73,6 +76,7 @@ export function getPerson(contacts, searchString) {
 
 // Touch listener -> touch move
 container.addEventListener("touchmove", function(event) {
+    touchmove = true;
     let touch = event.touches[0];
     let x = touch.clientX;
     let y = touch.clientY;
@@ -93,6 +97,7 @@ container.addEventListener("touchmove", function(event) {
 
 // Touch listener for touch end
 container.addEventListener("touchend", function(event) {
+    touchmove = false;
     if (targetDiv) {
         drop(targetDiv.id);  
         removeHighlightColumn(targetDiv.id);      
@@ -109,9 +114,9 @@ container.addEventListener("touchend", function(event) {
 function drop(column) {
     document.getElementById('boards-search').value = "";
     let id = parseTaskIdToNumberId(getCurrentDraggedElement());
-    
+        
     switch (column) {
-        case 'to-do': column = 'To Do'; break;
+        case 'to-do': column = 'To Do'; break;g
         case 'in-progress': column = 'In Progress'; break;
         case 'await-feedback': column = 'Await Feedback'; break;
         case 'done': column = 'Done'; break;

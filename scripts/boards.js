@@ -5,7 +5,7 @@ import { search } from "./boards-filter.js";
 import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
-import { getPerson, loadActiveUser, loadData } from "./module.js";
+import { getPerson, loadActiveUser, loadData, touchmove } from "./module.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 let addToColumn = "";
@@ -199,7 +199,7 @@ export function showData(array) {
  */
 function startDragging(id) {
     if(!id) return;
-    currentDraggedElement = id;    
+    currentDraggedElement = id;
 }
 
 
