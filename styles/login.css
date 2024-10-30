@@ -190,8 +190,8 @@ input::placeholder {
 }
 
 input:focus {
-  border: 2px solid #29ABE2;
-  outline: none;
+  outline: 2px solid #29ABE2;
+  border-color: #fff;
 }
 
 #error_message {
