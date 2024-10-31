@@ -6,7 +6,6 @@ let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
 let subtasks = [];
 let addedUser = [];
-let tasks = [];
 
 
 /**

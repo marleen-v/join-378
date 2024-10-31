@@ -483,6 +483,7 @@ main {
 .detailed-task-card-subtasks {
     overflow-y: auto;
     height: 100px;
+    width: calc(100% - 8px);
 }
 
 .subtasks-add-box {
@@ -707,6 +708,10 @@ main {
 .draggable {
     position: absolute;
     touch-action: none;
+}
+
+.task-edit-form {
+    width: 100%;
 }
 
 
