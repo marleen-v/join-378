@@ -10,7 +10,6 @@ let activeUser = [];
 let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
 let currentUserFirstName = "";
 let currentUserLastName = "";
-let loggedIn = false;
 
 
 /**
@@ -151,9 +150,8 @@ function checkOrigin(){
  * This function checks if you are logged in, if not you will be redirected to the login page
  */
 function checkIfLoggedIn(){
-    if (activeUser[0].email == ""){
-      window.location.href = './login.html';
-      loggedIn = false;
-    }
+  if (activeUser[0].email == ""){
+    window.location.href = './login.html';
+  }
 }
 

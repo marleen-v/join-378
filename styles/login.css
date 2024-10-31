@@ -194,6 +194,7 @@ input::placeholder {
 
 input[type="password"] {
 	font-family: "fontello";
+  font-size: 8px;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
