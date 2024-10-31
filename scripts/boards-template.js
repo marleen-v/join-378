@@ -14,7 +14,7 @@ import { getPerson } from "./module.js";
  */
 export function getTaskCard(id, taskId) {    
     return /*html*/`
-        <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card clickable" draggable="true" ondragstart="startDragging('${taskId}')" ontouchstart="startDragging('${taskId}')">
+        <section onclick="openOverlay(${id})" id="${taskId}" class="task-card add-task-card clickable prevent-select" draggable="true" ondragstart="startDragging('${taskId}')" ontouchstart="startDragging('${taskId}')">
             <div class="flex align-items-center add-task-card-top"><div class="flex align-items-center justify-content-center add-task-card-category"></div></div>
             <div class="add-task-card-headline"></div>
             <div class="add-task-card-description"></div>
