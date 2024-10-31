@@ -71,7 +71,7 @@ function showData(){
  */
 function showErrorMessage(){
   let errorRef = document.getElementById('error_message');
-  errorRef.innerHTML = "Your passwords don't match. Please try again.";
+  errorRef.innerHTML = "Check your email and password. Please try again.";
   setTimeout(function(){
     errorRef.innerHTML = '';
   }, 3000);
