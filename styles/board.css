@@ -757,6 +757,9 @@ and (max-width: 1024px) {
     }
 
 
+    .task-form-container {
+        overflow-y: auto;
+    }
 
     .board-bar {
         display: none;
@@ -836,6 +839,7 @@ and (max-width: 1024px) {
         height: 100vh;
         border-radius: 0%;
     }
+
     
     .boards {
         display: grid;

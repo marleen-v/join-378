@@ -164,7 +164,7 @@ export function setCard(element, index, column) {
  *
  * @export
  */
-export function checkEmptyColumns() {        
+export function checkEmptyColumns() { 
     if(!search(tasksFromFirebase, "Column", "To Do")) document.querySelector(`.board-main-to-do`).innerHTML = getEmptyColumn();
     if(!search(tasksFromFirebase, "Column", "In Progress")) document.querySelector(`.board-main-in-progress`).innerHTML = getEmptyColumn();
     if(!search(tasksFromFirebase, "Column", "Await Feedback")) document.querySelector(`.board-main-await-feedback`).innerHTML = getEmptyColumn();
@@ -173,7 +173,7 @@ export function checkEmptyColumns() {
 
 
 /** Function which clear all colums */
-function clearColumns() {
+export function clearColumns() {
     document.querySelector(`.board-main-to-do`).innerHTML = "";
     document.querySelector(`.board-main-in-progress`).innerHTML = "";
     document.querySelector(`.board-main-await-feedback`).innerHTML = "";
@@ -186,8 +186,8 @@ function clearColumns() {
 */
 export function showData(array) {
     clearColumns();  
-    if(array !== null) {
-        array.forEach((element, index) => {          
+    if(array !== null || array.length > 0) {
+        array.forEach((element, index) => {   
             if (element.Column === "To Do") setCard(element, index, "to-do");
             if (element.Column === "In Progress") setCard(element, index, "in-progress");
             if (element.Column === "Await Feedback") setCard(element, index, "await-feedback");

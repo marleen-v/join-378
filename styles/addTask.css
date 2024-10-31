@@ -10,7 +10,8 @@ body {
 main {
     display: grid;
     grid-template-columns: 1fr;
-    overflow: auto;
+    overflow-y: auto !important;
+    overflow-x: hidden;
     height: 100%;
     background-color: #f6f7f8;
 }
@@ -22,7 +23,7 @@ main {
  }
 
 .task-form-container {
-    width: 944px;
+    max-width: 944px;
 }
 
 .part-1-form {
@@ -108,9 +109,10 @@ main {
 /* add Task Styles */
 .add-task {
     display: grid;
-    grid-template-rows: 232px 1fr;
+    grid-template-rows: 232px 400px 128px;
+    grid-template-columns: calc(100vw - 32px);
     grid-column: 1;
-    padding: 0 64px 0 64px;
+    padding: 0 32px 0 32px;
     height: 100vh;
 }
 
@@ -375,7 +377,7 @@ input::placeholder {
 
 .add-task-form-bottom {
     display: grid;
-    grid-template-columns: 1fr 1px 1fr;
+    grid-template-columns: 472px 1px 472px 1fr;
     grid-template-rows: auto;
 }
 
@@ -430,9 +432,12 @@ input::placeholder {
 
 
 @media only screen and (max-width: 980px) {
+    main {
+        overflow-y: auto !important;
+    }
     .add-task {
         display: grid;
-        grid-template-rows: 128px 1fr;
+        grid-template-rows: 80px calc(100% + 80px) 80px;
         margin-top: 40px;
     }
 
@@ -442,7 +447,7 @@ input::placeholder {
     }
 
     .task-form-container {
-        width: 100%;
+        width: calc(100% - 8px);
         padding-bottom: 64px;
     }
 
@@ -456,13 +461,22 @@ input::placeholder {
     .select-box-contacts {
         height: 84px;
     }
+
+    .add-task-form-bottom {
+        display: grid;
+        grid-template-columns: calc(100vw - 32px);
+    }
 }
 
 
 @media only screen and (orientation: portrait)
 and (max-width: 1024px) {
-    
+    main {
+        overflow-y: hidden !important;
+    }
     .add-task {
+        display: grid;
+        grid-template-rows: 82px calc(100vh - 320px) 32px;
         padding: 0 16px 0 16px;
         margin-top: 0px;
     }
@@ -476,6 +490,7 @@ and (max-width: 1024px) {
     .task-form-container {
         width: 100%;
         padding-bottom: 64px;
+        overflow-y: auto;
     }
 
     .add-task-form {
@@ -488,7 +503,18 @@ and (max-width: 1024px) {
 
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen 
+and (max-width: 720px) {
+    main {
+        overflow-y: hidden !important;
+    }
+    .add-task {
+        display: grid;
+        grid-template-rows: 82px calc(100vh - 350px) 32px;
+    }
+    .add-head-headline {
+        position: sticky;
+    }
     .add-task-form-bottom {
         display: grid;
         grid-template-rows: 1fr;

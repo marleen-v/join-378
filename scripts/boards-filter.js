@@ -3,7 +3,8 @@
 */
 
 
-import { showData } from "./boards.js";
+import { getOverlay } from "./boards-overlay.js";
+import { clearColumns, showData } from "./boards.js";
 export let searchList = [];
 export let sortedList = [];
 
@@ -36,7 +37,7 @@ function checkValue(array, key, value, i, j) {
  * @returns {boolean}
  */
 export function search(array, key, value) {
-    if(array == null) return false;
+    if(array == null || array.length < 1) return false;
     let i = 0, j = array.length - 1;
     do {
         if (checkValue(array, key, value, i, j)) return true;
@@ -127,12 +128,22 @@ function mergeArraysWithoutDuplicates(oldArray, newArray) {
  * @param {*} result
  */
 function highlightResults(result) {    
-    if(result.length > 0 && result.length != tasksFromFirebase.length)  {
+    if(result != null && result.length > 0 && result.length != tasksFromFirebase.length)  {
         tasksFromFirebase.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = '#E7E7E7'; });
         result.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
         return;
     }    
     tasksFromFirebase.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
+}
+
+
+function noResults() {
+    let overlay = getOverlay()
+    overlay.innerHTML = /*html*/`
+         <section class="detailed-card grid-rows-auto">
+            No results
+        </section>
+    `;
 }
 
 
@@ -146,7 +157,13 @@ function orderTasks(input) {
     const searchString = input.value;
     const result = filterByNestedKeyAndArray(tasksFromFirebase, searchString);
     sortedList = mergeArraysWithoutDuplicates(tasksFromFirebase, result);
-    showData(sortedList);
+    if(result.length == 0 || result == null) {
+        //noResults();
+        clearColumns();
+        showData(result);
+        return;
+    }
+    showData(result);
     highlightResults(result);
 }
 

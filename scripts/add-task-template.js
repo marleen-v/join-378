@@ -201,7 +201,12 @@ export function getInputForm() {
                         </div>
                     </div>
                 </div>
-                <div class="add-task-form-bottom">
+                
+            </div>
+        </form>
+
+</div>
+<div class="add-task-form-bottom">
                     <div class="flex required-info"><span class="required-star">*</span><span>This Field is required</span></div>
                     <div></div>
                     <div class="flex justify-content-flex-end">
@@ -215,9 +220,7 @@ export function getInputForm() {
                         </button>
                     </div>
                 </div>
-            </div>
-        </form>
-</div>
+
 </section>
     `;
 }

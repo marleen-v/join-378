@@ -274,3 +274,8 @@
 .trans-dark-bg-p-50 {
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+
+.set-sticky {
+    position: sticky;
+}
