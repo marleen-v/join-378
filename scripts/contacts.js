@@ -277,7 +277,6 @@ function updateTaskList() {
       task.Persons.splice(index, 1); 
     }
   });
-  console.log(tasksFromFirebase)
 }
 
 
@@ -351,11 +350,9 @@ async function updateContactInfo(index) {
 function updateEmailInTasks() {
   taskIndexes.forEach((changedEmail) => {
     if(taskIndexes != []){
-    console.log(changedEmail.taskIndex);
     tasksFromFirebase[changedEmail.taskIndex].Persons[changedEmail.personIndex] = inputEmailRef.value;
     }
   });
-  console.log(tasksFromFirebase);
 }
 
 /**
