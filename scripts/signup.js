@@ -162,11 +162,20 @@ function pushEverythingNecessaryToFireBase(first, last){
 function enableButtonAfterChecked(){
   let checkRef = document.getElementById("checkbox");
   let buttonRef = document.getElementById("btn");
-  if(checkRef.checked){
+  if(checkRef.checked && everyInputFieldFilled()){
     buttonRef.removeAttribute("disabled");
   } else {
     buttonRef.disabled = "true";
   }
+}
+
+
+/**
+ * Checks if all input fields are filled
+ * @returns boolean if every field is filled
+ */
+function everyInputFieldFilled(){
+  return (nameInputRef.value != "") && (emailInputRef.value != "") && (passwordInputRef.value != "") && (passwordInputConfirmRef.value != "") && (checkCorrectPassword());
 }
 
 
