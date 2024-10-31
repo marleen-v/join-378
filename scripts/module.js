@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import './boards.js';
 import './add-task.js';
 import { parseTaskIdToNumberId } from './boards-edit.js';

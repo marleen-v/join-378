@@ -12,9 +12,7 @@
   <script type="module" src="../scripts/module.js"></script>
   <link rel="stylesheet" href="../styles/assets.css" />
   <link rel="icon" type="image/png" href="../assets/img/logo.png" />
-
   <title>Join</title>
-
 </head>
 
 <body onload="loadBoards()">
@@ -28,9 +26,7 @@
         </button>
         <div class="user-profil">
           <div class="dropdown-menu">
-            <button id="userlogo" class="profil-img" style="color: blue;">
-              <!-- <img src="../assets/img/user-profil.png" alt="" /> -->
-            </button>
+            <button id="userlogo" class="profil-img" style="color: blue;"></button>
             <div class="dropdown d_none" id="dropdown-menu">
               <button class="dropdown-btn" onclick="openImprint()"><span>Legal Notice</span></button>
               <button class="dropdown-btn" onclick="openPolicy()"><span>Privacy Policy</span></button>
@@ -41,6 +37,7 @@
       </div>
     </div>
   </header>
+
   <nav>
     <img src="../assets/img/logo-weiss.png" alt="join-logo" class="main-logo">
     <div class="menu-bar">
@@ -51,12 +48,10 @@
         <span class="nav-text clickable">Summary</span>
       </button>
       <button class="nav-btn" onclick="openAddTask()">
-        <span class="nav-icon"
-          ><img src="../assets/icons/add-task.png" alt=""
-        /></span>
-        <span class="nav-text clickable"
-          >Add Task</span
-        >
+        <span class="nav-icon">
+          <img src="../assets/icons/add-task.png" alt=""/>
+        </span>
+        <span class="nav-text clickable">Add Task</span>
       </button>
       <button class="nav-btn active" onclick="openBoards()">
         <span class="nav-icon"
@@ -76,6 +71,7 @@
       <button class="data-policy clickable" onclick="openImprint()"><span>Legal notice</span></button>
     </div>
   </nav>
+
   <main>
     <section id="boards" class="boards">
       <div class="board-head">
@@ -142,8 +138,8 @@
         <div id="done" class="board-main-done column" ondrop="moveTo('Done'); removeHighlightColumn('done')" ondragover="allowDrop(event); highlightColumn('done')" ondragleave="removeHighlightColumn('done')"></div>
       </div>
     </section>
-
   </main>
+  
   <div class="overlay d_none"></div>
 
 </body>

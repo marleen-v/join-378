@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { showData } from "./boards.js";
 export let searchList = [];
 export let sortedList = [];

@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { getCurrentDraggedElement } from "./boards.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
 

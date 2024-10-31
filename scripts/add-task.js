@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask } from './add-task-template.js';
 import { getUrgentSVG, getMediumSVG, getLowSVG, checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { loadActiveUser, loadData } from "./module.js";

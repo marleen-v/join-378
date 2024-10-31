@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { getPriority } from "./add-task.js";
 import { parseTaskIdToNumberId, setDetailedEditableCard } from "./boards-edit.js";
 import { refresh, setBgColor, setUserInitial, showData } from "./boards.js";

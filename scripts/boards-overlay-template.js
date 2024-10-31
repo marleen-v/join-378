@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { trashSVG, editSVG, getCloseSVG } from "./svg-template.js";
 
 

@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { getPriority } from "./add-task.js";
 import { getSubtaskMask, isChecked, getActiveUser } from "./boards-edit.js";
 import { editSVG, getCloseSVG, trashSVG } from "./svg-template.js";

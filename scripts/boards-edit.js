@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { highlightActiveUser, setPriorityColor } from "./add-task.js";
 import { setDetailedCard } from "./boards-overlay.js";
 import { setUserInitial } from "./boards.js";

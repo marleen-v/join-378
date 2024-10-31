@@ -1,3 +1,8 @@
+/*
+    Author: Martin Reifschneider
+*/
+
+
 import { getCloseSVG } from './svg-template.js';
 import { getPriority } from './add-task.js';
 import { editSVG, trashSVG } from './svg-template.js';
