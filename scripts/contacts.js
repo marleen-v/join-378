@@ -23,10 +23,11 @@ let initials;
  * This function loads the contactdata from firebase and renders the contact list
  */
 async function initContacts() {
-  checkScreenSize();
-  contactList = await loadData(CONTACTS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
+  checkIfLoggedIn();
+  contactList = await loadData(CONTACTS_DIR);
   tasksFromFirebase = await loadData(TASKS_DIR);
+  checkScreenSize();
   renderContactList();
   getLogo();
   userList = await loadData(USERS_DIR);
