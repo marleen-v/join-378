@@ -16,23 +16,35 @@ export function handleTouchEventListener() {
 }
 
 
+/**
+ * Help function to check if moved on current column with touch and set highlight current column to grey
+ * or unset left highlighted column
+ *
+ * @param {*} div
+ * @param {*} event
+ */
+function setTargetDiv(div, event) {
+    let touch = event.touches[0], x = touch.clientX, y = touch.clientY;
+    let rect = div.getBoundingClientRect();
+    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+        targetDiv = div; // set target div
+        highlightColumn(targetDiv.id);
+        return;
+    }
+    removeHighlightColumn(div.id);
+}
+
+
 /** Touch listener -> touch move */
 function columnTouchmoveEventListener() {
     container.addEventListener("touchmove", function (event) {
         event.preventDefault();
         touchmove = true;
-        let touch = event.touches[0], x = touch.clientX, y = touch.clientY;
         let innerDivs = document.getElementsByClassName("column");
         targetDiv = null;
 
         for (let div of innerDivs) {
-            let rect = div.getBoundingClientRect();
-            if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-                targetDiv = div; // set target div
-                highlightColumn(targetDiv.id);
-                break;
-            }
-            removeHighlightColumn(div.id);
+            setTargetDiv(div, event);
         }
     }, false);
 }
