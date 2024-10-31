@@ -72,7 +72,7 @@ function addNewContactSection(index) {
  * This function finds loged-in-User in contact-List and adds "(you)" im Namen
  */
 function markActiveUser() {
-  if(activeUser[0].email !== "guest@guest.de" && activeUser[0].email !== "" && activeUser[0].email == undefined) {
+  if(activeUser[0].email !== "guest@guest.de") {
   const contactNameRef = document.querySelectorAll(".contact-name");
   activeUserIndex = contactList.findIndex((contact) => contact.email == activeUser[0].email);
   contactNameRef[activeUserIndex].innerHTML += " (you)";
