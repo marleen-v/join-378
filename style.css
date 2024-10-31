@@ -337,6 +337,10 @@ main {
     height:auto;
   }
 
+  .dropdown{
+    top:68px;
+  }
+
  main {
   height:auto;
  } 
