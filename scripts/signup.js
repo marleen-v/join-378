@@ -25,24 +25,6 @@ function signUpUser(){
 
 
 /**
- * Puts data to firebase
- * @param {string} path directory in firebase
- * @param {object} data object-data
-async function putData(path="", data={}){
-  let res = await fetch(FIREBASE_URL + path + ".json",
-  {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data)
-  });
-  let resToJson = await res.json();
-}
-*/
-
-
-/**
  * Checks if both passwords are identical
  * @returns boolean
  */
