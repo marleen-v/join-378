@@ -18,7 +18,7 @@ export function handleTouchEventListener() {
 
 /**
  * Help function to check if moved on current column with touch and set highlight current column to grey
- * or unset left highlighted column
+ * or unset left highlighted column to white
  *
  * @param {*} div
  * @param {*} event
