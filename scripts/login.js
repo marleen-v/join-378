@@ -81,7 +81,7 @@ function showErrorMessage(){
 /**
  * Checks if the password is valid and stores active user
  */
-function checkUserPassword(){
+async function checkUserPassword(){
   let unknownUser = true;
   for (let i = 0; i < dataFromFirebase.length; i++) {
     if((emailInputRef.value === dataFromFirebase[i].email) && (passwordInputRef.value === dataFromFirebase[i].password)){
@@ -93,7 +93,7 @@ function checkUserPassword(){
           "initials": dataFromFirebase[i].initials,
           "email": dataFromFirebase[i].email
         }];
-      putData(ACTIVE_DIR, activeUser);
+      await putData(ACTIVE_DIR, activeUser);
       rememberMeCheck();
       window.location.href = './summary.html';
     }
