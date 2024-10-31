@@ -4,6 +4,8 @@
 async function initSummary(){
   //tasksFromFirebase = await loadData('/tasks_test');
   tasksFromFirebase = await loadData(TASKS_DIR);
+  activeUser = await loadData(ACTIVE_DIR);
+  checkIfLoggedIn();
   displayHTML();
   getLogo();
   if (document.referrer.includes("login.html") || document.referrer.includes("signup.html")){
