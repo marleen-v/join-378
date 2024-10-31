@@ -150,7 +150,8 @@ function checkOrigin(){
 /**
  * This function checks if you are logged in, if not you will be redirected to the login page
  */
-function checkIfLoggedIn(){
+async function checkIfLoggedIn(){
+  activeUser = await loadData(ACTIVE_DIR);
   if (activeUser[0].email == ""){
     window.location.href = './login.html';
   }
