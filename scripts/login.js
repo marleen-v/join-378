@@ -16,53 +16,14 @@ async function initLogin(){
     }  
   }
   loadCheckboxStatus();
-  //checkScreenOrientation();
 }
-
-
-/*
-async function checkScreenOrientation(){
-  if(window.matchMedia("(orientation: landscape)").matches){
-    try {
-      await screen.orientation.lock('portrait');
-      console.log('Screen orientation locked');
-    } catch(error) {
-      console.error(error);
-    }
-  }
-  console.log("Portrait: " + window.matchMedia("(orientation: portrait)").matches);
-  console.log("Landscape: " + window.matchMedia("(orientation: landscape)").matches);
-}
-
-async function preventLandscapeMode(){
-  return await screen.orientation.lock('portrait');
-}
-
-window.matchMedia("(orientation: landscape)").addEventListener("change", event => {
-  const portrait = event.matches;
-  if(!portrait){
-    preventLandscapeMode();
-  }
-});
-*/
-
-
-/**
- * Loads active user
- * @param {string} path to activeUser directory
-export async function loadActiveUser(path=""){
-  let res = await fetch(FIREBASE_URL + path + ".json");
-  let resToJson = await res.json();
-  activeUser = resToJson;
-}
-*/
 
 
 /**
  * Loads user data
  */
-function showData(){
-  loadData(USERS_DIR);
+async function showData(){
+  await loadData(USERS_DIR);
 }
 
 
