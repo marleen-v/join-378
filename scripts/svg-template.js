@@ -1,3 +1,7 @@
+/*
+    Author: Martin Reifschneider
+*/
+
 
 /**
  * Generate a SVG for urgent Icon
