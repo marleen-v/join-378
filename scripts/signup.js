@@ -175,7 +175,7 @@ function enableButtonAfterChecked(){
  * @returns boolean if every field is filled
  */
 function everyInputFieldFilled(){
-  return (nameInputRef.value != "") && (emailInputRef.value != "") && (passwordInputRef.value != "") && (passwordInputConfirmRef.value != "") && (checkCorrectPassword());
+  return (nameInputRef.value != "") && (emailInputRef.value != "") && (passwordInputRef.value != "") && (passwordInputConfirmRef.value != "");
 }
 
 

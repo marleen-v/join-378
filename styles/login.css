@@ -5,18 +5,6 @@
   font-style: normal;
 }
 
-@font-face {
-	font-family: 'fontello';
-	src: url('../fonts/fontello/fontello.eot?0000');
-	src: url('../fonts/fontello/fontello.eot?0000#iefix') format('embedded-opentype'),
-	     url('../fonts/fontello/fontello.woff2?0000') format('woff2'),
-	     url('../fonts/fontello/fontello.woff?0000') format('woff'),
-	     url('../fonts/fontello/fontello.ttf?0000') format('truetype'),
-	     url('../fonts/fontello/fontello.svg?0000#fontello') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
 * {
   font-family: 'Inter', sans-serif;
   border: unset;  
@@ -36,10 +24,6 @@ body {
 button {
   cursor: pointer;
 
-}
-
-.lock-landscape {
-  display: none;
 }
 
 .content-ctn {
@@ -190,25 +174,6 @@ input::placeholder {
   font-size: 20px;
   font-weight: 400;
   color: #D1D1D1;
-}
-
-input[type="password"] {
-	font-family: "fontello";
-  font-size: 8px;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
-	letter-spacing: .01rem;
-}
-
-input[type="password"]::placeholder {
-  font-family: 'Inter';
-  letter-spacing: 0;
-  text-shadow: none;
 }
 
 .input-ctn input {
