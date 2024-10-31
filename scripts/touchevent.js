@@ -7,6 +7,7 @@ import { getCurrentDraggedElement } from "./boards.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
 
 let container = document.getElementById("board-main");
+let task = document.querySelector(".column  * section")
 export let touchmove = false;
 let targetDiv = null;
 
@@ -16,8 +17,21 @@ let targetDiv = null;
  * @export
  */
 export function handleTouchEventListener() {
+    checkIfColumnWasTouched();
     columnTouchmoveEventListener();
     columnTouchendEventListener()
+}
+
+
+/** Check if a task is touched and prevent browser scrolling */
+function checkIfColumnWasTouched() {
+    for(let index = 0; index < tasksFromFirebase.length; index++) {
+        document.querySelector(`#taskId${index}`).addEventListener("touchstart", event => {
+            if(event.target) {    
+                event.preventDefault();                            
+            }
+        }, false);
+    }
 }
 
 
@@ -43,7 +57,7 @@ function setTargetDiv(div, event) {
 /** Touch listener -> touch move */
 function columnTouchmoveEventListener() {
     container.addEventListener("touchmove", function (event) {
-        event.preventDefault();
+        //event.preventDefault();
         touchmove = true;
         let innerDivs = document.getElementsByClassName("column");
         targetDiv = null;
