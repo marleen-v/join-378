@@ -11,7 +11,7 @@ async function initLogin(){
   dataFromFirebase = await loadData(USERS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
   for (let i = 0; i < fileArray.length; i++) {
-    if (document.referrer.includes(fileArray[i])){
+    if (document.referrer.includes(fileArray[i]) && !loggedIn){
       logoutPopup();
     }  
   }
@@ -54,6 +54,7 @@ async function checkUserPassword(){
           "initials": dataFromFirebase[i].initials,
           "email": dataFromFirebase[i].email
         }];
+      loggedIn = true;
       await putData(ACTIVE_DIR, activeUser);
       rememberMeCheck();
       window.location.href = './summary.html';
@@ -71,6 +72,7 @@ async function checkUserPassword(){
  * Forwards to summary as a guest user and sets active user
  */
 async function guestLogin(){
+  loggedIn = true;
   activeUser = [
   {
     "firstName": "Guest",
@@ -134,6 +136,7 @@ function logoutPopup(){
  * Resets the active user to empty string
  */
 async function resetActiveUser(){
+  loggedIn = false;
   activeUser = [
     {
       "firstName": "",

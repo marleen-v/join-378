@@ -8,9 +8,9 @@ let tasksFromFirebase = [];
 let contactsFromFirebase = [];
 let activeUser = [];
 let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
-
 let currentUserFirstName = "";
 let currentUserLastName = "";
+let loggedIn = false;
 
 
 /**
@@ -153,6 +153,7 @@ function checkOrigin(){
 function checkIfLoggedIn(){
     if (activeUser[0].email == ""){
       window.location.href = './login.html';
+      loggedIn = false;
     }
-  }
+}
 
