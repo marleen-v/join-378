@@ -28,10 +28,11 @@ function checkIfColumnWasTouched() {
     for(let index = 0; index < tasksFromFirebase.length; index++) {
         document.querySelector(`#taskId${index}`).addEventListener("touchstart", event => {
             if(event.target) {    
-                event.preventDefault();                            
+                touchmove = true;                           
             }
         }, false);
     }
+    touchmove = false;
 }
 
 
@@ -57,8 +58,7 @@ function setTargetDiv(div, event) {
 /** Touch listener -> touch move */
 function columnTouchmoveEventListener() {
     container.addEventListener("touchmove", function (event) {
-        //event.preventDefault();
-        touchmove = true;
+        if(touchmove) event.preventDefault();
         let innerDivs = document.getElementsByClassName("column");
         targetDiv = null;
 

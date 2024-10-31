@@ -132,14 +132,14 @@
         <div class="done-title d_none">
           <div class="board-done">
             <div>Done</div>
-            <div class="add-btn clickable" onclick="penAddTaskOverlay('done')"><img src="..\assets\icons\plus.svg" alt=""></div>
+            <div class="add-btn clickable" onclick="openAddTaskOverlay('done')"><img src="..\assets\icons\plus.svg" alt=""></div>
           </div>
         </div>
         <div id="done" class="board-main-done column" ondrop="moveTo('Done'); removeHighlightColumn('done')" ondragover="allowDrop(event); highlightColumn('done')" ondragleave="removeHighlightColumn('done')"></div>
       </div>
     </section>
   </main>
-  
+
   <div class="overlay d_none"></div>
 
 </body>
