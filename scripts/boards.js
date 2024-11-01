@@ -28,7 +28,7 @@ async function loadBoards() {
     tasksFromFirebase = await loadData(TASKS_DIR);
     contactsFromFirebase = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
-        
+    checkIfLoggedIn();
     showData(tasksFromFirebase);
     getLogo();
     //handleTouchEventListener();

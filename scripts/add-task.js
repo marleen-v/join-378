@@ -24,7 +24,7 @@ async function loadAddTask() {
     tasksFromFirebase = await loadData(TASKS_DIR);
     contactsFromFirebase = await loadData(CONTACTS_DIR);
     activeUser = await loadActiveUser(ACTIVE_DIR);
-    
+    checkIfLoggedIn();
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
     getLogo();

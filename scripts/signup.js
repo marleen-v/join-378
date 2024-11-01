@@ -162,7 +162,7 @@ function pushEverythingNecessaryToFireBase(first, last){
 function enableButtonAfterChecked(){
   let checkRef = document.getElementById("checkbox");
   let buttonRef = document.getElementById("btn");
-  if(checkRef.checked && everyInputFieldFilled()){
+  if(checkRef.checked){
     buttonRef.removeAttribute("disabled");
   } else {
     buttonRef.disabled = "true";
@@ -175,7 +175,7 @@ function enableButtonAfterChecked(){
  * @returns boolean if every field is filled
  */
 function everyInputFieldFilled(){
-  return (nameInputRef.value != "") && (emailInputRef.value != "") && (passwordInputRef.value != "") && (passwordInputConfirmRef.value != "") && (checkCorrectPassword());
+  return (nameInputRef.value != "") && (emailInputRef.value != "") && (passwordInputRef.value != "") && (passwordInputConfirmRef.value != "");
 }
 
 
@@ -197,6 +197,23 @@ function togglePasswordIcon(pwdIdx){
   } else {
     pwdInputRef.type = "text";
   }
+}
+
+
+/**
+ * Checks if all input fields are filled
+ */
+function checkForm(){
+  let formRef = document.forms['signupform'].elements;
+  const realLength = formRef.length - 2;
+  let allFieldsFilled = true;
+  for (let i = 0; i < realLength; i++) {
+    if(formRef[i].value.length == 0){
+      allFieldsFilled = false;
+    }
+  }
+  if(allFieldsFilled){enableButtonAfterChecked();}
+  else {document.getElementById("btn").disabled = "true";}
 }
 
 

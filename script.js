@@ -7,7 +7,8 @@ let dataFromFirebase = [];
 let tasksFromFirebase = [];
 let contactsFromFirebase = [];
 let activeUser = [];
-let contactColors = ["orange", "violet", "purple", "pink", "yellow", "green", "dark_purple", "red"];
+let contactColors = ["orange","pink", "dark_purple", "purple", "violet", "turquoise", "green", "bright-red", "bright-orange", "pink-2", "yellow", "blue", "bright-green", "yellow-2", "red", 
+    "orange-yellow"];
 let currentUserFirstName = "";
 let currentUserLastName = "";
 
@@ -149,7 +150,8 @@ function checkOrigin(){
 /**
  * This function checks if you are logged in, if not you will be redirected to the login page
  */
-function checkIfLoggedIn(){
+async function checkIfLoggedIn(){
+  activeUser = await loadData(ACTIVE_DIR);
   if (activeUser[0].email == ""){
     window.location.href = './login.html';
   }

@@ -1,5 +1,8 @@
 main {
+  padding-top: 80px;
+  padding-left: 64px;
   width: 100%;
+  height: calc(100vh - 96px);
   overflow: hidden;
 }
 
@@ -10,10 +13,7 @@ main {
 .summary-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   width: 100%;
-  margin-left: 120px;
 }
 
 .header-main {

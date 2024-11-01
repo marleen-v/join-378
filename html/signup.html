@@ -8,6 +8,7 @@
   
   <title>Join-378 Signup Page</title>
 
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../styles/signup.css">
   <link rel="stylesheet" href="../styles/signup-mq.css">
 
@@ -33,19 +34,19 @@
       <img class="leftarrow" src="../assets/img/bluearrowleft.png" alt="Arrow Left"/></a>
       <p class="signup-ctn">Sign Up</p>
 
-      <form onsubmit="signUpUser();return false;">
+      <form name="signupform" onsubmit="signUpUser();return false;">
         <div class="input-ctn">
-          <input id="nameInput" class="name-input" type="text" placeholder="Name" required>
-          <input autocomplete="username" id="emailInput" class="email-input" type="email" placeholder="Email" required>
+          <input id="nameInput" class="name-input" type="text" placeholder="Name" onkeyup="checkForm()" required>
+          <input autocomplete="username" id="emailInput" class="email-input" type="email" placeholder="Email" onkeyup="checkForm()" required>
           
           <div class="password-input-1">
-            <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" minlength="3" placeholder="Password" required>
+            <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" minlength="3" placeholder="Password" onkeyup="checkForm()" required>
             <img id="hidepwd1" onclick="togglePasswordIcon(1)" src="../assets/img/lock.png" alt="Lock-Icon">
             <img id="showpwd1" onclick="togglePasswordIcon(1)" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
           </div>
           
           <div class="password-input-2">
-            <input autocomplete="new-password" id="passwordInputConfirm" class="password-input" type="password" minlength="3" placeholder="Confirm Password" required>
+            <input autocomplete="new-password" id="passwordInputConfirm" class="password-input" type="password" minlength="3" placeholder="Confirm Password" onkeyup="checkForm()" required>
             <img id="hidepwd2" onclick="togglePasswordIcon(2)" src="../assets/img/lock.png" alt="Lock-Icon">
             <img id="showpwd2" onclick="togglePasswordIcon(2)" src="../assets/img/visibility_off.png" alt="Eyes-Icon" class="dnone">
           </div>
@@ -55,7 +56,7 @@
         </div>
         
         <div class="checkbox-ctn">
-          <input type="checkbox" id="checkbox" onclick="enableButtonAfterChecked()">
+          <input type="checkbox" id="checkbox" onclick="checkForm()">
           <label for="checkbox">I accept the <a href="./policy.html" target="_blank">Privacy policy</a></label>
         </div>
 
@@ -72,8 +73,6 @@
       </div>
 
     </div>
-
-
     
     
 
