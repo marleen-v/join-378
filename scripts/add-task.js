@@ -395,7 +395,8 @@ function clearButton() {
 /**
  * Function which collect all input values into JSON format and return JSON data
  *
- * @returns {{ id: any; Column: string; Title: any; Description: any; Date: any; Priority: any; Category: any; Subtasks: {}; Persons: {}; }}
+ * @returns {object} JSON data for task
+
  */
 function getTaskInfos(column) {
     let persons = [];
