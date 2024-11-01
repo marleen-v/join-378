@@ -625,7 +625,7 @@ main {
     grid-template-rows: 232px 1fr;
     grid-column: 1;
     padding: 0 64px 0 64px;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -679,7 +679,8 @@ main {
 }
 
 .add-new-task-to-column {
-    height: 870px;
+    height: calc(100% - 64px);
+    max-height: 870px;
     gap: 16px;
 }
 
@@ -744,7 +745,7 @@ and (max-width: 1024px) {
     .add-task-to-column  {
         display: grid;
         grid-template-rows: 78px 1fr;
-        height: calc(100vh - 48px);
+        height: calc(100vh - 98px);
         width: calc(100vw - 8px);
         overflow-y: auto;
         gap: 16px;
