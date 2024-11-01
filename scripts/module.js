@@ -20,6 +20,10 @@ const dropzones = document.querySelectorAll(".column");
 const movableDiv = document.getElementById("dragelement");
 let currentTaskId = null;
 let offsetX, offsetY;
+let isDragging = false; // Flag to track if the element is being dragged
+let startX, startY; // Start position for dragging
+let dragTimeout;
+let quickTap = false;
 
 
 /**
@@ -115,11 +119,6 @@ function getColumn(key) {
     return column;
 }
 
-
-let isDragging = false; // Flag to track if the element is being dragged
-let startX, startY; // Start position for dragging
-let dragTimeout;
-let quickTap = false;
 
 /**
  * Preparing movable object with all informations of catched div from mouse or touch event
