@@ -143,7 +143,8 @@ function pushEverythingNecessaryToFireBase(first, last){
       "email": emailInputRef.value,
       "firstName": first,
       "lastName": last,
-      "initials": first[0] + last[0]
+      "initials": first[0] + last[0],
+      "loggedIn": true
     }];
   contactsUser.push({
       "color": getRandomColor(),
