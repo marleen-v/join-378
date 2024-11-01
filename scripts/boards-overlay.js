@@ -9,6 +9,7 @@ import { refresh, setBgColor, setUserInitial, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
+import { dragAndDropListener } from "./mouseevent.js";
 
 
 /** Set transparency background color on overlay */
@@ -160,6 +161,7 @@ export function runOutOverlayAnimation(wrapper) {
         overlay.classList.add('z-index-minus-1');
         unsetOpacity();
         showData(tasksFromFirebase);
+        //dragAndDropListener();
     }, "300");
 }
 

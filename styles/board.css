@@ -284,6 +284,30 @@ main {
     border-color: #29abe2;
 }
 
+.dragelement {
+    /*display: grid;*/
+    position: absolute;
+    min-width: 252px;
+    max-width: 252px;
+    min-height: 263px;
+    max-height: 263px;
+   /* grid-template-rows: repeat(5, 1fr);
+    border-radius: 24px;
+    border: 2px solid #FFFFFF;
+    padding: 16px;
+    margin: 8px 2px 8px 2px;
+    min-width: 252px;
+    max-width: 252px;
+    min-height: 263px;
+    max-height: 263px;
+    gap: 16px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;*/
+    z-index: 1000;
+    transition: transform 0.1s ease;
+    user-select: none;
+}
+
 .task-card {
     display: grid;
     grid-template-rows: repeat(5, 1fr);
@@ -754,11 +778,6 @@ and (max-width: 1024px) {
 
     .boards {
         padding: 0 16px 0 16px;
-    }
-
-
-    .task-form-container {
-        overflow-y: auto;
     }
 
     .board-bar {

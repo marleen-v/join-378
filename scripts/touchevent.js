@@ -7,7 +7,6 @@ import { getCurrentDraggedElement } from "./boards.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
 
 let container = document.getElementById("board-main");
-let task = document.querySelector(".column  * section")
 export let touchmove = false;
 let targetDiv = null;
 

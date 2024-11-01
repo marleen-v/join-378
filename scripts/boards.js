@@ -11,6 +11,7 @@ import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
 import { getPerson, loadActiveUser, loadData } from "./module.js";
+import { dragAndDropListener } from "./mouseevent.js";
 import { handleTouchEventListener } from "./touchevent.js";
 let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
@@ -30,7 +31,8 @@ async function loadBoards() {
         
     showData(tasksFromFirebase);
     getLogo();
-    handleTouchEventListener();
+    //handleTouchEventListener();
+    //dragAndDropListener();
 
     searchId.addEventListener('input', function(e) {
         clearHighlightedTasks();
@@ -275,6 +277,7 @@ export function refresh() {
     document.querySelector('.board-main-await-feedback').innerHTML = "";
     document.querySelector('.board-main-done').innerHTML = "";
     showData(tasksFromFirebase);
+    //dragAndDropListener();
 }
 
 /**
