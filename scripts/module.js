@@ -11,14 +11,14 @@ export const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebase
 export const USERS_DIR = '/users';
 export const CONTACTS_DIR = '/contacts';
 export const TASKS_DIR = '/tasks';
-let container = document.getElementById("board-main");
-
-let isDragging = false;
 let currentTask = null;
 let originalColumn = null;
 let currentColumn = null;
-
-let id = "", i;
+const taskContainer = document.getElementById("board-main");
+const dropzones = document.querySelectorAll(".column");
+const movableDiv = document.getElementById("dragelement");
+let currentTaskId = null;
+let offsetX, offsetY;
 
 
 /**
@@ -82,12 +82,27 @@ export function getPerson(contacts, searchString) {
 }
 
 
+/**
+ * Template for movable object there copied all tasks information to it for simulating
+ * task card drag and drop
+ *
+ * @param {*} id
+ * @param {*} index
+ * @returns {string}
+ */
 function getTaskBody(id, index) {
     return /*html*/`
         <section onclick="openOverlay(0)" id="${id}" class="task-card add-task-card${index} clickable prevent-select" ondragstart="startDragging('${id}')"></section>  
     `;
 }
 
+/**
+ * Compare column id's from board.html and get column name back
+ * for task array literal
+ *
+ * @param {*} key
+ * @returns {string}
+ */
 function getColumn(key) {
     let column = "";
     switch (key) {
@@ -103,32 +118,84 @@ function getColumn(key) {
 
 // event mouse
 
+/**
+ * Preparing movable object with all informations of catched div from mouse or touch event
+ *
+ * @param {*} taskElement
+ */
+function prepareMovableObject(taskElement) {
+    currentTask = taskElement;
+    currentTaskId = taskElement.getAttribute("id");
+    originalColumn = taskElement.closest(".column");
+    originalColumn.style.backgroundColor = "lightgrey";
+    currentTaskId = taskElement.getAttribute("id");
+    let index = parseTaskIdToNumberId(currentTaskId);
+    movableDiv.innerHTML = getTaskBody(currentTaskId, index);
+    movableDiv.querySelector('section').innerHTML = document.getElementById(currentTaskId).innerHTML;
+    movableDiv.querySelector('section').style.transition = "0.1s ease";
+    movableDiv.querySelector('section').style.transform = "rotate(5deg)";
+    movableDiv.style.display = "block";
+}
 
-const taskContainer = document.getElementById("board-main");
-const dropzones = document.querySelectorAll(".column");
-const movableDiv = document.getElementById("dragelement");
+/** Reset movable object */
+function resetMovableObject() {
+    movableDiv.querySelector('section').style.transition = "0.1s ease";
+        movableDiv.querySelector('section').style.transform = "rotate(0deg)";
+        movableDiv.style.display = "none";
+        currentTaskId = null;
+}
 
-let currentTaskId = null;
-let offsetX, offsetY;
+/** reset touched columd background color */
+function resetColumn() {
+    if (originalColumn) {
+        originalColumn.style.backgroundColor = "";
+    }
+    if (currentColumn) {
+        currentColumn.style.backgroundColor = "";
+    }
+
+    // Reset
+    originalColumn = null;
+    currentColumn = null;
+}
 
 
-// `mousedown`-Listener auf `taskContainer`, um Task-Element zu kopieren
+/**
+ * Save all changed informations to task array and on firebase and refresh board data
+ *
+ * @param {*} currentTaskId
+ * @param {*} columnId
+ */
+function saveMovedTask(currentTaskId, columnId) {
+    let id = parseTaskIdToNumberId(currentTaskId);
+    tasksFromFirebase[id].Column = getColumn(columnId);
+    putData(TASKS_DIR, tasksFromFirebase);
+    refresh();
+}
 
+
+/**
+ * Change touched column color to lightgreen
+ *
+ * @param {*} newColumn
+ */
+function colorTouchedColumn(newColumn) {
+    if (newColumn !== currentColumn) {
+        if (currentColumn && currentColumn !== originalColumn) {
+            currentColumn.style.backgroundColor = "";
+        }
+        if (newColumn && newColumn !== originalColumn) {
+            newColumn.style.backgroundColor = "lightgreen";
+        }
+        currentColumn = newColumn;
+    }
+}
+
+// mousedown listener wich get all on clicked task informations like positon or children of div
 taskContainer.addEventListener("mousedown", function (event) {
     const taskElement = event.target.closest(".task-card");
     if (taskElement) {
-        currentTask = taskElement;
-        currentTaskId = taskElement.getAttribute("id");
-        originalColumn = taskElement.closest(".column");
-        originalColumn.style.backgroundColor = "lightgrey";
-
-        let index = parseTaskIdToNumberId(currentTaskId);
-        movableDiv.innerHTML = getTaskBody(currentTaskId, index);
-
-        movableDiv.querySelector('section').innerHTML = document.getElementById(currentTaskId).innerHTML;
-        movableDiv.querySelector('section').style.transition = "0.1s ease";
-        movableDiv.querySelector('section').style.transform = "rotate(5deg)";
-        movableDiv.style.display = "block";
+        prepareMovableObject(taskElement);
 
         const rect = currentTask.getBoundingClientRect();
         offsetX = event.clientX - rect.left;
@@ -141,86 +208,72 @@ taskContainer.addEventListener("mousedown", function (event) {
 });
 
 
-// `mousemove`-Event, um das bewegliche Element der Maus folgen zu lassen
+/**
+ * Check if mouse bounding column rectangle
+ *
+ * @param {*} event
+ * @param {*} column
+ * @returns {boolean}
+ */
+function checkMousemoveBounding(event, column) {
+    const rect = column.getBoundingClientRect();
+    if (event.clientX > rect.left && 
+        event.clientX < rect.right &&
+        event.clientY > rect.top && 
+        event.clientY < rect.bottom) {
+        return true;
+    }
+    return false;
+}
+
+
+/**
+ * Check if endposition on mouseup or touchend bounding column rectangle
+ * to example if you move from column called "To Do" to "Done" 
+ *
+ * @param {*} dropzone
+ * @returns {boolean}
+ */
+function checkDropzoneBounding(dropzone) {
+    const movableRect = movableDiv.getBoundingClientRect();
+    const dropzoneRect = dropzone.getBoundingClientRect();
+    if (
+        movableRect.left < dropzoneRect.right &&
+        movableRect.right > dropzoneRect.left &&
+        movableRect.top < dropzoneRect.bottom &&
+        movableRect.bottom > dropzoneRect.top
+    ) return true;
+    return false;
+}
+
+// mousemove event listener for movement of selected div
 document.addEventListener("mousemove", function (event) {
     if (currentTaskId) {
         movableDiv.style.left = event.pageX - offsetX + "px";
         movableDiv.style.top = event.pageY - offsetY + "px";
-
         if (currentTask) {
             movableDiv.style.left = `${event.pageX - offsetX}px`;
             movableDiv.style.top = `${event.pageY - offsetY}px`;
-
-            // Überprüfen, ob wir uns über einer neuen Spalte befinden
             let newColumn = null;
-            dropzones.forEach(column => {
-                const rect = column.getBoundingClientRect();
-                if (
-                    event.clientX > rect.left &&
-                    event.clientX < rect.right &&
-                    event.clientY > rect.top &&
-                    event.clientY < rect.bottom
-                ) {
-                    newColumn = column;
-                }
-            });
-            if (newColumn !== currentColumn) {
-                if (currentColumn && currentColumn !== originalColumn) {
-                    currentColumn.style.backgroundColor = ""; // Setze alte Spalte auf Standardfarbe
-                }
-                if (newColumn && newColumn !== originalColumn) {
-                    newColumn.style.backgroundColor = "lightgreen"; // Setze neue Spalte auf grün
-                }
-                currentColumn = newColumn;
-            }
+            dropzones.forEach(column => { if(checkMousemoveBounding(event, column)) newColumn = column; });
+            colorTouchedColumn(newColumn);
         }
-
     }
 });
 
-// `mouseup`-Event, um die Einsortierung zu überprüfen
+// mouseup listener to check where you dragged element and store new order
 document.addEventListener("mouseup", function () {
     if (currentTaskId) {
         let droppedInZone = false;
-
-        // Bounding-Box des bewegbaren Elements
-        const movableRect = movableDiv.getBoundingClientRect();
-
         dropzones.forEach(dropzone => {
-            const dropzoneRect = dropzone.getBoundingClientRect();
             const columnId = dropzone.getAttribute("id");
-
-            // Kollisionsprüfung
-            if (
-                movableRect.left < dropzoneRect.right &&
-                movableRect.right > dropzoneRect.left &&
-                movableRect.top < dropzoneRect.bottom &&
-                movableRect.bottom > dropzoneRect.top
-            ) {
+            if(checkDropzoneBounding(dropzone)) {
                 droppedInZone = true;
-                let id = parseTaskIdToNumberId(currentTaskId);
-                tasksFromFirebase[id].Column = getColumn(columnId);
-                putData(TASKS_DIR, tasksFromFirebase);
-                refresh();
+                saveMovedTask(currentTaskId, columnId);
             }
         });
-
-        // Bewegbares Element zurücksetzen und ausblenden
-        movableDiv.querySelector('section').style.transition = "0.1s ease";
-        movableDiv.querySelector('section').style.transform = "rotate(0deg)";
-        movableDiv.style.display = "none";
-        currentTaskId = null;
-
-        if (originalColumn) {
-            originalColumn.style.backgroundColor = "";
-        }
-        if (currentColumn) {
-            currentColumn.style.backgroundColor = "";
-        }
-
-        // Reset
-        originalColumn = null;
-        currentColumn = null;
+        resetMovableObject();
+        resetColumn();
     }
 });
 
@@ -228,104 +281,70 @@ document.addEventListener("mouseup", function () {
 
 // touch
 
-// Touchstart-Listener mit nicht passiv
+// touchstart listener same as mousedown listener
 taskContainer.addEventListener("touchstart", function (event) {
-    event.preventDefault(); // Verhindert das Standardverhalten
-
+    event.preventDefault(); 
     const taskElement = event.target.closest(".task-card");
     if (taskElement) {
-        currentTask = taskElement;
-        currentTaskId = taskElement.getAttribute("id");
-        originalColumn = taskElement.closest(".column");
-        originalColumn.style.backgroundColor = "lightgrey";
-
-        let index = parseTaskIdToNumberId(currentTaskId);
-        movableDiv.innerHTML = getTaskBody(currentTaskId, index);
-        movableDiv.querySelector('section').innerHTML = document.getElementById(currentTaskId).innerHTML;
-        movableDiv.querySelector('section').style.transition = "0.1s ease";
-        movableDiv.querySelector('section').style.transform = "rotate(5deg)";
-        movableDiv.style.display = "block";
-
+        prepareMovableObject(taskElement);
         const rect = currentTask.getBoundingClientRect();
-        offsetX = event.touches[0].clientX - rect.left; // Nutzung der Touch-Position
+        offsetX = event.touches[0].clientX - rect.left; 
         offsetY = event.touches[0].clientY - rect.top;
-
         movableDiv.style.left = (event.touches[0].pageX - offsetX) + "px";
         movableDiv.style.top = (event.touches[0].pageY - offsetY) + "px";
     }
-}, { passive: false }); // Hier passive: false setzen
+}, { passive: false });
 
-// Touchmove-Listener mit nicht passiv
+
+/**
+ * Check if touch move bounding a column rectangle
+ *
+ * @param {*} event
+ * @param {*} column
+ * @returns {boolean}
+ */
+function checkTouchmoveBounding(event, column) {
+    const rect = column.getBoundingClientRect();
+    if (event.touches[0].clientX > rect.left &&
+        event.touches[0].clientX < rect.right &&
+        event.touches[0].clientY > rect.top &&
+        event.touches[0].clientY < rect.bottom
+    ) {
+        return true;
+    }
+    return false;
+}
+
+// touchmove listener same as mousemove listener 
 document.addEventListener("touchmove", function (event) {
     if (currentTask) {
         movableDiv.style.left = `${event.touches[0].pageX - offsetX}px`;
         movableDiv.style.top = `${event.touches[0].pageY - offsetY}px`;
-
         let newColumn = null;
         dropzones.forEach(column => {
-            const rect = column.getBoundingClientRect();
-            if (
-                event.touches[0].clientX > rect.left &&
-                event.touches[0].clientX < rect.right &&
-                event.touches[0].clientY > rect.top &&
-                event.touches[0].clientY < rect.bottom
-            ) {
-                newColumn = column;
-            }
+            if (checkTouchmoveBounding(event, column)) newColumn = column;
         });
-
-        if (newColumn !== currentColumn) {
-            if (currentColumn && currentColumn !== originalColumn) {
-                currentColumn.style.backgroundColor = "";
-            }
-            if (newColumn && newColumn !== originalColumn) {
-                newColumn.style.backgroundColor = "lightgreen";
-            }
-            currentColumn = newColumn;
-        }
-
-        event.preventDefault(); // Verhindert das Standardverhalten
+        colorTouchedColumn(newColumn);
+        event.preventDefault(); 
     }
-}, { passive: false }); // Hier passive: false setzen
+}, { passive: false });
 
-// Touchend-Listener bleibt unverändert
+
+
+
+// touchend listener same as mouseup listener
 document.addEventListener("touchend", function () {
     if (currentTaskId) {
         let droppedInZone = false;
-
-        const movableRect = movableDiv.getBoundingClientRect();
-
         dropzones.forEach(dropzone => {
             const dropzoneRect = dropzone.getBoundingClientRect();
             const columnId = dropzone.getAttribute("id");
-
-            if (
-                movableRect.left < dropzoneRect.right &&
-                movableRect.right > dropzoneRect.left &&
-                movableRect.top < dropzoneRect.bottom &&
-                movableRect.bottom > dropzoneRect.top
-            ) {
+            if(checkDropzoneBounding(dropzone)) {
                 droppedInZone = true;
-                let id = parseTaskIdToNumberId(currentTaskId);
-                tasksFromFirebase[id].Column = getColumn(columnId);
-                putData(TASKS_DIR, tasksFromFirebase);
-                refresh(); // Update UI oder Daten
+                saveMovedTask(currentTaskId, columnId);
             }
         });
-
-        movableDiv.querySelector('section').style.transition = "0.1s ease";
-        movableDiv.querySelector('section').style.transform = "rotate(0deg)";
-        movableDiv.style.display = "none";
-        currentTaskId = null;
-
-        if (originalColumn) {
-            originalColumn.style.backgroundColor = "";
-        }
-        if (currentColumn) {
-            currentColumn.style.backgroundColor = "";
-        }
-
-        originalColumn = null;
-        currentColumn = null;
+        resetMovableObject();
+        resetColumn();
     }
 });
