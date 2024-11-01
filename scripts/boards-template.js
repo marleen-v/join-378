@@ -90,10 +90,10 @@ function calculateDoneSubtasks(element) {
 export function getProgressBar(element) {
     let done = calculateDoneSubtasks(element);
     let procent = (done / element.Subtasks.length) * 100;
-    
+    let color = (procent == 100) ? "background-color: lightgreen;" : "background-color: #4589FF;";
     return /*html*/`
         <div class="progressbar-container">
-            <div class="progressbar" style="width: ${procent}%"></div>
+            <div class="progressbar" style="width: ${procent}%; ${color}"></div>
         </div>
         <span class="flex align-items-center">${done}/${element.Subtasks.length} Subtasks</span>
     `
