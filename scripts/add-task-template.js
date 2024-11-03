@@ -250,7 +250,7 @@ export function getInputForm() {
                 <span class="mg-right-8px set-font-icon-700">Clear</span>
                 <div class="flex align-items-center">${getCloseSVG()}</div>
             </button>
-            <button form="create-task-form" type="submit" class="flex justify-content-center align-items-center btn-add-task clickable">
+            <button form="create-task-form" type="submit" class="flex justify-content-center align-items-center btn-create-task clickable">
                 <span class="mg-right-8px set-font-icon-700">Create Task</span>
                 <img class="flex align-items-center" src="../assets/icons/check.svg" alt="">
             </button>
