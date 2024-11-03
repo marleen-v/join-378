@@ -821,8 +821,6 @@ and (max-width: 1024px) {
         display: flex;
         overflow: auto;
         width: calc(100vw - 40px);
-        min-height: 265px;
-        max-height: 265px;
     }
 
     .board-main-to-do {
