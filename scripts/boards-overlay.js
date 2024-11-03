@@ -9,7 +9,7 @@ import { refresh, setBgColor, setUserInitial, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
-
+export let overlayIsOpen = false;
 
 /** Set transparency background color on overlay */
 export function setOpacity() {
@@ -159,6 +159,7 @@ export function runOutOverlayAnimation(wrapper) {
         overlay.classList.add('z-index-minus-1');
         unsetOpacity();
         showData(tasksFromFirebase);
+        overlayIsOpen = false;
     }, "300");
 }
 
@@ -171,6 +172,7 @@ export function runOutOverlayAnimation(wrapper) {
  */
 export function openOverlay(id) {
     let overlay = getOverlay();
+    overlayIsOpen = true;
     overlay.innerHTML = getDetailedCard('taskId' + id);
     runInOverlayAnimation('.detailed-card');
     setDetailedCard(id);

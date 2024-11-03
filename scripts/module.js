@@ -5,7 +5,7 @@ import './boards.js';
 import './add-task.js';
 import { parseTaskIdToNumberId } from './boards-edit.js';
 import { refresh } from './boards.js';
-import { openOverlay } from './boards-overlay.js';
+import { openOverlay, overlayIsOpen } from './boards-overlay.js';
 export const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
 export const USERS_DIR = '/users';
 export const CONTACTS_DIR = '/contacts';
@@ -267,12 +267,12 @@ function handleStart(event, isTouch = false) {
 
 // Start event for mouse
 if(taskContainer != null) taskContainer.addEventListener("mousedown", function (event) {
-    handleStart(event);
+    if(!overlayIsOpen) handleStart(event);
 });
 
 // Start event for touch
 if(taskContainer != null) taskContainer.addEventListener("touchstart", function (event) {
-    handleStart(event, true);
+    if(!overlayIsOpen) handleStart(event, true);
 }, { passive: false });
 
 // Function to handle mouse or touch move
@@ -292,12 +292,12 @@ function handleMove(event, isTouch = false) {
 
 // Move event for mouse
 document.addEventListener("mousemove", function (event) {
-    handleMove(event);
+    if(!overlayIsOpen) handleMove(event);
 });
 
 // Move event for touch
 document.addEventListener("touchmove", function (event) {
-    handleMove(event, true);
+    if(!overlayIsOpen) handleMove(event, true);
 }, { passive: false });
 
 /**
@@ -367,13 +367,13 @@ function handleEnd(event, isTouch = false) {
 
 // End event for mouse
 document.addEventListener("mouseup", function (event) {
-    handleEnd(event);
+    if(!overlayIsOpen) handleEnd(event);
 });
 
 
 // End event for touch
 document.addEventListener("touchend", function (event) {
-    handleEnd(event, true);
+    if(!overlayIsOpen) handleEnd(event, true);
 }, { passive: false });
 
 
