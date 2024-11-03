@@ -128,7 +128,7 @@ function getColumn(key) {
  */
 function prepareMovableObject(taskElement) {
     if(!isDragging) return; 
-    currentTask = taskElement;
+    //currentTask = taskElement;
     currentTaskId = taskElement.getAttribute("id");
     originalColumn = taskElement.closest(".column");
     originalColumn.style.backgroundColor = "lightgrey";
@@ -137,9 +137,7 @@ function prepareMovableObject(taskElement) {
     movableDiv.querySelector('section').innerHTML = document.getElementById(currentTaskId).innerHTML;
     movableDiv.querySelector('section').style.transition = "0.1s ease";
     movableDiv.querySelector('section').style.transform = "rotate(5deg)";
-    //movableDiv.querySelector('section').style.position = document.getElementById(currentTaskId).position;
     movableDiv.style.display = "block";
-    //document.getElementById(currentTaskId).style.display = "none";
 }
 
 /** Reset movable object */
