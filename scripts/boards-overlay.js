@@ -137,7 +137,6 @@ function deleteTask(taskId) {
     }
     tasks.forEach((element, index) => { element.id = index });
     putData(TASKS_DIR, tasks);
-    //tasksFromFirebase = await loadData(TASKS_DIR);
     closeOverlay('.detailed-card');
     if(tasks.length == 0) tasks = null;
     showData(tasks);
@@ -160,7 +159,6 @@ export function runOutOverlayAnimation(wrapper) {
         overlay.classList.add('z-index-minus-1');
         unsetOpacity();
         showData(tasksFromFirebase);
-        //dragAndDropListener();
     }, "300");
 }
 

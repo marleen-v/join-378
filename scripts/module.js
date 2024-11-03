@@ -312,9 +312,10 @@ document.addEventListener("touchmove", function (event) {
  * @param {*} deltaX
  * @param {*} deltaY
  */
-function onScroll(deltaX, deltaY) {
+function onScroll(event, deltaX, deltaY) {
     if(!quickTap && deltaX > swipeThresholdX && deltaX > deltaY) {
         const column = event.target.closest('.column');
+        if(column == null) return;
         if(endX < startX) column.scrollLeft += 252;
         else column.scrollLeft -= 252;
     }
@@ -339,7 +340,7 @@ function handleSwipe(event) {
         const taskElement = event.target.closest(".task-card");
         if(taskElement) handleClickOnTask(taskElement.getAttribute("id"));
     }
-    else onScroll(deltaX, deltaY);
+    else if(!quickTap) onScroll(event, deltaX, deltaY);
 }
 
 /** Clear all set timeout */
@@ -389,6 +390,7 @@ document.addEventListener("touchend", function (event) {
  */
 function handleClickOnTask(taskId) {
     isDragging = false;
+    quickTap = true;
     let id = parseTaskIdToNumberId(taskId);
     openOverlay(id);
 }

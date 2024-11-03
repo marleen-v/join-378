@@ -28,12 +28,6 @@ async function loadBoards() {
     checkIfLoggedIn();
     showData(tasksFromFirebase);
     getLogo();
-    //handleTouchEventListener();
-    //dragAndDropListener();
-
-    searchId.addEventListener('input', function(e) {
-        clearHighlightedTasks();
-    });
 }
 
 /**
