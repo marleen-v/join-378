@@ -25,6 +25,7 @@ const swipeThresholdY = 30;
 let dragTimeout;
 let quickTap = false;
 
+
 /**
  * Function for load data from firebase
  *
@@ -349,7 +350,7 @@ function clearTimeouts() {
  */
 function handleEnd(event, isTouch = false) {
     clearTimeouts();
-    if(isTouch) handleSwipe(event);
+    if(isTouch && !quickTap) handleSwipe(event);
     if (!isDragging && quickTap) handleClickOnTask(currentTaskId);
     else if (isDragging && currentTaskId) {
         dropzones.forEach(dropzone => {
