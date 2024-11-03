@@ -21,7 +21,10 @@ const movableDiv = document.getElementById("dragelement");
 let currentTaskId = null;
 let offsetX, offsetY;
 let isDragging = false; // Flag to track if the element is being dragged
-let startX, startY, endX, endY, tapTreshold = 10; // Start position for dragging
+let startX, startY, endX, endY, tapTimeout; // Start position for dragging
+const tapThreshold = 10;
+const swipeThresholdX = 30;   // Schwellenwert für horizontales Swiping
+const swipeThresholdY = 30;
 let dragTimeout;
 let quickTap = false;
 
@@ -244,7 +247,7 @@ function waitForDrag(isTouch, event, taskElement) {
         offsetY = startY - rect.top;
         movableDiv.style.left = (isTouch ? event.touches[0].pageX : event.pageX) - offsetX + "px";
         movableDiv.style.top = (isTouch ? event.touches[0].pageY : event.pageY) - offsetY + "px";
-    }, 200);
+    }, 500);
 }
 
 
@@ -259,6 +262,7 @@ function handleStart(event, isTouch = false) {
         startY = isTouch ? event.touches[0].clientY : event.clientY;
         endX = isTouch ? event.touches[0].clientX : event.clientX;
         endY = isTouch ? event.touches[0].clientY : event.clientY;
+        tapTimeout = setTimeout(() => { quickTap = false; }, 150);
         waitForDrag(isTouch, event, taskElement);
     }
 }
@@ -304,14 +308,19 @@ function handleSwipe(event) {
     endY = event.changedTouches[0].clientY;
     const deltaX = Math.abs(endX - startX);
     const deltaY = Math.abs(endY - startY);
-    if(deltaX < tapTreshold && deltaY < tapTreshold) {
+    if(deltaX < tapThreshold && deltaY < tapThreshold && quickTap) {
         const taskElement = event.target.closest(".task-card");
         if(taskElement) handleClickOnTask(taskElement.getAttribute("id"));
     }
-    else if(deltaX > deltaY) {
+    else if(!quickTap && deltaX > swipeThresholdX && deltaX > deltaY) {
         const column = event.target.closest('.column');
-        if(endX < startX) column.scrollLeft += 10;
-        else column.scrollLeft -= 10;
+        if(endX < startX) column.scrollLeft += 252;
+        else column.scrollLeft -= 252;
+    }
+    else if (!quickTap && deltaY > swipeThresholdY && deltaY > deltaX) {
+        const mainContainer = document.querySelector('main');
+        if (endY < startY) mainContainer.scrollTop += 300;  // Scrollen um 100px nach unten
+        else mainContainer.scrollTop -= 300;  // Scrollen um 100px nach oben
     }
 }
 
@@ -322,6 +331,7 @@ function handleSwipe(event) {
  */
 function handleEnd(event, isTouch = false) {
     clearTimeout(dragTimeout);
+    clearTimeout(tapTimeout);
     if(isTouch) handleSwipe(event);
     if (!isDragging && quickTap) {
         handleClickOnTask(currentTaskId);
