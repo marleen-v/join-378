@@ -21,7 +21,7 @@ const movableDiv = document.getElementById("dragelement");
 let currentTaskId = null;
 let offsetX, offsetY;
 let isDragging = false; // Flag to track if the element is being dragged
-let startX, startY; // Start position for dragging
+let startX, startY, endX, endY, tapTreshold = 10; // Start position for dragging
 let dragTimeout;
 let quickTap = false;
 
@@ -257,6 +257,8 @@ function handleStart(event, isTouch = false) {
         quickTap = true;
         startX = isTouch ? event.touches[0].clientX : event.clientX;
         startY = isTouch ? event.touches[0].clientY : event.clientY;
+        endX = isTouch ? event.touches[0].clientX : event.clientX;
+        endY = isTouch ? event.touches[0].clientY : event.clientY;
         waitForDrag(isTouch, event, taskElement);
     }
 }
@@ -297,14 +299,30 @@ document.addEventListener("touchmove", function (event) {
 }, { passive: false });
 
 
+function handleSwipe(event) {
+    endX = event.changedTouches[0].clientX;
+    endY = event.changedTouches[0].clientY;
+    const deltaX = Math.abs(endX - startX);
+    const deltaY = Math.abs(endY - startY);
+    if(deltaX < tapTreshold && deltaY < tapTreshold) {
+        const taskElement = event.target.closest(".task-card");
+        if(taskElement) handleClickOnTask(taskElement.getAttribute("id"));
+    }
+    else if(deltaX > deltaY) {
+        const column = event.target.closest('.column');
+        if(endX < startX) column.scrollLeft += 10;
+        else column.scrollLeft -= 10;
+    }
+}
+
 /**
  * Function to handle end event for mouse and touch
  *
  * @param {boolean} [isTouch=false]
  */
-function handleEnd(isTouch = false) {
+function handleEnd(event, isTouch = false) {
     clearTimeout(dragTimeout);
-
+    if(isTouch) handleSwipe(event);
     if (!isDragging && quickTap) {
         handleClickOnTask(currentTaskId);
     } else if (isDragging && currentTaskId) {
@@ -326,13 +344,13 @@ function handleEnd(isTouch = false) {
 }
 
 // End event for mouse
-document.addEventListener("mouseup", function () {
-    handleEnd();
+document.addEventListener("mouseup", function (event) {
+    handleEnd(event);
 });
 
 // End event for touch
-document.addEventListener("touchend", function () {
-    handleEnd(true);
+document.addEventListener("touchend", function (event) {
+    handleEnd(event, true);
 }, { passive: false });
 
 
