@@ -828,24 +828,28 @@ and (max-width: 1024px) {
         display: flex;
         overflow: auto;
         width: calc(100% - 16px);
+        height: 300px;
     }
 
     .board-main-in-progress {
         display: flex;
         overflow: auto;
         width: calc(100% - 16px);
+        height: 300px;
     }
 
     .board-main-await-feedback {
         display: flex;
         overflow: auto;
         width: calc(100% - 16px);
+        height: 300px;
     }
 
     .board-main-done {
         display: flex;
         overflow: auto;
         width: calc(100% - 16px);
+        height: 300px;
     }
 
     .add-new-task-to-column-container  {
