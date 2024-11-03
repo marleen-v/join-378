@@ -70,7 +70,7 @@ function showErrorMessage(str){
   let errorStr = 'Error';
   if(str === "wrongPassword"){errorStr = 'Passwords do not match!';} else
   if(str === "emailExists"){errorStr = 'Email already exists!';} else
-  if(str === "nameFormatIncorrect"){errorStr = 'Please enter your first and last name separated by a blank!';}
+  if(str === "nameFormatIncorrect"){errorStr = 'Please enter first and last name!';}
   errorRef.innerHTML += errorStr + `<br>`;
   setTimeout(function(){
     errorRef.innerHTML = '';
@@ -120,7 +120,6 @@ function addUser(){
     if(spaces !== 1){showErrorMessage('nameFormatIncorrect');}
     if(!emailNotExists()){showErrorMessage('emailExists');}
     if(!checkCorrectPassword()){showErrorMessage('wrongPassword');}
-    //resetValues();
   }
 }
 
