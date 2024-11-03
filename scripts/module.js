@@ -336,31 +336,29 @@ function handleSwipe(event) {
     else onScroll(deltaX, deltaY);
 }
 
+/** Clear all set timeout */
+function clearTimeouts() {
+    clearTimeout(dragTimeout);
+    clearTimeout(tapTimeout);
+}
+
 /**
  * Function to handle end event for mouse and touch
  *
  * @param {boolean} [isTouch=false]
  */
 function handleEnd(event, isTouch = false) {
-    clearTimeout(dragTimeout);
-    clearTimeout(tapTimeout);
+    clearTimeouts();
     if(isTouch) handleSwipe(event);
-    if (!isDragging && quickTap) {
-        handleClickOnTask(currentTaskId);
-    } else if (isDragging && currentTaskId) {
-        let droppedInZone = false;
+    if (!isDragging && quickTap) handleClickOnTask(currentTaskId);
+    else if (isDragging && currentTaskId) {
         dropzones.forEach(dropzone => {
             const columnId = dropzone.getAttribute("id");
-            if (checkDropzoneBounding(dropzone)) {
-                droppedInZone = true;
-                saveMovedTask(currentTaskId, columnId);
-            }
+            if (checkDropzoneBounding(dropzone)) saveMovedTask(currentTaskId, columnId);
         });
         resetMovableObject();
         resetColumn();
     }
-
-    // Reset
     isDragging = false;
     quickTap = false;
 }
