@@ -10,6 +10,7 @@ export const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebase
 export const USERS_DIR = '/users';
 export const CONTACTS_DIR = '/contacts';
 export const TASKS_DIR = '/tasks';
+let currentTask = null;
 let originalColumn = null;
 let currentColumn = null;
 const taskContainer = document.getElementById("board-main");
@@ -20,8 +21,8 @@ let offsetX, offsetY;
 let isDragging = false; // Flag to track if the element is being dragged
 let startX, startY, endX, endY, tapTimeout; // Start position for dragging
 const tapThreshold = 10;
-const swipeThresholdX = 30;   // Treshold for horizontal swiping
-const swipeThresholdY = 30;    // Treshold for vertical swiping
+const swipeThresholdX = 30;   // Schwellenwert für horizontales Swiping
+const swipeThresholdY = 30;
 let dragTimeout;
 let quickTap = false;
 
