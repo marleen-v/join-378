@@ -96,9 +96,7 @@ export function getPerson(contacts, searchString) {
  */
 function getTaskBody(id, index) {
     return /*html*/`
-        <!--<section onclick="openOverlay(0)" id="${id}" class="task-card add-task-card${index} clickable prevent-select" ondragstart="startDragging('${id}')"></section>-->  
-        <section class="task-card add-task-card${index} clickable prevent-select"></section>  
-
+        <section class="task-card add-task-card${index} clickable prevent-select"></section>
     `;
 }
 
@@ -128,7 +126,6 @@ function getColumn(key) {
  */
 function prepareMovableObject(taskElement) {
     if(!isDragging) return; 
-    //currentTask = taskElement;
     currentTaskId = taskElement.getAttribute("id");
     originalColumn = taskElement.closest(".column");
     originalColumn.style.backgroundColor = "lightgrey";

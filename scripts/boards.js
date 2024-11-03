@@ -190,16 +190,6 @@ export function showData(array) {
     checkEmptyColumns();
 }
 
-/**
- * Store the current id at start of draging a task card
- *
- * @param {*} id
- */
-function startDragging(id) {
-    if(!id) return;
-    currentDraggedElement = id;
-}
-
 
 /**
  * Template which return -> No tasks to do into each column
@@ -233,30 +223,6 @@ function removeHighlightColumn(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
-/**
- * Store current dropped task card into firebase and dropped column
- *
- * @param {*} column
- */
-function moveTo(column) {
-    let id = parseTaskIdToNumberId(currentDraggedElement);
-    tasksFromFirebase[id].Column = column;
-    document.getElementById('boards-search').value = "";
-    putData(TASKS_DIR, tasksFromFirebase);
-    refresh();
-}
-
-
-/**
- * Get function for current dragged element needed by touch
- *
- * @export
- * @returns {*}
- */
-export function getCurrentDraggedElement() {
-    return currentDraggedElement;
-}
-
 
 /** 
  * Refresh the changed board if an element is dropped
@@ -267,15 +233,6 @@ export function refresh() {
     document.querySelector('.board-main-await-feedback').innerHTML = "";
     document.querySelector('.board-main-done').innerHTML = "";
     showData(tasksFromFirebase);
-}
-
-/**
- * Allowing to drop a div element
- *
- * @param {*} ev
- */
-function allowDrop(ev) {
-    ev.preventDefault();
 }
 
 
@@ -311,9 +268,6 @@ function openAddTaskOverlay(column) {
 
 window.highlightColumn = highlightColumn;
 window.removeHighlightColumn = removeHighlightColumn;
-window.startDragging = startDragging;
-window.allowDrop = allowDrop;
-window.moveTo = moveTo;
 window.loadBoards = loadBoards;
 window.refresh = refresh;
 window.openOverlay = openOverlay;
