@@ -45,7 +45,6 @@ export function setBgColor(currentCard, element) {
         currentCard.querySelector('.add-task-card-category').classList.remove('bg-color-blue');
         currentCard.querySelector('.add-task-card-category').classList.add('bg-color-turkey');
     }
-
 }
 
 /**

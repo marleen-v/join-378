@@ -25,7 +25,6 @@ const swipeThresholdY = 30;
 let dragTimeout;
 let quickTap = false;
 
-export function setQuickTapToTrue() { quickTap = true; }
 /**
  * Function for load data from firebase
  *

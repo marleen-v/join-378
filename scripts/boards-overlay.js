@@ -9,7 +9,6 @@ import { refresh, setBgColor, setUserInitial, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
-import { setQuickTapToTrue } from "./module.js";
 
 
 /** Set transparency background color on overlay */
@@ -176,7 +175,6 @@ export function openOverlay(id) {
     runInOverlayAnimation('.detailed-card');
     setDetailedCard(id);
     setOpacity();
-    setQuickTapToTrue();
 }
 
 
@@ -188,7 +186,6 @@ export function openOverlay(id) {
  */
 export function closeOverlay(wrapper) {
     runOutOverlayAnimation(wrapper);
-    setQuickTapToTrue();
 }
 
 
