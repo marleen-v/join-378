@@ -10,7 +10,6 @@ import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
 import { getPerson, loadActiveUser, loadData } from "./module.js";
-let currentDraggedElement;
 let searchId = document.getElementById('boards-search');
 let addToColumn = "";
 
