@@ -10,7 +10,6 @@ export const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebase
 export const USERS_DIR = '/users';
 export const CONTACTS_DIR = '/contacts';
 export const TASKS_DIR = '/tasks';
-let currentTask = null;
 let originalColumn = null;
 let currentColumn = null;
 const taskContainer = document.getElementById("board-main");
@@ -26,7 +25,7 @@ const swipeThresholdY = 30;
 let dragTimeout;
 let quickTap = false;
 
-
+export function setQuickTapToTrue() { quickTap = true; }
 /**
  * Function for load data from firebase
  *

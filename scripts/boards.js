@@ -129,7 +129,7 @@ export function calculateDoneSubtasks(element) {
  */
 function setSubtasks(currentCard, element) {
     if(element.Subtasks == null || element.Subtasks.length < 1) currentCard.querySelector('.add-task-card-subtasks').innerHTML = "";
-    else currentCard.querySelector('.add-task-card-subtasks').innerHTML = getProgressBar(element); //element.Subtasks.length + " Subtasks";
+    else currentCard.querySelector('.add-task-card-subtasks').innerHTML = getProgressBar(element);
 }
 
 /**
@@ -268,7 +268,6 @@ export function refresh() {
     document.querySelector('.board-main-await-feedback').innerHTML = "";
     document.querySelector('.board-main-done').innerHTML = "";
     showData(tasksFromFirebase);
-    //dragAndDropListener();
 }
 
 /**
@@ -281,7 +280,7 @@ function allowDrop(ev) {
 }
 
 
-/** Clear all highlighted columns */
+/** Clear all highlighted columns - optional if search highlighted */
 function clearHighlightedTasks() {
     if(searchId.value == "") 
         tasksFromFirebase.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
