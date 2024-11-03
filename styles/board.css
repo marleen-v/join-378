@@ -801,6 +801,10 @@ and (max-width: 1024px) {
         overflow-y: auto !important;
     }
 
+    .boards {
+        padding: 0px 8px 0 8px;
+    }
+
     .board-bar {
         display: none;
     }
