@@ -936,6 +936,22 @@ and (max-width: 1024px) {
         display: grid;
         grid-template-rows: 24px 220px;
     }
+
+    .board-to-do {
+        grid-template-columns: calc(100vw - 64px) 24px;
+    }
+
+    .board-In-progress {
+        grid-template-columns: calc(100vw - 64px) 24px;
+    }
+
+    .board-feedback {
+        grid-template-columns: calc(100vw - 64px) 24px;
+    }
+
+    .board-done {
+        grid-template-columns: calc(100vw - 64px) 24px;
+    }
 }
 
 @media only screen and (max-width: 510px) {
