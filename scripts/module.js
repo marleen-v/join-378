@@ -98,7 +98,9 @@ export function getPerson(contacts, searchString) {
  */
 function getTaskBody(id, index) {
     return /*html*/`
-        <section onclick="openOverlay(0)" id="${id}" class="task-card add-task-card${index} clickable prevent-select" ondragstart="startDragging('${id}')"></section>  
+        <!--<section onclick="openOverlay(0)" id="${id}" class="task-card add-task-card${index} clickable prevent-select" ondragstart="startDragging('${id}')"></section>-->  
+        <section class="task-card add-task-card${index} clickable prevent-select"></section>  
+
     `;
 }
 
@@ -137,7 +139,9 @@ function prepareMovableObject(taskElement) {
     movableDiv.querySelector('section').innerHTML = document.getElementById(currentTaskId).innerHTML;
     movableDiv.querySelector('section').style.transition = "0.1s ease";
     movableDiv.querySelector('section').style.transform = "rotate(5deg)";
+    //movableDiv.querySelector('section').style.position = document.getElementById(currentTaskId).position;
     movableDiv.style.display = "block";
+    //document.getElementById(currentTaskId).style.display = "none";
 }
 
 /** Reset movable object */
@@ -146,6 +150,7 @@ function resetMovableObject() {
     movableDiv.querySelector('section').style.transition = "0.1s ease";
     movableDiv.querySelector('section').style.transform = "rotate(0deg)";
     movableDiv.style.display = "none";
+    document.getElementById(currentTaskId).classList.remove('task-card-placeholder');
     currentTaskId = null;
 }
 
@@ -245,6 +250,7 @@ function waitForDrag(isTouch, event, taskElement) {
         offsetY = startY - rect.top;
         movableDiv.style.left = (isTouch ? event.touches[0].pageX : event.pageX) - offsetX + "px";
         movableDiv.style.top = (isTouch ? event.touches[0].pageY : event.pageY) - offsetY + "px";
+        document.getElementById(currentTaskId).classList.add('task-card-placeholder');
     }, 500);
 }
 

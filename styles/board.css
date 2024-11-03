@@ -332,6 +332,21 @@ main {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 
+.task-card-placeholder {
+    margin: 8px 2px 8px 2px;
+    min-width: 252px;
+    max-width: 252px;
+    min-height: 263px;
+    max-height: 263px;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.task-card-placeholder > div {
+    display: none;
+}
+
 .add-task-card-category {
     border-radius: 8px;
     color: white;
@@ -806,6 +821,8 @@ and (max-width: 1024px) {
         display: flex;
         overflow: auto;
         width: calc(100vw - 40px);
+        min-height: 265px;
+        max-height: 265px;
     }
 
     .board-main-to-do {
