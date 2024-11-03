@@ -1,8 +1,6 @@
 /*
     Author: Martin Reifschneider
 */
-
-
 import './boards.js';
 import './add-task.js';
 import { parseTaskIdToNumberId } from './boards-edit.js';
@@ -12,7 +10,6 @@ export const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebase
 export const USERS_DIR = '/users';
 export const CONTACTS_DIR = '/contacts';
 export const TASKS_DIR = '/tasks';
-let currentTask = null;
 let originalColumn = null;
 let currentColumn = null;
 const taskContainer = document.getElementById("board-main");
@@ -23,8 +20,8 @@ let offsetX, offsetY;
 let isDragging = false; // Flag to track if the element is being dragged
 let startX, startY, endX, endY, tapTimeout; // Start position for dragging
 const tapThreshold = 10;
-const swipeThresholdX = 30;   // Schwellenwert für horizontales Swiping
-const swipeThresholdY = 30;
+const swipeThresholdX = 30;   // Treshold for horizontal swiping
+const swipeThresholdY = 30;    // Treshold for vertical swiping
 let dragTimeout;
 let quickTap = false;
 
@@ -302,17 +299,14 @@ document.addEventListener("touchmove", function (event) {
     handleMove(event, true);
 }, { passive: false });
 
-
-function handleSwipe(event) {
-    endX = event.changedTouches[0].clientX;
-    endY = event.changedTouches[0].clientY;
-    const deltaX = Math.abs(endX - startX);
-    const deltaY = Math.abs(endY - startY);
-    if(deltaX < tapThreshold && deltaY < tapThreshold && quickTap) {
-        const taskElement = event.target.closest(".task-card");
-        if(taskElement) handleClickOnTask(taskElement.getAttribute("id"));
-    }
-    else if(!quickTap && deltaX > swipeThresholdX && deltaX > deltaY) {
+/**
+ * Function for scroll on touch event
+ *
+ * @param {*} deltaX
+ * @param {*} deltaY
+ */
+function onScroll(deltaX, deltaY) {
+    if(!quickTap && deltaX > swipeThresholdX && deltaX > deltaY) {
         const column = event.target.closest('.column');
         if(endX < startX) column.scrollLeft += 252;
         else column.scrollLeft -= 252;
@@ -322,6 +316,23 @@ function handleSwipe(event) {
         if (endY < startY) mainContainer.scrollTop += 300;  // Scrollen um 100px nach unten
         else mainContainer.scrollTop -= 300;  // Scrollen um 100px nach oben
     }
+}
+
+/**
+ * Function for swipe on touch event
+ *
+ * @param {*} event
+ */
+function handleSwipe(event) {
+    endX = event.changedTouches[0].clientX;
+    endY = event.changedTouches[0].clientY;
+    const deltaX = Math.abs(endX - startX);
+    const deltaY = Math.abs(endY - startY);
+    if(deltaX < tapThreshold && deltaY < tapThreshold && quickTap) {
+        const taskElement = event.target.closest(".task-card");
+        if(taskElement) handleClickOnTask(taskElement.getAttribute("id"));
+    }
+    else onScroll(deltaX, deltaY);
 }
 
 /**
@@ -353,16 +364,17 @@ function handleEnd(event, isTouch = false) {
     quickTap = false;
 }
 
+
 // End event for mouse
 document.addEventListener("mouseup", function (event) {
     handleEnd(event);
 });
 
+
 // End event for touch
 document.addEventListener("touchend", function (event) {
     handleEnd(event, true);
 }, { passive: false });
-
 
 
 /** 
