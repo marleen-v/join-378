@@ -1,8 +1,7 @@
 /*
     Author: Martin Reifschneider
 */
-
-
+//import './boards-events.js';
 import { getInputForm } from "./add-task-template.js";
 import { getPriority, setPriority } from "./add-task.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";

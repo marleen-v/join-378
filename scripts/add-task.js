@@ -1,16 +1,13 @@
 /*
     Author: Martin Reifschneider
 */
-
-
-import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask } from './add-task-template.js';
-import { getUrgentSVG, getMediumSVG, getLowSVG, checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
+import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask, addUserItem, findPersons } from './add-task-template.js';
+import { getUrgentSVG, getMediumSVG, getLowSVG} from "./svg-template.js";
 import { loadActiveUser, loadData } from "./module.js";
-
 let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
 let subtasks = [];
-let addedUser = [];
+export let addedUser = [];
 
 
 /**
@@ -28,44 +25,6 @@ async function loadAddTask() {
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
     getLogo();
-}
-
-
-/**
- * Function which search contacts to find contact right contact informations
- *
- * @export
- * @param {*} data
- * @param {*} searchString
- * @returns {boolean}
- */
-export function findPersons(data, searchString) {
-    for (let index = 0; index < data.length; index++) {        
-        if (data[index].email === searchString) return true;
-    }
-    return false;
-}
-
-
-/**
- * Function which return a template to display user informations
- * just display initials in a circle
- *
- * @param {*} element
- * @param {*} index
- * @returns {string}
- */
-function addUserItem(element, index) {
-    let selectBox = "";
-    if(findPersons(addedUser, element.email)) selectBox = checkedBoxSVG()
-    else selectBox = uncheckedBoxSVG();
-    return /*html*/`
-        <div class="task-user-select grid grid-columns-3-48px-1fr-48px selection" onclick="addUser(${index})">
-            <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
-            <span class="username${index} flex align-items-center">${element.firstName} ${element.lastName}</span>
-            <div class="flex align-items-center">${selectBox}</div>
-        </div>
-    `;
 }
 
 
@@ -144,13 +103,11 @@ export function highlightActiveUser(user, highlight) {
 
 /** Function which generate all contacts in a contact select box for adding user */
 function openContacts() {
-    let assignBox = document.querySelector('.assign-to-select-box > span');
+    let assignBox = document.querySelector('.assign-to-select-box > span'), persons = document.querySelector('.select-box-contacts');
     assignBox.innerHTML = "|";
-    let persons = document.querySelector('.select-box-contacts');
 +   persons.classList.add('bg-white');
     persons.classList.add('set-z-index-100');
     persons.innerHTML = "";
-    
     contactsFromFirebase.forEach((element, index) => {
         persons.innerHTML += addUserItem(element, index);
         if(getActiveUser(element)) {
@@ -160,7 +117,6 @@ function openContacts() {
         else highlightActiveUser(`.username${index}`, false);
     });
     document.getElementById('contacts-toggle-img').style.transform = "rotate(180deg)";
-
 }
 
 
@@ -424,7 +380,6 @@ async function createNewTask(column) {
         window.location = "../html/boards.html";  
     }, "300");
 }
-
 
 
 window.clearButton = clearButton;

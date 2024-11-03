@@ -35,14 +35,15 @@ main {
 
 .board-head {
     display: grid;
+    grid-template-areas: "board-title board-search board-button";
     grid-template-columns: auto 312px 222px;
-    height: 232px;
     gap: 32px;
 }
 
 
 .board-search {
     display: grid;
+    grid-area: board-search;
     grid-template-columns: auto 312px 222px;
     height: 232px;
     gap: 32px;
@@ -70,7 +71,7 @@ main {
 
 
   .input-innerfield {
-    width: 250px;
+    width: 100%;
   }
 
   .board-search-input:focus {
@@ -79,7 +80,7 @@ main {
   }
 
 .board-search-input {
-    width: 270px;
+    width: 100%;
     border: 1px solid #D1D1D1;
     outline: none;
     border: none;
@@ -120,6 +121,7 @@ main {
 
 .search-task {
     display: flex;
+    grid-area: board-search;
     align-items: center;
     justify-content: center;
     width: 312px;
@@ -162,6 +164,7 @@ main {
 
 .btn-task-container {
     display: flex;
+    grid-area: board-button;
     align-items: center;
     justify-content: center;
     width: 160px;
@@ -851,13 +854,38 @@ and (max-width: 1024px) {
     
     .boards {
         display: grid;
-        grid-template-rows: 112px 0px 1fr;
+        grid-template-rows: 212px 0px 1fr;
     }
 
     .board-head {
         display: grid;
-        grid-template-columns: 160px 300px 160px;
-        grid-template-rows: 128px;
+        grid-template-areas:    "board-title board-button"
+                                "board-search board-search";
+        margin-top: 40px;
+    }
+
+    .search-task {
+        width: calc(100vw - 32px);
+    }
+
+    .search-box {
+        grid-template-columns: calc(100% - 33px) 1px 32px;
+    }
+
+    .btn-task-container {
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .btn-add-task {
+        display: flex;
+        justify-content: flex-end;
+        width: 48px;
+        justify-content: center;
+    }
+
+    .btn-add-task-description {
+        display: none;
     }
 
     .add-task-form-bottom {
@@ -878,28 +906,18 @@ and (max-width: 1024px) {
     }
 }
 
-@media only screen and (max-width: 720px) { 
-    .boards {
-        display: grid;
-        grid-template-rows: 212px 0px 1fr;
-    }
-
-    .board-head {
-        display: grid;
-        grid-template-columns: 200px 300px;
-        grid-template-rows: 128px 48px;
+@media only screen and (max-width: 510px) {
+    .btn-task-container {
+        width: calc(100vw - 200px);
     }
 }
+
 
 @media only screen and (max-width: 645px)  {
     .board-head {
         display: grid;
-        grid-template-columns: 300px;
-        grid-template-rows: 48px 48px 48px 1fr;
-        margin-top: 40px;
-    }
-
-    .board-main {
+        grid-template-areas:    "board-title board-button"
+        "board-search board-search";
         margin-top: 40px;
     }
 }

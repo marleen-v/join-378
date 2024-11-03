@@ -262,12 +262,12 @@ function handleStart(event, isTouch = false) {
 }
 
 // Start event for mouse
-taskContainer.addEventListener("mousedown", function (event) {
+if(taskContainer != null) taskContainer.addEventListener("mousedown", function (event) {
     handleStart(event);
 });
 
 // Start event for touch
-taskContainer.addEventListener("touchstart", function (event) {
+if(taskContainer != null) taskContainer.addEventListener("touchstart", function (event) {
     handleStart(event, true);
 }, { passive: false });
 

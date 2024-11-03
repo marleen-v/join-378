@@ -1,10 +1,8 @@
 /*
     Author: Martin Reifschneider
 */
-
-
-import { getCloseSVG } from './svg-template.js';
-import { getPriority } from './add-task.js';
+import { checkedBoxSVG, getCloseSVG, uncheckedBoxSVG } from './svg-template.js';
+import { addedUser, getPriority } from './add-task.js';
 import { editSVG, trashSVG } from './svg-template.js';
 
 
@@ -77,7 +75,7 @@ export function getCategory() {
  * @param {*} element
  * @param {*} index
  */
-export function editSubtask(element,index) {
+export function editSubtask(element, index) {
     let edit = document.querySelector(`.added-subtask${index}`);
     edit.classList.remove('hide-added-subtasks-item-children');
     edit.innerHTML = /*html*/`
@@ -113,6 +111,45 @@ export function getDisplaySubtaskMask(element, index) {
     `;
 }
 
+
+/**
+ * Function which search contacts to find contact right contact informations
+ *
+ * @export
+ * @param {*} data
+ * @param {*} searchString
+ * @returns {boolean}
+ */
+export function findPersons(data, searchString) {
+    for (let index = 0; index < data.length; index++) {        
+        if (data[index].email === searchString) return true;
+    }
+    return false;
+}
+
+
+/**
+ * Function which return a template to display user informations
+ * just display initials in a circle
+ *
+ * @param {*} element
+ * @param {*} index
+ * @returns {string}
+ */
+export function addUserItem(element, index) {
+    let selectBox = "";
+    if (findPersons(addedUser, element.email)) selectBox = checkedBoxSVG();
+    else selectBox = uncheckedBoxSVG();
+    return /*html*/`
+        <div class="task-user-select grid grid-columns-3-48px-1fr-48px selection" onclick="addUser(${index})">
+            <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
+            <span class="username${index} flex align-items-center">${element.firstName} ${element.lastName}</span>
+            <div class="flex align-items-center">${selectBox}</div>
+        </div>
+    `;
+}
+
+
 /**
  * Template which return add task html body -> form displayed into a grid
  * in large screen left and right side in small screen grid displayed in rows
@@ -120,7 +157,7 @@ export function getDisplaySubtaskMask(element, index) {
  * @export
  * @returns {string}
  */
-export function getInputForm() {  
+export function getInputForm() {
     return /*html*/`
     <section id="add-task" class="add-task">
         <div class="add-task-head flex align-items-center">
@@ -204,23 +241,21 @@ export function getInputForm() {
                 
             </div>
         </form>
-
-</div>
-<div class="add-task-form-bottom">
-                    <div class="flex required-info"><span class="required-star">*</span><span>This Field is required</span></div>
-                    <div></div>
-                    <div class="flex justify-content-flex-end">
-                        <button onclick="clearButton()" class="flex justify-content-center align-items-center btn-clear mg-right-8px clickable">
-                            <span class="mg-right-8px set-font-icon-700">Clear</span>
-                            <div class="flex align-items-center">${getCloseSVG()}</div>
-                        </button>
-                        <button form="create-task-form" type="submit" class="flex justify-content-center align-items-center btn-add-task clickable">
-                            <span class="mg-right-8px set-font-icon-700">Create Task</span>
-                            <img class="flex align-items-center" src="../assets/icons/check.svg" alt="">
-                        </button>
-                    </div>
-                </div>
-
+    </div>
+    <div class="add-task-form-bottom">
+        <div class="flex required-info"><span class="required-star">*</span><span>This Field is required</span></div>
+        <div></div>
+        <div class="flex justify-content-flex-end">
+            <button onclick="clearButton()" class="flex justify-content-center align-items-center btn-clear mg-right-8px clickable">
+                <span class="mg-right-8px set-font-icon-700">Clear</span>
+                <div class="flex align-items-center">${getCloseSVG()}</div>
+            </button>
+            <button form="create-task-form" type="submit" class="flex justify-content-center align-items-center btn-add-task clickable">
+                <span class="mg-right-8px set-font-icon-700">Create Task</span>
+                <img class="flex align-items-center" src="../assets/icons/check.svg" alt="">
+            </button>
+        </div>
+    </div>
 </section>
     `;
 }
