@@ -123,7 +123,7 @@ function mergeArraysWithoutDuplicates(oldArray, newArray) {
 
 
 /**
- * Function to highlight searched results
+ * Function to highlight searched results - optional if you want highlighted results
  *
  * @param {*} result
  */
@@ -156,7 +156,6 @@ function noResults() {
 function orderTasks(input) {
     const searchString = input.value;
     const result = filterByNestedKeyAndArray(tasksFromFirebase, searchString);
-    sortedList = mergeArraysWithoutDuplicates(tasksFromFirebase, result);
     if(result.length == 0 || result == null) {
         //noResults();
         clearColumns();
@@ -164,7 +163,6 @@ function orderTasks(input) {
         return;
     }
     showData(result);
-    highlightResults(result);
 }
 
 
