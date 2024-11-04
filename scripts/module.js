@@ -241,6 +241,7 @@ function waitForDrag(isTouch, event, taskElement) {
 function handleStart(event, isTouch = false) {
     event.preventDefault();
     const taskElement = event.target.closest(".task-card");
+    if(!taskContainer) return;
     if (taskElement) {
         currentTaskId = taskElement.id;
         quickTap = true;

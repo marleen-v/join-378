@@ -174,6 +174,7 @@ function searchEntry() {
         setZoom(1.0, true);
         return;
     }
+    document.querySelector('main').scrollTop = 0;
     orderTasks(input);
     setZoom(0.35, false);
 }
