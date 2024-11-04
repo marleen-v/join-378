@@ -108,6 +108,7 @@ function setGroupUser(element, displayFullName, grid) {
     return personsHTML;
 }
 
+
 /**
  * Set and collect all elements for displayed card with all informations with card ctaegory, headline description to example
  *

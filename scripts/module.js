@@ -55,6 +55,23 @@ export async function loadActiveUser(path = "") {
 
 
 /**
+* Puts user data to firebase
+* @param {string} path directory in firebase
+* @param {object} data object the needs to be stored
+*/
+export async function putData(path = "", data = {}) {
+    let res = await fetch(FIREBASE_URL + path + ".json",
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        });
+}
+
+
+/**
  * Iterate through contacts and find reference to searched contact
  *
  * @export
@@ -248,6 +265,15 @@ function handleStart(event, isTouch = false) {
     }
 }
 
+// Start event for mouse
+if(taskContainer != null) taskContainer.addEventListener("mousedown", function (event) {
+    if(!overlayIsOpen) handleStart(event);
+});
+
+// Start event for touch
+if(taskContainer != null) taskContainer.addEventListener("touchstart", function (event) {
+    if(!overlayIsOpen) handleStart(event, true);
+}, { passive: false });
 
 // Function to handle mouse or touch move
 function handleMove(event, isTouch = false) {
@@ -265,6 +291,15 @@ function handleMove(event, isTouch = false) {
     event.preventDefault();
 }
 
+// Move event for mouse
+document.addEventListener("mousemove", function (event) {
+    if(!overlayIsOpen) handleMove(event);
+});
+
+// Move event for touch
+document.addEventListener("touchmove", function (event) {
+    if(!overlayIsOpen) handleMove(event, true);
+}, { passive: false });
 
 /**
  * Function for scroll on touch event
@@ -309,7 +344,6 @@ function clearTimeouts() {
     clearTimeout(tapTimeout);
 }
 
-
 /**
  * Function for swapping tasks
  *
@@ -343,7 +377,7 @@ function handleEnd(event, isTouch = false) {
             const columnId = dropzone.getAttribute("id");
             if (checkDropzoneBounding(dropzone)) {
                 checkBoundingTask(dropzone);
-                saveMovedTask(currentTaskId, columnId); 
+                saveMovedTask(currentTaskId, columnId);
             }
         });
         resetMovableObject();
@@ -354,7 +388,6 @@ function handleEnd(event, isTouch = false) {
     quickTap = false;
 }
 
-
 /**
  * Function for zoom out on smartphones
  *
@@ -362,21 +395,21 @@ function handleEnd(event, isTouch = false) {
  */
 export function setZoom(scale, reset) {
     if(window.innerWidth > 768 && !reset) return;
-    document.querySelector('main').scrollTop = 0;
+    if(reset) document.querySelector('main').scrollTop = 0;
     const viewport = document.querySelector("meta[name=viewport]");
     viewport.setAttribute("content", `width=device-width, initial-scale=${scale}, maximum-scale=${scale}`);
 }
 
+// End event for mouse
+document.addEventListener("mouseup", function (event) {
+    if(!overlayIsOpen) handleEnd(event);
+});
 
-// Add event listener for each column on board.html
-if(dropzones != null) dropzones.forEach(element => {
-    element.addEventListener("mousedown", function (event) { handleStart(event); });    
-    element.addEventListener("touchstart", function (event) { handleStart(event, true); }, { passive: false });
-    element.addEventListener("mousemove", function (event) { handleMove(event); });
-    element.addEventListener("touchmove", function (event) { handleMove(event, true); }, { passive: false });
-    element.addEventListener("mouseup", function (event) { handleEnd(event); });
-    element.addEventListener("touchend", function (event) { handleEnd(event, true); }, { passive: false });
-})
+
+// End event for touch
+document.addEventListener("touchend", function (event) {
+    if(!overlayIsOpen) handleEnd(event, true);
+}, { passive: false });
 
 
 /** 

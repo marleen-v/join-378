@@ -36,7 +36,7 @@ export function getTaskCard(id, taskId) {
  * @returns {string}
  */
 export function getGroupUserInitials(element) {
-    let persons = (element.Persons.length > 3) ? `+${element.Persons.length - 3}` : "";    
+    let persons = (element.Persons.length > 3) ? `+${element.Persons.length - 3}` : "";
     return /*html*/`
         <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>${persons}</span></span> 
     `;
