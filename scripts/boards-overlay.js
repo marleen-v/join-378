@@ -9,6 +9,7 @@ import { refresh, setBgColor, setUserInitial, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
+import { setZoom } from "./module.js";
 export let overlayIsOpen = false;
 
 /** Set transparency background color on overlay */
@@ -177,6 +178,8 @@ export function openOverlay(id) {
     runInOverlayAnimation('.detailed-card');
     setDetailedCard(id);
     setOpacity();
+    document.getElementById('boards-search').value = "";
+    setZoom(1.0, true);
 }
 
 
