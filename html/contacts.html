@@ -150,9 +150,10 @@
           <input required
             class="contact-input"
             type="text"
+            pattern="^[A-Za-zÄäÖöÜüß\s]+$"
             id="c-name"
             name="c-name"
-            placeholder="Name"
+            placeholder="Name*"
           />
           <img
             class="input-icon"
@@ -164,9 +165,10 @@
           <input required
             class="contact-input"
             type="email"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
           id="c-email"
           name="c-email"
-          placeholder="Email"
+          placeholder="Email*"
           />
           <img
             class="input-icon"
@@ -179,6 +181,7 @@
           <input 
             class="contact-input"
             type="tel"
+            pattern="^(\+?[0-9]{1,3})? ?[0-9]{10,13}$"
             id="c-phone"
             name="c-phone"
             placeholder="Phone"
