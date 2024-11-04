@@ -387,6 +387,7 @@ document.addEventListener("mouseup", function (event) { if(!overlayIsOpen) handl
 // End event for touch
 document.addEventListener("touchend", function (event) { if(!overlayIsOpen) handleEnd(event, true);}, { passive: false });
 
+
 /** 
  * Handle a simple click on a task
  * Add your click handling logic here
