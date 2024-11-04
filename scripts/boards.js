@@ -97,9 +97,7 @@ export function setUserInitial(element, displayFullName = false, grid = false) {
 function setGroupUser(element, displayFullName, grid) {
     let personsHTML = "";
     for (let index = 0; index < 3; index++) {
-        let p = getPerson(contactsFromFirebase, element.Persons[index]);
-        console.log(element.Persons[index]);
-        
+        let p = getPerson(contactsFromFirebase, element.Persons[index]);        
         if(p != "") {        
             let initial = p.firstName.charAt(0) + p.lastName.charAt(0);
             let color = p.color;       
