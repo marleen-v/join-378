@@ -25,7 +25,6 @@ const swipeThresholdY = 30;
 let dragTimeout;
 let quickTap = false;
 
-
 /**
  * Function for load data from firebase
  *
@@ -40,6 +39,7 @@ export async function loadData(path = "") {
     return resToJson;
 }
 
+
 /**
  * load activ user from firebase
  *
@@ -51,23 +51,6 @@ export async function loadData(path = "") {
 export async function loadActiveUser(path = "") {
     let res = await fetch(FIREBASE_URL + path + ".json");
     return await res.json();;
-}
-
-
-/**
-* Puts user data to firebase
-* @param {string} path directory in firebase
-* @param {object} data object the needs to be stored
-*/
-export async function putData(path = "", data = {}) {
-    let res = await fetch(FIREBASE_URL + path + ".json",
-        {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        });
 }
 
 
@@ -148,6 +131,7 @@ function resetMovableObject() {
     currentTaskId = null;
 }
 
+
 /** Reset touched column background color */
 function resetColumn() {
     if (originalColumn) {
@@ -161,6 +145,7 @@ function resetColumn() {
     currentColumn = null;
 }
 
+
 /**
  * Save all changed informations to task array and on firebase and refresh board data
  *
@@ -173,6 +158,7 @@ function saveMovedTask(currentTaskId, columnId) {
     putData(TASKS_DIR, tasksFromFirebase);
     refresh();
 }
+
 
 /**
  * Change touched column color to lightgreen
@@ -191,6 +177,7 @@ function colorTouchedColumn(newColumn) {
     }
 }
 
+
 /**
  * Check if mouse bounding column rectangle
  *
@@ -207,6 +194,7 @@ function checkMousemoveBounding(event, column) {
         event.clientY < rect.bottom
     );
 }
+
 
 /**
  * Check if end position on mouseup or touchend bounding column rectangle
@@ -225,6 +213,7 @@ function checkDropzoneBounding(dropzone) {
         movableRect.bottom > dropzoneRect.top
     );
 }
+
 
 /**
  * Function for waiting 200ms and preparing dragging element
@@ -248,7 +237,6 @@ function waitForDrag(isTouch, event, taskElement) {
     }, 500);
 }
 
-
 // Function to handle start event for mouse or touch
 function handleStart(event, isTouch = false) {
     event.preventDefault();
@@ -266,14 +254,10 @@ function handleStart(event, isTouch = false) {
 }
 
 // Start event for mouse
-if(taskContainer != null) taskContainer.addEventListener("mousedown", function (event) {
-    if(!overlayIsOpen) handleStart(event);
-});
+if(taskContainer != null) taskContainer.addEventListener("mousedown", function (event) { if(!overlayIsOpen) handleStart(event); });
 
 // Start event for touch
-if(taskContainer != null) taskContainer.addEventListener("touchstart", function (event) {
-    if(!overlayIsOpen) handleStart(event, true);
-}, { passive: false });
+if(taskContainer != null) taskContainer.addEventListener("touchstart", function (event) { if(!overlayIsOpen) handleStart(event, true); }, { passive: false });
 
 // Function to handle mouse or touch move
 function handleMove(event, isTouch = false) {
@@ -292,14 +276,10 @@ function handleMove(event, isTouch = false) {
 }
 
 // Move event for mouse
-document.addEventListener("mousemove", function (event) {
-    if(!overlayIsOpen) handleMove(event);
-});
+document.addEventListener("mousemove", function (event) { if(!overlayIsOpen) handleMove(event); });
 
 // Move event for touch
-document.addEventListener("touchmove", function (event) {
-    if(!overlayIsOpen) handleMove(event, true);
-}, { passive: false });
+document.addEventListener("touchmove", function (event) { if(!overlayIsOpen) handleMove(event, true); }, { passive: false });
 
 /**
  * Function for scroll on touch event
@@ -337,6 +317,7 @@ function handleSwipe(event) {
     }
     else if(!quickTap) onScroll(event, deltaX, deltaY);
 }
+
 
 /** Clear all set timeout */
 function clearTimeouts() {
@@ -401,16 +382,10 @@ export function setZoom(scale, reset) {
 }
 
 // End event for mouse
-document.addEventListener("mouseup", function (event) {
-    if(!overlayIsOpen) handleEnd(event);
-});
-
+document.addEventListener("mouseup", function (event) { if(!overlayIsOpen) handleEnd(event); });
 
 // End event for touch
-document.addEventListener("touchend", function (event) {
-    if(!overlayIsOpen) handleEnd(event, true);
-}, { passive: false });
-
+document.addEventListener("touchend", function (event) { if(!overlayIsOpen) handleEnd(event, true);}, { passive: false });
 
 /** 
  * Handle a simple click on a task
