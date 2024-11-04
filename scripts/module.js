@@ -362,6 +362,7 @@ function handleEnd(event, isTouch = false) {
  */
 function setZoom(scale) {
     if(window.innerWidth > 768) return;
+    document.querySelector('main').scrollHeight = 0;
     const viewport = document.querySelector("meta[name=viewport]");
     viewport.setAttribute("content", `width=device-width, initial-scale=${scale}, maximum-scale=${scale}`);
 }
