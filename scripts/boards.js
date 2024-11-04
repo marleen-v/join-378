@@ -81,7 +81,32 @@ export function setUserInitial(element, displayFullName = false, grid = false) {
             personsHTML += getUser(person, initial, color, displayFullName, grid);
         }
     });    
-    if(element.Persons.length > 4 && displayFullName == false) return getGroupUserInitials(element);
+    if(element.Persons.length > 4 && displayFullName == false) return setGroupUser(element, displayFullName, grid);
+    return personsHTML;
+}
+
+
+/**
+ * Function which display 3 added user and more than 3 the amount of users
+ *
+ * @param {*} element
+ * @param {*} displayFullName
+ * @param {*} grid
+ * @returns {string}
+ */
+function setGroupUser(element, displayFullName, grid) {
+    let personsHTML = "";
+    for (let index = 0; index < 3; index++) {
+        let p = getPerson(contactsFromFirebase, element.Persons[index]);
+        console.log(element.Persons[index]);
+        
+        if(p != "") {        
+            let initial = p.firstName.charAt(0) + p.lastName.charAt(0);
+            let color = p.color;       
+            personsHTML += getUser(element.Persons[index], initial, color, displayFullName, grid);
+        }
+    }    
+    personsHTML += getGroupUserInitials(element);
     return personsHTML;
 }
 
