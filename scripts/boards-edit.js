@@ -9,6 +9,7 @@ import { setUserInitial } from "./boards.js";
 import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSubtaskInput, addLinkedItem } from './boards-edit-template.js';
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
+import { validateDate } from "./boards-filter.js";
 let toggleContactList = false;
 let formData = [];
 
@@ -98,6 +99,12 @@ function getFormData() {
  */
 function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
+    const d = new Date(document.getElementById('due-date').value);
+    let date = document.getElementById('due-date').value = validateDate(d);
+    if(date == "") {
+        document.getElementById('due-date').setCustomValidity('Date is in the past!');
+        return;
+    } 
     getFormData();
     tasksFromFirebase[id].Title = formData[0];
     tasksFromFirebase[id].Description = formData[1];

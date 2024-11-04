@@ -6,6 +6,7 @@ import './add-task.js';
 import { parseTaskIdToNumberId } from './boards-edit.js';
 import { refresh } from './boards.js';
 import { openOverlay, overlayIsOpen } from './boards-overlay.js';
+import { addContact, closeContacts, toggle } from './add-task.js';
 export const FIREBASE_URL = 'https://join-378-default-rtdb.europe-west1.firebasedatabase.app/';
 export const USERS_DIR = '/users';
 export const CONTACTS_DIR = '/contacts';
@@ -109,7 +110,7 @@ function getColumn(key) {
  * @param {*} taskElement
  */
 function prepareMovableObject(taskElement) {
-    if(!isDragging) return; 
+    if (!isDragging) return;
     currentTaskId = taskElement.getAttribute("id");
     originalColumn = taskElement.closest(".column");
     originalColumn.style.backgroundColor = "lightgrey";
@@ -123,7 +124,7 @@ function prepareMovableObject(taskElement) {
 
 /** Reset movable object */
 function resetMovableObject() {
-    if(movableDiv == null) return;
+    if (movableDiv == null) return;
     movableDiv.querySelector('section').style.transition = "0.1s ease";
     movableDiv.querySelector('section').style.transform = "rotate(0deg)";
     movableDiv.style.display = "none";
@@ -241,7 +242,6 @@ function waitForDrag(isTouch, event, taskElement) {
 function handleStart(event, isTouch = false) {
     event.preventDefault();
     const taskElement = event.target.closest(".task-card");
-    if(!taskContainer) return;
     if (taskElement) {
         currentTaskId = taskElement.id;
         quickTap = true;
@@ -254,11 +254,6 @@ function handleStart(event, isTouch = false) {
     }
 }
 
-// Start event for mouse
-if(taskContainer != null) taskContainer.addEventListener("mousedown", function (event) { if(!overlayIsOpen) handleStart(event); });
-
-// Start event for touch
-if(taskContainer != null) taskContainer.addEventListener("touchstart", function (event) { if(!overlayIsOpen) handleStart(event, true); }, { passive: false });
 
 // Function to handle mouse or touch move
 function handleMove(event, isTouch = false) {
@@ -276,11 +271,6 @@ function handleMove(event, isTouch = false) {
     event.preventDefault();
 }
 
-// Move event for mouse
-document.addEventListener("mousemove", function (event) { if(!overlayIsOpen) handleMove(event); });
-
-// Move event for touch
-document.addEventListener("touchmove", function (event) { if(!overlayIsOpen) handleMove(event, true); }, { passive: false });
 
 /**
  * Function for scroll on touch event
@@ -289,16 +279,19 @@ document.addEventListener("touchmove", function (event) { if(!overlayIsOpen) han
  * @param {*} deltaY
  */
 function onScroll(event, deltaX, deltaY) {
-    if(!quickTap && deltaX > swipeThresholdX && deltaX > deltaY) {
-        const column = event.target.closest('.column');
-        if(column == null) return;
-        if(endX < startX) column.scrollLeft += 252;
-        else column.scrollLeft -= 252;
-    }
-    else if (!quickTap && deltaY > swipeThresholdY && deltaY > deltaX) {
-        const mainContainer = document.querySelector('main');
-        if (endY < startY) mainContainer.scrollTop += 300;  // Scrollen um 100px nach unten
-        else mainContainer.scrollTop -= 300;  // Scrollen um 100px nach oben
+    const taskElement = event.target.closest(".task-card");
+    if (taskElement) {
+        if (!quickTap && deltaX > swipeThresholdX && deltaX > deltaY) {
+            const column = event.target.closest('.column');
+            if (column == null) return;
+            if (endX < startX) column.scrollLeft += 252;
+            else column.scrollLeft -= 252;
+        }
+        else if (!quickTap && deltaY > swipeThresholdY && deltaY > deltaX) {
+            const mainContainer = document.querySelector('main');
+            if (endY < startY) mainContainer.scrollTop += 300;  // Scrollen um 100px nach unten
+            else mainContainer.scrollTop -= 300;  // Scrollen um 100px nach oben
+        }
     }
 }
 
@@ -312,11 +305,11 @@ function handleSwipe(event) {
     endY = event.changedTouches[0].clientY;
     const deltaX = Math.abs(endX - startX);
     const deltaY = Math.abs(endY - startY);
-    if(deltaX < tapThreshold && deltaY < tapThreshold && quickTap) {
+    if (deltaX < tapThreshold && deltaY < tapThreshold && quickTap) {
         const taskElement = event.target.closest(".task-card");
-        if(taskElement) handleClickOnTask(taskElement.getAttribute("id"));
+        if (taskElement) handleClickOnTask(taskElement.getAttribute("id"));
     }
-    else if(!quickTap) onScroll(event, deltaX, deltaY);
+    else if (!quickTap) onScroll(event, deltaX, deltaY);
 }
 
 
@@ -333,8 +326,8 @@ function clearTimeouts() {
  */
 function checkBoundingTask(dropzone) {
     const targetOtherTasks = dropzone.querySelectorAll('.task-card');
-    targetOtherTasks.forEach(taskDiv => { 
-        if(checkDropzoneBounding(taskDiv) && taskDiv.id != currentTaskId) {
+    targetOtherTasks.forEach(taskDiv => {
+        if (checkDropzoneBounding(taskDiv) && taskDiv.id != currentTaskId) {
             let i = parseTaskIdToNumberId(taskDiv.id), j = parseTaskIdToNumberId(currentTaskId);
             let temp = tasksFromFirebase[i].id;
             tasksFromFirebase[i].id = tasksFromFirebase[j].id;
@@ -352,7 +345,7 @@ function checkBoundingTask(dropzone) {
  */
 function handleEnd(event, isTouch = false) {
     clearTimeouts();
-    if(isTouch && !quickTap) handleSwipe(event);
+    if (isTouch && !quickTap) handleSwipe(event);
     if (!isDragging && quickTap) handleClickOnTask(currentTaskId);
     else if (isDragging && currentTaskId) {
         dropzones.forEach(dropzone => {
@@ -376,17 +369,20 @@ function handleEnd(event, isTouch = false) {
  * @param {*} scale
  */
 export function setZoom(scale, reset) {
-    if(window.innerWidth > 768 && !reset) return;
-    if(reset) document.querySelector('main').scrollTop = 0;
+    if (window.innerWidth > 768 && !reset) return;
+    if (reset) document.querySelector('main').scrollTop = 0;
     const viewport = document.querySelector("meta[name=viewport]");
     viewport.setAttribute("content", `width=device-width, initial-scale=${scale}, maximum-scale=${scale}`);
 }
 
-// End event for mouse
-document.addEventListener("mouseup", function (event) { if(!overlayIsOpen) handleEnd(event); });
-
-// End event for touch
-document.addEventListener("touchend", function (event) { if(!overlayIsOpen) handleEnd(event, true);}, { passive: false });
+// Event Listener for board
+if (taskContainer != null) taskContainer.addEventListener("mousedown", function (event) { if (!overlayIsOpen) handleStart(event); });
+if (taskContainer != null) taskContainer.addEventListener("touchstart", function (event) { if (!overlayIsOpen) handleStart(event, true); }, { passive: false });
+document.addEventListener("mouseup", function (event) { if (!overlayIsOpen) handleEnd(event); });
+document.addEventListener("touchend", function (event) { if (!overlayIsOpen) handleEnd(event, true); }, { passive: false });
+document.addEventListener("mousemove", function (event) { if (!overlayIsOpen) handleMove(event); });
+document.addEventListener("touchmove", function (event) { if (!overlayIsOpen) handleMove(event, true); }, { passive: false });
+document.addEventListener("click", (event) => { if (!event.target.closest('.assign-to-select-box')) toggle(false); closeContacts() });
 
 
 /** 

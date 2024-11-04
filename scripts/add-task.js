@@ -4,11 +4,12 @@
 import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask, addUserItem, findPersons } from './add-task-template.js';
 import { getUrgentSVG, getMediumSVG, getLowSVG} from "./svg-template.js";
 import { loadActiveUser, loadData } from "./module.js";
+import { validateDate } from './boards-filter.js';
 let priority = "medium";
 let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
 let subtasks = [];
 export let addedUser = [];
-
+export function toggle(status) { toggleContactList = status }
 
 /**
  * Load function which load data from firebase and display add task
@@ -59,12 +60,8 @@ function displayAddedUser() {
  * @param {*} index
  */
 function addUser(index) {    
-    if (!findPersons(addedUser, contactsFromFirebase[index].email)) {
-        addedUser.push(contactsFromFirebase[index]);         
-    }
-    else {
-        removePerson(addedUser, contactsFromFirebase[index].email);
-    }
+    if (!findPersons(addedUser, contactsFromFirebase[index].email)) addedUser.push(contactsFromFirebase[index]);         
+    else removePerson(addedUser, contactsFromFirebase[index].email);
     displayAddedUser();
     openContacts();
 }
@@ -121,7 +118,7 @@ function openContacts() {
 
 
 /** Function which close contact select box */
-function closeContacts() {
+export function closeContacts() {
     let assignBox = document.querySelector('.assign-to-select-box > span');
     assignBox.innerHTML = "Select contacts to assign";
     let persons = document.querySelector('.select-box-contacts');
@@ -132,7 +129,7 @@ function closeContacts() {
 }
 
 /** Function which open and close contact select box */
-async function addContact() {
+export async function addContact() {
     contactsFromFirebase = await loadData(CONTACTS_DIR);
     toggleContactList = !toggleContactList;
     if (toggleContactList) {
@@ -374,6 +371,12 @@ function getTaskInfos(column) {
 /** Function which put all data into firebase and call board */
 async function createNewTask(column) {          
     tasksFromFirebase = await loadData(TASKS_DIR); 
+    const d = new Date(document.getElementById('due-date').value);
+    let date = document.getElementById('due-date').value = validateDate(d);
+    if(date == "") {
+        document.getElementById('due-date').setCustomValidity('Date is in the past!');
+        return;
+    }
     tasksFromFirebase.push(getTaskInfos(column));            
     putData(TASKS_DIR, tasksFromFirebase);
     
@@ -381,7 +384,6 @@ async function createNewTask(column) {
         window.location = "../html/boards.html";  
     }, "300");
 }
-
 
 window.clearButton = clearButton;
 window.loadAddTask = loadAddTask;

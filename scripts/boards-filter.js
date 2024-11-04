@@ -48,23 +48,31 @@ export function search(array, key, value) {
     return false;
 }
 
-
 /**
  * Function for date validation
  *
  * @param {*} d
  * @returns {string}
  */
-function validateDate(d) {
+export function validateDate(d) {
+    // Prüfen, ob d ein gültiges Datum ist
     if (!isNaN(d.getTime())) {
-        const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0');  // Monate sind 0-basiert
-        const day = String(d.getDate()).padStart(2, '0');  // Tag formatieren
-        return `${year}-${month}-${day}`;
-      }
+        const today = new Date(); // aktuelles Datum
 
-    return "Invalid date";
+        // Wenn das eingegebene Datum vor dem heutigen Datum liegt
+        if (d < today) {
+            return "";
+        }
+
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0'); // Monate sind 0-basiert
+        const day = String(d.getDate()).padStart(2, '0'); // Tag formatieren
+        return `${year}-${month}-${day}`;
+    }
+
+    return "";
 }
+
 
 /**
  * Function for formating date

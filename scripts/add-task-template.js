@@ -6,6 +6,7 @@ import { addedUser, getPriority } from './add-task.js';
 import { editSVG, trashSVG } from './svg-template.js';
 
 
+
 /**
  * Template for subtask without input field
  *
