@@ -55,23 +55,6 @@ export async function loadActiveUser(path = "") {
 
 
 /**
-* Puts user data to firebase
-* @param {string} path directory in firebase
-* @param {object} data object the needs to be stored
-*/
-export async function putData(path = "", data = {}) {
-    let res = await fetch(FIREBASE_URL + path + ".json",
-        {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        });
-}
-
-
-/**
  * Iterate through contacts and find reference to searched contact
  *
  * @export
@@ -277,6 +260,7 @@ function handleMove(event, isTouch = false) {
     dropzones.forEach(column => {
         if (isTouch ? checkDropzoneBounding(column) : checkMousemoveBounding(event, column)) newColumn = column;
     });
+    setZoom(0.8);
     colorTouchedColumn(newColumn);
     event.preventDefault();
 }
@@ -325,6 +309,26 @@ function clearTimeouts() {
     clearTimeout(tapTimeout);
 }
 
+
+/**
+ * Function for swapping tasks
+ *
+ * @param {*} dropzone
+ */
+function checkBoundingTask(dropzone) {
+    const targetOtherTasks = dropzone.querySelectorAll('.task-card');
+    targetOtherTasks.forEach(taskDiv => { 
+        if(checkDropzoneBounding(taskDiv) && taskDiv.id != currentTaskId) {
+            let i = parseTaskIdToNumberId(taskDiv.id), j = parseTaskIdToNumberId(currentTaskId);
+            let temp = tasksFromFirebase[i].id;
+            tasksFromFirebase[i].id = tasksFromFirebase[j].id;
+            tasksFromFirebase[j].id = temp;
+            [tasksFromFirebase[i], tasksFromFirebase[j]] = [tasksFromFirebase[j], tasksFromFirebase[i]];
+            currentTaskId = "taskId" + tasksFromFirebase[i].id;
+        }
+    });
+}
+
 /**
  * Function to handle end event for mouse and touch
  *
@@ -337,14 +341,31 @@ function handleEnd(event, isTouch = false) {
     else if (isDragging && currentTaskId) {
         dropzones.forEach(dropzone => {
             const columnId = dropzone.getAttribute("id");
-            if (checkDropzoneBounding(dropzone)) saveMovedTask(currentTaskId, columnId);
+            if (checkDropzoneBounding(dropzone)) {
+                checkBoundingTask(dropzone);
+                saveMovedTask(currentTaskId, columnId); 
+            }
         });
         resetMovableObject();
         resetColumn();
     }
+    setZoom(1.0);
     isDragging = false;
     quickTap = false;
 }
+
+
+/**
+ * Function for zoom out on smartphones
+ *
+ * @param {*} scale
+ */
+function setZoom(scale) {
+    if(window.innerWidth > 768) return;
+    const viewport = document.querySelector("meta[name=viewport]");
+    viewport.setAttribute("content", `width=device-width, initial-scale=${scale}, maximum-scale=${scale}`);
+}
+
 
 // Add event listener for each column on board.html
 if(dropzones != null) dropzones.forEach(element => {
