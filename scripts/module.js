@@ -260,7 +260,7 @@ function handleMove(event, isTouch = false) {
     dropzones.forEach(column => {
         if (isTouch ? checkDropzoneBounding(column) : checkMousemoveBounding(event, column)) newColumn = column;
     });
-    setZoom(0.35);
+    setZoom(0.35, false);
     colorTouchedColumn(newColumn);
     event.preventDefault();
 }
@@ -348,7 +348,7 @@ function handleEnd(event, isTouch = false) {
         });
         resetMovableObject();
         resetColumn();
-        document.querySelector("meta[name=viewport]").setAttribute("content", `width=device-width, initial-scale=${1.0}, maximum-scale=${1.0}`);
+        setZoom(1.0, true);
     }
     isDragging = false;
     quickTap = false;
@@ -360,9 +360,9 @@ function handleEnd(event, isTouch = false) {
  *
  * @param {*} scale
  */
-function setZoom(scale) {
-    if(window.innerWidth > 768) return;
-    document.querySelector('main').scrollHeight = 0;
+export function setZoom(scale, reset) {
+    if(window.innerWidth > 768 && !reset) return;
+    document.querySelector('main').scrollTop = 0;
     const viewport = document.querySelector("meta[name=viewport]");
     viewport.setAttribute("content", `width=device-width, initial-scale=${scale}, maximum-scale=${scale}`);
 }

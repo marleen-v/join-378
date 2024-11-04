@@ -5,6 +5,7 @@
 
 import { getOverlay } from "./boards-overlay.js";
 import { clearColumns, showData } from "./boards.js";
+import { setZoom } from "./module.js";
 export let searchList = [];
 export let sortedList = [];
 
@@ -169,8 +170,12 @@ function orderTasks(input) {
 /** Function which called after entry in input field -> search */
 function searchEntry() {
     let input = document.getElementById('boards-search');
-    if (input.value === "") return;
+    if (input.value === "") {
+        setZoom(1.0, true);
+        return;
+    }
     orderTasks(input);
+    setZoom(0.35, false);
 }
 
 
