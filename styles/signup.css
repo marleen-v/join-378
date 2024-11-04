@@ -18,6 +18,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #F6F7F8;
+  overflow-y: hidden;
 }
 
 button {
@@ -110,7 +111,6 @@ input::placeholder {
   border: 1px solid #D1D1D1;
   padding-left: 21px;
   padding-right: 21px;
-  /* padding: 12px 21px; */
   margin-bottom: 16px;
   font-size: 24px;
 }
@@ -120,25 +120,15 @@ input:focus {
   border-color: #fff;
 }
 
-.name-input {
-  background-image: url(../assets/img/person.png);
-  background-repeat: no-repeat;
-  background-position: right;
-  background-position-x: 420px;
-}
-
-.email-input {
-  background-image: url(../assets/img/mail.png);
-  background-repeat: no-repeat;
-  background-position: right;
-  background-position-x: 420px;
+.name-input, .email-input {
+  position: relative;
 }
 
 .password-input-1, .password-input-2 {
   position: relative;
 }
 
-.password-input-1 img, .password-input-2 img {
+.name-input img, .email-input img, .password-input-1 img, .password-input-2 img {
   position: absolute;
   top: 16px;
   right: 26px;

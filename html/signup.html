@@ -36,8 +36,14 @@
 
       <form name="signupform" onsubmit="signUpUser();return false;">
         <div class="input-ctn">
-          <input id="nameInput" class="name-input" type="text" placeholder="FirstName LastName" onkeyup="checkForm()" required>
-          <input autocomplete="username" id="emailInput" class="email-input" type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" placeholder="Email" onkeyup="checkForm()" required>
+          <div class="name-input">
+            <input id="nameInput" class="" type="text" placeholder="FirstName LastName" onkeyup="checkForm()" required>
+            <img src="../assets/img/person.png" alt="Person-Icon">
+          </div>
+          <div class="email-input">
+            <input autocomplete="username" id="emailInput" class="" type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" placeholder="Email" onkeyup="checkForm()" required>
+            <img src="../assets/img/mail.png" alt="E-Mail-Icon">
+          </div>
           
           <div class="password-input-1">
             <input autocomplete="new-password" id="passwordInput" class="password-input" type="password" minlength="3" placeholder="Password" onkeyup="checkForm()" required>
