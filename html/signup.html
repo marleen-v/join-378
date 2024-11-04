@@ -37,7 +37,7 @@
       <form name="signupform" onsubmit="signUpUser();return false;">
         <div class="input-ctn">
           <div class="name-input">
-            <input id="nameInput" class="" type="text" placeholder="FirstName LastName" onkeyup="checkForm()" required>
+            <input id="nameInput" class="" type="text" placeholder="FirstName LastName" pattern="^[A-Za-zÄäÖöÜüß\s]+$" onkeyup="checkForm()" required>
             <img src="../assets/img/person.png" alt="Person-Icon">
           </div>
           <div class="email-input">
