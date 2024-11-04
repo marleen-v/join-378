@@ -260,7 +260,7 @@ function handleMove(event, isTouch = false) {
     dropzones.forEach(column => {
         if (isTouch ? checkDropzoneBounding(column) : checkMousemoveBounding(event, column)) newColumn = column;
     });
-    setZoom(0.8);
+    setZoom(0.35);
     colorTouchedColumn(newColumn);
     event.preventDefault();
 }
@@ -348,8 +348,8 @@ function handleEnd(event, isTouch = false) {
         });
         resetMovableObject();
         resetColumn();
+        document.querySelector("meta[name=viewport]").setAttribute("content", `width=device-width, initial-scale=${1.0}, maximum-scale=${1.0}`);
     }
-    setZoom(1.0);
     isDragging = false;
     quickTap = false;
 }
