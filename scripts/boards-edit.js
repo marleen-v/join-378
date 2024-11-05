@@ -89,6 +89,7 @@ function getFormData() {
     formData = [];
     formData.push(document.querySelector('#input-edit-headline').value);
     formData.push(document.querySelector('#textarea-edit-description').value);
+    checkDate();
     formData.push(document.querySelector('#due-date').value);    
 }
 
@@ -114,7 +115,6 @@ function closeEdit(taskId) {
     putData(TASKS_DIR, tasksFromFirebase);
     document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
     setDetailedCard(id);
-    assign = null;
 }
 
 
@@ -329,6 +329,7 @@ function cancelSubtask() {
  * @param {*} taskId
  */
 function addSubtask(taskId) {
+    if(taskId == undefined) taskId = "taskId" + (parseTaskIdToNumberId(document.querySelector('.detailed-card').getAttribute('id')));
     let container = document.querySelector('.detailed-task-card-subtasks');
     container.innerHTML = getSubtaskInput(taskId);
     document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushSubtask(taskId); });

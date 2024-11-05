@@ -184,6 +184,7 @@ export function openOverlay(id) {
     let assign = document.querySelector('.add-task-card-assigned-to');
     //addListener(assign);
     addBoardEditListener(assign, 'taskId' + id);
+    //addListener();
 }
 
 

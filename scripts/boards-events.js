@@ -347,7 +347,7 @@ export function addBoardEditListener(assign, taskId) {
     if(assign != null) document.addEventListener("click", (event) => { 
         if(event.target.closest('.assign-to-select-box')) return;
         if (!event.target.closest('.task-user-select')) {
-            toggleContactListToFalse();
+            toggleContactListToFalse();            
             closeContactSelectBox(taskId);
             closeContactSelectBox(taskId);
         }
