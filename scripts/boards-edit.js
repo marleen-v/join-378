@@ -36,11 +36,12 @@ export function setDetailedEditableCard(taskId) {
     let id = parseTaskIdToNumberId(taskId);    
     if(taskId == "") id = (parseTaskIdToNumberId(document.querySelector('.detailed-card').getAttribute('id')));
     let detailedCard = document.querySelector('.detailed-card');
-    
     if(formData.length < 1) {
         detailedCard.querySelector('.input-edit-headline').value = tasksFromFirebase[id].Title;
         detailedCard.querySelector('.textarea-edit-description').innerHTML = tasksFromFirebase[id].Description;
         detailedCard.querySelector('.due-date').value = tasksFromFirebase[id].Date;
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("due-date").setAttribute("min", today);
     }
     else updateFormData();
     detailedCard.querySelector('.add-task-card-persons').innerHTML = setUserInitial(tasksFromFirebase[id], true, true);

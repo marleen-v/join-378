@@ -182,9 +182,7 @@ export function openOverlay(id) {
     document.getElementById('boards-search').value = "";
     setZoom(1.0, true);
     let assign = document.querySelector('.add-task-card-assigned-to');
-    //addListener(assign);
     addBoardEditListener(assign, 'taskId' + id);
-    //addListener();
 }
 
 

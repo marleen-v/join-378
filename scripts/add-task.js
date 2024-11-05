@@ -30,6 +30,8 @@ async function loadAddTask() {
     getLogo();
     const taskForm = document.querySelector('.task-form-container');
     addListener();
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("due-date").setAttribute("min", today);
 }
 
 

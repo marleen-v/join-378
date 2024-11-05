@@ -266,18 +266,28 @@ function clearHighlightedTasks() {
         tasksFromFirebase.forEach(element => { document.getElementById('taskId' + element.id).style.backgroundColor = 'white'; });
 }
 
+
 /**
- * Function which show add task on overlay and add task to chosen column
+ * Function which add chosen column to new task that the new task appear in it
  *
  * @param {*} column
  */
-function openAddTaskOverlay(column) {
+function addToChosenColumn(column) {
     switch (column) {
         case 'to-do': addToColumn = "To Do";  break;
         case 'in-progress': addToColumn = "In Progress"; break;
         case 'await-feedback': addToColumn = "Await Feedback"; break;
         case 'done': addToColumn = "Done"; break;
     }
+}
+
+/**
+ * Function which show add task on overlay and add task to chosen column
+ *
+ * @param {*} column
+ */
+function openAddTaskOverlay(column) {
+    addToChosenColumn(column);
     let overflow = getOverlay();
     overflow.innerHTML = getAddTaskToOverlay();
     setOpacity();
@@ -288,6 +298,8 @@ function openAddTaskOverlay(column) {
     card.querySelector('#create-task-form').setAttribute('onsubmit', `createNewTask('${addToColumn}'); return false;`);
     setPriority('medium');
     addListener();
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("due-date").setAttribute("min", today);
 }
 
 
