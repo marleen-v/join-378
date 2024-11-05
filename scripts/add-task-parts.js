@@ -11,6 +11,7 @@ import { closeCategory, closeContacts, toggleCategory, toggleContacts, toggleSub
  */
 export function addListener() {  
     document.addEventListener("click", (event) => { 
+        if(event.target.closest('.assign-to-select-box')) return;
         if (!event.target.closest('.task-user-select')) {
             toggleContacts();
             closeContacts();
@@ -55,3 +56,5 @@ export function validateDate(d) {
 
     return "";
 }
+
+

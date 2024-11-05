@@ -1,10 +1,11 @@
 /*
     Author: Martin Reifschneider
 */
-import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask, addUserItem, findPersons } from './add-task-template.js';
+import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask, addUserItem, findPersons, getGroupInitials } from './add-task-template.js';
 import { getUrgentSVG, getMediumSVG, getLowSVG} from "./svg-template.js";
 import { loadActiveUser, loadData } from "./module.js";
 import { addListener, validateDate } from './add-task-parts.js';
+import { getGroupUserInitials } from './boards-template.js';
 let priority = "medium";
 export let toggleContactList = false, toggleCategoryList = false, toggleSubtaskButton = false;
 let subtasks = [], dateValue;
@@ -52,9 +53,12 @@ function removePerson(data, elementToRemove) {
 /** Function which display all added user informations */
 function displayAddedUser() {
     document.querySelector('.display-assigned-user').innerHTML = "";
+    let index = 0;
     addedUser.forEach(element => {
-        document.querySelector('.display-assigned-user').innerHTML += getUserIcon(element);
+        if(index < 3) document.querySelector('.display-assigned-user').innerHTML += getUserIcon(element);
+        index++;
     });
+    if(index > 2) document.querySelector('.display-assigned-user').innerHTML += getGroupInitials(addedUser);
 }
 
 /**

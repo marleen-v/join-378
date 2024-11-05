@@ -31,8 +31,13 @@ export function getSubtaskMask() {
  */
 export function getUserIcon(element) {
     return /*html*/`
-        <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span> 
-  
+        <span class="circle ${element.color} flex justify-content-center align-items-center set-width-height-42"><span>${element.initials}</span></span>  
+    `;
+}
+
+export function getGroupInitials(user) {
+    return /*html*/`
+        <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>+${user.length - 3}</span></span> 
     `;
 }
 
