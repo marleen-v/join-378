@@ -15,7 +15,7 @@ body {
 main {
     display: grid;
     grid-template-columns: 1fr;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overflow-x: hidden;
     background-color: #f6f7f8;
 }
