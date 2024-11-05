@@ -329,7 +329,7 @@ function cancelSubtask() {
  * @param {*} taskId
  */
 function addSubtask(taskId) {
-    if(taskId == undefined) taskId = "taskId" + (parseTaskIdToNumberId(document.querySelector('.detailed-card').getAttribute('id')));
+    if(taskId == undefined || taskId == "") taskId = "taskId" + (parseTaskIdToNumberId(document.querySelector('.detailed-card').getAttribute('id')));
     let container = document.querySelector('.detailed-task-card-subtasks');
     container.innerHTML = getSubtaskInput(taskId);
     document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushSubtask(taskId); });
