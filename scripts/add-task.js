@@ -4,12 +4,14 @@
 import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask, editSubtask, getDisplaySubtaskMask, addUserItem, findPersons } from './add-task-template.js';
 import { getUrgentSVG, getMediumSVG, getLowSVG} from "./svg-template.js";
 import { loadActiveUser, loadData } from "./module.js";
-import { validateDate } from './boards-filter.js';
+import { addListener, validateDate } from './add-task-parts.js';
 let priority = "medium";
-let toggleContactList = false, toggleCategory = false, toggleSubtask = false;
-let subtasks = [];
+export let toggleContactList = false, toggleCategoryList = false, toggleSubtaskButton = false;
+let subtasks = [], dateValue;
 export let addedUser = [];
-export function toggle(status) { toggleContactList = status }
+export function toggleContacts() { toggleContactList = false; }
+export function toggleCategory() { toggleCategoryList = false; }
+export function toggleSubask() { toggleSubtaskButton = false; }
 
 /**
  * Load function which load data from firebase and display add task
@@ -26,6 +28,7 @@ async function loadAddTask() {
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
     getLogo();
+    addListener();
 }
 
 
@@ -158,7 +161,6 @@ function setBgColor(element) {
 
 }
 
-
 /**
  * Function which remove all priority button colors
  *
@@ -213,7 +215,6 @@ export function getPriority(priority) {
     return svg;
 }
 
-
 /**
  * Function to set priority
  *
@@ -236,32 +237,31 @@ function addCategory(cat) {
     chooseCategory();
 }
 
-
 /** Function to open category select box and to rotate select triangle */
 function openCategory() {
     let category = document.querySelector('.add-category');
     category.classList.add('bg-white');
     category.classList.add('set-z-index-100');
+    category.classList.remove('d_none');
     document.getElementById('category-toggle-img').style.transform = "rotate(180deg)";
 }
 
 /** Function to close category select box and restore select triangle */
-function closeCategory() {
+export function closeCategory() {
     let category = document.querySelector('.add-category');
     category.classList.remove('bg-white');
     category.classList.remove('set-z-index-100');
+    category.classList.add('d_none');
     document.getElementById('category-toggle-img').style.transform = "rotate(0deg)";
 }
 
-
 /** Toggle help function to open or close category select box */
-function chooseCategory() {
-    toggleCategory = !toggleCategory;
+export function chooseCategory() {
+    toggleCategoryList = !toggleCategoryList;
     let category = document.querySelector('.add-category');
-    category.innerHTML = (toggleCategory) ? getCategory() : "";
-    (toggleCategory) ? openCategory() : closeCategory();
+    category.innerHTML = (toggleCategoryList) ? getCategory() : "";
+    (toggleCategoryList) ? openCategory() : closeCategory();
 }
-
 
 /**
  * Function to remove added subtasks
@@ -284,7 +284,6 @@ function saveSubtaskEdit(index) {
     displaySubtasks();
 }
 
-
 /**
  * Function to display added subtasks
  *
@@ -305,12 +304,12 @@ function displaySubtasks() {
 /** Function which push added subtasks into a temporary list and 
  * to show added subtasks
  */
-function pushNewSubtask() {
+function pushNewSubtask() {    
     let input = document.querySelector('#add-new-subtask').value;
     if(input !== "") {
         let subtask =  { Description: input, Done: false };    
         subtasks.push(subtask);  
-        displaySubtasks('add-task', -1);
+        displaySubtasks('add-task', -1);        
     } 
     document.querySelector('.add-new-subtask-box').innerHTML = getSubtaskMask();    
 }
@@ -324,10 +323,10 @@ function pushNewSubtaskOnPressedEnter() {
 
 
 /** Toggle Function which open or close subtask input field */
-function addNewSubtask() {
-    toggleSubtask = !toggleSubtask;
+export function addNewSubtask() {
+    toggleSubtaskButton = !toggleSubtaskButton;
     let subtask = document.querySelector('.add-new-subtask-box');
-    subtask.innerHTML = (toggleSubtask) ? getSubtaskInput() : getSubtaskMask();
+    subtask.innerHTML = (toggleSubtaskButton) ? getSubtaskInput() : getSubtaskMask();
     pushNewSubtaskOnPressedEnter();
 }
 
@@ -367,14 +366,14 @@ function getTaskInfos(column) {
       };      
 }
 
-
 /** Function which put all data into firebase and call board */
-async function createNewTask(column) {          
-    tasksFromFirebase = await loadData(TASKS_DIR); 
+function createNewTask(column) {          
+    dateValue = document.getElementById('due-date').value;
     const d = new Date(document.getElementById('due-date').value);
     let date = document.getElementById('due-date').value = validateDate(d);
     if(date == "") {
         document.getElementById('due-date').setCustomValidity('Date is in the past!');
+        document.getElementById('due-date').value = dateValue;
         return;
     }
     tasksFromFirebase.push(getTaskInfos(column));            

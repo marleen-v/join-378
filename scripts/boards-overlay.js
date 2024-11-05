@@ -9,7 +9,7 @@ import { refresh, setBgColor, setUserInitial, showData } from "./boards.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
-import { setZoom } from "./module.js";
+import { addBoardEditListener, setZoom } from "./boards-events.js";
 export let overlayIsOpen = false;
 
 /** Set transparency background color on overlay */
@@ -31,8 +31,8 @@ export function unsetOpacity() {
  * @param {*} id
  */
 function setDate(card, id) {
-    const date = new Date(tasksFromFirebase[id].Date);
-    const formatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const date = new Date(tasksFromFirebase[id].Date);    
+    const formatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });    
     const formattedDate = formatter.format(date);
     card.querySelector('.add-task-card-date').innerHTML = "Due date: " + formattedDate;
 }
@@ -180,6 +180,8 @@ export function openOverlay(id) {
     setOpacity();
     document.getElementById('boards-search').value = "";
     setZoom(1.0, true);
+    let assign = document.querySelector('.add-task-card-assigned-to');
+    addBoardEditListener(assign, 'taskId' + id);
 }
 
 
@@ -191,6 +193,7 @@ export function openOverlay(id) {
  */
 export function closeOverlay(wrapper) {
     runOutOverlayAnimation(wrapper);
+    addBoardEditListener(null, '');
 }
 
 

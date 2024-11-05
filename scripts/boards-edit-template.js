@@ -108,7 +108,7 @@ export function getDetailedEditableCard(taskId) {
         <section class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div></div>
-                <div onclick="cancelEdit('${taskId}')"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
+                <div id="close-card-edit" onclick="cancelEdit('${taskId}')"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
             </div>
             <div class="detailed-card-editable-container grid grid-auto-rows gap-8px auto-overflow-y mg-right-8px">
                 <form id="task-edit-form" class="task-edit-form" onsubmit="closeEdit('${taskId}');return false;">
@@ -155,7 +155,7 @@ export function getDetailedEditableCard(taskId) {
             </div>
             <div class="add-new-subtask">
                 <span class="detailed-card-label mg-top-8px">Subtasks</span>
-                <div class="detailed-task-card-subtasks flex">
+                <div id='${taskId}-subtasks' class="detailed-task-card-subtasks flex">
                     ${getSubtaskMask(taskId)}
                 </div>
                 <div class="added-subtasks"></div>

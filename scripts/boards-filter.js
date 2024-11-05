@@ -5,7 +5,7 @@
 
 import { getOverlay } from "./boards-overlay.js";
 import { clearColumns, showData } from "./boards.js";
-import { setZoom } from "./module.js";
+import { setZoom } from "./boards-events.js";
 export let searchList = [];
 export let sortedList = [];
 
@@ -48,31 +48,23 @@ export function search(array, key, value) {
     return false;
 }
 
+
 /**
  * Function for date validation
  *
  * @param {*} d
  * @returns {string}
  */
-export function validateDate(d) {
-    // Prüfen, ob d ein gültiges Datum ist
+function validateDate(d) {
     if (!isNaN(d.getTime())) {
-        const today = new Date(); // aktuelles Datum
-
-        // Wenn das eingegebene Datum vor dem heutigen Datum liegt
-        if (d < today) {
-            return "";
-        }
-
         const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0'); // Monate sind 0-basiert
-        const day = String(d.getDate()).padStart(2, '0'); // Tag formatieren
+        const month = String(d.getMonth() + 1).padStart(2, '0');  // Monate sind 0-basiert
+        const day = String(d.getDate()).padStart(2, '0');  // Tag formatieren
         return `${year}-${month}-${day}`;
-    }
+      }
 
-    return "";
+    return "Invalid date";
 }
-
 
 /**
  * Function for formating date
@@ -108,7 +100,7 @@ function filterByNestedKeyAndArray(data, searchString) {
         const priority = item.Priority.toLowerCase().includes(searchString.toLowerCase());
         const description = item.Description.toLowerCase().includes(searchString.toLowerCase());
         const subtasks = (item.Subtasks != null) ? item.Subtasks.some(member => member.Description.toLowerCase().includes(searchString.toLowerCase())) : null;        
-        const persons = item.Persons.some(member => member.toLowerCase().includes(searchString.toLowerCase()));
+        const persons = (item.Persons != null) ? item.Persons.some(member => member.toLowerCase().includes(searchString.toLowerCase())) : null;
         return title || persons || date || priority || description || subtasks;
     });
 }
@@ -182,7 +174,6 @@ function searchEntry() {
         setZoom(1.0, true);
         return;
     }
-    document.querySelector('main').scrollTop = 0;
     orderTasks(input);
     setZoom(0.35, false);
 }

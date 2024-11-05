@@ -5,6 +5,7 @@
 import { getInputForm } from "./add-task-template.js";
 import { getPriority, setPriority } from "./add-task.js";
 import { parseTaskIdToNumberId } from "./boards-edit.js";
+import { addBoardListener } from "./boards-events.js";
 import { search } from "./boards-filter.js";
 import { getAddTaskToOverlay } from "./boards-overlay-template.js";
 import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./boards-overlay.js";
@@ -27,6 +28,7 @@ async function loadBoards() {
     checkIfLoggedIn();
     showData(tasksFromFirebase);
     getLogo();
+    addBoardListener();
 }
 
 /**

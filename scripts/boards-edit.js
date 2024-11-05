@@ -9,9 +9,11 @@ import { setUserInitial } from "./boards.js";
 import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSubtaskInput, addLinkedItem } from './boards-edit-template.js';
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
-import { validateDate } from "./boards-filter.js";
+import { validateDate } from "./add-task-parts.js";
+import { addBoardEditListener } from "./boards-events.js";
 let toggleContactList = false;
-let formData = [];
+let formData = [], currentCard;
+let assign = document.querySelector('.assign-to-select-box');
 
 /**
  * Help Function to generate string ID into numbered id
@@ -32,7 +34,7 @@ export function parseTaskIdToNumberId(taskId) {
  * @param {*} taskId
  */
 export function setDetailedEditableCard(taskId) {
-    let id = parseTaskIdToNumberId(taskId);    
+    let id = parseTaskIdToNumberId(taskId), currentCard = taskId;    
     let detailedCard = document.querySelector('.detailed-card');
     
     if(formData.length < 1) {
@@ -100,7 +102,7 @@ function getFormData() {
 function closeEdit(taskId) {
     let id = parseTaskIdToNumberId(taskId);
     const d = new Date(document.getElementById('due-date').value);
-    let date = document.getElementById('due-date').value = validateDate(d);
+    let date = document.getElementById('due-date').value = (validateDate(d) == "") ? tasksFromFirebase[id].Date : document.getElementById('due-date').value;
     if(date == "") {
         document.getElementById('due-date').setCustomValidity('Date is in the past!');
         return;
@@ -112,6 +114,7 @@ function closeEdit(taskId) {
     putData(TASKS_DIR, tasksFromFirebase);
     document.querySelector('.overlay').innerHTML = getDetailedCard(taskId);
     setDetailedCard(id);
+    assign = null;
 }
 
 
@@ -201,6 +204,7 @@ export function getActiveUser(element) {
  */
 function focusUserSelectBox(active) {
     let container = document.querySelector('.detailed-card-editable-container');
+    if(container == null) return;
     if (active) {
         container.classList.remove('auto-overflow-y');
         container.classList.add('hidden-overflow-y');
@@ -242,13 +246,15 @@ function openContactSelectBox(taskId) {
  *
  * @param {*} taskId
  */
-function closeContactSelectBox(taskId) {
+export function closeContactSelectBox(taskId) {
     focusUserSelectBox(false);
     let assignBox = document.querySelector('.assign-to-select-box > span');
+    if(assignBox == null) return;
     assignBox.innerHTML = "Select contacts to assign";
     let persons = document.querySelector('.add-task-card-persons');
     persons.classList.remove('set-height-140px');
     persons.innerHTML = "";
+    document.getElementById('assign-to-toggle-icon').style.transform = "rotate(0deg)";   
     setDetailedEditableCard(taskId);
 }
 
@@ -294,7 +300,9 @@ export function getSubtaskMask(taskId) {
  * @param {*} taskId
  */
 function pushSubtask(taskId) {
-    let id = parseTaskIdToNumberId(taskId);
+    let subtaskId = document.querySelector('.detailed-task-card-subtasks').getAttribute('id');
+    let getId = subtaskId.split('-');    
+    let id = parseTaskIdToNumberId(getId[0]);
     let input = document.querySelector('#add-new-subtask').value;
     if (input == "") { cancelSubtask(); return; }
     if (tasksFromFirebase[id].Subtasks) tasksFromFirebase[id].Subtasks.push({ "Description": input, "Done": false });
@@ -306,7 +314,9 @@ function pushSubtask(taskId) {
 
 /** Function to cancel subtask box -> button*/
 function cancelSubtask() {
-    let container = document.querySelector('.detailed-task-card-subtasks');
+    let subtaskId = document.querySelector('.detailed-task-card-subtasks').getAttribute('id');
+    if(subtaskId == null) return;
+    let container = document.querySelector(`#${subtaskId}`);    
     container.innerHTML = getSubtaskMask();
 }
 
@@ -361,6 +371,24 @@ function displayCardSubtasks(subtasks, id) {
     
     subtasks.forEach((element, index) => {
         subtaskDisplay.innerHTML += getDisplaySubtaskMask(element, id, index);
+    });
+}
+
+export function toggleContactListToFalse() { toggleContactList = false; }
+
+function addListener(taskId) {  
+    assign = document.querySelector('.assign-to-select-box');
+    if(assign == null) return;
+    if(assign != null) document.addEventListener("click", (event) => { 
+        if (!event.target.closest('.task-user-select')) {
+            toggleContactList = false;
+            closeContactSelectBox(taskId);
+        } else openContactSelectBox(taskId);
+        
+        if (!event.target.closest('.subtasks-add-box')) {   
+            cancelSubtask();
+        }
+        
     });
 }
 
