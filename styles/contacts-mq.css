@@ -26,8 +26,8 @@
     }
   
     .add-contact-container {
-      bottom: 20px;
-      right: 20px;
+      bottom: 40px;
+      right: 40px;
       background-color: transparent;
       height: auto;
       width: auto;
@@ -60,7 +60,7 @@
       background-color: #fff;
       width: 100%;
       height: 100%;
-      padding: 40px 16px;
+      padding: 40px 45px;
     }
   
     .contact-title {
@@ -124,10 +124,6 @@
       max-width: 450px;
       max-height: 750px;
       height: 100%;
-     
-    /*  max-inline-size: min(90vw, 60ch);
-    max-block-size: min(80vh, 100%);
-    max-block-size: min(80dvb, 100%); */
     }
   
     .dialog-content {
@@ -185,24 +181,14 @@
     }
   }
   
-  
-/*   @media only screen and (orientation: landscape) {
-    header, main, dialog, nav {
-        display: none;
+  @media only screen and (max-width: 400px) {
+    .contact-info-container {
+      padding: 40px 16px;
+    }
+    .back-arrow {
+      right: 14px;
+  }
+    .add-contact-container{
+      right: 14px;
     }
   }
-  
-  @media only screen and (orientation: landscape) {
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-size: 20px;
-        color: red;
-    }
-    
-    body::before {
-        content: "Bitte Gerät ins Hochformat drehen.";
-    }
-  } */

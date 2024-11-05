@@ -141,12 +141,16 @@ function renderEditContactDialog(index) {
  */
 function saveIndexesIfEmailInTask() {
   tasksFromFirebase.forEach((task, index) => {
-    const personIndex = task.Persons.indexOf(currentContact.email);
-    if (personIndex !== -1) {
-      taskIndexes.push({"taskIndex": index, "personIndex": personIndex }); 
+    // Prüfen, ob .Persons existiert und ein Array ist
+    if (task.Persons && Array.isArray(task.Persons)) {  
+      const personIndex = task.Persons.indexOf(currentContact.email);
+      if (personIndex !== -1) {
+        taskIndexes.push({"taskIndex": index, "personIndex": personIndex }); 
+      }
     }
   });
 }
+
 
 /**
  * This function fills input fields with current contact information

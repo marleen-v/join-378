@@ -17,6 +17,13 @@
     z-index: 10;
     opacity: 1;
     transition: opacity 0.5s ease;
+    font-size: 16px;
+  }
+  .greeting-formula {
+    font-size: 46px;
+  }
+  .greeting-person {
+    font-size: 52px;
   }
   .summary-section {
     margin-left: 0;
@@ -109,6 +116,12 @@
   }
 }
 
+@media only screen and (max-width: 430px){
+  .greeting-ctn {
+    top: 50%;
+    left: 50%;
+  }
+}
 
 @media only screen and (max-width: 400px){
   .header-main {

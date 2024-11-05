@@ -108,6 +108,9 @@
 }
 
 @media only screen and (max-width: 400px){
+  .logo-small {
+    top: 47px;
+  }
   .content-ctn {
     overflow-y: auto;
   }
