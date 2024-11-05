@@ -58,7 +58,7 @@ function displayAddedUser() {
         if(index < 3) document.querySelector('.display-assigned-user').innerHTML += getUserIcon(element);
         index++;
     });
-    if(index > 2) document.querySelector('.display-assigned-user').innerHTML += getGroupInitials(addedUser);
+    if(index > 3) document.querySelector('.display-assigned-user').innerHTML += getGroupInitials(addedUser);
 }
 
 /**
