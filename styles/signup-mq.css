@@ -48,6 +48,11 @@
 }
 
 @media only screen and (max-width: 400px){
+  .logo {
+    top: 20px;
+    left: 38px;
+    z-index: 1;
+  }
   .login-ctn {
     width: 320px;
   }
