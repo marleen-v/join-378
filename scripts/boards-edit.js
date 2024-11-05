@@ -305,7 +305,7 @@ function pushSubtask(taskId) {
     let getId = subtaskId.split('-');    
     let id = parseTaskIdToNumberId(getId[0]);
     let input = document.querySelector('#add-new-subtask').value;
-    if (input == "") { cancelSubtask(); return; }
+    if (input == "" || input.trim() == "") { cancelSubtask(); return; }
     if (tasksFromFirebase[id].Subtasks) tasksFromFirebase[id].Subtasks.push({ "Description": input, "Done": false });
     else tasksFromFirebase[id]["Subtasks"] = [{ "Description": input, "Done": false }];
     document.querySelector('.detailed-task-card-subtasks').innerHTML = getSubtaskMask(taskId);

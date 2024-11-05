@@ -312,6 +312,7 @@ function displaySubtasks() {
  */
 function pushNewSubtask() {    
     let input = document.querySelector('#add-new-subtask').value;
+    if(input == "" || input.trim() == "") return
     if(input !== "") {
         let subtask =  { Description: input, Done: false };    
         subtasks.push(subtask);  
