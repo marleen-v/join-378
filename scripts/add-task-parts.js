@@ -88,9 +88,29 @@ export function validateDate(d) {
 }
 
 
+/**
+ * Function for formating date
+ *
+ * @param {*} input
+ * @returns {string}
+ */
+function formatDate(input) {
+    const datePattern1 = /^(\d{2})\.(\d{2})\.(\d{4})$/;
+    
+    if (datePattern1.test(input)) {
+      const [ , day, month, year] = input.match(datePattern1);
+      return `${year}-${month}-${day}`;  // yyyy-mm-dd Format
+    }
+  
+    const d = new Date(input);
+    return validateDate(d);
+  }
+
+
 function checkDate() {
     const d = new Date(document.getElementById('due-date').value);
-    let date = validateDate(d);
+    let dateValue = document.getElementById('due-date').value;
+    let date = formatDate(d);    
     if(date == "") {
         document.getElementById('due-date').setCustomValidity('Date is in the past!');
         document.getElementById('due-date').value = dateValue;
