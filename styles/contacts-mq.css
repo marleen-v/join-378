@@ -26,8 +26,8 @@
     }
   
     .add-contact-container {
-      bottom: 20px;
-      right: 20px;
+      bottom: 40px;
+      right: 40px;
       background-color: transparent;
       height: auto;
       width: auto;
@@ -188,4 +188,7 @@
     .back-arrow {
       right: 14px;
   }
+    .add-contact-container{
+      right: 14px;
+    }
   }
