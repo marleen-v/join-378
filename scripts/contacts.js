@@ -271,14 +271,16 @@ async function deleteContact(index) {
 }
 
 
-function updateTaskList() {
-  tasksFromFirebase.forEach(task => {
-    const index = task.Persons.indexOf(currentContact.email);
-    if (index !== -1) {
-      task.Persons.splice(index, 1); 
-    }
-  });
-}
+  function updateTaskList() {
+    tasksFromFirebase.forEach(task => {
+      if (task.Persons && Array.isArray(task.Persons)) {  
+        const index = task.Persons.indexOf(currentContact.email);
+        if (index !== -1) {
+          task.Persons.splice(index, 1); 
+        }
+      }
+    });
+  }
 
 
 /**
