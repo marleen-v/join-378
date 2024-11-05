@@ -3,7 +3,7 @@
 */
 import { getSubtaskMask } from "./add-task-template.js";
 import { closeCategory, closeContacts, toggleCategory, toggleContacts, toggleSubask, toggleSubtaskButton } from "./add-task.js";
-
+let dateValue;
 
 /**
  * Function to handle select box contacts button auto close if user click outside
@@ -109,9 +109,14 @@ function formatDate(input) {
 
 function checkDate() {
     const d = new Date(document.getElementById('due-date').value);
-    let dateValue = document.getElementById('due-date').value;
-    let date = formatDate(d);    
-    if(date == "") {
+    dateValue = document.getElementById('due-date').value;
+    let date = formatDate(d);   
+    
+    if(date != "") {
+        document.getElementById('due-date').setCustomValidity('');
+        document.getElementById('due-date').value = date;        
+    }
+    else {
         document.getElementById('due-date').setCustomValidity('Date is in the past!');
         document.getElementById('due-date').value = dateValue;
     }
