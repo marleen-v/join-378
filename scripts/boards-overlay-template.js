@@ -15,7 +15,7 @@ import { trashSVG, editSVG, getCloseSVG } from "./svg-template.js";
  */
 export function getDetailedCard(taskId) {
     return /*html*/`
-        <section class="detailed-card grid-rows-auto">
+        <section id="indetail-${taskId}" class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div class="flex justify-content-center align-items-center add-task-card-category"></div>
                 <div onclick="closeOverlay('.detailed-card')"class="flex justify-content-center align-items-center detailed-card-close clickable">${getCloseSVG()}</div>

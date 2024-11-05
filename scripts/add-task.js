@@ -5,7 +5,6 @@ import { getInputForm, getCategory, getUserIcon, getSubtaskInput, getSubtaskMask
 import { getUrgentSVG, getMediumSVG, getLowSVG} from "./svg-template.js";
 import { loadActiveUser, loadData } from "./module.js";
 import { addListener, validateDate } from './add-task-parts.js';
-import { getGroupUserInitials } from './boards-template.js';
 let priority = "medium";
 export let toggleContactList = false, toggleCategoryList = false, toggleSubtaskButton = false;
 let subtasks = [], dateValue;
@@ -29,6 +28,7 @@ async function loadAddTask() {
     document.querySelector('main').innerHTML = getInputForm();
     setBgColor('medium');
     getLogo();
+    const taskForm = document.querySelector('.task-form-container');
     addListener();
 }
 
@@ -127,8 +127,10 @@ function openContacts() {
 /** Function which close contact select box */
 export function closeContacts() {
     let assignBox = document.querySelector('.assign-to-select-box > span');
+    if(assignBox == null) return;
     assignBox.innerHTML = "Select contacts to assign";
     let persons = document.querySelector('.select-box-contacts');
+    if(persons == null) return;
     persons.classList.remove('bg-white');
     persons.classList.remove('set-z-index-100');
     persons.innerHTML = "";
@@ -253,6 +255,7 @@ function openCategory() {
 /** Function to close category select box and restore select triangle */
 export function closeCategory() {
     let category = document.querySelector('.add-category');
+    if(category == null) return;
     category.classList.remove('bg-white');
     category.classList.remove('set-z-index-100');
     category.classList.add('d_none');
@@ -382,10 +385,7 @@ function createNewTask(column) {
     }
     tasksFromFirebase.push(getTaskInfos(column));            
     putData(TASKS_DIR, tasksFromFirebase);
-    
-    setTimeout(() => {
-        window.location = "../html/boards.html";  
-    }, "300");
+    setTimeout(() => { window.location = "../html/boards.html"; }, "300");
 }
 
 window.clearButton = clearButton;

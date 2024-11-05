@@ -10,10 +10,9 @@ import { getDetailedEditableCard, getDisplaySubtaskMask, editCardSubtask, getSub
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { validateDate } from "./add-task-parts.js";
-import { addBoardEditListener } from "./boards-events.js";
 let toggleContactList = false;
-let formData = [], currentCard;
-let assign = document.querySelector('.assign-to-select-box');
+let formData = [];
+export function toggleContactListToFalse() { toggleContactList = false; }
 
 /**
  * Help Function to generate string ID into numbered id
@@ -34,7 +33,8 @@ export function parseTaskIdToNumberId(taskId) {
  * @param {*} taskId
  */
 export function setDetailedEditableCard(taskId) {
-    let id = parseTaskIdToNumberId(taskId), currentCard = taskId;    
+    let id = parseTaskIdToNumberId(taskId);    
+    if(taskId == "") id = (parseTaskIdToNumberId(document.querySelector('.detailed-card').getAttribute('id')));
     let detailedCard = document.querySelector('.detailed-card');
     
     if(formData.length < 1) {
@@ -252,6 +252,7 @@ export function closeContactSelectBox(taskId) {
     if(assignBox == null) return;
     assignBox.innerHTML = "Select contacts to assign";
     let persons = document.querySelector('.add-task-card-persons');
+    if(persons == null) return;
     persons.classList.remove('set-height-140px');
     persons.innerHTML = "";
     document.getElementById('assign-to-toggle-icon').style.transform = "rotate(0deg)";   
@@ -314,6 +315,8 @@ function pushSubtask(taskId) {
 
 /** Function to cancel subtask box -> button*/
 function cancelSubtask() {
+    let detailedCard = document.querySelector('.detailed-task-card-subtasks');
+    if(detailedCard == null) return;
     let subtaskId = document.querySelector('.detailed-task-card-subtasks').getAttribute('id');
     if(subtaskId == null) return;
     let container = document.querySelector(`#${subtaskId}`);    
@@ -371,24 +374,6 @@ function displayCardSubtasks(subtasks, id) {
     
     subtasks.forEach((element, index) => {
         subtaskDisplay.innerHTML += getDisplaySubtaskMask(element, id, index);
-    });
-}
-
-export function toggleContactListToFalse() { toggleContactList = false; }
-
-function addListener(taskId) {  
-    assign = document.querySelector('.assign-to-select-box');
-    if(assign == null) return;
-    if(assign != null) document.addEventListener("click", (event) => { 
-        if (!event.target.closest('.task-user-select')) {
-            toggleContactList = false;
-            closeContactSelectBox(taskId);
-        } else openContactSelectBox(taskId);
-        
-        if (!event.target.closest('.subtasks-add-box')) {   
-            cancelSubtask();
-        }
-        
     });
 }
 

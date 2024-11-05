@@ -2,9 +2,9 @@
     Author: Martin Reifschneider
 */
 //import './boards-events.js';
+import { addListener } from "./add-task-parts.js";
 import { getInputForm } from "./add-task-template.js";
 import { getPriority, setPriority } from "./add-task.js";
-import { parseTaskIdToNumberId } from "./boards-edit.js";
 import { addBoardListener } from "./boards-events.js";
 import { search } from "./boards-filter.js";
 import { getAddTaskToOverlay } from "./boards-overlay-template.js";
@@ -12,7 +12,7 @@ import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./bo
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
 import { getPerson, loadActiveUser, loadData } from "./module.js";
 let searchId = document.getElementById('boards-search');
-let addToColumn = "";
+let addToColumn = "", assign;
 
 
 /**
@@ -288,6 +288,8 @@ function openAddTaskOverlay(column) {
     card.querySelector('.add-task').classList.add('add-task-to-column');
     card.querySelector('#create-task-form').setAttribute('onsubmit', `createNewTask('${addToColumn}'); return false;`);
     setPriority('medium');
+    let assign = document.querySelector('.overlay');
+    addListener();
 }
 
 

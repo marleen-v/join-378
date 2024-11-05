@@ -35,6 +35,13 @@ export function getUserIcon(element) {
     `;
 }
 
+/**
+ * Template for group initals on add task if more than 3 users are selected
+ *
+ * @export
+ * @param {*} user
+ * @returns {string}
+ */
 export function getGroupInitials(user) {
     return /*html*/`
         <span class="circle red flex justify-content-center align-items-center set-width-height-42"><span>+${user.length - 3}</span></span> 

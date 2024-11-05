@@ -335,12 +335,19 @@ export function addBoardListener() {
     document.addEventListener("touchmove", function (event) { if (!overlayIsOpen) handleMove(event, true); }, { passive: false });    
 }
 
+/**
+ * Function to add listener for card editing
+ *
+ * @export
+ * @param {*} assign
+ * @param {*} taskId
+ */
 export function addBoardEditListener(assign, taskId) {  
     if(assign == null) return;
     if(assign != null) document.addEventListener("click", (event) => { 
         if(event.target.closest('.assign-to-select-box')) return;
         if (!event.target.closest('.task-user-select')) {
-            toggleContactListToFalse()
+            toggleContactListToFalse();
             closeContactSelectBox(taskId);
             closeContactSelectBox(taskId);
         }
@@ -350,6 +357,7 @@ export function addBoardEditListener(assign, taskId) {
         }
     });
 }
+
 
 /** 
  * Handle a simple click on a task

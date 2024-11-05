@@ -10,6 +10,7 @@ import { checkedBoxSVG, uncheckedBoxSVG } from "./svg-template.js";
 import { getDetailedEditableCard } from "./boards-edit-template.js";
 import { getDetailedCard } from "./boards-overlay-template.js";
 import { addBoardEditListener, setZoom } from "./boards-events.js";
+import { addListener } from "./add-task-parts.js";
 export let overlayIsOpen = false;
 
 /** Set transparency background color on overlay */
@@ -181,6 +182,7 @@ export function openOverlay(id) {
     document.getElementById('boards-search').value = "";
     setZoom(1.0, true);
     let assign = document.querySelector('.add-task-card-assigned-to');
+    //addListener(assign);
     addBoardEditListener(assign, 'taskId' + id);
 }
 

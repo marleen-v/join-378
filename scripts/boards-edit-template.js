@@ -105,7 +105,7 @@ export function getSubtaskInput(taskId) {
  */
 export function getDetailedEditableCard(taskId) {
     return /*html*/`
-        <section class="detailed-card grid-rows-auto">
+        <section id="editable-${taskId}" class="detailed-card grid-rows-auto">
             <div class="detailed-card-top">
                 <div></div>
                 <div id="close-card-edit" onclick="cancelEdit('${taskId}')"class="flex justify-content-center align-items-center detailed-card-close">${getCloseSVG()}</div>
