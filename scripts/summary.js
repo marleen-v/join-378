@@ -11,9 +11,6 @@ async function initSummary(){
   if (document.referrer.includes("login.html") || document.referrer.includes("signup.html")){
     showGreetingMobile();
   }
-  else {
-    document.getElementById("greeting_ctn").style.display = "none";
-  }
 }
 
 
