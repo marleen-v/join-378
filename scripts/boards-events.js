@@ -18,7 +18,6 @@ const swipeThresholdX = 30;   // Schwellenwert für horizontales Swiping
 const swipeThresholdY = 30;
 let dragTimeout;
 let quickTap = false;
-let assign;
 
 
 /**
@@ -192,6 +191,8 @@ function waitForDrag(isTouch, event, taskElement) {
 function handleStart(event, isTouch = false) {
     event.preventDefault();
     const taskElement = event.target.closest(".task-card");
+    const button = event.target.closest(".add-btn");
+    if(button) event.target.click();
     if (taskElement) {
         currentTaskId = taskElement.id;
         quickTap = true;
@@ -326,13 +327,13 @@ export function setZoom(scale, reset) {
 }
 
 // Event Listener for board
-export function addBoardListener() {
+export function addBoardListener(aktive) {
     if (taskContainer != null) taskContainer.addEventListener("mousedown", function (event) { if (!overlayIsOpen) handleStart(event); });
     if (taskContainer != null) taskContainer.addEventListener("touchstart", function (event) { if (!overlayIsOpen) handleStart(event, true); }, { passive: false });
     document.addEventListener("mouseup", function (event) { if (!overlayIsOpen) handleEnd(event); });
     document.addEventListener("touchend", function (event) { if (!overlayIsOpen) handleEnd(event, true); }, { passive: false });
     document.addEventListener("mousemove", function (event) { if (!overlayIsOpen) handleMove(event); });
-    document.addEventListener("touchmove", function (event) { if (!overlayIsOpen) handleMove(event, true); }, { passive: false });    
+    document.addEventListener("touchmove", function (event) { if (!overlayIsOpen) handleMove(event, true); }, { passive: false });
 }
 
 /**

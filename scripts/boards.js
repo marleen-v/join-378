@@ -12,8 +12,7 @@ import { getOverlay, openOverlay, runInOverlayAnimation, setOpacity } from "./bo
 import { getTaskCard, getProgressBar, getGroupUserInitials, getUser } from "./boards-template.js";
 import { getPerson, loadActiveUser, loadData } from "./module.js";
 let searchId = document.getElementById('boards-search');
-let addToColumn = "", assign;
-
+let addToColumn = "";
 
 /**
  * Load board and store all data for board from firebase strorage
@@ -288,7 +287,6 @@ function openAddTaskOverlay(column) {
     card.querySelector('.add-task').classList.add('add-task-to-column');
     card.querySelector('#create-task-form').setAttribute('onsubmit', `createNewTask('${addToColumn}'); return false;`);
     setPriority('medium');
-    let assign = document.querySelector('.overlay');
     addListener();
 }
 
