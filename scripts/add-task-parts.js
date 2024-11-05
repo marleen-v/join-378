@@ -4,30 +4,44 @@
 import { getSubtaskMask } from "./add-task-template.js";
 import { closeCategory, closeContacts, toggleCategory, toggleContacts, toggleSubask, toggleSubtaskButton } from "./add-task.js";
 
+
+function handleSelectContactBox(event) {
+    if(event.target.closest('.assign-to-select-box')) return;
+    if (!event.target.closest('.task-user-select')) {
+        toggleContacts();
+        closeContacts();
+    }
+}
+
+function handleSelectCategoryBox(event) {
+    if (!event.target.closest('.select-category-box'))  {
+        toggleCategory();
+        closeCategory();
+    }
+}
+
+function handleSelectSubtaskButton(event) {
+    if (!event.target.closest('.subtasks-add-box')) {   
+        if(toggleSubtaskButton) {          
+            let subtask = document.querySelector('.add-new-subtask-box');
+            subtask.innerHTML = getSubtaskMask();
+            toggleSubask();
+        }
+    }
+}
+
 /**
  * Function for starting event listener that close opened select boxes on add task
  *
  * @export
  */
 export function addListener() {  
+    const taskForm = document.querySelector('.task-form-container');
+    if(taskForm == null) return;
     document.addEventListener("click", (event) => { 
-        if(event.target.closest('.assign-to-select-box')) return;
-        if (!event.target.closest('.task-user-select')) {
-            toggleContacts();
-            closeContacts();
-        }
-        if (!event.target.closest('.select-category-box'))  {
-            toggleCategory();
-            closeCategory();
-        }
-        
-        if (!event.target.closest('.subtasks-add-box')) {   
-            if(toggleSubtaskButton) {          
-                let subtask = document.querySelector('.add-new-subtask-box');
-                subtask.innerHTML = getSubtaskMask();
-                toggleSubask();
-            }
-        }
+        handleSelectContactBox(event);
+        handleSelectCategoryBox(event)
+        handleSelectSubtaskButton(event)
     });
 }
 
