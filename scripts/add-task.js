@@ -149,7 +149,6 @@ export async function addContact() {
     }
 }
 
-
 /**
  * Function which set user contact background color of initals circle
  *
@@ -321,13 +320,11 @@ function pushNewSubtask() {
     document.querySelector('.add-new-subtask-box').innerHTML = getSubtaskMask();    
 }
 
-
 /** Event listener which add new subtask when user type in and pressed enter key */
 function pushNewSubtaskOnPressedEnter() {
     if(document.getElementById('add-new-subtask')) 
         document.getElementById('add-new-subtask').addEventListener("keypress", event => { if(event.key == "Enter") pushNewSubtask(); });
 }
-
 
 /** Toggle Function which open or close subtask input field */
 export function addNewSubtask() {
@@ -349,7 +346,6 @@ function clearButton() {
     addedUser = [];
     setPriority("medium");
 }
-
 
 /**
  * Function which collect all input values into JSON format and return JSON data

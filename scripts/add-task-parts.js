@@ -86,3 +86,16 @@ export function validateDate(d) {
 
     return "";
 }
+
+
+function checkDate() {
+    const d = new Date(document.getElementById('due-date').value);
+    let date = validateDate(d);
+    if(date == "") {
+        document.getElementById('due-date').setCustomValidity('Date is in the past!');
+        document.getElementById('due-date').value = dateValue;
+    }
+}
+
+
+window.checkDate = checkDate;

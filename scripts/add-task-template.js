@@ -209,7 +209,7 @@ export function getInputForm() {
                         <div>
                             <!-- Fälligkeitsdatum -->
                             <span>Due date<span class="required-star">*</span></span>
-                            <input class="task-input" type="date" id="due-date" name="due_date" required>
+                            <input class="task-input" type="date" id="due-date" onchange="checkDate()" name="due_date" required>
                         </div>
                         <div class="select-priority">
                             <span class="flex detailed-card-label">Priority</span>
