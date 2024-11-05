@@ -2,7 +2,6 @@
  * Initializes the page by loading and displaying all tasks
  */
 async function initSummary(){
-  //tasksFromFirebase = await loadData('/tasks_test');
   tasksFromFirebase = await loadData(TASKS_DIR);
   activeUser = await loadData(ACTIVE_DIR);
   checkIfLoggedIn();
